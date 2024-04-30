@@ -17,6 +17,15 @@ namespace VLG
         // The gameplay UI.
         public GameplayUIManager gameUI;
 
+        // The player for the game.
+        public Player player;
+
+        // The floor manager.
+        public FloorManager floorManager;
+
+        // The game time.
+        public float gameTime = 0;
+
         // TODO: add floor array for moving around entites.
 
         // Constructor
@@ -89,10 +98,46 @@ namespace VLG
             }
         }
 
+        // Tries player movement.
+        public bool TryPlayerMovement(Vector2Int direc)
+        {
+            // No movement.
+            if (direc == Vector2.zero)
+                return false;
+
+            // Gets the player's position.
+            Vector2Int playerPos = player.floorPos;
+
+            // Gets the current floor.
+            Floor floor = floorManager.currFloor;
+
+            // The new player direction.
+            Vector2Int newPos = playerPos + direc;
+
+            // Checks movement validity.
+            // Checks rows (y-movement)
+            if(newPos.y < 0 || newPos.y >= floor.geometry.Length)
+            {
+                return false; // Invalid.
+            }
+
+            // Checks columns (x-movement)
+            if (newPos.x < 0 || newPos.x >= floor.geometry.GetLength(0))
+            {
+                return false; // Invalid.
+            }
+
+            // Update player's position on the floor.
+            playerPos = newPos;
+
+            // Return true.
+            return true;
+        }
+
         // Update is called once per frame
         void Update()
         {
-
+            gameTime += Time.deltaTime;
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

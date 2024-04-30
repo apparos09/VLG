@@ -33,6 +33,11 @@ namespace VLG
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
 
+        [Header("Prefabs")]
+
+        // Blocks
+        public FloorAsset block00;
+
         // Constructor
         private FloorData()
         {
@@ -124,13 +129,37 @@ namespace VLG
         // Floor 00
         public Floor GetFloor00()
         {
+            // Template
+            // {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+            // };
+
             Floor floor = new Floor();
 
             // ID
             floor.id = 0;
 
             // Geometry
-            int[,] geometry = new int[FLOOR_COLS_MAX, FLOOR_ROWS_MAX];
+            int[,] geometry = new int[FLOOR_COLS_MAX, FLOOR_ROWS_MAX]{
+                {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
+                {1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+                      
             floor.geometry = geometry;
 
 
