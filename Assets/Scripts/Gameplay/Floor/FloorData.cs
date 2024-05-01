@@ -20,6 +20,8 @@ namespace VLG
     // The floor data.
     public class FloorData : MonoBehaviour
     {
+        // TODO: add spawn block for player's position.
+
         // The maximum amount of floor rows.
         public const int FLOOR_ROWS_MAX = 10;
 
@@ -36,7 +38,10 @@ namespace VLG
         [Header("Prefabs")]
 
         // Blocks
-        public FloorAsset block00;
+        // 00 is a blank space
+        public FloorAsset block01;
+        public FloorAsset block02;
+        public FloorAsset block03;
 
         // Constructor
         private FloorData()
@@ -149,10 +154,10 @@ namespace VLG
 
             // Geometry
             int[,] geometry = new int[FLOOR_COLS_MAX, FLOOR_ROWS_MAX]{
-                {1, 1, 0, 0, 0, 0, 0, 0, 0, 0},
-                {1, 0, 1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 1, 1, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {1, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+                {3, 0, 3, 0, 0, 0, 0, 0, 0, 0},
+                {3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -167,7 +172,8 @@ namespace VLG
             int[,] items = new int[FLOOR_COLS_MAX, FLOOR_ROWS_MAX];
             floor.items = items;
 
-            return new Floor();
+
+            return floor;
         }
 
 

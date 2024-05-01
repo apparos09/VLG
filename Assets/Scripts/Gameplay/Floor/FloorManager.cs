@@ -31,8 +31,8 @@ namespace VLG
         // The spacing for floor assets.
         public Vector2 floorSpacing = new Vector2(5.0F, 5.0F);
 
-        // The list of floor assets.
-        public List<FloorAsset> floorAssets;
+        // The array of floor geometry
+        public FloorAsset[,] floorGeometry = new FloorAsset[FloorData.FLOOR_ROWS_MAX, FloorData.FLOOR_COLS_MAX];
 
         [Header("Other")]
 
@@ -83,7 +83,7 @@ namespace VLG
                 floorData = FloorData.Instance;
 
             // Generates the floor
-            // GenerateFloor(floorData.GetFloor00());
+            GenerateFloor(floorData.GetFloor00());
         }
 
         // Gets the instance.
@@ -135,6 +135,14 @@ namespace VLG
         // Generates the floor.
         public void GenerateFloor(Floor floor)
         {
+            // Clear current floor, and set new floor.
+            ClearFloor();
+            currFloor = floor;
+
+            // If the floor is null, do nothing.
+            if (floor == null)
+                return;
+
             // TODO: create instances
 
             // TODO: maybe use the array sizes instead of the max values?
@@ -156,8 +164,16 @@ namespace VLG
                     // Checks the geometry.
                     switch(floor.geometry[col, row])
                     {
-                        case 1: // Block 00
-                            geoAsset = Instantiate(floorData.block00);
+                        case 1: // Block 01
+                            geoAsset = Instantiate(floorData.block01);
+                            break;
+
+                        case 2: // Block 02
+                            geoAsset = Instantiate(floorData.block02);
+                            break;
+
+                        case 3: // Block 03
+                            geoAsset = Instantiate(floorData.block03);
                             break;
                     }
 
@@ -174,7 +190,7 @@ namespace VLG
                         geoAsset.SetFloorPosition(gridPos, true);
 
                         // Adds the asset to the list.
-                        floorAssets.Add(geoAsset);
+                        floorGeometry[row, col] = geoAsset;
                     }
                     
                 }
@@ -187,14 +203,20 @@ namespace VLG
         // Clears the floor.
         public void ClearFloor()
         {
-            // The floor assets.
-            for(int i = 0; i < floorAssets.Count; i++)
+            // Deletes all the geometry.
+            for(int r = 0; r < floorGeometry.GetLength(0); r++)
             {
-                Destroy(floorAssets[0]);
+                for(int c = 0; c < floorGeometry.GetLength(1); c++)
+                {
+                    // Delete the element.
+                    if(floorGeometry[r, c] != null)
+                    {
+                        Destroy(floorGeometry[r, c]);
+                        floorGeometry[r, c] = null;
+                    }
+                }
             }
 
-            // Clears the list.
-            floorAssets.Clear();
         }
 
         // Resets the floor.

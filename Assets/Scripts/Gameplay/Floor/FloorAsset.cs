@@ -10,11 +10,15 @@ namespace VLG
         // The floor manager.
         public FloorManager floorManager;
 
+        // The world Y position of the floor asset.
+        [Tooltip("The asset's position on the y-axis (up/down) in world space.")]
+        public float localYPos = 0;
+
         // The floor position of the player (negative means the player isn't on the floor).
         public Vector2Int floorPos = new Vector2Int(-1, -1);
 
         // The reset position.
-        public Vector2Int resetPos = new Vector2Int(-1, -1);
+        public Vector2Int resetPos = new Vector2Int(-1, -1); 
 
         // Start is called before the first frame update
         protected virtual void Start()
@@ -28,8 +32,8 @@ namespace VLG
         public void SetFloorPosition(Vector2Int newPos, bool setResetPos)
         {
             // If the position is valid.
-            if(newPos.x >= 0 && newPos.x < floorManager.currFloor.geometry.GetLength(0) &&
-                newPos.y >= 0 && newPos.y < floorManager.currFloor.geometry.Length)
+            if(newPos.x >= 0 && newPos.x < floorManager.currFloor.geometry.GetLength(1) &&
+                newPos.y >= 0 && newPos.y < floorManager.currFloor.geometry.GetLength(0))
             {
                 // Set position.
                 floorPos = newPos;
@@ -38,8 +42,9 @@ namespace VLG
                 if (setResetPos)
                     resetPos = newPos;
 
-                // Sets the position in world space.
-                transform.localPosition = floorPos * floorManager.floorSpacing;
+                // Sets the position in world space (the y-position in the grid is used as the z-position).
+                Vector2 localXZPos = floorPos * floorManager.floorSpacing;
+                transform.localPosition = new Vector3(localXZPos.x, localYPos, localXZPos.y);
             }
             
         }

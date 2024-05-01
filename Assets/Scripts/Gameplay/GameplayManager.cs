@@ -116,19 +116,21 @@ namespace VLG
 
             // Checks movement validity.
             // Checks rows (y-movement)
-            if(newPos.y < 0 || newPos.y >= floor.geometry.Length)
+            if(newPos.y < 0 || newPos.y >= floor.geometry.GetLength(0))
             {
                 return false; // Invalid.
             }
 
             // Checks columns (x-movement)
-            if (newPos.x < 0 || newPos.x >= floor.geometry.GetLength(0))
+            if (newPos.x < 0 || newPos.x >= floor.geometry.GetLength(1))
             {
                 return false; // Invalid.
             }
 
+            // TODO: restrict player movement
+
             // Update player's position on the floor.
-            playerPos = newPos;
+            player.SetFloorPosition(newPos, false);
 
             // Return true.
             return true;

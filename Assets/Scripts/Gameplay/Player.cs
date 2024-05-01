@@ -4,7 +4,7 @@ using UnityEngine;
 namespace VLG
 {
     // The player for the game.
-    public class Player : MonoBehaviour
+    public class Player : FloorAsset
     {
         // The gameplay manager.
         public GameplayManager gameManager;
@@ -12,12 +12,11 @@ namespace VLG
         // Enables input from the player.
         public bool allowInput = true;
 
-        // The floor position of the player (negative means the player isn't on the floor).
-        public Vector2Int floorPos = new Vector2Int(-1, -1);
-
         // Start is called before the first frame update
-        void Start()
+        override protected void Start()
         {
+            base.Start();
+
             // Gets the instance if this is null.
             if (gameManager == null)
                 gameManager = GameplayManager.Instance;
@@ -32,33 +31,61 @@ namespace VLG
         public void UpdateInput()
         {
             // The move direction.
-            Vector2Int moveDirec;
+            Vector2Int moveDirec = Vector2Int.zero;
 
-            // Player Movement
-            if (Input.GetKeyDown("Up"))
+            // Player Movement - Ver. 1 - Constant Movement
+            //if (Input.GetAxisRaw("Vertical") != 0) // Up/Down
+            //{
+            //    // Checks direction.
+            //    if(Input.GetAxisRaw("Vertical") == 1) // Up
+            //    {
+            //        moveDirec = Vector2Int.up;
+            //    }
+            //    else // Down
+            //    {
+            //        moveDirec = Vector2Int.down;
+            //    }
+
+            //}
+            //else if (Input.GetAxisRaw("Horizontal") != 0) // Left/Right
+            //{
+            //    // Checks direction.
+            //    if (Input.GetAxisRaw("Horizontal") == 1) // Right
+            //    {
+            //        moveDirec = Vector2Int.right;
+            //    }
+            //    else // Left
+            //    {
+            //        moveDirec = Vector2Int.left;
+            //    }
+            //}
+            //else // No Movement
+            //{
+            //     moveDirec = Vector2Int.zero;
+            //}
+
+            // Player Movement - Ver. 2 - Button-Based (One Space per Input)
+            if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) // Up
             {
                 moveDirec = Vector2Int.up;
             }
-            else if (Input.GetKeyDown("Down"))
+            else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) // Down
             {
                 moveDirec = Vector2Int.down;
             }
-            else if (Input.GetKeyDown("Left"))
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) // Left
             {
                 moveDirec = Vector2Int.left;
             }
-            else if (Input.GetKeyDown("Right"))
+            else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) // Right
             {
                 moveDirec = Vector2Int.right;
-            }
-            else // No Movement
-            {
-                 moveDirec = Vector2Int.zero;
             }
 
 
             // There is movement.
-            if(moveDirec != Vector2.zero)
+            if (moveDirec != Vector2.zero)
             {
                 gameManager.TryPlayerMovement(moveDirec);
             }
@@ -70,6 +97,11 @@ namespace VLG
             // Updates the inputs from the player.
             if (allowInput)
                 UpdateInput();
+        }
+
+        public override void ResetAsset()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
