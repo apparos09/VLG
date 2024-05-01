@@ -14,6 +14,18 @@ namespace VLG
             base.Start();
         }
 
+        // Called to see if this block is valid to use.
+        public virtual bool UsableBlock()
+        {
+            return true;
+        }
+
+        // Called when an element interact with this block, which is usually the player.
+        public virtual void OnBlockInteract(FloorAsset asset)
+        {
+            // ...
+        }
+
         // Resets the asset.
         public override void ResetAsset()
         {

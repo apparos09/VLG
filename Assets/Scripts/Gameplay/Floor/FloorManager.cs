@@ -143,7 +143,8 @@ namespace VLG
             if (floor == null)
                 return;
 
-            // TODO: create instances
+            // The entry point for the player.
+            EntryBlock entryBlock = null;
 
             // TODO: maybe use the array sizes instead of the max values?
 
@@ -190,14 +191,19 @@ namespace VLG
                         geoAsset.SetFloorPosition(gridPos, true);
 
                         // Adds the asset to the list.
-                        floorGeometry[row, col] = geoAsset;
+                        floorGeometry[col, row] = geoAsset;
+
+                        // If the geo asset is the entry block, and this hasn't been set.
+                        if(geoAsset is EntryBlock && entryBlock == null)
+                            entryBlock = geoAsset as EntryBlock;
                     }
                     
                 }
             }
-            
-            
-            // TODO: reset player position
+
+            // Resets the player's position to the entry block's position.
+            if (entryBlock != null)
+                gameManager.player.SetFloorPosition(entryBlock.floorPos, true);
         }
 
         // Clears the floor.
@@ -230,6 +236,78 @@ namespace VLG
 
             // Reset timer.
             floorTime = 0.0F;
+        }
+
+        // Tries player movement.
+        public bool TryPlayerMovement(Player player, Vector2Int direc)
+        {
+            // No movement.
+            if (direc == Vector2.zero)
+                return false;
+
+            // Gets the player's position.
+            Vector2Int currFloorPos = player.floorPos;
+
+            // The new player new floor position.
+            Vector2Int newFloorPos = currFloorPos + direc;
+
+            // Checks movement validity.
+            // Checks rows (y-movement)
+            if (newFloorPos.y < 0 || newFloorPos.y >= currFloor.geometry.GetLength(0))
+            {
+                return false; // Invalid.
+            }
+
+            // Checks columns (x-movement)
+            if (newFloorPos.x < 0 || newFloorPos.x >= currFloor.geometry.GetLength(1))
+            {
+                return false; // Invalid.
+            }
+
+            // Restricts player movement.
+            if (floorGeometry[newFloorPos.x, newFloorPos.y] != null)
+            {
+                // The element is active and enabled.
+                if(floorGeometry[newFloorPos.x, newFloorPos.y].isActiveAndEnabled)
+                {
+                    // Checks
+                    if (floorGeometry[newFloorPos.x, newFloorPos.y] is Block)
+                    {
+                        // Gets the block.
+                        Block block = (Block)floorGeometry[newFloorPos.x, newFloorPos.y];
+
+                        // If the block is usable.
+                        if (block.UsableBlock())
+                        {
+                            // Sets the position.
+                            player.SetFloorPosition(newFloorPos, false);
+
+                            // Element has interacted with the block.
+                            block.OnBlockInteract(player);
+
+                            // Success.
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        // It's not a block, so the player can't jump on it.
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else // No block at that space for the player to jump on.
+            {
+                return false;
+            }
         }
 
         // Called when the floor is completed.

@@ -101,39 +101,7 @@ namespace VLG
         // Tries player movement.
         public bool TryPlayerMovement(Vector2Int direc)
         {
-            // No movement.
-            if (direc == Vector2.zero)
-                return false;
-
-            // Gets the player's position.
-            Vector2Int playerPos = player.floorPos;
-
-            // Gets the current floor.
-            Floor floor = floorManager.currFloor;
-
-            // The new player direction.
-            Vector2Int newPos = playerPos + direc;
-
-            // Checks movement validity.
-            // Checks rows (y-movement)
-            if(newPos.y < 0 || newPos.y >= floor.geometry.GetLength(0))
-            {
-                return false; // Invalid.
-            }
-
-            // Checks columns (x-movement)
-            if (newPos.x < 0 || newPos.x >= floor.geometry.GetLength(1))
-            {
-                return false; // Invalid.
-            }
-
-            // TODO: restrict player movement
-
-            // Update player's position on the floor.
-            player.SetFloorPosition(newPos, false);
-
-            // Return true.
-            return true;
+            return floorManager.TryPlayerMovement(player, direc);
         }
 
         // Update is called once per frame
