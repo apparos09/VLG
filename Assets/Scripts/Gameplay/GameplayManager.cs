@@ -104,6 +104,13 @@ namespace VLG
             return floorManager.TryPlayerMovement(player, direc);
         }
 
+        // Resets the floor.
+        public void ResetFloor()
+        {
+            // Resets the floor.
+            floorManager.ResetFloor();
+        }
+
         // Update is called once per frame
         void Update()
         {

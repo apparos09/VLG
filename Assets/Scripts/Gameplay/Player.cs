@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 
@@ -89,6 +90,20 @@ namespace VLG
             {
                 gameManager.TryPlayerMovement(moveDirec);
             }
+
+
+
+            // Reset Floor
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                gameManager.ResetFloor();
+            }
+        }
+
+        // Resets the asset.
+        public override void ResetAsset()
+        {
+            base.ResetAsset();
         }
 
         // Update is called once per frame
@@ -99,9 +114,5 @@ namespace VLG
                 UpdateInput();
         }
 
-        public override void ResetAsset()
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }

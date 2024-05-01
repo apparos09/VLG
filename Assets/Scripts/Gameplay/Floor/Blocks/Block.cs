@@ -26,13 +26,6 @@ namespace VLG
             // ...
         }
 
-        // Resets the asset.
-        public override void ResetAsset()
-        {
-            // Resets the position.
-            SetFloorPosition(resetPos, false);
-        }
-
         // Update is called once per frame
         void Update()
         {

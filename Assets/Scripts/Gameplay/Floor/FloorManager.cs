@@ -228,11 +228,23 @@ namespace VLG
         // Resets the floor.
         public void ResetFloor()
         {
-            // // The floor assets.
-            // for (int i = 0; i < floorAssets.Count; i++)
-            // {
-            //     // TODO: reset floor asset.
-            // }
+            // Resets the geometry floor assets.
+            for (int r = 0; r < floorGeometry.GetLength(0); r++) // Row
+            {
+                for(int c = 0; c < floorGeometry.GetLength(1); c++) // Column
+                {
+                    // Object exists.
+                    if (floorGeometry[r, c] != null)
+                    {
+                        floorGeometry[r, c].ResetAsset();
+                    }
+                }
+            }
+
+            // TODO: reset other assets.
+
+            // Resets the player.
+            gameManager.player.ResetAsset();
 
             // Reset timer.
             floorTime = 0.0F;

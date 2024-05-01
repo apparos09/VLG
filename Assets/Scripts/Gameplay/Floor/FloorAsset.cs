@@ -50,6 +50,9 @@ namespace VLG
         }
 
         // Resets the floor asset.
-        public abstract void ResetAsset();
+        public virtual void ResetAsset()
+        {
+            SetFloorPosition(resetPos, false);
+        }
     }
 }
