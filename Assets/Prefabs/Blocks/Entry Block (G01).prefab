@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 2883295839062419490}
   - component: {fileID: 3542573973040894250}
   m_Layer: 0
-  m_Name: Block 01
+  m_Name: Entry Block (G01)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorManager: {fileID: 0}
+  id: 1
   localYPos: 0
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}

@@ -18,6 +18,9 @@ namespace VLG
         {
             base.Start();
 
+            // Sets the group.
+            group = assetGroup.player;
+
             // Gets the instance if this is null.
             if (gameManager == null)
                 gameManager = GameplayManager.Instance;
@@ -88,7 +91,7 @@ namespace VLG
             // There is movement.
             if (moveDirec != Vector2.zero)
             {
-                gameManager.TryPlayerMovement(moveDirec);
+                gameManager.floorManager.TryPlayerMovement(this, moveDirec);
             }
 
 
@@ -96,7 +99,7 @@ namespace VLG
             // Reset Floor
             if(Input.GetKeyDown(KeyCode.R))
             {
-                gameManager.ResetFloor();
+                gameManager.floorManager.ResetFloor();
             }
         }
 

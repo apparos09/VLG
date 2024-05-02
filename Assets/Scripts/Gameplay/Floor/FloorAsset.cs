@@ -7,8 +7,17 @@ namespace VLG
     // A floor asset.
     public abstract class FloorAsset : MonoBehaviour
     {
+        // The asset group.
+        public enum assetGroup { none, player, geometry, item }
+
         // The floor manager.
         public FloorManager floorManager;
+
+        // The group the asset is part of.
+        protected assetGroup group = assetGroup.none;
+
+        // The ID of the floor asset.
+        public int id = -1;
 
         // The world Y position of the floor asset.
         [Tooltip("The asset's position on the y-axis (up/down) in world space.")]
@@ -26,6 +35,44 @@ namespace VLG
             // Gets the instance if this is null.
             if (floorManager == null)
                 floorManager = FloorManager.Instance;
+        }
+        
+        // Gets the group the asset is part of.
+        public assetGroup GetGroup()
+        {
+            return group;
+        }
+
+        // Gets the group ID
+        public string GetGroupId()
+        {
+            string str = "";
+
+            // Checks the group.
+            switch(group)
+            {
+                default:
+                case assetGroup.none: 
+                    str = "N"; 
+                    break;
+
+                case assetGroup.player: 
+                    str = "P"; 
+                    break;
+
+                case assetGroup.geometry: 
+                    str = "G"; 
+                    break;
+
+                case assetGroup.item: 
+                    str = "I"; 
+                    break;
+            }
+
+            // Adds the ID
+            str += id.ToString("D2");
+
+            return str;
         }
 
         // Set the floor position of the asset.

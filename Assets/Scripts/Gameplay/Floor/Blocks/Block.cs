@@ -12,6 +12,8 @@ namespace VLG
         protected override void Start()
         {
             base.Start();
+
+            group = assetGroup.geometry;
         }
 
         // Called to see if this block is valid to use.

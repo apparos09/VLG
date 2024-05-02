@@ -25,6 +25,10 @@ namespace VLG
         // The origin of all floor/the floor's parent (top left corner of the floor).
         public GameObject floorOrigin;
 
+        // If 'true', the origin is the centre of the area. If not, it's the top left of the area.
+        [Tooltip("Makes the floor origin the center of the area if true. If false, it's the top left corner.")]
+        public bool originIsCenter = true;
+
         // The floor data.
         public FloorData floorData;
 
@@ -166,15 +170,15 @@ namespace VLG
                     switch(floor.geometry[col, row])
                     {
                         case 1: // Block 01
-                            geoAsset = Instantiate(floorData.block01);
+                            geoAsset = Instantiate(floorData.g01);
                             break;
 
                         case 2: // Block 02
-                            geoAsset = Instantiate(floorData.block02);
+                            geoAsset = Instantiate(floorData.g02);
                             break;
 
                         case 3: // Block 03
-                            geoAsset = Instantiate(floorData.block03);
+                            geoAsset = Instantiate(floorData.g03);
                             break;
                     }
 

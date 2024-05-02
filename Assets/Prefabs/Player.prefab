@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorManager: {fileID: 0}
+  id: 1
   localYPos: 1
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}

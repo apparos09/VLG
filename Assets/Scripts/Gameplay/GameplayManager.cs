@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace VLG
 {
@@ -98,17 +99,50 @@ namespace VLG
             }
         }
 
-        // Tries player movement.
-        public bool TryPlayerMovement(Vector2Int direc)
+        // // Tries player movement.
+        // public bool TryPlayerMovement(Vector2Int direc)
+        // {
+        //     return floorManager.TryPlayerMovement(player, direc);
+        // }
+        // 
+        // // Resets the floor.
+        // public void ResetFloor()
+        // {
+        //     // Resets the floor.
+        //     floorManager.ResetFloor();
+        // }
+
+        // Call when the goal is entered. 
+        public void OnGoalEntered()
         {
-            return floorManager.TryPlayerMovement(player, direc);
+            // No floor set, so just finish the game.
+            if(floorManager.currFloor == null)
+            {
+                FinishGame();
+            }
+            else
+            {
+                // Gets the next ID.
+                int nextFloorId = floorManager.currFloor.id + 1;
+
+                // There are remaining floors.
+                if(nextFloorId <= FloorData.FLOOR_COUNT)
+                {
+                    // Generates the next floor.
+                    floorManager.GenerateFloor(nextFloorId);
+                }
+                else // No other floors.
+                {
+                    FinishGame();
+                }
+
+            }
         }
 
-        // Resets the floor.
-        public void ResetFloor()
+        // Called to finish game.
+        public void FinishGame()
         {
-            // Resets the floor.
-            floorManager.ResetFloor();
+            SceneManager.LoadScene("ResultsScene");
         }
 
         // Update is called once per frame

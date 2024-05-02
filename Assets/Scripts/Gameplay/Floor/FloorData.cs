@@ -20,7 +20,9 @@ namespace VLG
     // The floor data.
     public class FloorData : MonoBehaviour
     {
-        // TODO: add spawn block for player's position.
+
+        // The floor count (ignores the debug floor/floor 0).
+        public const int FLOOR_COUNT = 0;
 
         // The maximum amount of floor rows.
         public const int FLOOR_ROWS_MAX = 10;
@@ -37,11 +39,11 @@ namespace VLG
 
         [Header("Prefabs")]
 
-        // Blocks
+        // Geometry (G-Series Elements)
         // 00 is a blank space
-        public FloorAsset block01;
-        public FloorAsset block02;
-        public FloorAsset block03;
+        public FloorAsset g01;
+        public FloorAsset g02;
+        public FloorAsset g03;
 
         // Constructor
         private FloorData()
