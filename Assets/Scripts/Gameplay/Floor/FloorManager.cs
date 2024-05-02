@@ -36,7 +36,7 @@ namespace VLG
         public Vector2 floorSpacing = new Vector2(5.0F, 5.0F);
 
         // The array of floor geometry
-        public FloorAsset[,] floorGeometry = new FloorAsset[FloorData.FLOOR_ROWS_MAX, FloorData.FLOOR_COLS_MAX];
+        public FloorAsset[,] floorGeometry = new FloorAsset[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
 
         [Header("Other")]
 
@@ -154,10 +154,10 @@ namespace VLG
 
             // Generate Assets
             // The row (Y) value.
-            for (int row = 0; row < FloorData.FLOOR_ROWS_MAX; row++)
+            for (int row = 0; row < FloorData.FLOOR_ROWS; row++)
             {                
                 // The column (X) value.
-                for (int col = 0; col < FloorData.FLOOR_COLS_MAX; col++)
+                for (int col = 0; col < FloorData.FLOOR_COLS; col++)
                 {
                     // Calculates the new position for the potential assets.
                     // New position in the grid.

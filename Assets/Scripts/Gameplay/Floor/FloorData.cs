@@ -24,11 +24,13 @@ namespace VLG
         // The floor count (ignores the debug floor/floor 0).
         public const int FLOOR_COUNT = 0;
 
-        // The maximum amount of floor rows.
-        public const int FLOOR_ROWS_MAX = 10;
+        // All floors are the same size, but the amount of space used will vary.
 
-        // The maximum amount of floor columns.
-        public const int FLOOR_COLS_MAX = 10;
+        // The amount of floor rows.
+        public const int FLOOR_ROWS = 10;
+
+        // The amount of floor columns.
+        public const int FLOOR_COLS = 10;
 
         // The singleton instance.
         private static FloorData instance;
@@ -155,8 +157,8 @@ namespace VLG
             floor.id = 0;
 
             // Geometry
-            int[,] geometry = new int[FLOOR_COLS_MAX, FLOOR_ROWS_MAX]{
-                {1, 3, 0, 0, 0, 0, 0, 0, 0, 0},
+            int[,] geometry = new int[FLOOR_COLS, FLOOR_ROWS]{
+                {1, 3, 0, 0, 0, 0, 0, 0, 0, 3},
                 {3, 0, 3, 0, 0, 0, 0, 0, 0, 0},
                 {3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
@@ -165,13 +167,13 @@ namespace VLG
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+                {3, 0, 0, 0, 0, 0, 0, 0, 0, 3}};
                       
             floor.geometry = geometry;
 
 
             // Items
-            int[,] items = new int[FLOOR_COLS_MAX, FLOOR_ROWS_MAX];
+            int[,] items = new int[FLOOR_COLS, FLOOR_ROWS];
             floor.items = items;
 
 

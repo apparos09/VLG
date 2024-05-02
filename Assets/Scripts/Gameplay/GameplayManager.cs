@@ -99,19 +99,6 @@ namespace VLG
             }
         }
 
-        // // Tries player movement.
-        // public bool TryPlayerMovement(Vector2Int direc)
-        // {
-        //     return floorManager.TryPlayerMovement(player, direc);
-        // }
-        // 
-        // // Resets the floor.
-        // public void ResetFloor()
-        // {
-        //     // Resets the floor.
-        //     floorManager.ResetFloor();
-        // }
-
         // Call when the goal is entered. 
         public void OnGoalEntered()
         {

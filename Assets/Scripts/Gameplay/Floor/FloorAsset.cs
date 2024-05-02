@@ -91,6 +91,28 @@ namespace VLG
 
                 // Sets the position in world space (the y-position in the grid is used as the z-position).
                 Vector2 localXZPos = floorPos * floorManager.floorSpacing;
+
+                // The local position offset.
+                Vector2 localPosOffset;
+
+                // Checks if the origin should be the centre of the world.
+                // If true, the object is offset by the world size. If false, no offset is applied.
+                // If no offset is applied, the world origin is in the top left.
+                if (floorManager.originIsCenter) // Centre
+                {
+                    localPosOffset = new Vector2(
+                        FloorData.FLOOR_COLS * floorManager.floorSpacing.x / 2.0F,
+                        FloorData.FLOOR_ROWS * floorManager.floorSpacing.y / 2.0F);
+                }
+                else // Top Left
+                {
+                    localPosOffset = Vector2.zero;
+                }
+
+                // Applies the offset.
+                localXZPos -= localPosOffset;
+
+                // Sets the local position.
                 transform.localPosition = new Vector3(localXZPos.x, localYPos, localXZPos.y);
             }
             
