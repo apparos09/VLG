@@ -11,14 +11,14 @@ namespace VLG
         public Goal goal;
 
         // Called when an element interacts with the goal.
-        public override void OnBlockInteract(FloorAsset asset)
+        public override void OnEntityInteract(FloorEntity entity)
         {
-            base.OnBlockInteract(asset);
+            base.OnEntityInteract(entity);
 
             // The player interacted with the block.
-            if (asset is Player)
+            if (entity is Player)
             {
-                goal.TryEnterGoal(asset as Player);
+                goal.TryEnterGoal(entity as Player);
             }
         }
     }

@@ -36,7 +36,11 @@ namespace VLG
         public Vector2 floorSpacing = new Vector2(5.0F, 5.0F);
 
         // The array of floor geometry
-        public FloorAsset[,] floorGeometry = new FloorAsset[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
+        public FloorEntity[,] floorGeometry = new FloorEntity[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
+
+        // The array of floor items
+        // TODO: implement item array initalization.
+        public FloorEntity[,] floorItems = new FloorEntity[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
 
         [Header("Other")]
 
@@ -164,7 +168,7 @@ namespace VLG
                     Vector2Int gridPos = new Vector2Int(col, row);
 
                     // The floor asset.
-                    FloorAsset geoAsset = null;
+                    FloorEntity geoAsset = null;
 
                     // Checks the geometry.
                     switch(floor.geometry[col, row])
@@ -192,7 +196,7 @@ namespace VLG
                         geoAsset.transform.parent = floorOrigin.transform;
 
                         // Sets the floor position.
-                        geoAsset.SetFloorPosition(gridPos, true);
+                        geoAsset.SetFloorPosition(gridPos, true, false);
 
                         // Adds the asset to the list.
                         floorGeometry[col, row] = geoAsset;
@@ -207,7 +211,7 @@ namespace VLG
 
             // Resets the player's position to the entry block's position.
             if (entryBlock != null)
-                gameManager.player.SetFloorPosition(entryBlock.floorPos, true);
+                gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
         }
 
         // Clears the floor.
@@ -221,12 +225,97 @@ namespace VLG
                     // Delete the element.
                     if(floorGeometry[r, c] != null)
                     {
-                        Destroy(floorGeometry[r, c]);
+                        Destroy(floorGeometry[r, c].gameObject);
                         floorGeometry[r, c] = null;
                     }
                 }
             }
 
+        }
+
+        // Checks if a floor position is valid.
+        public bool IsFloorPositionValid(Vector2Int floorPos)
+        {
+            // Checks position validity.
+            // Checks rows (y) and cols (x)
+            if (floorPos.y >= 0 && floorPos.y < currFloor.geometry.GetLength(0) &&
+                floorPos.x >= 0 && floorPos.x < currFloor.geometry.GetLength(1))
+            {
+                return true; // Valid
+            }
+            else
+            {
+                return false; // Invalid
+            }
+
+        }
+
+        // Gets the floor position in world space.
+        public Vector3 GetFloorPositionInWorldSpace(Vector2Int floorPos)
+        {
+            // The world position.
+            Vector3 worldPos = new Vector3();
+            
+            // The world size.
+            Vector2 worldSize = new Vector2(FloorData.FLOOR_COLS, FloorData.FLOOR_ROWS);
+
+            // Calculates the base floor position based on the spacing of indexes.
+            worldPos.x = floorPos.x * floorSpacing.x;
+            worldPos.z = floorPos.y * floorSpacing.y;
+
+            // Floor origin exists.
+            if(floorOrigin != null)
+            {
+                // Alters the world position.
+                worldPos = floorOrigin.transform.position + worldPos;
+
+                // If the origin is the centre instead of the top left...
+                // Adjust the world position.
+                if (originIsCenter) // Centre 
+                {
+                    worldPos -= new Vector3(worldSize.x * floorSpacing.x / 2.0F, 0, worldSize.y * floorSpacing.y / 2.0F);
+                }
+            }
+            
+
+            // Return the world position.
+            return worldPos;
+        }
+
+        // Called when the floor entity's position has been changed.
+        public void OnFloorEntityPositionChanged(FloorEntity entity)
+        {
+            // The floor position isn't valid, so do nothing.
+            if (!IsFloorPositionValid(entity.floorPos))
+                return;
+
+            // Gets the floor position.
+            Vector2Int floorPos = entity.floorPos;
+
+            // If the entity isn't the player, check them for player interaction.
+            if (!(entity is Player))
+            {
+                // Get the player.
+                Player player = gameManager.player;
+
+                // Player Check
+                if (entity.floorPos == player.floorPos)
+                {
+                    player.OnEntityInteract(entity);
+                }
+            }
+
+            // Geometry Check
+            if (floorGeometry[floorPos.x, floorPos.y] != null && floorGeometry[floorPos.x, floorPos.y] != entity)
+            {
+                floorGeometry[floorPos.x, floorPos.y].OnEntityInteract(entity);
+            }
+
+            // Item Check
+            if(floorItems[floorPos.x, floorPos.y] != null && floorItems[floorPos.x, floorPos.y] != entity)
+            {
+                floorItems[floorPos.x, floorPos.y].OnEntityInteract(entity);
+            }
         }
 
         // Resets the floor.
@@ -240,7 +329,7 @@ namespace VLG
                     // Object exists.
                     if (floorGeometry[r, c] != null)
                     {
-                        floorGeometry[r, c].ResetAsset();
+                        floorGeometry[r, c].ResetEntity();
                     }
                 }
             }
@@ -248,7 +337,7 @@ namespace VLG
             // TODO: reset other assets.
 
             // Resets the player.
-            gameManager.player.ResetAsset();
+            gameManager.player.ResetEntity();
 
             // Reset timer.
             floorTime = 0.0F;
@@ -268,16 +357,10 @@ namespace VLG
             Vector2Int newFloorPos = currFloorPos + direc;
 
             // Checks movement validity.
-            // Checks rows (y-movement)
-            if (newFloorPos.y < 0 || newFloorPos.y >= currFloor.geometry.GetLength(0))
+            if(!IsFloorPositionValid(newFloorPos))
             {
-                return false; // Invalid.
-            }
-
-            // Checks columns (x-movement)
-            if (newFloorPos.x < 0 || newFloorPos.x >= currFloor.geometry.GetLength(1))
-            {
-                return false; // Invalid.
+                // Validity check failed.
+                return false;
             }
 
             // Restricts player movement.
@@ -295,11 +378,22 @@ namespace VLG
                         // If the block is usable.
                         if (block.UsableBlock())
                         {
-                            // Sets the position.
-                            player.SetFloorPosition(newFloorPos, false);
+                            // TODO: move the interaction function to FloorEntity, and...
+                            // Have it be called everytime the entity is moved to a new space.
 
-                            // Element has interacted with the block.
-                            block.OnBlockInteract(player);
+                            // If the player is using move interpolation...
+                            // Some operations will be done at the end of the movement.
+                            // If the movement is isntant, do them here.
+                            if(player.useMoveInter)
+                            {
+                                // Start the movement.
+                                player.MoveEntity(newFloorPos, false, false);
+                            }
+                            else
+                            {
+                                // Sets the position.
+                                player.SetFloorPosition(newFloorPos, false, true);                             
+                            }
 
                             // Success.
                             return true;

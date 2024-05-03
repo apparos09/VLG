@@ -5,7 +5,7 @@ using UnityEngine;
 namespace VLG
 {
     // A generic block for the game.
-    public class Block : FloorAsset
+    public class Block : FloorEntity
     {
 
         // Start is called before the first frame update
@@ -23,15 +23,9 @@ namespace VLG
         }
 
         // Called when an element interact with this block, which is usually the player.
-        public virtual void OnBlockInteract(FloorAsset asset)
+        public override void OnEntityInteract(FloorEntity entity)
         {
             // ...
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
     }
 }

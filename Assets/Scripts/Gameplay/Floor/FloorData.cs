@@ -22,7 +22,7 @@ namespace VLG
     {
 
         // The floor count (ignores the debug floor/floor 0).
-        public const int FLOOR_COUNT = 0;
+        public const int FLOOR_COUNT = 1;
 
         // All floors are the same size, but the amount of space used will vary.
 
@@ -43,9 +43,9 @@ namespace VLG
 
         // Geometry (G-Series Elements)
         // 00 is a blank space
-        public FloorAsset g01;
-        public FloorAsset g02;
-        public FloorAsset g03;
+        public FloorEntity g01;
+        public FloorEntity g02;
+        public FloorEntity g03;
 
         // Constructor
         private FloorData()
@@ -130,6 +130,10 @@ namespace VLG
                 case 0:
                     floor = GetFloor00();
                     break;
+
+                case 1:
+                    floor = GetFloor01();
+                    break;
             }
 
             return floor;
@@ -173,12 +177,66 @@ namespace VLG
 
 
             // Items
-            int[,] items = new int[FLOOR_COLS, FLOOR_ROWS];
+            int[,] items = new int[FLOOR_COLS, FLOOR_ROWS] {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+            
             floor.items = items;
 
 
             return floor;
         }
+
+        // Floor 00
+        public Floor GetFloor01()
+        {
+            Floor floor = new Floor();
+
+            // ID
+            floor.id = 1;
+
+            // Geometry
+            int[,] geometry = new int[FLOOR_COLS, FLOOR_ROWS]{
+            { 0, 0, 0, 0, 0, 0, 0, 3, 3, 2},
+            { 0, 0, 0, 0, 0, 0, 0, 3, 3, 3},
+            { 0, 0, 0, 0, 0, 0, 3, 3, 3, 3},
+            { 0, 0, 0, 0, 0, 0, 3, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 3, 3, 0, 0, 0},
+            { 0, 0, 0, 0, 3, 3, 0, 0, 0, 0},
+            { 0, 0, 0, 3, 3, 0, 0, 0, 0, 0},
+            { 3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+            { 3, 3, 3, 0, 0, 0, 0, 0, 0, 0},
+            { 1, 3, 3, 0, 0, 0, 0, 0, 0, 0}};
+
+            floor.geometry = geometry;
+
+
+            // Items
+            int[,] items = new int[FLOOR_COLS, FLOOR_ROWS] {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+            floor.items = items;
+
+
+            return floor;
+        }    
 
 
         // This function is called when the MonoBehaviour will be destroyed.
