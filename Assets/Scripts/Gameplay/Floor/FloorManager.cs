@@ -217,6 +217,8 @@ namespace VLG
         // Clears the floor.
         public void ClearFloor()
         {
+            // TODO: use object pools instead of deleting and remaking objects.
+
             // Deletes all the geometry.
             for(int r = 0; r < floorGeometry.GetLength(0); r++)
             {
@@ -250,8 +252,32 @@ namespace VLG
 
         }
 
+        // Gets the floor position in local space.
+        public Vector3 GetFloorPositionInLocalSpace(Vector2Int floorPos, float localYPos)
+        {
+            // The local position.
+            Vector3 localPos = new Vector3();
+
+            // The world size.
+            Vector2 worldSize = new Vector2(FloorData.FLOOR_COLS, FloorData.FLOOR_ROWS);
+
+            // Calculates the base floor position based on the spacing of indexes.
+            localPos.x = floorPos.x * floorSpacing.x;
+            localPos.y = localYPos; // The y-position stays the same.
+            localPos.z = floorPos.y * floorSpacing.y;
+
+            // Gets the local position without offsetting by the origin's position.
+            if (originIsCenter) // Centre 
+            {
+                localPos -= new Vector3(worldSize.x * floorSpacing.x / 2.0F, 0, worldSize.y * floorSpacing.y / 2.0F);
+            }
+
+            // Return the world position.
+            return localPos;
+        }
+
         // Gets the floor position in world space.
-        public Vector3 GetFloorPositionInWorldSpace(Vector2Int floorPos)
+        public Vector3 GetFloorPositionInWorldSpace(Vector2Int floorPos, float localYPos)
         {
             // The world position.
             Vector3 worldPos = new Vector3();
@@ -261,6 +287,7 @@ namespace VLG
 
             // Calculates the base floor position based on the spacing of indexes.
             worldPos.x = floorPos.x * floorSpacing.x;
+            worldPos.y = localYPos; // The y-position stays the same.
             worldPos.z = floorPos.y * floorSpacing.y;
 
             // Floor origin exists.

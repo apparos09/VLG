@@ -54,6 +54,10 @@ namespace VLG
         // The movement speed.
         public float moveSpeed = 1.0F;
 
+        // The jump height for the interpolation (only applies on curves).
+        [Tooltip("The jump height during curved movement.")]
+        public float jumpHeight = 10.0F;
+
         // Start is called before the first frame update
         protected virtual void Start()
         {
@@ -193,11 +197,8 @@ namespace VLG
                 }
 
                 // Gets the start and end points.
-                startWorldPos = floorManager.GetFloorPositionInWorldSpace(floorPos);
-                startWorldPos.y = transform.position.y;
-
-                endWorldPos = floorManager.GetFloorPositionInWorldSpace(newFloorPos);
-                endWorldPos.y = transform.position.y;
+                startWorldPos = floorManager.GetFloorPositionInWorldSpace(floorPos, localYPos);
+                endWorldPos = floorManager.GetFloorPositionInWorldSpace(newFloorPos, localYPos);
 
                 // Internally, the player is considerd at their end location.
                 floorPos = newFloorPos;
@@ -218,11 +219,50 @@ namespace VLG
         // Interpolates movement from one space to another on the floor in world space.
         protected virtual Vector3 InterpolateMove(Vector3 a, Vector3 b, float t)
         {
+            // The resulting vector.
+            Vector3 result;
+
             // Checks if movement should be curved.
             if(curvedMovement)
-                return util.Interpolation.CatmullRom(a, a, b, b, t);
+            {
+                result = util.Interpolation.CatmullRom(a, a, b, b, t);
+
+                // TODO: fix the jump arc so that it makes a curve.
+                // The result's y-value. 
+                float resultY = 0.0F;
+
+                // The peak of the jump.
+                float jumpPeak = localYPos + jumpHeight;
+
+                // The lowest and highest points of the jump.
+                Vector3 jumpLow = new Vector3(0, localYPos, 0); // Ground
+                Vector3 jumpHigh = new Vector3(0, localYPos, 0); // Peak
+
+                // Calculates the jump height (50% through should be the peak of the jump)
+                if (t <= 0.5F)
+                {
+                    resultY = Mathf.Lerp(localYPos, localYPos + jumpHeight, t/0.5F);
+                    // resultY = util.Interpolation.CatmullRom(jumpLow, jumpLow, jumpHigh, jumpHigh, t / 0.5F).y;
+                }
+                else
+                {
+                    resultY = Mathf.Lerp(localYPos + jumpHeight, localYPos, (t - 0.5F) / 0.5F);
+                    // resultY = util.Interpolation.CatmullRom(jumpLow, jumpLow, jumpHigh, jumpHigh, (t - 0.5F) / 0.5F).y;
+                }
+
+                // Adjust for floor origin.
+                if (floorManager.floorOrigin != null)
+                    resultY += floorManager.floorOrigin.transform.position.y;
+
+                // Sets the y-value.
+                result.y = resultY;
+            }
             else
-                return Vector3.Lerp(a, b, t);
+            {
+                result = Vector3.Lerp(a, b, t);
+            }               
+
+            return result;
         }
 
         // Called when a movement has been started.
