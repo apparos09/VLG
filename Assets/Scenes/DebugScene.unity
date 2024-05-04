@@ -151,7 +151,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1960487468}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &705507993
@@ -414,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1696945532}
   floorOrigin: {fileID: 624282697}
-  originIsCenter: 1
+  originIsCenter: 0
   floorData: {fileID: 2084182935}
   floorSpacing: {x: 5, y: 5}
   floorTime: 0
@@ -600,6 +601,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1960487468 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8276334634695787878, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
+  m_PrefabInstance: {fileID: 3736792733711228259}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2084182935 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8520588072961170829, guid: 830203a0f278cf748990eaca5ae95124, type: 3}
@@ -617,7 +623,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 624282698}
     m_Modifications:
     - target: {fileID: 7689295257826430086, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: m_Name
@@ -641,15 +647,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8276334634695787878, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8276334634695787878, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8276334634695787878, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8276334634695787878, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -760,4 +766,3 @@ SceneRoots:
   - {fileID: 1696945533}
   - {fileID: 6653520069439987862}
   - {fileID: 624282698}
-  - {fileID: 3736792733711228259}

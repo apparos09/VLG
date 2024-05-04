@@ -43,11 +43,11 @@ namespace VLG
         [Tooltip("If true, movement is curved. If false, it's a straight line.")]
         public bool curvedMovement = true;
 
-        // The start position.
-        private Vector3 startWorldPos;
+        // The start position in local space.
+        private Vector3 startLocalPos;
 
-        // The end position.
-        private Vector3 endWorldPos;
+        // The end position in local space.
+        private Vector3 endLocalPos;
 
         // The interpolation time
         private float interPercent = 0.0F;
@@ -198,8 +198,8 @@ namespace VLG
                 }
 
                 // Gets the start and end points.
-                startWorldPos = floorManager.GetFloorPositionInWorldSpace(floorPos, localYPos);
-                endWorldPos = floorManager.GetFloorPositionInWorldSpace(newFloorPos, localYPos);
+                startLocalPos = floorManager.GetFloorPositionInLocalSpace(floorPos, localYPos);
+                endLocalPos = floorManager.GetFloorPositionInLocalSpace(newFloorPos, localYPos);
 
                 // Internally, the player is considerd at their end location.
                 floorPos = newFloorPos;
@@ -211,7 +211,7 @@ namespace VLG
                 interPercent = 0.0F;
 
                 // The move has started.
-                OnMoveStarted(startWorldPos, endWorldPos, interPercent);
+                OnMoveStarted(startLocalPos, endLocalPos, interPercent);
             }
 
             
@@ -240,19 +240,19 @@ namespace VLG
         }
 
         // Called when a movement has been started.
-        public virtual void OnMoveStarted(Vector3 start, Vector3 end, float t)
+        public virtual void OnMoveStarted(Vector3 localStart, Vector3 localEnd, float t)
         {
             // ...
         }
 
         // Called when a movement is ongoing.
-        public virtual void OnMoveOngoing(Vector3 start, Vector3 end, float t)
+        public virtual void OnMoveOngoing(Vector3 localStart, Vector3 localEnd, float t)
         {
             // ...
         }
 
         // Called when a movement is ending.
-        public virtual void OnMoveEnded(Vector3 start, Vector3 end, float t)
+        public virtual void OnMoveEnded(Vector3 localStart, Vector3 localEnd, float t)
         {
             floorManager.OnFloorEntityPositionChanged(this);
         }
@@ -280,19 +280,19 @@ namespace VLG
                     interPercent = Mathf.Clamp(interPercent, 0, 1);
 
                     // Interpolates the movement.
-                    transform.position = InterpolateMove(startWorldPos, endWorldPos, interPercent);
+                    transform.localPosition = InterpolateMove(startLocalPos, endLocalPos, interPercent);
 
                     // If the end has been reached, stop moving.
                     if(interPercent >= 1.0F)
                     {
                         interPercent = 0.0F;
                         moving = false;
-                        OnMoveEnded(startWorldPos, endWorldPos, interPercent);
+                        OnMoveEnded(startLocalPos, endLocalPos, interPercent);
                     }
                     else
                     {
                         // The move is still ongoing.
-                        OnMoveOngoing(startWorldPos, endWorldPos, interPercent);
+                        OnMoveOngoing(startLocalPos, endLocalPos, interPercent);
                     }
                 }
             }

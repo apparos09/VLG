@@ -118,15 +118,15 @@ namespace VLG
         }
 
         // Called when a movement has been started.
-        public override void OnMoveStarted(Vector3 start, Vector3 end, float t)
+        public override void OnMoveStarted(Vector3 localStart, Vector3 localEnd, float t)
         {
-            base.OnMoveStarted(start, end, t);
+            base.OnMoveStarted(localStart, localEnd, t);
         }
 
         // Called when a movement is ending.
-        public override void OnMoveEnded(Vector3 start, Vector3 end, float t)
+        public override void OnMoveEnded(Vector3 localStart, Vector3 localEnd, float t)
         {
-            base.OnMoveEnded(start, end, t);
+            base.OnMoveEnded(localStart, localEnd, t);
         }
 
         // Called when an element interact with this block, which is usually the player.

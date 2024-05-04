@@ -233,6 +233,20 @@ namespace VLG
                 }
             }
 
+            // Deletes all the items.
+            for (int r = 0; r < floorItems.GetLength(0); r++)
+            {
+                for (int c = 0; c < floorItems.GetLength(1); c++)
+                {
+                    // Delete the element.
+                    if (floorItems[r, c] != null)
+                    {
+                        Destroy(floorItems[r, c].gameObject);
+                        floorItems[r, c] = null;
+                    }
+                }
+            }
+
         }
 
         // Checks if a floor position is valid.
