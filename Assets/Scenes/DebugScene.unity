@@ -664,12 +664,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: floorPos.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: floorPos.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
+      propertyPath: jumpHeight
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: resetPos.x

@@ -33,7 +33,8 @@ namespace VLG
         [Header("Move Interpolation")]
 
         // If 'true', the entity interpolates movement across the floor.
-        public bool useMoveInter = false;
+        // If 'false', the entity instantly moves to their next location.
+        public bool useMoveInter = true;
 
         // Gets set to 'true' when the entity is moving.
         private bool moving = false;
@@ -54,9 +55,9 @@ namespace VLG
         // The movement speed.
         public float moveSpeed = 1.0F;
 
-        // The jump height for the interpolation (only applies on curves).
-        [Tooltip("The jump height during curved movement.")]
-        public float jumpHeight = 10.0F;
+        // The jump factor used for movement interpolation (only applies on curved movement, applied to bezier handles).
+        [Tooltip("The jump factor for curved movement (applied to handles of bezier curve).")]
+        public float jumpFactor = 7.0F;
 
         // Start is called before the first frame update
         protected virtual void Start()
@@ -225,37 +226,10 @@ namespace VLG
             // Checks if movement should be curved.
             if(curvedMovement)
             {
-                result = util.Interpolation.CatmullRom(a, a, b, b, t);
-
-                // TODO: fix the jump arc so that it makes a curve.
-                // The result's y-value. 
-                float resultY = 0.0F;
-
-                // The peak of the jump.
-                float jumpPeak = localYPos + jumpHeight;
-
-                // The lowest and highest points of the jump.
-                Vector3 jumpLow = new Vector3(0, localYPos, 0); // Ground
-                Vector3 jumpHigh = new Vector3(0, localYPos, 0); // Peak
-
-                // Calculates the jump height (50% through should be the peak of the jump)
-                if (t <= 0.5F)
-                {
-                    resultY = Mathf.Lerp(localYPos, localYPos + jumpHeight, t/0.5F);
-                    // resultY = util.Interpolation.CatmullRom(jumpLow, jumpLow, jumpHigh, jumpHigh, t / 0.5F).y;
-                }
-                else
-                {
-                    resultY = Mathf.Lerp(localYPos + jumpHeight, localYPos, (t - 0.5F) / 0.5F);
-                    // resultY = util.Interpolation.CatmullRom(jumpLow, jumpLow, jumpHigh, jumpHigh, (t - 0.5F) / 0.5F).y;
-                }
-
-                // Adjust for floor origin.
-                if (floorManager.floorOrigin != null)
-                    resultY += floorManager.floorOrigin.transform.position.y;
-
-                // Sets the y-value.
-                result.y = resultY;
+                // The bezier handles are the start and end points with their y's adjusted.
+                // This makes a perfect curve, but it doesn't make direct control of the jump height.
+                Vector3 curveHeight = new Vector3(0, jumpFactor, 0);
+                result = util.Interpolation.Bezier(a + curveHeight, a, b, b + curveHeight, t);
             }
             else
             {
