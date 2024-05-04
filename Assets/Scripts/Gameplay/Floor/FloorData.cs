@@ -13,8 +13,12 @@ namespace VLG
         // The floor geometry (includes door).
         public int[,] geometry;
 
+        // The enemies.
+        public int[,] enemies;
+
         // The items.
         public int[,] items;
+
     }
 
     // The floor data.
@@ -176,6 +180,22 @@ namespace VLG
             floor.geometry = geometry;
 
 
+            // Enemies
+            int[,] enemies = new int[FLOOR_COLS, FLOOR_ROWS] {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+            floor.enemies = enemies;
+
+
             // Items
             int[,] items = new int[FLOOR_COLS, FLOOR_ROWS] {
             { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -218,6 +238,20 @@ namespace VLG
 
             floor.geometry = geometry;
 
+            // Enemies
+            int[,] enemies = new int[FLOOR_COLS, FLOOR_ROWS] {
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
+            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+            floor.enemies = enemies;
 
             // Items
             int[,] items = new int[FLOOR_COLS, FLOOR_ROWS] {

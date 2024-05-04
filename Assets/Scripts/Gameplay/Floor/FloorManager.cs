@@ -35,13 +35,17 @@ namespace VLG
         // The spacing for floor assets.
         public Vector2 floorSpacing = new Vector2(5.0F, 5.0F);
 
+        // TODO: add object pools so that you aren't constantly deleting and remaking everything.
+
         // The array of floor geometry
         public FloorEntity[,] floorGeometry = new FloorEntity[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
 
-        // The array of floor items
-        // TODO: implement item array initalization.
-        public FloorEntity[,] floorItems = new FloorEntity[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
+        // The array of floor enemies.
+        public Enemy[,] floorEnemies = new Enemy[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
 
+        // The array of floor items
+        public Item[,] floorItems = new Item[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
+        
         [Header("Other")]
 
         // The time spent on this floor.
@@ -167,45 +171,91 @@ namespace VLG
                     // New position in the grid.
                     Vector2Int gridPos = new Vector2Int(col, row);
 
-                    // The floor asset.
-                    FloorEntity geoAsset = null;
+                    // The floor assets for geometry, items, and enemies.
+                    FloorEntity geoEntity = null;
+                    Enemy emyEntity = null;
+                    Item itmEntity = null;
 
+                    // GEOMETRY //
                     // Checks the geometry.
                     switch(floor.geometry[col, row])
                     {
                         case 1: // Block 01
-                            geoAsset = Instantiate(floorData.g01);
+                            geoEntity = Instantiate(floorData.g01);
                             break;
 
                         case 2: // Block 02
-                            geoAsset = Instantiate(floorData.g02);
+                            geoEntity = Instantiate(floorData.g02);
                             break;
 
                         case 3: // Block 03
-                            geoAsset = Instantiate(floorData.g03);
+                            geoEntity = Instantiate(floorData.g03);
                             break;
                     }
 
-                    // Initialize the asset.
-                    if(geoAsset != null)
+                    // ENEMY
+                    // switch(floor.enemies[col, row])
+                    // {
+                    //     case 0:
+                    // }
+
+                    // ITEM
+                    // switch(floor.items[col, row])
+                    // {
+                    //     case 0:
+                    // }
+
+                    // Initialize the entity.
+                    if (geoEntity != null)
                     {
                         // Sets the floor manager.
-                        geoAsset.floorManager = this;
+                        geoEntity.floorManager = this;
 
                         // Sets the transform parent.
-                        geoAsset.transform.parent = floorOrigin.transform;
+                        geoEntity.transform.parent = floorOrigin.transform;
 
                         // Sets the floor position.
-                        geoAsset.SetFloorPosition(gridPos, true, false);
+                        geoEntity.SetFloorPosition(gridPos, true, false);
 
                         // Adds the asset to the list.
-                        floorGeometry[col, row] = geoAsset;
+                        floorGeometry[col, row] = geoEntity;
 
                         // If the geo asset is the entry block, and this hasn't been set.
-                        if(geoAsset is EntryBlock && entryBlock == null)
-                            entryBlock = geoAsset as EntryBlock;
+                        if(geoEntity is EntryBlock && entryBlock == null)
+                            entryBlock = geoEntity as EntryBlock;
                     }
-                    
+
+                    // ENEMY //
+                    if (emyEntity != null)
+                    {
+                        // Sets the floor manager.
+                        emyEntity.floorManager = this;
+
+                        // Sets the transform parent.
+                        emyEntity.transform.parent = floorOrigin.transform;
+
+                        // Sets the floor position.
+                        emyEntity.SetFloorPosition(gridPos, true, false);
+
+                        // Adds the asset to the list.
+                        floorEnemies[col, row] = emyEntity;
+                    }
+
+                    // ITEM //
+                    if (itmEntity != null)
+                    {
+                        // Sets the floor manager.
+                        itmEntity.floorManager = this;
+
+                        // Sets the transform parent.
+                        itmEntity.transform.parent = floorOrigin.transform;
+
+                        // Sets the floor position.
+                        itmEntity.SetFloorPosition(gridPos, true, false);
+
+                        // Adds the asset to the list.
+                        floorItems[col, row] = itmEntity;
+                    }
                 }
             }
 

@@ -415,7 +415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1696945532}
   floorOrigin: {fileID: 624282697}
-  originIsCenter: 0
+  originIsCenter: 1
   floorData: {fileID: 2084182935}
   floorSpacing: {x: 5, y: 5}
   floorTime: 0
