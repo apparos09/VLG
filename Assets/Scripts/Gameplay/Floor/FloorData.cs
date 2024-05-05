@@ -7,6 +7,9 @@ namespace VLG
     // The floor.
     public class Floor
     {
+        // The code for the floor (5 chars).
+        public string code;
+
         // The id number (double digit).
         public int id;
 
@@ -43,6 +46,15 @@ namespace VLG
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
 
+        // The floor codes, which are used to skip floors on the title screen.
+        // A floor code has 4 digits, but "0" and "O" aren't used because they look similar.
+        // TODO: don't allow the player to use "0" or "O".
+        private string[] floorCodes = new string[FLOOR_COUNT + 1]
+        {
+            "0000",
+            "91AB"
+        };
+
         [Header("Prefabs")]
 
         // Geometry (G-Series Elements)
@@ -50,6 +62,8 @@ namespace VLG
         public FloorEntity g01;
         public FloorEntity g02;
         public FloorEntity g03;
+        public FloorEntity g04;
+        public FloorEntity g05;
 
         // Constructor
         private FloorData()
@@ -120,6 +134,81 @@ namespace VLG
             }
         }
 
+        // Gets the geometry element.
+        public FloorEntity InstantiateGeometryElement(int id)
+        {
+            // The geometry entity
+            FloorEntity geoEntity;
+
+            // Instantiates the goemetry object.
+            switch (id)
+            {
+                case 1:
+                    geoEntity = Instantiate(g01);
+                    break;
+
+                case 2:
+                    geoEntity = Instantiate(g02);
+                    break;
+
+                case 3:
+                    geoEntity = Instantiate(g03);
+                    break;
+
+                case 4:
+                    geoEntity = Instantiate(g04);
+                    break;
+
+                case 5:
+                    geoEntity = Instantiate(g05);
+                    break;
+
+                case 0:
+                default:
+                    geoEntity = null;
+                    break;
+            }
+
+            return geoEntity;
+        }
+
+        // Gets the enemy element.
+        public Enemy InstantiateEnemyElement(int id)
+        {
+            // The enemy entity
+            Enemy emyEntity;
+
+            // Instantiates the enemy object.
+            switch (id)
+            {
+                case 0:
+                default:
+                    emyEntity = null;
+                    break;
+            }
+
+            return emyEntity;
+        }
+
+        // Gets the item element.
+        public Item InstantiateItemElement(int id)
+        {
+            // The item entity
+            Item itmEntity;
+
+            // Instantiates the item object.
+            switch (id)
+            {
+                case 0:
+                default:
+                    itmEntity = null;
+                    break;
+            }
+
+            return itmEntity;
+        }
+
+
         // General Function
         // Gets the floor ID.
         public Floor GetFloor(int id)
@@ -159,16 +248,18 @@ namespace VLG
             // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
             // };
 
+            // Floor
             Floor floor = new Floor();
 
-            // ID
+            // ID and Code
             floor.id = 0;
+            floor.code = floorCodes[floor.id];
 
             // Geometry
             int[,] geometry = new int[FLOOR_COLS, FLOOR_ROWS]{
                 {1, 3, 0, 0, 0, 0, 0, 0, 0, 3},
-                {3, 0, 3, 0, 0, 0, 0, 0, 0, 0},
-                {3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
+                {3, 0, 3, 0, 5, 0, 0, 0, 0, 0},
+                {3, 3, 3, 3, 3, 4, 0, 0, 0, 0},
                 {0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -220,8 +311,9 @@ namespace VLG
         {
             Floor floor = new Floor();
 
-            // ID
+            // ID and Code
             floor.id = 1;
+            floor.code = floorCodes[floor.id];
 
             // Geometry
             int[,] geometry = new int[FLOOR_COLS, FLOOR_ROWS]{

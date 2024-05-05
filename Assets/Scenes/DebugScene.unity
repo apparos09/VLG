@@ -418,6 +418,7 @@ MonoBehaviour:
   originIsCenter: 1
   floorData: {fileID: 2084182935}
   floorSpacing: {x: 5, y: 5}
+  flipFloorVert: 0
   floorTime: 0
 --- !u!1 &1711864592
 GameObject:
@@ -671,7 +672,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: moveSpeed
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8632849550937163663, guid: c15b5a06ac69a134bac56fe8873b8aca, type: 3}
       propertyPath: floorPos.x

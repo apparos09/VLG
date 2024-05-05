@@ -18,9 +18,6 @@ namespace VLG
         public GameplayManager gameManager;
 
         [Header("Floor")]
-
-        // The current floor.
-        public Floor currFloor = null;
         
         // The origin of all floor/the floor's parent (top left corner of the floor).
         public GameObject floorOrigin;
@@ -29,11 +26,18 @@ namespace VLG
         [Tooltip("Makes the floor origin the center of the area if true. If false, it's the top left corner.")]
         public bool originIsCenter = true;
 
+        // The current floor.
+        public Floor currFloor = null;
+
         // The floor data.
         public FloorData floorData;
 
         // The spacing for floor assets.
         public Vector2 floorSpacing = new Vector2(5.0F, 5.0F);
+
+        // If 'true', the floor is fliped vertically. A flipped floor matches how the array looks in the code.
+        [Tooltip("Flips the floor map vertically if true.")]
+        public bool flipFloorVert = false;
 
         // TODO: add object pools so that you aren't constantly deleting and remaking everything.
 
@@ -45,8 +49,6 @@ namespace VLG
 
         // The array of floor items
         public Item[,] floorItems = new Item[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
-        
-        [Header("Other")]
 
         // The time spent on this floor.
         public float floorTime = 0.0F;
@@ -162,48 +164,28 @@ namespace VLG
 
             // Generate Assets
             // The row (Y) value.
-            for (int row = 0; row < FloorData.FLOOR_ROWS; row++)
+            for (int row = 0; row < currFloor.geometry.GetLength(0); row++)
             {                
                 // The column (X) value.
-                for (int col = 0; col < FloorData.FLOOR_COLS; col++)
+                for (int col = 0; col < currFloor.geometry.GetLength(1); col++)
                 {
                     // Calculates the new position for the potential assets.
                     // New position in the grid.
                     Vector2Int gridPos = new Vector2Int(col, row);
 
                     // The floor assets for geometry, items, and enemies.
-                    FloorEntity geoEntity = null;
-                    Enemy emyEntity = null;
-                    Item itmEntity = null;
+                    FloorEntity geoEntity;
+                    Enemy emyEntity;
+                    Item itmEntity;
 
-                    // GEOMETRY //
-                    // Checks the geometry.
-                    switch(floor.geometry[col, row])
-                    {
-                        case 1: // Block 01
-                            geoEntity = Instantiate(floorData.g01);
-                            break;
+                    // Calculates the new row value if the floor should be flipped vertically.
+                    int etyRow = flipFloorVert ? currFloor.geometry.GetLength(0) - 1 - row : row;
 
-                        case 2: // Block 02
-                            geoEntity = Instantiate(floorData.g02);
-                            break;
+                    // Generates the geometry, enemy, and item elements.
+                    geoEntity = floorData.InstantiateGeometryElement(floor.geometry[col, etyRow]);
+                    emyEntity = floorData.InstantiateEnemyElement(floor.enemies[col, etyRow]);
+                    itmEntity = floorData.InstantiateItemElement(floor.enemies[col, etyRow]);
 
-                        case 3: // Block 03
-                            geoEntity = Instantiate(floorData.g03);
-                            break;
-                    }
-
-                    // ENEMY
-                    // switch(floor.enemies[col, row])
-                    // {
-                    //     case 0:
-                    // }
-
-                    // ITEM
-                    // switch(floor.items[col, row])
-                    // {
-                    //     case 0:
-                    // }
 
                     // Initialize the entity.
                     if (geoEntity != null)
