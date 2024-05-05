@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using util;
 
 namespace VLG
 {
@@ -13,6 +15,20 @@ namespace VLG
         // Gets set to 'true' when the singleton has been instanced.
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
+
+        // The game manager.
+        public GameplayManager gameManager;
+
+        // The text that displays the floor.
+        public TMP_Text floorText;
+
+        [Header("Time")]
+
+        // The time text for the whole game.
+        public TMP_Text gameTimeText;
+
+        // The time text for the current floor.
+        public TMP_Text floorTimeText;
 
         // Constructor
         private GameplayUIManager()
@@ -45,7 +61,9 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-
+            // Gets the game manager.
+            if (gameManager == null)
+                gameManager = GameplayManager.Instance;
         }
 
         // Gets the instance.
@@ -84,10 +102,32 @@ namespace VLG
             }
         }
 
+        // Updates the floor text.
+        public void UpdateFloorText()
+        {
+            // Gets the floor ID.
+            int floorId = gameManager.floorManager.currFloor.id;
+
+            // Sets the floor text.
+            floorText.text = "Floor " + floorId.ToString();
+        }
+
         // Update is called once per frame
         void Update()
         {
+            // If the game is not paused.
+            if(!gameManager.paused)
+            {
+                // TODO: maybe change how often time text is updated so that it doesn't happen every frame.
 
+                // Gets the game time and floor time.
+                float gt = gameManager.gameTime;
+                float ft = gameManager.floorManager.floorTime;
+
+                // Updates the text.
+                gameTimeText.text = "GT: " + StringFormatter.FormatTime(gt, false, true, false);
+                floorTimeText.text = "FT: " + StringFormatter.FormatTime(ft, false, true, false);
+            }
         }
     }
 }

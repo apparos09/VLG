@@ -244,6 +244,10 @@ namespace VLG
             // Resets the player's position to the entry block's position.
             if (entryBlock != null)
                 gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
+
+
+            // Update the floor text.
+            gameManager.gameUI.UpdateFloorText();
         }
 
         // Clears the floor.
@@ -279,6 +283,8 @@ namespace VLG
                 }
             }
 
+            // Reset the floor time.
+            floorTime = 0;
         }
 
         // Checks if a floor position is valid.
@@ -407,7 +413,31 @@ namespace VLG
                 }
             }
 
-            // TODO: reset other assets.
+            // Resets the enemy elements.
+            for (int r = 0; r < floorEnemies.GetLength(0); r++) // Row
+            {
+                for (int c = 0; c < floorEnemies.GetLength(1); c++) // Column
+                {
+                    // Object exists.
+                    if (floorEnemies[r, c] != null)
+                    {
+                        floorEnemies[r, c].ResetEntity();
+                    }
+                }
+            }
+
+            // Resets the item elements.
+            for (int r = 0; r < floorItems.GetLength(0); r++) // Row
+            {
+                for (int c = 0; c < floorItems.GetLength(1); c++) // Column
+                {
+                    // Object exists.
+                    if (floorItems[r, c] != null)
+                    {
+                        floorItems[r, c].ResetEntity();
+                    }
+                }
+            }
 
             // Resets the player.
             gameManager.player.ResetEntity();
@@ -448,8 +478,8 @@ namespace VLG
                         // Gets the block.
                         Block block = (Block)floorGeometry[newFloorPos.x, newFloorPos.y];
 
-                        // If the block is usable.
-                        if (block.UsableBlock())
+                        // If the block is active and enabled, and if the block is usable.
+                        if (block.isActiveAndEnabled && block.UsableBlock())
                         {
                             // TODO: move the interaction function to FloorEntity, and...
                             // Have it be called everytime the entity is moved to a new space.
@@ -508,7 +538,12 @@ namespace VLG
         // Update is called once per frame
         void Update()
         {
-            floorTime += Time.deltaTime;
+            // If the game is not paused.
+            if(!gameManager.paused)
+            {
+                floorTime += Time.deltaTime;
+            }
+            
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

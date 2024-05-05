@@ -41,6 +41,9 @@ namespace VLG
                 // The move direction.
                 Vector2Int moveDirec = Vector2Int.zero;
 
+                // TODO: If using move interpolation, use the axis raw version?
+                // Maybe don't if the movement speed is too fast. Maybe revisit this idea.
+
                 // Moves the player in a given direction, and has the player face said direction.
                 // Player Movement - Ver. 1 - Constant Movement
                 //if (Input.GetAxisRaw("Vertical") != 0) // Up/Down

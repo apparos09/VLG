@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 8632849550937163663}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -155,5 +155,9 @@ MonoBehaviour:
   localYPos: 1
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}
+  useMoveInter: 1
+  curvedMovement: 1
+  moveSpeed: 1
+  jumpFactor: 7
   gameManager: {fileID: 0}
   allowInput: 1

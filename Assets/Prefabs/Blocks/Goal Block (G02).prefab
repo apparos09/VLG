@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d69401c2eb827604f9dad89bebf39d71, type: 2}
+  - {fileID: 2100000, guid: 4bbef85f34ad87e4892f689c4e2e1b81, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,6 +156,10 @@ MonoBehaviour:
   localYPos: 0
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}
+  useMoveInter: 1
+  curvedMovement: 1
+  moveSpeed: 1
+  jumpFactor: 7
   goal: {fileID: 4032517970450707862}
 --- !u!114 &4032517970450707862
 MonoBehaviour:

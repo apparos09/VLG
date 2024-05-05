@@ -27,6 +27,9 @@ namespace VLG
         // The game time.
         public float gameTime = 0;
 
+        // Determines if the game is paused or not.
+        public bool paused = false;
+
         // TODO: add floor array for moving around entites.
 
         // Constructor
@@ -135,7 +138,12 @@ namespace VLG
         // Update is called once per frame
         void Update()
         {
-            gameTime += Time.deltaTime;
+            // The game is not paused.
+            if(!paused)
+            {
+                gameTime += Time.deltaTime;
+            }
+            
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

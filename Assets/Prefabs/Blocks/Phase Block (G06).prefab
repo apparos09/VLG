@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2373691745846927437}
   - component: {fileID: 5677157146809287739}
   m_Layer: 0
-  m_Name: Phase Block (G05)
+  m_Name: Phase Block (G06)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

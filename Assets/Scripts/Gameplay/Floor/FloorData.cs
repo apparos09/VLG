@@ -64,6 +64,7 @@ namespace VLG
         public FloorEntity g03;
         public FloorEntity g04;
         public FloorEntity g05;
+        public FloorEntity g06;
 
         // Constructor
         private FloorData()
@@ -163,6 +164,11 @@ namespace VLG
                     geoEntity = Instantiate(g05);
                     break;
 
+                case 6:
+                    geoEntity = Instantiate(g06);
+                    break;
+
+
                 case 0:
                 default:
                     geoEntity = null;
@@ -260,7 +266,7 @@ namespace VLG
                 {1, 3, 0, 0, 0, 0, 0, 0, 0, 3},
                 {3, 0, 3, 0, 5, 0, 0, 0, 0, 0},
                 {3, 3, 3, 3, 3, 4, 0, 0, 0, 0},
-                {0, 0, 0, 2, 0, 0, 0, 0, 0, 0},
+                {0, 0, 2, 0, 6, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
