@@ -4,30 +4,28 @@ using UnityEngine;
 
 namespace VLG
 {
-    // The title manager.
-    public class TitleManager : MonoBehaviour
+    // The results UI.
+    public class ResultsUI : MonoBehaviour
     {
         // The singleton instance.
-        private static TitleManager instance;
+        private static ResultsUI instance;
 
         // Gets set to 'true' when the singleton has been instanced.
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
 
-        // The title UI.
-        public TitleUI titleUI;
+        // The results manager.
+        public ResultsManager resultsManager;
 
-        // The code input.
-        public CodeInput codeInput;
 
         // Constructor
-        private TitleManager()
+        private ResultsUI()
         {
             // ...
         }
 
         // Awake is called when the script is being loaded
-        void Awake()
+        protected virtual void Awake()
         {
             // If the instance hasn't been set, set it to this object.
             if (instance == null)
@@ -51,11 +49,13 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-            // ...
+            // Gets the manager.
+            if (resultsManager == null)
+                resultsManager = ResultsManager.Instance;
         }
 
         // Gets the instance.
-        public static TitleManager Instance
+        public static ResultsUI Instance
         {
             get
             {
@@ -63,15 +63,15 @@ namespace VLG
                 if (instance == null)
                 {
                     // Tries to find the instance.
-                    instance = FindObjectOfType<TitleManager>(true);
+                    instance = FindObjectOfType<ResultsUI>(true);
 
 
                     // The instance doesn't already exist.
                     if (instance == null)
                     {
                         // Generate the instance.
-                        GameObject go = new GameObject("TitleManager (singleton)");
-                        instance = go.AddComponent<TitleManager>();
+                        GameObject go = new GameObject("ResultsUIManager (singleton)");
+                        instance = go.AddComponent<ResultsUI>();
                     }
 
                 }
@@ -79,21 +79,6 @@ namespace VLG
                 // Return the instance.
                 return instance;
             }
-        }
-
-        // Returns 'true' if the object has been initialized.
-        public static bool Instantiated
-        {
-            get
-            {
-                return instanced;
-            }
-        }
-
-        // Quits the application.
-        public void QuitApplication()
-        {
-            Application.Quit();
         }
 
         // Update is called once per frame

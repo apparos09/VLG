@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace VLG
 {
@@ -22,7 +23,7 @@ namespace VLG
         // Update is called once per frame
         void Update()
         {
-            // TODO: open the scene.
+            SceneManager.LoadScene("TitleScene");
         }
     }
 }

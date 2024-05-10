@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace VLG
 {
@@ -16,6 +18,7 @@ namespace VLG
 
         // The title manager.
         public TitleManager titleManager;
+
 
         // Constructor
         private TitleUI()
@@ -87,6 +90,12 @@ namespace VLG
             {
                 return instanced;
             }
+        }
+
+        // Quits the application.
+        public void QuitApplication()
+        {
+            titleManager.QuitApplication();
         }
 
         // Update is called once per frame

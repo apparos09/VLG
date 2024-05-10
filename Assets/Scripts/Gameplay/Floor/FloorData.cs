@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace VLG
@@ -135,6 +136,28 @@ namespace VLG
             }
         }
 
+        // Checks if the floor code is valid.
+        public bool IsFloorCodeValid(string code)
+        {
+            // Checks if the code is valid.
+            if(floorCodes.Contains<string>(code))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        // Returns the debug floor code.
+        public string GetDebugFloorCode()
+        {
+            return floorCodes[0];
+        }
+
+
+        // INSTANTIATING OBJECTS //
         // Gets the geometry element.
         public FloorEntity InstantiateGeometryElement(int id)
         {
@@ -215,6 +238,7 @@ namespace VLG
         }
 
 
+        // GETTING FLOOR DATA //
         // General Function
         // Gets the floor ID.
         public Floor GetFloor(int id)
