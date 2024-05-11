@@ -97,7 +97,7 @@ namespace VLG
                 floorData = FloorData.Instance;
 
             // Generates the floor
-            GenerateFloor(floorData.GetFloor00());
+            // GenerateFloor(floorData.GetFloor00());
         }
 
         // Gets the instance.
@@ -139,11 +139,14 @@ namespace VLG
         // Generates the floor by the ID.
         public void GenerateFloor(int id)
         {
-            // Gets the floor data.
-            Floor floor = FloorData.Instance.GetFloor(id);
+            // Gets the floor data and tries to generate it.
+            GenerateFloor(FloorData.Instance.GetFloor(id));
+        }
 
-            // Generates the floor.
-            GenerateFloor(floor);
+        // Generates the floor using the provided code.
+        public void GenerateFloor(string code)
+        {
+            GenerateFloor(FloorData.Instance.GetFloor(code));
         }
 
         // Generates the floor.
@@ -155,7 +158,11 @@ namespace VLG
 
             // If the floor is null, do nothing.
             if (floor == null)
+            {
+                Debug.LogError("Attempted to generate a floor that was null.");
                 return;
+            }
+                
 
             // The entry point for the player.
             EntryBlock entryBlock = null;

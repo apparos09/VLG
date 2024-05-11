@@ -15,10 +15,10 @@ namespace VLG
         private static bool instanced = false;
 
         // The Results UI.
-        public ResultsUI titleUI;
+        public ResultsUI resultsUI;
 
-        // The code input.
-        public CodeInput codeInput;
+        // The results info
+        public ResultsInfo resultsInfo;
 
         // Constructor
         private ResultsManager()
@@ -51,7 +51,15 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-            // ...
+            // Checks if the results info object exists.
+            if(resultsInfo == null)
+            {
+                resultsInfo = FindObjectOfType<ResultsInfo>(true);
+            }
+
+            // Loads the results info.
+            if(resultsInfo != null)
+                LoadResultsInfo(true);
         }
 
         // Gets the instance.
@@ -87,6 +95,32 @@ namespace VLG
             get
             {
                 return instanced;
+            }
+        }
+
+        // Loads the results information.
+        public void LoadResultsInfo(bool destroyObject)
+        {
+            LoadResultsInfo(resultsInfo, destroyObject);
+        }
+
+        // Loads the results information.
+        public void LoadResultsInfo(ResultsInfo info, bool destroyObject)
+        {
+            // Checks that the info exists.
+            if(info != null)
+            {
+                // TODO: add info
+
+                // If the results info object should be destroyed.
+                if(destroyObject)
+                {
+                    Destroy(info.gameObject);
+                }
+            }
+            else // Doesn't exist, so load default values.
+            {
+
             }
         }
 

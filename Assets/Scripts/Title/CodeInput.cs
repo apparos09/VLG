@@ -12,11 +12,13 @@ namespace VLG
         // The title UI.
         public TitleUI titleUI;
 
-        // The password field for the title screen (selects level).
-        public TMP_InputField codeInputField;
-
         // The floor data to check the code of.
         public FloorData floorData;
+
+        [Header("UI")]
+
+        // The password field for the title screen (selects level).
+        public TMP_InputField codeInputField;
 
         // Start is called before the first frame update
         void Start()
@@ -53,7 +55,11 @@ namespace VLG
             // Checks if the code is valid.
             if (valid)
             {
-                // TODO: create object and dont destroy it on load.
+                // Gets the instance.
+                TitleManager manager = TitleManager.Instance;
+                
+                // Gets the floor ID using the code and sets it.
+                manager.gameInfo.floorId = floorData.GetFloorIdByCode(code);
             }
         }
 

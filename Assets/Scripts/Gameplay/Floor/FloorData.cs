@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -136,11 +137,12 @@ namespace VLG
             }
         }
 
+        // FLOOR CODE
         // Checks if the floor code is valid.
         public bool IsFloorCodeValid(string code)
         {
             // Checks if the code is valid.
-            if(floorCodes.Contains<string>(code))
+            if(floorCodes.Contains(code))
             {
                 return true;
             }
@@ -150,10 +152,32 @@ namespace VLG
             }
         }
 
+        // Gets the floor code by the ID.
+        public string GetFloorCodeById(int id)
+        {
+            // If the ID is valid.
+            if(id >= 0 && id < floorCodes.Length)
+            {
+                return floorCodes[id];
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
+
         // Returns the debug floor code.
         public string GetDebugFloorCode()
         {
             return floorCodes[0];
+        }
+
+
+        // FLOOR ID
+        // Gets the floor ID by the code. An ID of -1 means the code is invalid.
+        public int GetFloorIdByCode(string code)
+        {
+            return Array.IndexOf(floorCodes, code);
         }
 
 
@@ -260,6 +284,24 @@ namespace VLG
             }
 
             return floor;
+        }
+
+        // Gets the floor using the provided code.
+        public Floor GetFloor(string code)
+        {
+            // Gets the index.
+            int index = Array.IndexOf(floorCodes, code);
+
+            // Checks the value of the index.
+            if(index == -1) // Value not found.
+            {
+                return null;
+            }
+            else
+            {
+                // The ID is the same as the index, with floor 0 having index 0.
+                return GetFloor(index);
+            }
         }
 
         // Floor 00

@@ -20,6 +20,9 @@ namespace VLG
         // The code input.
         public CodeInput codeInput;
 
+        // The gameplay info object.
+        public GameInfo gameInfo;
+
         // Constructor
         private TitleManager()
         {
@@ -51,7 +54,23 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-            // ...
+            // If the game info object is null.
+            if(gameInfo == null)
+            {
+                // Try to find the game info object.
+                gameInfo = FindObjectOfType<GameInfo>(true);
+
+                // The game info oobject doesn't exist.
+                if(gameInfo == null)
+                {
+                    // Makes the new object and adds the info component.
+                    GameObject newObject = new GameObject("Game Info");
+                    gameInfo = newObject.AddComponent<GameInfo>();
+                }
+            }
+
+            // Keep the game info object around for going to the gameplay scene.
+            DontDestroyOnLoad(gameInfo);
         }
 
         // Gets the instance.

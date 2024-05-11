@@ -63,7 +63,23 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
+            // Finds the game info object.
+            GameInfo gameInfo = FindObjectOfType<GameInfo>(true);
 
+            // If the game info object couldn't be found...
+            if(gameInfo != null)
+            {
+                floorManager.GenerateFloor(gameInfo.floorId);
+
+                // Destroy the game object now that it's done.
+                Destroy(gameInfo.gameObject);
+            }
+            else // Default load.
+            {
+                // Generates floor 1.
+                floorManager.GenerateFloor(0); // Debug
+                // floorManager.GenerateFloor(1);
+            }
         }
 
         // Gets the instance.
