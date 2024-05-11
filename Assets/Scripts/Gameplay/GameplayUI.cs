@@ -7,10 +7,10 @@ using util;
 namespace VLG
 {
     // The gameplay UI manager.
-    public class GameplayUIManager : MonoBehaviour
+    public class GameplayUI : MonoBehaviour
     {
         // The singleton instance.
-        private static GameplayUIManager instance;
+        private static GameplayUI instance;
 
         // Gets set to 'true' when the singleton has been instanced.
         // This isn't needed, but it helps with the clarity.
@@ -22,6 +22,11 @@ namespace VLG
         // The text that displays the floor.
         public TMP_Text floorText;
 
+        [Header("Progress")]
+
+        // The progress bar for the game.
+        public ProgressBar gameProgressBar;
+
         [Header("Time")]
 
         // The time text for the whole game.
@@ -31,7 +36,7 @@ namespace VLG
         public TMP_Text floorTimeText;
 
         // Constructor
-        private GameplayUIManager()
+        private GameplayUI()
         {
             // ...
         }
@@ -55,19 +60,21 @@ namespace VLG
             if (!instanced)
             {
                 instanced = true;
+
+                // Gets the game manager.
+                if (gameManager == null)
+                    gameManager = GameplayManager.Instance;
             }
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            // Gets the game manager.
-            if (gameManager == null)
-                gameManager = GameplayManager.Instance;
+            // ...
         }
 
         // Gets the instance.
-        public static GameplayUIManager Instance
+        public static GameplayUI Instance
         {
             get
             {
@@ -75,7 +82,7 @@ namespace VLG
                 if (instance == null)
                 {
                     // Tries to find the instance.
-                    instance = FindObjectOfType<GameplayUIManager>(true);
+                    instance = FindObjectOfType<GameplayUI>(true);
 
 
                     // The instance doesn't already exist.
@@ -83,7 +90,7 @@ namespace VLG
                     {
                         // Generate the instance.
                         GameObject go = new GameObject("GameplayUIManager (singleton)");
-                        instance = go.AddComponent<GameplayUIManager>();
+                        instance = go.AddComponent<GameplayUI>();
                     }
 
                 }
@@ -110,6 +117,16 @@ namespace VLG
 
             // Sets the floor text.
             floorText.text = "Floor " + floorId.ToString();
+        }
+
+        // Updates the game progress.
+        public void UpdateGameProgressBar()
+        {
+            // Gets the clear percent.
+            float percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / FloorData.FLOOR_COUNT);
+
+            // Sets the value.
+            gameProgressBar.SetValue(percent, true);
         }
 
         // Update is called once per frame

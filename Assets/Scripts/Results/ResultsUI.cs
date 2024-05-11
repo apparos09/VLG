@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using util;
 
 namespace VLG
 {
@@ -17,6 +19,8 @@ namespace VLG
         // The results manager.
         public ResultsManager resultsManager;
 
+        // The game time text.
+        public TMP_Text gameTimeText;
 
         // Constructor
         private ResultsUI()
@@ -43,15 +47,17 @@ namespace VLG
             if (!instanced)
             {
                 instanced = true;
+
+                // Gets the manager.
+                if (resultsManager == null)
+                    resultsManager = ResultsManager.Instance;
             }
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            // Gets the manager.
-            if (resultsManager == null)
-                resultsManager = ResultsManager.Instance;
+            // ...
         }
 
         // Gets the instance.
@@ -78,6 +84,26 @@ namespace VLG
 
                 // Return the instance.
                 return instance;
+            }
+        }
+
+        // Loads the results info into the UI.
+        public void LoadResultsInfo()
+        {
+            LoadResultsInfo(resultsManager.resultsInfo);
+        }
+
+        // Load the results info for the UI.
+        public void LoadResultsInfo(ResultsInfo info)
+        {
+            // Checks the object to know what to load in.
+            if(info != null)
+            {
+                gameTimeText.text = StringFormatter.FormatTime(info.gameTime, true, true);
+            }
+            else
+            {
+                gameTimeText.text = "-";
             }
         }
 

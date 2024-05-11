@@ -57,9 +57,7 @@ namespace VLG
                 resultsInfo = FindObjectOfType<ResultsInfo>(true);
             }
 
-            // Loads the results info.
-            if(resultsInfo != null)
-                LoadResultsInfo(true);
+            LoadResultsInfo();
         }
 
         // Gets the instance.
@@ -99,28 +97,25 @@ namespace VLG
         }
 
         // Loads the results information.
-        public void LoadResultsInfo(bool destroyObject)
+        public void LoadResultsInfo()
         {
-            LoadResultsInfo(resultsInfo, destroyObject);
+            LoadResultsInfo(resultsInfo);
         }
 
         // Loads the results information.
-        public void LoadResultsInfo(ResultsInfo info, bool destroyObject)
+        public void LoadResultsInfo(ResultsInfo info)
         {
-            // Checks that the info exists.
-            if(info != null)
-            {
-                // TODO: add info
+            // Loads the information for the UI.
+            resultsUI.LoadResultsInfo(info);
 
-                // If the results info object should be destroyed.
-                if(destroyObject)
-                {
-                    Destroy(info.gameObject);
-                }
+            // Checks that the info exists.
+            if (info != null)
+            {
+                // ...
             }
             else // Doesn't exist, so load default values.
             {
-
+                // ...
             }
         }
 
@@ -128,6 +123,15 @@ namespace VLG
         void Update()
         {
 
+        }
+
+        // This function is called when the MonoBehaviour will be destroyed
+        private void OnDestroy()
+        {
+            // Destroys the game object.
+            // This is set to not destroy on load, hence why it must be destroyed this way.
+            if (resultsInfo != null)
+                Destroy(resultsInfo.gameObject);
         }
     }
 }

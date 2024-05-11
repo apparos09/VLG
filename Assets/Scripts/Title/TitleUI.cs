@@ -45,15 +45,17 @@ namespace VLG
             if (!instanced)
             {
                 instanced = true;
+
+                // Gets the manager.
+                if (titleManager == null)
+                    titleManager = TitleManager.Instance;
             }
         }
 
         // Start is called before the first frame update
         void Start()
         {
-            // Gets the manager.
-            if (titleManager == null)
-                titleManager = TitleManager.Instance;
+            // ...
         }
 
         // Gets the instance.
@@ -90,6 +92,24 @@ namespace VLG
             {
                 return instanced;
             }
+        }
+
+        // Starts the game.
+        public void StartGame()
+        {
+            titleManager.StartGame();
+        }
+
+        // Starts a new game.
+        public void StartNewGame()
+        {
+            titleManager.StartNewGame();
+        }
+
+        // Continues the game.
+        public void ContinueGame()
+        {
+            titleManager.ContinueGame();
         }
 
         // Quits the application.

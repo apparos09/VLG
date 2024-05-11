@@ -16,7 +16,7 @@ namespace VLG
         private static bool instanced = false;
 
         // The gameplay UI.
-        public GameplayUIManager gameUI;
+        public GameplayUI gameUI;
 
         // The player for the game.
         public Player player;
@@ -147,6 +147,21 @@ namespace VLG
 
         // Called to finish game.
         public void FinishGame()
+        {
+            // Creates the results info object.
+            GameObject newObject = new GameObject("Results Info");
+            ResultsInfo resultsInfo = newObject.AddComponent<ResultsInfo>();
+            DontDestroyOnLoad(newObject);
+
+            // Saving data.
+            resultsInfo.gameTime = gameTime;
+
+            // Results scene.
+            ToResultsScene();
+        }
+
+        // Goes to the results scene.
+        public void ToResultsScene()
         {
             SceneManager.LoadScene("ResultsScene");
         }

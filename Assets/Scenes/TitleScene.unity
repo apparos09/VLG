@@ -598,7 +598,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 463056773}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1069938288}
+        m_TargetAssemblyTypeName: VLG.TitleUI, Assembly-CSharp
+        m_MethodName: ContinueGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &463056773
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1081,7 +1093,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 739795471}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1069938288}
+        m_TargetAssemblyTypeName: VLG.TitleUI, Assembly-CSharp
+        m_MethodName: QuitApplication
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &739795471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1572,7 +1596,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4117648923356156662, guid: 88d90f2e185eb1c4d95a728f92e2d75a, type: 3}
       propertyPath: m_Name
-      value: Game Canvas
+      value: Title Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 4610175980648279408, guid: 88d90f2e185eb1c4d95a728f92e2d75a, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -2045,7 +2069,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1284190242}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1069938288}
+        m_TargetAssemblyTypeName: VLG.TitleUI, Assembly-CSharp
+        m_MethodName: StartNewGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1284190242
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -95,9 +95,6 @@ namespace VLG
             // Gets the instance if this is null.
             if (floorData == null)
                 floorData = FloorData.Instance;
-
-            // Generates the floor
-            // GenerateFloor(floorData.GetFloor00());
         }
 
         // Gets the instance.
@@ -253,8 +250,9 @@ namespace VLG
                 gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
 
 
-            // Update the floor text.
+            // Update the floor text and game progress bar.
             gameManager.gameUI.UpdateFloorText();
+            gameManager.gameUI.UpdateGameProgressBar();
         }
 
         // Clears the floor.

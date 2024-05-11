@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace VLG
 {
@@ -107,6 +108,34 @@ namespace VLG
             {
                 return instanced;
             }
+        }
+
+        // Starts the game.
+        public void StartGame()
+        {
+            gameInfo.floorId = Mathf.Clamp(gameInfo.floorId, 0, FloorData.FLOOR_COUNT);
+
+            ToGameScene();
+        }
+
+        // Starts a new game.
+        public void StartNewGame()
+        {
+            gameInfo.floorId = 1;
+            StartGame();
+        }
+
+        // Continues the game.
+        public void ContinueGame()
+        {
+            // TODO: load save data
+            StartGame();
+        }
+
+        // Goes to the gameplay scene.
+        public void ToGameScene()
+        {
+            SceneManager.LoadScene("GameScene");
         }
 
         // Quits the application.

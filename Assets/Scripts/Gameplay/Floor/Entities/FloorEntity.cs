@@ -59,12 +59,18 @@ namespace VLG
         [Tooltip("The jump factor for curved movement (applied to handles of bezier curve).")]
         public float jumpFactor = 7.0F;
 
-        // Start is called before the first frame update
-        protected virtual void Start()
+        // Awake is called when the script instance is being loaded
+        protected virtual void Awake()
         {
             // Gets the instance if this is null.
             if (floorManager == null)
                 floorManager = FloorManager.Instance;
+        }
+
+        // Start is called before the first frame update
+        protected virtual void Start()
+        {
+            // ...
         }
 
         // Checks if the entity is moving (in move animation)
