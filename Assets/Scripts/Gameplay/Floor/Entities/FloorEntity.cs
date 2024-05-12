@@ -288,6 +288,68 @@ namespace VLG
             floorManager.OnFloorEntityPositionChanged(this);
         }
 
+        // Swaps positions in the floor array.
+        public void SwapPositionsInFloorArray(Vector2Int newFloorPos, bool callSetPosition)
+        {
+            // The array.
+            FloorEntity[,] array = null;
+
+            // Checks the group the entity is part of.
+            switch (group)
+            {
+                case entityGroup.geometry:
+                    array = floorManager.floorGeometry;
+
+                    break;
+
+                case entityGroup.enemy:
+                    array = floorManager.floorEnemies;
+
+                    break;
+
+                case entityGroup.item:
+                    array = floorManager.floorItems;
+
+                    break;
+
+                default:
+                    Debug.LogWarning("This entity is not part of a valid group for floor array swapping.");
+                    break;
+            }
+
+            // Array set.
+            if(array != null)
+            {
+                // The old floor position.
+                Vector2Int currFloorPos = new Vector2Int(-1, -1);
+
+                // Goes through each row.
+                for(int r = 0; r < array.GetLength(0); r++)
+                {
+                    // Goes through each column.
+                    for(int c = 0; c < array.GetLength(1); c++)
+                    {
+                        // The object has been found.
+                        if (array[r, c] == this)
+                        {
+                            currFloorPos.x = r;
+                            currFloorPos.y = c;
+                            break;
+                        }
+                    }
+
+                    // Old position set.
+                    if (currFloorPos.x != -1 && currFloorPos.y != -1)
+                        break;
+                }
+
+                // Found the position, so set the other position.
+                if (currFloorPos.x != -1 && currFloorPos.y != -1)
+                    SwapPositionsInFloorArray(currFloorPos, newFloorPos, callSetPosition);
+            }
+
+        }
+
         // Swaps the positions of the entity in the applicable floor array. This does NOT physically move the entities.
         // If 'callSetPosition' is true, then SetFloorPosition is called on the object(s) swapped.
         // If 'callSetPosition' is false, the floorPos objects are changed, but the entities are not physically moved.
