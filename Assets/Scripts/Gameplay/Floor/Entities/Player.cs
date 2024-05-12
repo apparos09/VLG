@@ -105,30 +105,10 @@ namespace VLG
                 if (moveDirec != Vector2.zero)
                 {
                     // Attempt movement.
-                    bool success = gameManager.floorManager.TryEntityMovement(this, moveDirec);
+                    bool success = floorManager.TryEntityMovement(this, moveDirec);
 
-                    // Movement successful.
-                    if(success)
-                    {
-                        // Gives the information to all the copy enemies.
-                        foreach(CopyEnemy copy in CopyEnemy.copyEnemies)
-                        {
-                            // The copy is active.
-                            if(copy.isActiveAndEnabled)
-                            {
-                                // The direction of movement for the copy.
-                                Vector2Int copyMoveDirec = new Vector2Int();
-                                copyMoveDirec.x = (copy.reverseX) ? moveDirec.x * - 1 : moveDirec.x;
-                                copyMoveDirec.y = (copy.reverseY) ? moveDirec.y * -1 : moveDirec.y;
-
-                                // Try to move the copy.
-                                bool copySuccess = floorManager.TryEntityMovement(copy, copyMoveDirec);
-
-                                // Tells the copy if it worked.
-                                copy.OnPlayerCopy(copySuccess);
-                            }
-                        }
-                    }
+                    // Call on player movement input.
+                    floorManager.OnPlayerMovementInput(this, moveDirec, success);
                 }
             }
             
@@ -156,6 +136,14 @@ namespace VLG
         public override void OnEntityInteract(FloorEntity entity)
         {
             // ...
+        }
+
+        // Kills the player.
+        public override void KillEntity()
+        {
+            // TODO: should the whole floor be reset?
+            ResetEntity();
+            // floorManager.ResetFloor();
         }
 
         // Resets the asset.

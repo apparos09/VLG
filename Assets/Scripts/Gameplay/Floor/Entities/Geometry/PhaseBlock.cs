@@ -49,7 +49,7 @@ namespace VLG
         }
 
         // Called to see if this block is valid to use.
-        public override bool UsableBlock()
+        public override bool UsableBlock(FloorEntity entity)
         {
             // If the block is tangle, it is usable.
             // If the block is intangible, it is not.

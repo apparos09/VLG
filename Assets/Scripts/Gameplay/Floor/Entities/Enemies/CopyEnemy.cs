@@ -52,10 +52,13 @@ namespace VLG
         }
 
         // Remove from the copy enemies list.
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             // Remove from the list.
-            copyEnemies.Remove(this);
+            if(copyEnemies.Contains(this))
+                copyEnemies.Remove(this);
         }
     }
 }

@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 4032517970450707862}
   m_Layer: 0
   m_Name: Goal Block (G02)
-  m_TagString: Untagged
+  m_TagString: Geometry
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ef6000b40ed803489dfcfd94c34925c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
   floorManager: {fileID: 0}
   id: 2
   localYPos: 0

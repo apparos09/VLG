@@ -16,8 +16,8 @@ namespace VLG
             group = entityGroup.geometry;
         }
 
-        // Called to see if this block is valid to use.
-        public virtual bool UsableBlock()
+        // Called to see if this block is valid to use for the provided entity.
+        public virtual bool UsableBlock(FloorEntity entity)
         {
             return true;
         }
@@ -26,6 +26,33 @@ namespace VLG
         public override void OnEntityInteract(FloorEntity entity)
         {
             // ...
+        }
+
+        // Kills the block - by default it does nothing.
+        public override void KillEntity()
+        {
+            Destroy(gameObject);
+        }
+
+        // This function is called when the MonoBehaviour will be destroyed
+        protected virtual void OnDestroy()
+        {
+            // Checks for removal.
+            bool removed = false;
+
+            // Goes through every row and column to remove the enemy from the array.
+            for (int r = 0; r < floorManager.floorGeometry.GetLength(0) && !removed; r++)
+            {
+                for (int c = 0; c < floorManager.floorGeometry.GetLength(1) && !removed; c++)
+                {
+                    if (floorManager.floorGeometry[r, c] == this)
+                    {
+                        floorManager.floorGeometry[r, c] = null;
+                        removed = true;
+                        break;
+                    }
+                }
+            }
         }
     }
 }

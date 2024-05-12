@@ -61,12 +61,15 @@ namespace VLG
 
         // Geometry (G-Series Elements)
         // 00 is a blank space
-        public FloorEntity g01;
-        public FloorEntity g02;
-        public FloorEntity g03;
-        public FloorEntity g04;
-        public FloorEntity g05;
-        public FloorEntity g06;
+        public Block g01;
+        public Block g02;
+        public Block g03;
+        public Block g04;
+
+        public Block g05;
+        public Block g06;
+        // public Block g07;
+        // public Block g08;
 
         // Constructor
         private FloorData()
@@ -183,10 +186,10 @@ namespace VLG
 
         // INSTANTIATING OBJECTS //
         // Gets the geometry element.
-        public FloorEntity InstantiateGeometryElement(int id)
+        public Block InstantiateGeometryElement(int id)
         {
             // The geometry entity
-            FloorEntity geoEntity;
+            Block geoEntity;
 
             // Instantiates the goemetry object.
             switch (id)

@@ -27,6 +27,11 @@ namespace VLG
         // The progress bar for the game.
         public ProgressBar gameProgressBar;
 
+        [Header("Objective")]
+
+        // The objective for the game.
+        public TMP_Text objectiveText;
+
         [Header("Time")]
 
         // The time text for the whole game.
@@ -129,6 +134,54 @@ namespace VLG
             gameProgressBar.SetValue(percent, true);
         }
 
+        // TODO: make this use enums instead of numbers, and implement objective setting in Goal.cs.
+        // Updates the objective text.
+        public void UpdateObjectiveText(int objective)
+        {
+            // Updates the objective text.
+            switch(objective)
+            {
+                default:
+                case 0: // No specific objective.
+                    objectiveText.text = "";
+                    break;
+
+                case 1: // Reach the goal.
+                    objectiveText.text = "Reach the Goal!";
+                    break;
+
+                case 2: // Kill all enemies
+                    objectiveText.text = "Kill all the Enemies!";
+                    break;
+
+                case 3: // Get all the keys
+                    objectiveText.text = "Get all the Keys!";
+                    break;
+
+                case 4: // Defeat boss.
+                    objectiveText.text = "Defeat the Boss!";
+                        break;
+
+            }
+        }
+
+        // Resets the timer text with the provided game time and floor time.
+        public void UpdateTimerText(float gameTime, float floorTime)
+        {
+            gameTimeText.text = "GT: " + StringFormatter.FormatTime(gameTime, true, true, false);
+            floorTimeText.text = "FT: " + StringFormatter.FormatTime(floorTime, true, true, false);
+        }
+
+        // Updates all the UI elements
+        public void UpdateAllHUDElements()
+        {
+            // TODO: implement objective text into gameplay.
+            UpdateFloorText();
+            UpdateGameProgressBar();
+            UpdateObjectiveText(0);
+            UpdateTimerText(gameManager.gameTime, gameManager.floorManager.floorTime);
+        }
+
         // Update is called once per frame
         void Update()
         {
@@ -141,9 +194,8 @@ namespace VLG
                 float gt = gameManager.gameTime;
                 float ft = gameManager.floorManager.floorTime;
 
-                // Updates the text.
-                gameTimeText.text = "GT: " + StringFormatter.FormatTime(gt, true, true, false);
-                floorTimeText.text = "FT: " + StringFormatter.FormatTime(ft, true, true, false);
+                // Updates the timer text.
+                UpdateTimerText(gt, ft);
             }
         }
     }

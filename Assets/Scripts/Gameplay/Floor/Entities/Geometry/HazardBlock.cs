@@ -10,7 +10,7 @@ namespace VLG
         [Header("HazardBlock")]
         // The state of the hazard upon the game starting (on/off).
         [Tooltip("Determines the starting state of the hazard (on/off).")]
-        public bool hazardOnStart = true;
+        public bool hazardOnDefault = true;
 
         // Determines if the hazard is on or off.
         protected bool hazardOn = true;
@@ -21,11 +21,11 @@ namespace VLG
             base.Start();
 
             // Sets the default hazard value.
-            SetHazardOn(hazardOnStart, false);
+            SetHazardOn(hazardOnDefault, false);
         }
 
         // Returns a bool to indicate if the hazard is on.
-        public bool GetHazardOn()
+        public bool IsHazardOn()
         {
             return hazardOn;
         }
@@ -56,13 +56,7 @@ namespace VLG
             // If the hazard is on.
             if (hazardOn)
             {
-                // If the entity is the player.
-                if (entity is Player)
-                {
-                    // Kill the player.
-                    Player player = (Player)entity;
-                    player.ResetEntity();
-                }
+                entity.KillEntity();
             }
             
         }
@@ -71,7 +65,7 @@ namespace VLG
         public override void ResetEntity()
         {
             base.ResetEntity();
-            SetHazardOn(hazardOnStart, false); // Set value to default.
+            SetHazardOn(hazardOnDefault, false); // Set value to default.
         }
     }
 

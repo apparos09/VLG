@@ -67,7 +67,7 @@ namespace VLG
         }
 
         // Called to see if this block is valid to use.
-        public override bool UsableBlock()
+        public override bool UsableBlock(FloorEntity entity)
         {
             // If the block shouldn't be usuable if no uses are left.
             if(unusableIfNoUses)

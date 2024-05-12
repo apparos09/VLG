@@ -35,6 +35,32 @@ namespace VLG
             }
         }
 
-       
+        // Kills the enemy.
+        public override void KillEntity()
+        {
+            Destroy(gameObject);
+        }
+
+        // This function is called when the MonoBehaviour will be destroyed
+        protected virtual void OnDestroy()
+        {
+            // Checks for removal.
+            bool removed = false;
+
+            // Goes through every row and column to remove the enemy from the array.
+            for(int r = 0; r < floorManager.floorEnemies.GetLength(0) && !removed; r++)
+            {
+                for (int c = 0; c < floorManager.floorEnemies.GetLength(1) && !removed; c++)
+                {
+                    if (floorManager.floorEnemies[r, c] == this)
+                    {
+                        floorManager.floorEnemies[r, c] = null;
+                        removed = true;
+                        break;
+                    }
+                }
+            }
+        }
+
     }
 }

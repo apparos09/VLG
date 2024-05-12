@@ -289,6 +289,7 @@ namespace VLG
         }
 
         // Swaps positions in the floor array.
+        // if 'callSetPosition' is true, the entity is physically moved.
         public void SwapPositionsInFloorArray(Vector2Int newFloorPos, bool callSetPosition)
         {
             // The array.
@@ -345,15 +346,15 @@ namespace VLG
 
                 // Found the position, so set the other position.
                 if (currFloorPos.x != -1 && currFloorPos.y != -1)
-                    SwapPositionsInFloorArray(currFloorPos, newFloorPos, callSetPosition);
+                    UpdatePositionInFloorArray(currFloorPos, newFloorPos, callSetPosition);
             }
 
         }
 
-        // Swaps the positions of the entity in the applicable floor array. This does NOT physically move the entities.
+        // Swaps the position of the entity in the applicable floor array.
         // If 'callSetPosition' is true, then SetFloorPosition is called on the object(s) swapped.
         // If 'callSetPosition' is false, the floorPos objects are changed, but the entities are not physically moved.
-        public void SwapPositionsInFloorArray(Vector2Int oldFloorPos, Vector2Int newFloorPos, bool callSetPosition)
+        public void UpdatePositionInFloorArray(Vector2Int oldFloorPos, Vector2Int newFloorPos, bool callSetPosition)
         {
             // If there is an invalid floor position, do nothing.
             if(!floorManager.IsFloorPositionValid(oldFloorPos) || !floorManager.IsFloorPositionValid(newFloorPos))
@@ -364,42 +365,40 @@ namespace VLG
             // The entity to be traded with.
             FloorEntity entity2 = null;
 
-            // Checks the group the entity is part of.
-            switch(group)
+
+            // Checks the type of the entity.
+            if(this is Block)
             {
-                case entityGroup.geometry:
-                    // Grabs the entity at the intended position.
-                    entity2 = floorManager.floorGeometry[newFloorPos.x, newFloorPos.y];
+                // Grabs the entity at the intended position.
+                entity2 = floorManager.floorGeometry[newFloorPos.x, newFloorPos.y];
 
-                    // Swaps the entities.
-                    floorManager.floorGeometry[oldFloorPos.x, oldFloorPos.y] = entity2;
-                    floorManager.floorGeometry[newFloorPos.x, newFloorPos.y] = this;
-
-                    break;
-
-                case entityGroup.enemy:
-                    // Grabs the entity at the intended position.
-                    entity2 = floorManager.floorEnemies[newFloorPos.x, newFloorPos.y];
-
-                    // Swaps the entities.
-                    floorManager.floorEnemies[oldFloorPos.x, oldFloorPos.y] = (Enemy)entity2;
-                    floorManager.floorEnemies[newFloorPos.x, newFloorPos.y] = (Enemy)this;
-
-                    break;
-
-                case entityGroup.item:
-                    // Grabs the entity at the intended position.
-                    entity2 = floorManager.floorItems[newFloorPos.x, newFloorPos.y];
-
-                    // Swaps the entities.
-                    floorManager.floorItems[oldFloorPos.x, oldFloorPos.y] = (Item)entity2;
-                    floorManager.floorItems[newFloorPos.x, newFloorPos.y] = (Item)this;
-                    break;
-
-                default:
-                    Debug.LogWarning("This entity is not part of a valid group for floor array swapping.");
-                    break;
+                // Swaps the entities.
+                floorManager.floorGeometry[oldFloorPos.x, oldFloorPos.y] = (Block)entity2;
+                floorManager.floorGeometry[newFloorPos.x, newFloorPos.y] = (Block)this;
             }
+            else if(this is Enemy)
+            {
+                // Grabs the entity at the intended position.
+                entity2 = floorManager.floorEnemies[newFloorPos.x, newFloorPos.y];
+
+                // Swaps the entities.
+                floorManager.floorEnemies[oldFloorPos.x, oldFloorPos.y] = (Enemy)entity2;
+                floorManager.floorEnemies[newFloorPos.x, newFloorPos.y] = (Enemy)this;
+            }
+            else if(this is Item)
+            {
+                // Grabs the entity at the intended position.
+                entity2 = floorManager.floorItems[newFloorPos.x, newFloorPos.y];
+
+                // Swaps the entities.
+                floorManager.floorItems[oldFloorPos.x, oldFloorPos.y] = (Item)entity2;
+                floorManager.floorItems[newFloorPos.x, newFloorPos.y] = (Item)this;
+            }
+            else
+            {
+                Debug.LogWarning("This entity is not part of a valid group for floor array swapping.");
+            }
+
 
             // Save the positions.
             floorPos = newFloorPos;
@@ -419,6 +418,9 @@ namespace VLG
 
         // Called when an entity interacts with this entity.
         public abstract void OnEntityInteract(FloorEntity entity);
+
+        // Kills the entity.
+        public abstract void KillEntity();
 
         // Resets the floor entity.
         public virtual void ResetEntity()

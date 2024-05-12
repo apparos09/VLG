@@ -42,7 +42,8 @@ namespace VLG
         // TODO: add object pools so that you aren't constantly deleting and remaking everything.
 
         // The array of floor geometry
-        public FloorEntity[,] floorGeometry = new FloorEntity[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
+        // TODO: I don't know if all floor geometry will be blocks, hence why this is just floor entity. Maybe change this.
+        public Block[,] floorGeometry = new Block[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
 
         // The array of floor enemies.
         public Enemy[,] floorEnemies = new Enemy[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
@@ -178,7 +179,7 @@ namespace VLG
                     Vector2Int gridPos = new Vector2Int(col, row);
 
                     // The floor assets for geometry, items, and enemies.
-                    FloorEntity geoEntity;
+                    Block geoEntity;
                     Enemy emyEntity;
                     Item itmEntity;
 
@@ -251,8 +252,7 @@ namespace VLG
 
 
             // Update the floor text and game progress bar.
-            gameManager.gameUI.UpdateFloorText();
-            gameManager.gameUI.UpdateGameProgressBar();
+            gameManager.gameUI.UpdateAllHUDElements();
         }
 
         // Clears the floor.
@@ -392,7 +392,20 @@ namespace VLG
             // Geometry Check
             if (floorGeometry[floorPos.x, floorPos.y] != null && floorGeometry[floorPos.x, floorPos.y] != entity)
             {
-                floorGeometry[floorPos.x, floorPos.y].OnEntityInteract(entity);
+                // Checks if the entity is an enemy.
+                if (entity is Enemy)
+                {
+                    Enemy enemy = (Enemy)entity;
+
+                    // If the enemy doesn't ignore geometry, interact with the geometry.
+                    if(!enemy.ignoreGeometry)
+                        floorGeometry[floorPos.x, floorPos.y].OnEntityInteract(entity);
+                }
+                else
+                {
+                    floorGeometry[floorPos.x, floorPos.y].OnEntityInteract(entity);
+                }
+                
             }
 
             // Item Check
@@ -491,7 +504,7 @@ namespace VLG
                     }
 
                     // Swap positions in array.
-                    entity.SwapPositionsInFloorArray(currFloorPos, newFloorPos, false);
+                    entity.UpdatePositionInFloorArray(currFloorPos, newFloorPos, false);
 
                     // Movement successful.
                     return true;
@@ -529,7 +542,7 @@ namespace VLG
                             }
 
                             // Swap positions in array.
-                            entity.SwapPositionsInFloorArray(currFloorPos, newFloorPos, false);
+                            entity.UpdatePositionInFloorArray(currFloorPos, newFloorPos, false);
 
                             // Movement successful.
                             return true;
@@ -558,7 +571,7 @@ namespace VLG
                             Block block = (Block)floorGeometry[newFloorPos.x, newFloorPos.y];
 
                             // If the block is active and enabled, and if the block is usable.
-                            if (block.isActiveAndEnabled && block.UsableBlock())
+                            if (block.isActiveAndEnabled && block.UsableBlock(entity))
                             {
                                 // TODO: move the interaction function to FloorEntity, and...
                                 // Have it be called everytime the entity is moved to a new space.
@@ -579,7 +592,7 @@ namespace VLG
 
                                 // Swap positions in array (doesn't get used for the player)
                                 if(!(entity is Player))
-                                    entity.SwapPositionsInFloorArray(currFloorPos, newFloorPos, false);
+                                    entity.UpdatePositionInFloorArray(currFloorPos, newFloorPos, false);
 
                                 // Success.
                                 return true;
@@ -609,9 +622,42 @@ namespace VLG
             }
         }
 
-        public void TryEnemyMovement()
+        // Called when the player moves via their own input.
+        // Player is the player object, and move direction is where they moved.
+        // Success shows if the movement worked.
+        public void OnPlayerMovementInput(Player player, Vector2Int moveDirec, bool success)
         {
+            
+            // If the player's movement input was a success.
+            if(success)
+            {
+                // Updating the Switch Blocks
+                foreach (SwitchBlock switchBlock in SwitchBlock.switchBlocks)
+                {
+                    // Toggles the block's state.
+                    switchBlock.ToggleBlock();
+                }
+            }
 
+            // Moving the Copy Enemies
+            // Gives the information to all the copy enemies.
+            foreach (CopyEnemy copy in CopyEnemy.copyEnemies)
+            {
+                // The copy is active.
+                if (copy.isActiveAndEnabled)
+                {
+                    // The direction of movement for the copy.
+                    Vector2Int copyMoveDirec = new Vector2Int();
+                    copyMoveDirec.x = (copy.reverseX) ? moveDirec.x * -1 : moveDirec.x;
+                    copyMoveDirec.y = (copy.reverseY) ? moveDirec.y * -1 : moveDirec.y;
+
+                    // Try to move the copy.
+                    bool copySuccess = TryEntityMovement(copy, copyMoveDirec);
+
+                    // Tells the copy if it worked.
+                    copy.OnPlayerCopy(copySuccess);
+                }
+            }
         }
 
         // Called when the floor is completed.
