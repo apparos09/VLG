@@ -7,10 +7,7 @@ namespace VLG
     // The player for the game.
     public class Player : FloorEntity
     {
-        // The gameplay manager.
-        public GameplayManager gameManager;
-
-        [Header("Player/Input")]
+        [Header("Player")]
         // Enables input from the player.
         public bool allowInput = true;
 
@@ -20,7 +17,7 @@ namespace VLG
             base.Start();
 
             // Sets the group.
-            group = assetGroup.player;
+            group = entityGroup.player;
 
             // Gets the instance if this is null.
             if (gameManager == null)
@@ -108,7 +105,30 @@ namespace VLG
                 if (moveDirec != Vector2.zero)
                 {
                     // Attempt movement.
-                    gameManager.floorManager.TryPlayerMovement(this, moveDirec);
+                    bool success = gameManager.floorManager.TryEntityMovement(this, moveDirec);
+
+                    // Movement successful.
+                    if(success)
+                    {
+                        // Gives the information to all the copy enemies.
+                        foreach(CopyEnemy copy in CopyEnemy.copyEnemies)
+                        {
+                            // The copy is active.
+                            if(copy.isActiveAndEnabled)
+                            {
+                                // The direction of movement for the copy.
+                                Vector2Int copyMoveDirec = new Vector2Int();
+                                copyMoveDirec.x = (copy.reverseX) ? moveDirec.x * - 1 : moveDirec.x;
+                                copyMoveDirec.y = (copy.reverseY) ? moveDirec.y * -1 : moveDirec.y;
+
+                                // Try to move the copy.
+                                bool copySuccess = floorManager.TryEntityMovement(copy, copyMoveDirec);
+
+                                // Tells the copy if it worked.
+                                copy.OnPlayerCopy(copySuccess);
+                            }
+                        }
+                    }
                 }
             }
             
@@ -148,6 +168,10 @@ namespace VLG
         protected override void Update()
         {
             base.Update();
+
+            // The game is paused, so don't update anything.
+            if (gameManager.paused)
+                return;
 
             // Updates the inputs from the player.
             if (allowInput)

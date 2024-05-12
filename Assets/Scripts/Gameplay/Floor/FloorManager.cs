@@ -451,15 +451,15 @@ namespace VLG
             floorTime = 0.0F;
         }
 
-        // Tries player movement.
-        public bool TryPlayerMovement(Player player, Vector2Int direc)
+        // Tries entity movement.
+        public bool TryEntityMovement(FloorEntity entity, Vector2Int direc)
         {
             // No movement.
             if (direc == Vector2.zero)
                 return false;
 
             // Gets the player's position.
-            Vector2Int currFloorPos = player.floorPos;
+            Vector2Int currFloorPos = entity.floorPos;
 
             // The new player new floor position.
             Vector2Int newFloorPos = currFloorPos + direc;
@@ -471,61 +471,147 @@ namespace VLG
                 return false;
             }
 
-            // Restricts player movement.
-            if (floorGeometry[newFloorPos.x, newFloorPos.y] != null)
+
+            // Checks entity type...
+            if (entity.GetGroup() == FloorEntity.entityGroup.geometry) // Geometry
             {
-                // The element is active and enabled.
-                if(floorGeometry[newFloorPos.x, newFloorPos.y].isActiveAndEnabled)
+                // Checks if the space is open for the block to move there.
+                if (floorGeometry[newFloorPos.x, newFloorPos.y] == null) // Space open.
                 {
-                    // Checks
-                    if (floorGeometry[newFloorPos.x, newFloorPos.y] is Block)
+                    // Checks how the block should move.
+                    if (entity.useMoveInter)
                     {
-                        // Gets the block.
-                        Block block = (Block)floorGeometry[newFloorPos.x, newFloorPos.y];
+                        // Start the movement.
+                        entity.MoveEntity(newFloorPos, false, false);
+                    }
+                    else
+                    {
+                        // Sets the position.
+                        entity.SetFloorPosition(newFloorPos, false, true);
+                    }
 
-                        // If the block is active and enabled, and if the block is usable.
-                        if (block.isActiveAndEnabled && block.UsableBlock())
+                    // Swap positions in array.
+                    entity.SwapPositionsInFloorArray(currFloorPos, newFloorPos, false);
+
+                    // Movement successful.
+                    return true;
+                }
+                else // Space taken.
+                {
+                    return false;
+                }
+
+            }
+            else // Other group
+            {
+                // If the entity is an enemy.
+                if(entity is Enemy)
+                {
+                    // Enemy
+                    Enemy enemy = (Enemy)entity;
+
+                    // Checks that the space is available
+                    if (floorEnemies[newFloorPos.x, newFloorPos.y] == null)
+                    {
+                        // If the geometry should be ignored...
+                        if (enemy.ignoreGeometry)
                         {
-                            // TODO: move the interaction function to FloorEntity, and...
-                            // Have it be called everytime the entity is moved to a new space.
-
-                            // If the player is using move interpolation...
-                            // Some operations will be done at the end of the movement.
-                            // If the movement is isntant, do them here.
-                            if(player.useMoveInter)
+                            // Checks how the enemy should move.
+                            if (enemy.useMoveInter)
                             {
                                 // Start the movement.
-                                player.MoveEntity(newFloorPos, false, false);
+                                enemy.MoveEntity(newFloorPos, false, false);
                             }
                             else
                             {
                                 // Sets the position.
-                                player.SetFloorPosition(newFloorPos, false, true);                             
+                                enemy.SetFloorPosition(newFloorPos, false, true);
                             }
 
-                            // Success.
+                            // Swap positions in array.
+                            entity.SwapPositionsInFloorArray(currFloorPos, newFloorPos, false);
+
+                            // Movement successful.
                             return true;
+                        }
+
+                        // The enemy abides by the geometry, so go to block check.
+                    }
+                    else
+                    {
+                        // Space not available, so don't move.
+                        return false;
+                    } 
+                    
+                }
+
+                // Restricts entity movement to floor geometry.
+                if (floorGeometry[newFloorPos.x, newFloorPos.y] != null)
+                {
+                    // The element is active and enabled.
+                    if (floorGeometry[newFloorPos.x, newFloorPos.y].isActiveAndEnabled)
+                    {
+                        // Checks that the floor geometry entity is a block.
+                        if (floorGeometry[newFloorPos.x, newFloorPos.y] is Block)
+                        {
+                            // Gets the block.
+                            Block block = (Block)floorGeometry[newFloorPos.x, newFloorPos.y];
+
+                            // If the block is active and enabled, and if the block is usable.
+                            if (block.isActiveAndEnabled && block.UsableBlock())
+                            {
+                                // TODO: move the interaction function to FloorEntity, and...
+                                // Have it be called everytime the entity is moved to a new space.
+
+                                // If the entity is using move interpolation...
+                                // Some operations will be done at the end of the movement.
+                                // If the movement is isntant, do them here.
+                                if (entity.useMoveInter)
+                                {
+                                    // Start the movement.
+                                    entity.MoveEntity(newFloorPos, false, false);
+                                }
+                                else
+                                {
+                                    // Sets the position.
+                                    entity.SetFloorPosition(newFloorPos, false, true);
+                                }
+
+                                // Swap positions in array (doesn't get used for the player)
+                                if(!(entity is Player))
+                                    entity.SwapPositionsInFloorArray(currFloorPos, newFloorPos, false);
+
+                                // Success.
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
                         }
                         else
                         {
+                            // It's not a block, so the player can't jump on it.
                             return false;
                         }
                     }
                     else
                     {
-                        // It's not a block, so the player can't jump on it.
                         return false;
                     }
+
+
                 }
-                else
+                else // No block at that space for the player to jump on.
                 {
                     return false;
                 }
             }
-            else // No block at that space for the player to jump on.
-            {
-                return false;
-            }
+        }
+
+        public void TryEnemyMovement()
+        {
+
         }
 
         // Called when the floor is completed.

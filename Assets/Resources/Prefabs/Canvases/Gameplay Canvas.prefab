@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -270}
-  m_SizeDelta: {x: 200, y: 30}
+  m_AnchoredPosition: {x: 375, y: -270}
+  m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &120772461596369808
 CanvasRenderer:
@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'FT: 00:00.000'
+  m_text: 'FT: 00:00:00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -302,8 +302,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 400, y: -236}
-  m_SizeDelta: {x: 200, y: 30}
+  m_AnchoredPosition: {x: 375, y: -236}
+  m_SizeDelta: {x: 250, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4427094282983761750
 CanvasRenderer:
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GT: 00:00.000'
+  m_text: 'GT: 00:00:00'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -541,7 +541,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4117648923356156662, guid: 88d90f2e185eb1c4d95a728f92e2d75a, type: 3}
       propertyPath: m_Name
-      value: Game Canvas Variant
+      value: Gameplay Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 4610175980648279408, guid: 88d90f2e185eb1c4d95a728f92e2d75a, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

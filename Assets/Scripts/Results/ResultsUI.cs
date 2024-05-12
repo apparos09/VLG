@@ -99,7 +99,7 @@ namespace VLG
             // Checks the object to know what to load in.
             if(info != null)
             {
-                gameTimeText.text = StringFormatter.FormatTime(info.gameTime, true, true);
+                gameTimeText.text = StringFormatter.FormatTime(info.gameTime, true, true, false);
             }
             else
             {

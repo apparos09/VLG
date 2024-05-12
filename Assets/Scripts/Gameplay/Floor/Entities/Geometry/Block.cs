@@ -13,7 +13,7 @@ namespace VLG
         {
             base.Start();
 
-            group = assetGroup.geometry;
+            group = entityGroup.geometry;
         }
 
         // Called to see if this block is valid to use.

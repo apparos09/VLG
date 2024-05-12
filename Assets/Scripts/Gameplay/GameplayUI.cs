@@ -142,8 +142,8 @@ namespace VLG
                 float ft = gameManager.floorManager.floorTime;
 
                 // Updates the text.
-                gameTimeText.text = "GT: " + StringFormatter.FormatTime(gt, false, true, false);
-                floorTimeText.text = "FT: " + StringFormatter.FormatTime(ft, false, true, false);
+                gameTimeText.text = "GT: " + StringFormatter.FormatTime(gt, true, true, false);
+                floorTimeText.text = "FT: " + StringFormatter.FormatTime(ft, true, true, false);
             }
         }
     }

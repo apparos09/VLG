@@ -9,13 +9,16 @@ namespace VLG
     public abstract class FloorEntity : MonoBehaviour
     {
         // The asset group.
-        public enum assetGroup { none, player, geometry, item }
+        public enum entityGroup { none, player, geometry, enemy, item }
+
+        // The game manager.
+        public GameplayManager gameManager;
 
         // The floor manager.
         public FloorManager floorManager;
 
         // The group the asset is part of.
-        protected assetGroup group = assetGroup.none;
+        protected entityGroup group = entityGroup.none;
 
         // The ID of the floor asset.
         public int id = -1;
@@ -62,6 +65,10 @@ namespace VLG
         // Awake is called when the script instance is being loaded
         protected virtual void Awake()
         {
+            // Gets the instance.
+            if (gameManager == null)
+                gameManager = GameplayManager.Instance;
+
             // Gets the instance if this is null.
             if (floorManager == null)
                 floorManager = FloorManager.Instance;
@@ -80,7 +87,7 @@ namespace VLG
         }
         
         // Gets the group the asset is part of.
-        public assetGroup GetGroup()
+        public entityGroup GetGroup()
         {
             return group;
         }
@@ -94,19 +101,23 @@ namespace VLG
             switch(group)
             {
                 default:
-                case assetGroup.none: 
+                case entityGroup.none: 
                     str = "N"; 
                     break;
 
-                case assetGroup.player: 
+                case entityGroup.player: 
                     str = "P"; 
                     break;
 
-                case assetGroup.geometry: 
+                case entityGroup.geometry: 
                     str = "G"; 
                     break;
 
-                case assetGroup.item: 
+                case entityGroup.enemy:
+                    str = "E";
+                    break;
+
+                case entityGroup.item: 
                     str = "I"; 
                     break;
             }
@@ -117,8 +128,22 @@ namespace VLG
             return str;
         }
 
+        // Called when collision is entered.
+        private void OnCollisionEnter(Collision collision)
+        {
+            // An entity.
+            FloorEntity entity;
+
+            // Tries to get the entity's componenet.
+            if(collision.gameObject.TryGetComponent(out entity))
+            {
+                // Call entity interaction.
+                OnEntityInteract(entity);
+            }
+        }
+
         // Set the floor position of the asset.
-        public void SetFloorPosition(Vector2Int newFloorPos, bool setResetPos, bool callInteract)
+        public virtual void SetFloorPosition(Vector2Int newFloorPos, bool setResetPos, bool callInteract)
         {
             // If the position is valid.
             if(newFloorPos.x >= 0 && newFloorPos.x < floorManager.currFloor.geometry.GetLength(1) &&
@@ -263,6 +288,73 @@ namespace VLG
             floorManager.OnFloorEntityPositionChanged(this);
         }
 
+        // Swaps the positions of the entity in the applicable floor array. This does NOT physically move the entities.
+        // If 'callSetPosition' is true, then SetFloorPosition is called on the object(s) swapped.
+        // If 'callSetPosition' is false, the floorPos objects are changed, but the entities are not physically moved.
+        public void SwapPositionsInFloorArray(Vector2Int oldFloorPos, Vector2Int newFloorPos, bool callSetPosition)
+        {
+            // If there is an invalid floor position, do nothing.
+            if(!floorManager.IsFloorPositionValid(oldFloorPos) || !floorManager.IsFloorPositionValid(newFloorPos))
+            {
+                return;
+            }
+
+            // The entity to be traded with.
+            FloorEntity entity2 = null;
+
+            // Checks the group the entity is part of.
+            switch(group)
+            {
+                case entityGroup.geometry:
+                    // Grabs the entity at the intended position.
+                    entity2 = floorManager.floorGeometry[newFloorPos.x, newFloorPos.y];
+
+                    // Swaps the entities.
+                    floorManager.floorGeometry[oldFloorPos.x, oldFloorPos.y] = entity2;
+                    floorManager.floorGeometry[newFloorPos.x, newFloorPos.y] = this;
+
+                    break;
+
+                case entityGroup.enemy:
+                    // Grabs the entity at the intended position.
+                    entity2 = floorManager.floorEnemies[newFloorPos.x, newFloorPos.y];
+
+                    // Swaps the entities.
+                    floorManager.floorEnemies[oldFloorPos.x, oldFloorPos.y] = (Enemy)entity2;
+                    floorManager.floorEnemies[newFloorPos.x, newFloorPos.y] = (Enemy)this;
+
+                    break;
+
+                case entityGroup.item:
+                    // Grabs the entity at the intended position.
+                    entity2 = floorManager.floorItems[newFloorPos.x, newFloorPos.y];
+
+                    // Swaps the entities.
+                    floorManager.floorItems[oldFloorPos.x, oldFloorPos.y] = (Item)entity2;
+                    floorManager.floorItems[newFloorPos.x, newFloorPos.y] = (Item)this;
+                    break;
+
+                default:
+                    Debug.LogWarning("This entity is not part of a valid group for floor array swapping.");
+                    break;
+            }
+
+            // Save the positions.
+            floorPos = newFloorPos;
+
+            if (entity2 != null)
+                entity2.floorPos = oldFloorPos;
+
+            // If SetPositions should be called for the entities.
+            if(callSetPosition)
+            {
+                SetFloorPosition(newFloorPos, false, false);
+
+                if (entity2 != null)
+                    entity2.SetFloorPosition(oldFloorPos, false, false);
+            }
+        }
+
         // Called when an entity interacts with this entity.
         public abstract void OnEntityInteract(FloorEntity entity);
 
@@ -275,6 +367,10 @@ namespace VLG
         // Update is called once per frame
         protected virtual void Update()
         {
+            // The game is paused, so don't update anything.
+            if (gameManager.paused)
+                return;
+
             // If interpolation should be used.
             if(useMoveInter)
             {
