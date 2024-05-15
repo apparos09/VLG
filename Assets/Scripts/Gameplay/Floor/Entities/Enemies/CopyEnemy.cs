@@ -45,10 +45,6 @@ namespace VLG
         protected override void Update()
         {
             base.Update();
-
-            // The game is paused, so don't update anything.
-            if (gameManager.paused)
-                return;
         }
 
         // Remove from the copy enemies list.

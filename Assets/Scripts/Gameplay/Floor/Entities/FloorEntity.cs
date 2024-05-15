@@ -59,7 +59,7 @@ namespace VLG
         private float interPercent = 0.0F;
 
         // The movement speed.
-        public float moveSpeed = 1.0F;
+        public float moveSpeed = 4.0F;
 
         // The jump factor used for movement interpolation (only applies on curved movement, applied to bezier handles).
         [Tooltip("The jump factor for curved movement (applied to handles of bezier curve).")]

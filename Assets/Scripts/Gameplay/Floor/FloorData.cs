@@ -76,41 +76,45 @@ namespace VLG
             "91AB"
         };
 
-        [Header("Prefabs")]
+        [Header("Geometry")]
 
         // Geometry (G-Series Elements)
         // 00 is a blank space
-        [Header("Prefabs/Entrance")]
+        [Header("Geometry/Entrance")]
         public Block g01A;
 
         // Goal
-        [Header("Prefabs/Goal")]
+        [Header("Geometry/Goal")]
         public Block g02A;
 
         // Block
-        [Header("Prefabs/Blocks")]
+        [Header("Geometry/Blocks")]
         public Block g03A;
 
         // Hazard
-        [Header("Prefabs/Hazard")]
+        [Header("Geometry/Hazard")]
         public Block g04A;
 
         // Damaged
-        [Header("Prefabs/Damaged")]
+        [Header("Geometry/Damaged")]
         public Block g05A;
 
         // Phase
-        [Header("Prefabs/Phase")]
+        [Header("Geometry/Phase")]
         public Block g06A;
 
-        [Header("Prefabs/Portal")]
+        [Header("Geometry/Portal")]
         public Block g07A;
 
-        [Header("Prefabs/Switch")]
+        [Header("Geometry/Switch")]
         public Block g08A;
 
-        [Header("Prefabs/Button")]
+        [Header("Geometry/Button")]
         public Block g09A;
+
+        [Header("Enemies/Enemy")]
+        public Enemy e01A;
+        public Enemy e02A;
 
         // Constructor
         private FloorData()
@@ -273,8 +277,8 @@ namespace VLG
             switch (elementInfo.id)
             {
                 case 1:
-                    // Type
-                    switch(elementInfo.version)
+                    // Version
+                    switch (elementInfo.version)
                     {
                         case 'A':
                         case 'a':
@@ -286,7 +290,7 @@ namespace VLG
                     break;
 
                 case 2:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -298,7 +302,7 @@ namespace VLG
                     break;
 
                 case 3:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -311,7 +315,7 @@ namespace VLG
                     break;
 
                 case 4:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -323,7 +327,7 @@ namespace VLG
                     break;
 
                 case 5:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -336,7 +340,7 @@ namespace VLG
                     break;
 
                 case 6:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -349,7 +353,7 @@ namespace VLG
                     break;
 
                 case 7:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -362,7 +366,7 @@ namespace VLG
                     break;
 
                 case 8:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -375,7 +379,7 @@ namespace VLG
                     break;
 
                 case 9:
-                    // Type
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
@@ -398,6 +402,7 @@ namespace VLG
             if (autoSetIdInfo && geoEntity != null)
             {
                 geoEntity.idNumber = elementInfo.id;
+                geoEntity.version = elementInfo.version;
             }
 
             return geoEntity;
@@ -415,18 +420,41 @@ namespace VLG
             // Instantiates the enemy object.
             switch (elementInfo.id)
             {
-                case 0:
-                default:
-                    // Type
+                case 1:
+                    // Version
                     switch (elementInfo.version)
                     {
                         case 'A':
                         case 'a':
+                            emyEntity = Instantiate(e01A);
+                            break;
+
                         default:
                             emyEntity = null;
                             break;
                     }
 
+                    break;
+
+                case 2:
+                    // Version
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                            emyEntity = Instantiate(e02A);
+                            break;
+
+                        default:
+                            emyEntity = null;
+                            break;
+                    }
+
+                    break;
+
+                case 0:
+                default:
+                    emyEntity = null;
                     break;
             }
 
@@ -434,6 +462,7 @@ namespace VLG
             if(autoSetIdInfo && emyEntity != null)
             {
                 emyEntity.idNumber = elementInfo.id;
+                emyEntity.version = elementInfo.version;
             }            
 
             return emyEntity;
@@ -560,32 +589,32 @@ namespace VLG
 
             // Enemies
             string[,] enemies = new string[FLOOR_COLS, FLOOR_ROWS] {
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+                { "00A", "01A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "02A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "02A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.enemies = enemies;
 
 
             // Items
             string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.items = items;
 
@@ -604,46 +633,46 @@ namespace VLG
 
             // Geometry
             string[,] geometry = new string[FLOOR_COLS, FLOOR_ROWS]{
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "02A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "03A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "03A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A", "00A", "00A"},
-            { "03A", "03A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "03A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "01A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "02A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "03A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "03A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A", "00A", "00A"},
+                { "03A", "03A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "03A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "01A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.geometry = geometry;
 
             // Enemies
             string[,] enemies = new string[FLOOR_COLS, FLOOR_ROWS] {
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.enemies = enemies;
 
             // Items
             string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.items = items;
 

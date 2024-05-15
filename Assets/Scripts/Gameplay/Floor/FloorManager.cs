@@ -274,6 +274,20 @@ namespace VLG
                 }
             }
 
+            // Deletes all the enemies.
+            for (int r = 0; r < floorEnemies.GetLength(0); r++)
+            {
+                for (int c = 0; c < floorEnemies.GetLength(1); c++)
+                {
+                    // Delete the element.
+                    if (floorEnemies[r, c] != null)
+                    {
+                        Destroy(floorEnemies[r, c].gameObject);
+                        floorEnemies[r, c] = null;
+                    }
+                }
+            }
+
             // Deletes all the items.
             for (int r = 0; r < floorItems.GetLength(0); r++)
             {
@@ -627,7 +641,7 @@ namespace VLG
         // Success shows if the movement worked.
         public void OnPlayerMovementInput(Player player, Vector2Int moveDirec, bool success)
         {
-            
+            // TODO: move this so that it's based on the attack.
             // If the player's movement input was a success.
             if(success)
             {
@@ -658,6 +672,12 @@ namespace VLG
                     copy.OnPlayerCopy(copySuccess);
                 }
             }
+        }
+
+        // Called on the player's attack input
+        public void OnPlayerAttackInput(Player player, Vector2Int attackDirec, Vector2Int attackFloorPos)
+        {
+
         }
 
         // Called when the floor is completed.

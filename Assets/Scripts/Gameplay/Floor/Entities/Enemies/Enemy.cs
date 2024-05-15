@@ -23,6 +23,25 @@ namespace VLG
             group = entityGroup.enemy;
         }
 
+        // OnTriggerEnter is called when the Collider other enters the trigger
+        private void OnTriggerEnter(Collider other)
+        {
+            FloorEntity entity;
+
+            // Tries to get the floor entity component.
+            if (other.TryGetComponent(out entity))
+            {
+                OnEntityInteract(entity);
+            }
+
+        }
+
+        // Runs the AI for the enemy.
+        public virtual void RunAI()
+        {
+            // ...
+        }
+
         // Called when the player has attacked the enemy.
         public virtual void OnPlayerAttackHit(Player player)
         {
@@ -41,8 +60,8 @@ namespace VLG
 
                 // TODO: attack player.
 
-                // Resets the player's position.
-                player.ResetEntity();
+                // Kill the player.
+                player.KillEntity();
             }
         }
 
@@ -50,6 +69,19 @@ namespace VLG
         public override void KillEntity()
         {
             Destroy(gameObject);
+        }
+
+        // Update is called once per frame
+        protected override void Update()
+        {
+            base.Update();
+
+            // The game is paused, so don't update anything.
+            if (!gameManager.paused)
+            {
+                RunAI();
+            }
+                
         }
 
         // This function is called when the MonoBehaviour will be destroyed

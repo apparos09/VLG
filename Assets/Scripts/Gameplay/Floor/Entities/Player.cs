@@ -32,6 +32,19 @@ namespace VLG
 
         }
 
+        // OnTriggerEnter is called when the Collider other enters the trigger
+        private void OnTriggerEnter(Collider other)
+        {
+            FloorEntity entity;
+            
+            // Tries to get the floor entity component.
+            if(other.TryGetComponent(out entity))
+            {
+                OnEntityInteract(entity);
+            }
+
+        }
+
         // Updates the player movements.
         public void UpdateInput()
         {
@@ -41,63 +54,43 @@ namespace VLG
                 // The move direction.
                 Vector2Int moveDirec = Vector2Int.zero;
 
-                // TODO: If using move interpolation, use the axis raw version?
-                // Maybe don't if the movement speed is too fast. Maybe revisit this idea.
+                // Changes the direction the player is facing.
+                if (Input.GetKeyDown(KeyCode.UpArrow)) // Face Up
+                {
+                    transform.forward = Vector3.forward;
+                }
+                else if (Input.GetKeyDown(KeyCode.DownArrow)) // Face Down
+                {
+                    transform.forward = Vector3.back;
+                }
+
+                if (Input.GetKeyDown(KeyCode.LeftArrow)) // Face Left
+                {
+                    transform.forward = Vector3.left;
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow)) // Face Right
+                {
+                    transform.forward = Vector3.right;
+                }
 
                 // Moves the player in a given direction, and has the player face said direction.
-                // Player Movement - Ver. 1 - Constant Movement
-                //if (Input.GetAxisRaw("Vertical") != 0) // Up/Down
-                //{
-                //    // Checks direction.
-                //    if(Input.GetAxisRaw("Vertical") == 1) // Up
-                //    {
-                //        moveDirec = Vector2Int.up;
-                //        transform.forward = Vector3.forward;
-                //    }
-                //    else // Down
-                //    {
-                //        moveDirec = Vector2Int.down;
-                //        transform.forward = Vector3.back;
-                //    }
-
-                //}
-                //else if (Input.GetAxisRaw("Horizontal") != 0) // Left/Right
-                //{
-                //    // Checks direction.
-                //    if (Input.GetAxisRaw("Horizontal") == 1) // Right
-                //    {
-                //        moveDirec = Vector2Int.right;
-                //        transform.forward = Vector3.right;
-                //    }
-                //    else // Left
-                //    {
-                //        moveDirec = Vector2Int.left;
-                //        transform.forward = Vector3.left;
-                //    }
-                //}
-                //else // No Movement
-                //{
-                //     moveDirec = Vector2Int.zero;
-                //}
-
-                // Player Movement - Ver. 2 - Button-Based (One Space per Input)
-                if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W)) // Up
+                if (Input.GetKeyDown(KeyCode.W)) // Move Up
                 {
                     moveDirec = Vector2Int.up;
                     transform.forward = Vector3.forward;
                 }
-                else if (Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S)) // Down
+                else if (Input.GetKeyDown(KeyCode.S)) // Move Down
                 {
                     moveDirec = Vector2Int.down;
                     transform.forward = Vector3.back;
                 }
 
-                if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A)) // Left
+                if (Input.GetKeyDown(KeyCode.A)) // Move Left
                 {
                     moveDirec = Vector2Int.left;
                     transform.forward = Vector3.left;
                 }
-                else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) // Right
+                else if (Input.GetKeyDown(KeyCode.D)) // Move Right
                 {
                     moveDirec = Vector2Int.right;
                     transform.forward = Vector3.right;
@@ -169,6 +162,9 @@ namespace VLG
                     enemy.OnPlayerAttackHit(this);
                 }
             }
+
+            // Call for the player attack input.
+            floorManager.OnPlayerAttackInput(this, attackDirec, attackFloorPos);
         }
 
         // Called when the player's attack is started.
