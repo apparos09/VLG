@@ -20,8 +20,11 @@ namespace VLG
         // The group the asset is part of.
         protected entityGroup group = entityGroup.none;
 
-        // The ID of the floor asset.
-        public int id = -1;
+        // The ID number of the floor asset.
+        public int idNumber = -1;
+
+        // The version of the entity (A-Z).
+        public char version = 'A';
 
         // The world Y position of the floor asset.
         [Tooltip("The asset's position on the y-axis (up/down) in world space.")]
@@ -123,9 +126,17 @@ namespace VLG
             }
 
             // Adds the ID
-            str += id.ToString("D2");
+            str += idNumber.ToString("D2");
 
             return str;
+        }
+
+        // Returns the ID with the version as the floor info code.
+        public string GetFloorInfoCode()
+        {
+            string infoCode = idNumber.ToString("D2");
+            infoCode += version;
+            return infoCode;
         }
 
         // Called when collision is entered.

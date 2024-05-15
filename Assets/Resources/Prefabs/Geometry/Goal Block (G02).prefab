@@ -153,7 +153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   floorManager: {fileID: 0}
-  id: 2
+  idNumber: 2
+  version: 65
   localYPos: 0
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}

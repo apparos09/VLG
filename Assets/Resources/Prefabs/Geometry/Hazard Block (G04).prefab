@@ -47,7 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   floorManager: {fileID: 0}
-  id: -1
+  idNumber: 4
+  version: 65
   localYPos: 0
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}
@@ -55,7 +56,7 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
-  hazardOnStart: 1
+  hazardOnDefault: 1
 --- !u!1 &7821808261158753636
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Xml;
 using UnityEngine;
 
 namespace VLG
@@ -16,19 +18,32 @@ namespace VLG
         public int id;
 
         // The floor geometry (includes door).
-        public int[,] geometry;
+        public string[,] geometry;
 
         // The enemies.
-        public int[,] enemies;
+        public string[,] enemies;
 
         // The items.
-        public int[,] items;
+        public string[,] items;
 
     }
 
     // The floor data.
     public class FloorData : MonoBehaviour
     {
+        // A floor element code.
+        private struct FloorElementInfo
+        {
+            // The entity group.
+            public FloorEntity.entityGroup group;
+
+            // The ID number.
+            public int id;
+
+            // The object type.
+            public char version;
+        }
+
 
         // The floor count (ignores the debug floor/floor 0).
         public const int FLOOR_COUNT = 1;
@@ -48,6 +63,10 @@ namespace VLG
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
 
+        // Automatically overrides the prefab's ID and version values using grid information instead.
+        [Tooltip("Autosets ID information for prefabs generated instances.")]
+        public bool autoSetIdInfo = true;
+
         // The floor codes, which are used to skip floors on the title screen.
         // A floor code has 4 digits, but "0" and "O" aren't used because they look similar.
         // TODO: don't allow the player to use "0" or "O".
@@ -61,15 +80,37 @@ namespace VLG
 
         // Geometry (G-Series Elements)
         // 00 is a blank space
-        public Block g01;
-        public Block g02;
-        public Block g03;
-        public Block g04;
+        [Header("Prefabs/Entrance")]
+        public Block g01A;
 
-        public Block g05;
-        public Block g06;
-        // public Block g07;
-        // public Block g08;
+        // Goal
+        [Header("Prefabs/Goal")]
+        public Block g02A;
+
+        // Block
+        [Header("Prefabs/Blocks")]
+        public Block g03A;
+
+        // Hazard
+        [Header("Prefabs/Hazard")]
+        public Block g04A;
+
+        // Damaged
+        [Header("Prefabs/Damaged")]
+        public Block g05A;
+
+        // Phase
+        [Header("Prefabs/Phase")]
+        public Block g06A;
+
+        [Header("Prefabs/Portal")]
+        public Block g07A;
+
+        [Header("Prefabs/Switch")]
+        public Block g08A;
+
+        [Header("Prefabs/Button")]
+        public Block g09A;
 
         // Constructor
         private FloorData()
@@ -102,6 +143,7 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
+
         }
 
         // Gets the instance.
@@ -183,39 +225,166 @@ namespace VLG
             return Array.IndexOf(floorCodes, code);
         }
 
+        // Generates a floor element.
+        private FloorElementInfo GenerateFloorElementInfo(FloorEntity.entityGroup group, string code)
+        {
+            // The element info.
+            FloorElementInfo elementInfo = new FloorElementInfo();
+
+            // Sets the group.
+            elementInfo.group = group;
+
+            // The code length is wrong.
+            if (code.Length != 3)
+            {
+                Debug.LogError("The code is the wrong length. Codes are 3 chars long (double digit number followed by a letter).");
+
+                // Default values.
+                elementInfo.id = -1;
+                elementInfo.version = 'A';
+
+                return elementInfo;
+            }
+                
+
+            // Gets the code in all uppercase (makes letter identifier uppercase).
+            string codeUpper = code.ToUpper();
+
+            // Sets the ID and type.
+            elementInfo.id = int.Parse(codeUpper.Substring(0, 2));
+            elementInfo.version = codeUpper[2];
+
+            // Return the element info.
+            return elementInfo;
+        }
+
 
         // INSTANTIATING OBJECTS //
         // Gets the geometry element.
-        public Block InstantiateGeometryElement(int id)
+        public Block InstantiateGeometryElement(string code)
         {
+            // The element info.
+            FloorElementInfo elementInfo = GenerateFloorElementInfo(FloorEntity.entityGroup.geometry, code);
+
             // The geometry entity
             Block geoEntity;
 
-            // Instantiates the goemetry object.
-            switch (id)
+            // Instantiates the geometry object.
+            switch (elementInfo.id)
             {
                 case 1:
-                    geoEntity = Instantiate(g01);
+                    // Type
+                    switch(elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g01A);
+                            break;
+                    }
+                    
                     break;
 
                 case 2:
-                    geoEntity = Instantiate(g02);
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g02A);
+                            break;
+                    }
                     break;
 
                 case 3:
-                    geoEntity = Instantiate(g03);
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g03A);
+                            break;
+                    }
+
                     break;
 
                 case 4:
-                    geoEntity = Instantiate(g04);
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g04A);
+                            break;
+                    }
                     break;
 
                 case 5:
-                    geoEntity = Instantiate(g05);
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g05A);
+                            break;
+                    }
+
                     break;
 
                 case 6:
-                    geoEntity = Instantiate(g06);
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g06A);
+                            break;
+                    }
+
+                    break;
+
+                case 7:
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g07A);
+                            break;
+                    }
+
+                    break;
+
+                case 8:
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g08A);
+                            break;
+                    }
+
+                    break;
+
+                case 9:
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            geoEntity = Instantiate(g09A);
+                            break;
+                    }
+
                     break;
 
 
@@ -225,40 +394,83 @@ namespace VLG
                     break;
             }
 
+            // Sets the values.
+            if (autoSetIdInfo && geoEntity != null)
+            {
+                geoEntity.idNumber = elementInfo.id;
+            }
+
             return geoEntity;
         }
 
         // Gets the enemy element.
-        public Enemy InstantiateEnemyElement(int id)
+        public Enemy InstantiateEnemyElement(string code)
         {
+            // The element info.
+            FloorElementInfo elementInfo = GenerateFloorElementInfo(FloorEntity.entityGroup.enemy, code);
+
             // The enemy entity
             Enemy emyEntity;
 
             // Instantiates the enemy object.
-            switch (id)
+            switch (elementInfo.id)
             {
                 case 0:
                 default:
-                    emyEntity = null;
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            emyEntity = null;
+                            break;
+                    }
+
                     break;
             }
+
+            // Sets the values.
+            if(autoSetIdInfo && emyEntity != null)
+            {
+                emyEntity.idNumber = elementInfo.id;
+            }            
 
             return emyEntity;
         }
 
         // Gets the item element.
-        public Item InstantiateItemElement(int id)
+        public Item InstantiateItemElement(string code)
         {
+            // The element info.
+            FloorElementInfo elementInfo = GenerateFloorElementInfo(FloorEntity.entityGroup.item, code);
+
             // The item entity
             Item itmEntity;
 
             // Instantiates the item object.
-            switch (id)
+            switch (elementInfo.id)
             {
                 case 0:
                 default:
-                    itmEntity = null;
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            itmEntity = null;
+                            break;
+                    }
+                    
                     break;
+            }
+
+            // Sets the values
+            if(autoSetIdInfo && itmEntity != null)
+            {
+                itmEntity.idNumber = elementInfo.id;
+                itmEntity.version = elementInfo.version;
             }
 
             return itmEntity;
@@ -311,16 +523,16 @@ namespace VLG
         public Floor GetFloor00()
         {
             // Template
-            // {{ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            // { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+            // {{ "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            // { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
             // };
 
             // Floor
@@ -331,50 +543,50 @@ namespace VLG
             floor.code = floorCodes[floor.id];
 
             // Geometry
-            int[,] geometry = new int[FLOOR_COLS, FLOOR_ROWS]{
-                {1, 3, 0, 0, 0, 0, 0, 0, 0, 3},
-                {3, 0, 3, 0, 5, 0, 0, 0, 0, 0},
-                {3, 3, 3, 3, 3, 4, 0, 0, 0, 0},
-                {0, 0, 2, 0, 6, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                {0, 0, 0, 0, 0, 0, 3, 3, 3, 0},
-                {0, 0, 0, 0, 0, 0, 3, 0, 3, 0},
-                {0, 0, 0, 0, 0, 0, 3, 3, 3, 0},
-                {3, 0, 0, 0, 0, 0, 0, 0, 0, 3}};
+            string[,] geometry = new string[FLOOR_COLS, FLOOR_ROWS]{
+                {"01A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A"},
+                {"03A", "00A", "03A", "00A", "05A", "00A", "00A", "00A", "00A", "00A"},
+                {"03A", "03A", "03A", "03A", "03A", "04A", "00A", "00A", "00A", "00A"},
+                {"00A", "00A", "02A", "00A", "06A", "00A", "00A", "00A", "00A", "00A"},
+                {"00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                {"00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                {"00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "00A"},
+                {"00A", "00A", "00A", "00A", "00A", "00A", "03A", "00A", "03A", "00A"},
+                {"00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "00A"},
+                {"03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A"}};
                       
             floor.geometry = geometry;
 
 
             // Enemies
-            int[,] enemies = new int[FLOOR_COLS, FLOOR_ROWS] {
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+            string[,] enemies = new string[FLOOR_COLS, FLOOR_ROWS] {
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.enemies = enemies;
 
 
             // Items
-            int[,] items = new int[FLOOR_COLS, FLOOR_ROWS] {
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
-            
+            string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+
             floor.items = items;
 
 
@@ -391,47 +603,47 @@ namespace VLG
             floor.code = floorCodes[floor.id];
 
             // Geometry
-            int[,] geometry = new int[FLOOR_COLS, FLOOR_ROWS]{
-            { 0, 0, 0, 0, 0, 0, 0, 3, 3, 2},
-            { 0, 0, 0, 0, 0, 0, 0, 3, 3, 3},
-            { 0, 0, 0, 0, 0, 0, 3, 3, 3, 3},
-            { 0, 0, 0, 0, 0, 0, 3, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 3, 3, 0, 0, 0},
-            { 0, 0, 0, 0, 3, 3, 0, 0, 0, 0},
-            { 0, 0, 0, 3, 3, 0, 0, 0, 0, 0},
-            { 3, 3, 3, 3, 0, 0, 0, 0, 0, 0},
-            { 3, 3, 3, 0, 0, 0, 0, 0, 0, 0},
-            { 1, 3, 3, 0, 0, 0, 0, 0, 0, 0}};
+            string[,] geometry = new string[FLOOR_COLS, FLOOR_ROWS]{
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "02A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "03A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "03A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "03A", "03A", "00A", "00A", "00A", "00A", "00A"},
+            { "03A", "03A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "03A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "01A", "03A", "03A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.geometry = geometry;
 
             // Enemies
-            int[,] enemies = new int[FLOOR_COLS, FLOOR_ROWS] {
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+            string[,] enemies = new string[FLOOR_COLS, FLOOR_ROWS] {
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.enemies = enemies;
 
             // Items
-            int[,] items = new int[FLOOR_COLS, FLOOR_ROWS] {
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+            string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+            { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.items = items;
 
