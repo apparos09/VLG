@@ -11,6 +11,9 @@ namespace VLG
         // Enables input from the player.
         public bool allowInput = true;
 
+        // Gets se to 'true' when attacking, false when not attacking.
+        private bool attacking = false;
+
         // Start is called before the first frame update
         override protected void Start()
         {
@@ -110,6 +113,17 @@ namespace VLG
                     // Call on player movement input.
                     floorManager.OnPlayerMovementInput(this, moveDirec, success);
                 }
+
+
+                // Attack
+                if(!attacking)
+                {
+                    // If the player should attack.
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        Attack();
+                    }
+                }
             }
             
 
@@ -131,6 +145,44 @@ namespace VLG
         {
             base.OnMoveEnded(localStart, localEnd, t);
         }
+
+        // Call function to attack enemy.
+        public void Attack()
+        {
+            // TODO: trigger animation and make function calls.
+            // The attack direction.
+            Vector2Int attackDirec = new Vector2Int(Mathf.RoundToInt(transform.forward.x), Mathf.RoundToInt(transform.forward.z));
+            
+            // The attack position on the floor.
+            Vector2Int attackFloorPos = floorPos + attackDirec;
+
+            // Validity check.
+            if(floorManager.IsFloorPositionValid(attackFloorPos))
+            {
+                // Gets the enemy.
+                Enemy enemy = floorManager.floorEnemies[attackFloorPos.x, attackFloorPos.y];
+
+                // There's an enemy at this index.
+                if (enemy != null)
+                {
+                    // The enemy has been hit by the player.
+                    enemy.OnPlayerAttackHit(this);
+                }
+            }
+        }
+
+        // Called when the player's attack is started.
+        public void OnAttackStarted()
+        {
+            attacking = true;
+        }
+
+        // Called when the player's attack is ended.
+        public void OnAttackEnded()
+        {
+            attacking = false;
+        }
+
 
         // Called when an element interact with this block, which is usually the player.
         public override void OnEntityInteract(FloorEntity entity)

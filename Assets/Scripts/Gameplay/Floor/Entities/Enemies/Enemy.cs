@@ -11,12 +11,23 @@ namespace VLG
         [Tooltip("If true, the enemy ignores the floor geometry for movement.")]
         public bool ignoreGeometry = false;
 
+        // If 'true', the enemy can take damage from the player.
+        [Tooltip("If true, the player can damage the enemy.")]
+        public bool vulnerable = true;
+
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
 
             group = entityGroup.enemy;
+        }
+
+        // Called when the player has attacked the enemy.
+        public virtual void OnPlayerAttackHit(Player player)
+        {
+            if(vulnerable)
+                KillEntity();
         }
 
         // Called when the entity is interacted with.
