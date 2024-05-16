@@ -60,19 +60,18 @@ namespace VLG
             // TODO: trigger animation
 
             // Checks for entities on the platform.
-            // TODO: maybe have the entity fall?
-            if(!blockOn)
+            if(!blockOn && killWhenOff) // The block is off.
             {
                 // Player
                 if (gameManager.player.floorPos == floorPos)
                 {
-                    OnEntityInteract(gameManager.player);
+                    gameManager.player.KillEntity();
                 }
 
                 // Enemy
                 if (floorManager.floorEnemies[floorPos.x, floorPos.y] != null)
                 {
-                    OnEntityInteract(floorManager.floorEnemies[floorPos.x, floorPos.y]);
+                    floorManager.floorEnemies[floorPos.x, floorPos.y].KillEntity();
                 }
             }
             
@@ -108,13 +107,7 @@ namespace VLG
         {
             base.OnEntityInteract(entity);
 
-            // If the block is off.
-            if (killWhenOff && !blockOn)
-            {
-                // Kills the entity on the block if the block if off.
-                entity.KillEntity();
-            }
-
+            // ...
         }
 
         // Resets the floor entity.

@@ -8,6 +8,13 @@ namespace VLG
     public class Player : FloorEntity
     {
         [Header("Player")]
+
+        // The collider for the player.
+        public new BoxCollider collider;
+
+        // The rigidbody for the player.
+        public new Rigidbody rigidbody;
+
         // Enables input from the player.
         public bool allowInput = true;
 
@@ -22,13 +29,22 @@ namespace VLG
             // Sets the group.
             group = entityGroup.player;
 
-            // Gets the instance if this is null.
-            if (gameManager == null)
-                gameManager = GameplayManager.Instance;
-
             // Sets to this player.
             if (gameManager.player == null)
                 gameManager.player = this;
+
+
+            // If the collider is not set.
+            if(collider == null)
+            {
+                collider = GetComponent<BoxCollider>();
+            }
+
+            // If the rigidbody is not set.
+            if(rigidbody == null)
+            {
+                rigidbody = GetComponent<Rigidbody>();
+            }
 
         }
 

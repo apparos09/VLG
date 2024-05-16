@@ -114,9 +114,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8276334634695787878}
-  - component: {fileID: 8632849550937163663}
   - component: {fileID: 4885720312683704552}
   - component: {fileID: 4788282775311535427}
+  - component: {fileID: 8632849550937163663}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -140,30 +140,6 @@ Transform:
   - {fileID: 8770697624966921373}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8632849550937163663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7689295257826430086}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1b9ba94779b9024eb3f46d30a6afce2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 0}
-  floorManager: {fileID: 0}
-  idNumber: -1
-  version: 65
-  localYPos: 1
-  floorPos: {x: -1, y: -1}
-  resetPos: {x: -1, y: -1}
-  useMoveInter: 1
-  curvedMovement: 1
-  moveSpeed: 1
-  jumpFactor: 7
-  allowInput: 1
 --- !u!65 &4885720312683704552
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -212,3 +188,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &8632849550937163663
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7689295257826430086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1b9ba94779b9024eb3f46d30a6afce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  floorManager: {fileID: 0}
+  idNumber: -1
+  version: 65
+  localYPos: 1
+  floorPos: {x: -1, y: -1}
+  resetPos: {x: -1, y: -1}
+  useMoveInter: 1
+  curvedMovement: 1
+  moveSpeed: 1
+  jumpFactor: 7
+  collider: {fileID: 4885720312683704552}
+  rigidbody: {fileID: 4788282775311535427}
+  allowInput: 1

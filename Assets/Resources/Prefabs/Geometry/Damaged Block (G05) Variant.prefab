@@ -196,8 +196,8 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
-  usesMax: 3
-  unusableIfNoUses: 1
+  usesMax: 4
+  usableIfNoUses: 0
 --- !u!4 &1389825442741304051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8278416656219007680, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}

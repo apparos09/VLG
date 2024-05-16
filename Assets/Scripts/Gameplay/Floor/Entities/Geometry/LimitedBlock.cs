@@ -10,14 +10,17 @@ namespace VLG
         [Header("LimitedBlock")]
 
         // The limited block.
-        public int usesMax = 3;
+        // Every time an entity jumps on a block, its uses drops by 1.
+        // When the uses count drops to 0, the block breaks, and the entity on it is killed.
+        [Tooltip("The total amount of uses the block gets. This goes down everytime an entity jumps on it.")]
+        public int usesMax = 4;
 
         // The number of uses.
         protected int uses = 0;
 
         // If 'true', the block cannot be jumped on if it has no uses.
-        [Tooltip("If true, the block is unusable if there are no uses left.")]
-        public bool unusableIfNoUses = true;
+        [Tooltip("If true, the block is usable even if there are no uses left.")]
+        public bool usableIfNoUses = false;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -40,6 +43,27 @@ namespace VLG
         {
             // Sets uses.
             uses = Mathf.Clamp(newCount, 0, usesMax);
+
+            // No uses left.
+            if(uses == 0)
+            {
+                // Disable the block.
+                gameObject.SetActive(false);
+
+                // Kills any player or enemy that's on the block.
+
+                // Player
+                if (gameManager.player.floorPos == floorPos)
+                {
+                    gameManager.player.KillEntity();
+                }
+
+                // Enemy
+                if (floorManager.floorEnemies[floorPos.x, floorPos.y] != null)
+                {
+                    floorManager.floorEnemies[floorPos.x, floorPos.y].KillEntity();
+                }
+            }
         }
 
         // Adds to the number of uses.
@@ -54,12 +78,6 @@ namespace VLG
             SetUsesCount(uses - decrease, animate);
         }
 
-        // Sets the uses count to max.
-        public void SetUsesCountToMax(bool animate = true)
-        {
-            SetUsesCount(usesMax, animate);
-        }
-
         // Increase the uses by 1.
         public void IncrementUsesCount(bool animate = true)
         {
@@ -72,6 +90,12 @@ namespace VLG
             SetUsesCount(uses - 1, animate);
         }
 
+        // Sets the uses count to max.
+        public void SetUsesCountToMax(bool animate = true)
+        {
+            SetUsesCount(usesMax, animate);
+        }
+
         // Returns 'true' if there are uses left.
         public bool HasUsesLeft()
         {
@@ -81,22 +105,23 @@ namespace VLG
         // Called to see if this block is valid to use.
         public override bool UsableBlock(FloorEntity entity)
         {
-            // If the block shouldn't be usuable if no uses are left.
-            if(unusableIfNoUses)
+            // If there are uses left, return true.
+            if(HasUsesLeft())
             {
-                // Checks if there are uses left.
-                if(HasUsesLeft())
-                {
-                    return true;
-                } 
-                else // No uses left.
-                {
-                    return false;
-                }
+                return true;
+                
             }
             else
             {
-                return true;
+                // Can be used no matter what.
+                if (usableIfNoUses)
+                {
+                    return true;
+                }
+                else // Can no longer be used.
+                {
+                    return false;
+                }
             }
         }
 
@@ -108,16 +133,15 @@ namespace VLG
             // Reduce the uses by 1.
             if(entity is Player)
             {
-                DecreaseUsesCount(1);
+                DecrementUsesCount();
             }
             else if(entity is Enemy)
             {
                 Enemy enemy = (Enemy)entity;
 
                 if (!enemy.ignoreGeometry)
-                    DecreaseUsesCount(1);
+                    DecrementUsesCount();
             }
-                
 
         }
 
