@@ -163,7 +163,7 @@ namespace VLG
                 }
             }
 
-            // Call for the player attack input.
+            // The player used an attack.
             floorManager.OnPlayerAttackInput(this, attackDirec, attackFloorPos);
         }
 

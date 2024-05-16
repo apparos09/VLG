@@ -39,6 +39,11 @@ namespace VLG
         [Tooltip("Flips the floor map vertically if true.")]
         public bool flipFloorVert = false;
 
+        // The death plane for elements that fall off the map.
+        // I don't know if I'll use this, but I'll keep it here.
+        //[Tooltip("The death plane Y. If an element falls below this value, kill it.")]
+        //public float deathPlaneY = -10;
+
         // TODO: add object pools so that you aren't constantly deleting and remaking everything.
 
         // The array of floor geometry
@@ -640,19 +645,7 @@ namespace VLG
         // Player is the player object, and move direction is where they moved.
         // Success shows if the movement worked.
         public void OnPlayerMovementInput(Player player, Vector2Int moveDirec, bool success)
-        {
-            // TODO: move this so that it's based on the attack.
-            // If the player's movement input was a success.
-            if(success)
-            {
-                // Updating the Switch Blocks
-                foreach (SwitchBlock switchBlock in SwitchBlock.switchBlocks)
-                {
-                    // Toggles the block's state.
-                    switchBlock.ToggleBlock();
-                }
-            }
-
+        {       
             // Moving the Copy Enemies
             // Gives the information to all the copy enemies.
             foreach (CopyEnemy copy in CopyEnemy.copyEnemies)
@@ -674,10 +667,15 @@ namespace VLG
             }
         }
 
-        // Called on the player's attack input
+        // Called on the player's attack input.
         public void OnPlayerAttackInput(Player player, Vector2Int attackDirec, Vector2Int attackFloorPos)
         {
-
+            // Updating the switch blocks - they switch when the player attacks 
+            foreach (SwitchBlock switchBlock in SwitchBlock.switchBlocks)
+            {
+                // Toggles the block's state.
+                switchBlock.ToggleBlock();
+            }
         }
 
         // Called when the floor is completed.

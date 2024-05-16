@@ -60,6 +60,18 @@ namespace VLG
             SetUsesCount(usesMax, animate);
         }
 
+        // Increase the uses by 1.
+        public void IncrementUsesCount(bool animate = true)
+        {
+            SetUsesCount(uses + 1, animate);
+        }
+
+        // Lower the uses by 1.
+        public void DecrementUsesCount(bool animate = true)
+        {
+            SetUsesCount(uses - 1, animate);
+        }
+
         // Returns 'true' if there are uses left.
         public bool HasUsesLeft()
         {
@@ -95,7 +107,17 @@ namespace VLG
 
             // Reduce the uses by 1.
             if(entity is Player)
+            {
                 DecreaseUsesCount(1);
+            }
+            else if(entity is Enemy)
+            {
+                Enemy enemy = (Enemy)entity;
+
+                if (!enemy.ignoreGeometry)
+                    DecreaseUsesCount(1);
+            }
+                
 
         }
 

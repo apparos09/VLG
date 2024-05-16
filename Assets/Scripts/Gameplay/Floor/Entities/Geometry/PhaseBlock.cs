@@ -10,7 +10,7 @@ namespace VLG
         [Header("PhaseBlock")]
         // The phase start upon the game starting (tangible/instangible).
         [Tooltip("Determines the starting state of the phase block (tangible/intangible).")]
-        public bool tangibleStart = true;
+        public bool tangibleDefault = true;
 
         // Sets if the phase block is tangible or intangible.
         protected bool tangible = true;
@@ -21,7 +21,7 @@ namespace VLG
             base.Start();
 
             // Sets the tangible state.
-            SetTangible(tangibleStart, false);
+            SetTangible(tangibleDefault, false);
         }
 
         // Returns the tangibility of the object.
@@ -34,6 +34,9 @@ namespace VLG
         public virtual void SetTangible(bool value, bool animate = true)
         {
             tangible = value;
+
+            // TODO: change this when you add tangible and intangible animations.
+            gameObject.SetActive(value);
         }    
         
         // Makes the block tangible.
@@ -60,7 +63,7 @@ namespace VLG
         public override void ResetEntity()
         {
             base.ResetEntity();
-            SetTangible(tangibleStart, false); // Set value to default.
+            SetTangible(tangibleDefault, false); // Set value to default.
         }
     }
 }

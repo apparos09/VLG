@@ -14,10 +14,10 @@ namespace VLG
 
         // Determines default state of the block (on/off)
         [Tooltip("If 'true', the block is on by default. If false, the block is off by default.")]
-        public bool blockOnDefault = false;
+        public bool blockOnDefault = true;
 
         // The block is on/off
-        protected bool blockOn = false;
+        protected bool blockOn = true;
 
         // If 'true', the block is usable when it's off. 
         [Tooltip("If 'true', the block is usable no matter the state.")]
@@ -36,7 +36,7 @@ namespace VLG
             base.Start();
 
             // Default setting.
-            blockOn = blockOnDefault;
+            SetBlockOn(blockOnDefault);
 
             // Add to the list.
             switchBlocks.Add(this);
@@ -53,9 +53,14 @@ namespace VLG
         {
             blockOn = value;
 
+            // TODO: remove when not used.
+            // Change block active
+            gameObject.SetActive(value);
+
             // TODO: trigger animation
 
             // Checks for entities on the platform.
+            // TODO: maybe have the entity fall?
             if(!blockOn)
             {
                 // Player
@@ -94,18 +99,8 @@ namespace VLG
         // Called to see if this block is valid to use.
         public override bool UsableBlock(FloorEntity entity)
         {
-            // If the block is usable when off, always return true.
-            // If the entity is the player, they can try to jump on it regardless of the state.
-            if (usableWhenOff || entity is Player)
-            {
-                return true;
-
-            }
-            else
-            {
-                return blockOn;
-
-            }
+            // If the block is active, it can be used.
+            return blockOn;
         }
 
         // Called when an element interact with this block, which is usually the player.
@@ -141,7 +136,8 @@ namespace VLG
             base.OnDestroy();
 
             // Remove from the block list.
-            switchBlocks.Remove(this);
+            if(switchBlocks.Contains(this))
+                switchBlocks.Remove(this);
         }
     }
 }

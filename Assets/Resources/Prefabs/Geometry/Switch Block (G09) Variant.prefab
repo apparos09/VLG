@@ -196,7 +196,7 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
-  blockOnDefault: 0
+  blockOnDefault: 1
   usableWhenOff: 0
   killWhenOff: 1
 --- !u!4 &1657132484836500566 stripped
