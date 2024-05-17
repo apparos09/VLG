@@ -32,7 +32,8 @@ namespace VLG
                 player = GameplayManager.Instance.player;
 
             // Add to the list.
-            copyEnemies.Add(this);
+            if(!copyEnemies.Contains(this))
+                copyEnemies.Add(this);
         }
 
         // Called when the enemy tries to copy the player

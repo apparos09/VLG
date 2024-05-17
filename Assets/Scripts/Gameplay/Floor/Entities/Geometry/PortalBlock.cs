@@ -7,10 +7,18 @@ namespace VLG
     // The portal block.
     public class PortalBlock : Block
     {
-        [Header("Portal Block")]
+        [Header("PortalBlock")]
+
+        // Gets set to 'true' when the post start function has been called.
+        private bool calledPostStart = false;
 
         // The end portal that this portal is connected to.
-        public PortalBlock endPortal;
+        [Tooltip("The destination portal.")]
+        public PortalBlock destPortal;
+
+        // Automically sets the end portal.
+        [Tooltip("Automatically looks for the end portal, which is a portal that shares the same version.")]
+        public bool autoSetEndPortal = true;
 
         // The tags for triggering a portal.
         [Tooltip("Valid interactions for the portal. If none are listed, all entities can use the portal")]
@@ -19,10 +27,56 @@ namespace VLG
         // Determines if the button is locked or unlocked.
         private bool locked = false;
 
+        // The list of portals in the game.
+        private static List<PortalBlock> portalBlocks = new List<PortalBlock>();
+
         // Start is called before the first frame update
         protected override void Start()
         {
             base.Start();
+
+            // Add to the list.
+            if(!portalBlocks.Contains(this))
+                portalBlocks.Add(this);
+        }
+
+        // Called on the first update frame.
+        protected virtual void PostStart()
+        {
+            // If the end portal needs to be set.
+            if(destPortal == null)
+            {
+                // Goes through all he portalBlocks.
+                foreach (PortalBlock portalBlock in portalBlocks)
+                {
+                    // Add to the poral queue if the versions match.
+                    if (portalBlock != this)
+                    {
+                        // If a valid end portal has been found, and the end portal is either not set...
+                        // Or is set to this portal, add to the list.
+                        if (portalBlock.version == version && (portalBlock.destPortal == null || portalBlock.destPortal == this))
+                        {
+                            // Sets the destination portal.
+                            destPortal = portalBlock;
+                            portalBlock.destPortal = this;
+                            break;
+                        }
+                    }
+                        
+                }
+            }
+            
+
+            
+
+            // Post start has been called.
+            calledPostStart = true;
+        }
+
+        // Search for the end portal.
+        public void SearchForEndPortal()
+        {
+
         }
 
         // Is the button locked?
@@ -69,7 +123,7 @@ namespace VLG
                 return;
 
             // The end portal is not connected.
-            if(endPortal == null)
+            if(destPortal == null)
             {
                 Debug.LogError("No end portal is set, so warp can't happen.");
                 return;
@@ -82,14 +136,28 @@ namespace VLG
             if (warp)
             {
                 // TODO: apply animation.
-                entity.SetFloorPosition(endPortal.floorPos, false, false);
+                entity.SetFloorPosition(destPortal.floorPos, false, false);
             }
         }
 
         // Update is called once per frame
         protected override void Update()
         {
+            // Calls the post start function if it hasn't been called already.
+            if (!calledPostStart)
+                PostStart();
+
             base.Update();
+        }
+
+        // Remove from the switch block list.
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            // Remove from the block list.
+            if (portalBlocks.Contains(this))
+                portalBlocks.Remove(this);
         }
     }
 }

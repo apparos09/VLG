@@ -39,7 +39,8 @@ namespace VLG
             SetBlockOn(blockOnDefault);
 
             // Add to the list.
-            switchBlocks.Add(this);
+            if(!switchBlocks.Contains(this))
+                switchBlocks.Add(this);
         }
 
         // Returns a bool to indicate if the hazard is on.
