@@ -51,12 +51,27 @@ namespace VLG
             SetTangible(false, animate);
         }
 
+        // Toggles the tangibility of the phase block.
+        public void ToggleTangible()
+        {
+            SetTangible(!tangible);
+        }
+
         // Called to see if this block is valid to use.
         public override bool UsableBlock(FloorEntity entity)
         {
             // If the block is tangle, it is usable.
             // If the block is intangible, it is not.
             return tangible;
+        }
+
+        // Called by a ButtonBlock event.
+        public override void OnButtonBlockClicked(FloorEntity entity)
+        {
+            base.OnButtonBlockClicked(entity);
+
+            // Toggle tangibility.
+            ToggleTangible();
         }
 
         // Resets the floor entity.

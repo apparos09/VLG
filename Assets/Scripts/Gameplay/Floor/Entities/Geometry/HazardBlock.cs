@@ -48,6 +48,21 @@ namespace VLG
             SetHazardOn(false);
         }
 
+        // Toggle the hazard on/off.
+        public void ToggleHazard(bool animate = true)
+        {
+            SetHazardOn(!hazardOn);
+        }
+
+        // Called by a ButtonBlock event.
+        public override void OnButtonBlockClicked(FloorEntity entity)
+        {
+            base.OnButtonBlockClicked(entity);
+
+            // Toggles the hazard on/off.
+            ToggleHazard();
+        }
+
         // Called when an element interact with this block, which is usually the player.
         public override void OnEntityInteract(FloorEntity entity)
         {

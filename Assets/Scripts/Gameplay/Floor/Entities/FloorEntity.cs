@@ -36,6 +36,9 @@ namespace VLG
         // The reset position.
         public Vector2Int resetPos = new Vector2Int(-1, -1);
 
+        // The list of button blocks this floor entity is linked to.
+        private List<ButtonBlock> linkedButtonBlocks = new List<ButtonBlock>();
+
         [Header("Move Interpolation")]
 
         // If 'true', the entity interpolates movement across the floor.
@@ -427,6 +430,39 @@ namespace VLG
             }
         }
 
+
+        // Call to add to the button block callback.
+        public void AddToButtonBlock(ButtonBlock buttonBlock)
+        {
+            // Add to the button block callback.
+            buttonBlock.AddClickButtonBlockCallback(OnButtonBlockClicked);
+
+            // If the button block isn't in the list, add it.
+            if(!linkedButtonBlocks.Contains(buttonBlock))
+            {
+                linkedButtonBlocks.Add(buttonBlock);
+            }
+        }
+
+        // Call to remove from the button block callback.
+        public void RemoveFromButtonBlock(ButtonBlock buttonBlock)
+        {
+            // Remove from the button block callback.
+            buttonBlock.RemoveClickButtonBlockCallback(OnButtonBlockClicked);
+
+            // If the button block is in the list, remove it.
+            if (linkedButtonBlocks.Contains(buttonBlock))
+            {
+                linkedButtonBlocks.Remove(buttonBlock);
+            }
+        }
+
+        // Called when a ButtonBlock has its button clicked.
+        public virtual void OnButtonBlockClicked(FloorEntity entity)
+        {
+            // ...
+        }
+
         // Called when an entity interacts with this entity.
         public abstract void OnEntityInteract(FloorEntity entity);
 
@@ -474,6 +510,22 @@ namespace VLG
                 }
             }
             
+        }
+
+        // This function is called when the MonoBehaviour will be destroyed.
+        protected virtual void OnDestroy()
+        {
+            // Goes through each button block this floor entity is linked to.
+            for(int i = linkedButtonBlocks.Count - 1;  i >= 0; i--)
+            {
+                // If the block button exists.
+                if(linkedButtonBlocks[i] != null)
+                {
+                    // Remove from the button block.
+                    // This also removes the button from the linked button blocks list.
+                    RemoveFromButtonBlock(linkedButtonBlocks[i]);
+                }
+            }
         }
     }
 }

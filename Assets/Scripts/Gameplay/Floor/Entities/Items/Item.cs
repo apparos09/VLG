@@ -33,5 +33,11 @@ namespace VLG
         {
             Destroy(gameObject);
         }
+
+        // This function is called when the MonoBehaviour will be destroyed.
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+        }
     }
 }

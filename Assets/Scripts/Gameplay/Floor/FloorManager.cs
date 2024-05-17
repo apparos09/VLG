@@ -255,7 +255,6 @@ namespace VLG
             if (entryBlock != null)
                 gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
 
-
             // Update the floor text and game progress bar.
             gameManager.gameUI.UpdateAllHUDElements();
         }

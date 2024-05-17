@@ -35,8 +35,10 @@ namespace VLG
         }
 
         // This function is called when the MonoBehaviour will be destroyed
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             // Checks for removal.
             bool removed = false;
 

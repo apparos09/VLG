@@ -9,9 +9,6 @@ namespace VLG
     {
         [Header("PortalBlock")]
 
-        // Gets set to 'true' when the post start function has been called.
-        private bool calledPostStart = false;
-
         // The end portal that this portal is connected to.
         [Tooltip("The destination portal.")]
         public PortalBlock destPortal;
@@ -29,6 +26,9 @@ namespace VLG
 
         // The list of portals in the game.
         private static List<PortalBlock> portalBlocks = new List<PortalBlock>();
+
+        // Gets set to 'true' when the post start function has been called.
+        private bool calledPostStart = false;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -111,6 +111,20 @@ namespace VLG
         public void UnlockPortal()
         {
             SetLocked(false);
+        }
+
+        // Toggles the portal being locked/unlocked.
+        public void TogglePortalLocked()
+        {
+            SetLocked(!locked);
+        }
+
+        // Called by a ButtonBlock event.
+        public override void OnButtonBlockClicked(FloorEntity entity)
+        {
+            base.OnButtonBlockClicked(entity);
+
+            TogglePortalLocked();
         }
 
         // Called when an element interact with this block, which is usually the player.
