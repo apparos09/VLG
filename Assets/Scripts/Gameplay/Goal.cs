@@ -69,6 +69,50 @@ namespace VLG
             SetLocked(!locked);
         }
 
+        // Called by the goal to check if its unlock condition has been met.
+        public virtual bool ConditionMet()
+        {
+            // The value to be returned.
+            bool result;
+
+            // TODO: implement condition checking.
+            switch (objective)
+            {
+                default: // Goal is available.
+                case goalType.none:
+                    result = true;
+
+                    break;
+
+                case goalType.keys: // Grab all the keys.
+                    result = KeyItem.GetKeyItemCount() == 0;
+
+                    break;
+
+                case goalType.enemy: // Destory all enemies.
+                    result = Enemy.GetEnemyCount() == 0;
+
+                    break;
+
+                case goalType.button: // Jump on a button.
+                    result = locked;
+
+                    break;
+
+                case goalType.boss: // TODO: change win condition for the boss.
+                    result = Enemy.GetEnemyCount() == 0;
+                    break;
+            }
+
+            return result;
+        }
+
+        // Returns 'true' if the goal is unlocked, and if the condition is met.
+        public bool IsUnlockedAndConditionMet()
+        {
+            return !locked && ConditionMet();
+        }
+
 
         // Called when the player has interacted with the goal.
         public virtual bool TryEnterGoal(Player player)
@@ -77,26 +121,20 @@ namespace VLG
             if (locked)
                 return false;
 
-            // TODO: add other conditions.
-
-            // Enter the goal.
-            gameManager.OnGoalEntered();
+            // Enter the goal if the condition is mset.
+            if(ConditionMet())
+                gameManager.OnGoalEntered();
 
             // Return true.
             return true;
         }
 
-        // Called by the goal to check if its unlock condition has been met.
-        public virtual bool ConditionMet()
-        {
-            // TODO: implement condition checking.
-            return true;
-        }
+        
 
         // Update is called once per frame
         void Update()
         {
-            ConditionMet();
+            // ...
         }
     }
 }

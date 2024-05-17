@@ -197,7 +197,7 @@ namespace VLG
                     // Generates the geometry, enemy, and item elements.
                     geoEntity = floorData.InstantiateGeometryElement(floor.geometry[col, etyRow]);
                     emyEntity = floorData.InstantiateEnemyElement(floor.enemies[col, etyRow]);
-                    itmEntity = floorData.InstantiateItemElement(floor.enemies[col, etyRow]);
+                    itmEntity = floorData.InstantiateItemElement(floor.items[col, etyRow]);
 
 
                     // Initialize the entity.

@@ -152,7 +152,7 @@ namespace VLG
                     objectiveText.text = "Reach the Goal!";
                     break;
 
-                case Goal.goalType.keys: // Get all the keys.
+                case Goal.goalType.keys: // Get all the keyItems.
                     objectiveText.text = "Get all the Keys!";
                     break;
 

@@ -195,6 +195,12 @@ namespace VLG
             attacking = false;
         }
 
+        // Gives the player the provided item.
+        public void GiveItem(Item item)
+        {
+            item.OnItemGiven(this);
+        }
+
 
         // Called when an element interact with this block, which is usually the player.
         public override void OnEntityInteract(FloorEntity entity)

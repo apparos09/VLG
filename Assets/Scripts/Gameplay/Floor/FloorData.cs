@@ -76,9 +76,10 @@ namespace VLG
             "91AB"
         };
 
+
+        // Geometry (G-Group)
         [Header("Geometry")]
 
-        // Geometry (G-Series Elements)
         // 00 is a blank space
         [Header("Geometry/Entrance")]
         public Block g01A;
@@ -112,9 +113,14 @@ namespace VLG
         [Header("Geometry/Button")]
         public Block g09A;
 
-        [Header("Enemies/Enemy")]
+        // Enemies (E-Group)
+        [Header("Enemies")]
         public Enemy e01A;
         public Enemy e02A;
+
+        // Items (I-Group)
+        [Header("Items")]
+        public Item i01A;
 
         // Constructor
         private FloorData()
@@ -276,6 +282,11 @@ namespace VLG
             // Instantiates the geometry object.
             switch (elementInfo.id)
             {
+                case 0:
+                default:
+                    geoEntity = null;
+                    break;
+
                 case 1:
                     // Version
                     switch (elementInfo.version)
@@ -390,12 +401,6 @@ namespace VLG
                     }
 
                     break;
-
-
-                case 0:
-                default:
-                    geoEntity = null;
-                    break;
             }
 
             // Sets the values.
@@ -420,6 +425,12 @@ namespace VLG
             // Instantiates the enemy object.
             switch (elementInfo.id)
             {
+
+                case 0:
+                default:
+                    emyEntity = null;
+                    break;
+
                 case 1:
                     // Version
                     switch (elementInfo.version)
@@ -450,11 +461,6 @@ namespace VLG
                             break;
                     }
 
-                    break;
-
-                case 0:
-                default:
-                    emyEntity = null;
                     break;
             }
 
@@ -492,6 +498,19 @@ namespace VLG
                             break;
                     }
                     
+                    break;
+
+                case 1:
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            itmEntity = Instantiate(i01A);
+                            break;
+                    }
+
                     break;
             }
 
@@ -607,7 +626,7 @@ namespace VLG
             string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "01A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},

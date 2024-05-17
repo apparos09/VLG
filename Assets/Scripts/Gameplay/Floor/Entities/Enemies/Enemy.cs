@@ -22,6 +22,9 @@ namespace VLG
         [Tooltip("If true, the player can damage the enemy.")]
         public bool vulnerable = true;
 
+        // The list of all enemies.
+        private static List<Enemy> enemies = new List<Enemy>();
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -40,6 +43,10 @@ namespace VLG
             {
                 rigidbody = GetComponent<Rigidbody>();
             }
+
+            // Add to the enemy list.
+            if (!enemies.Contains(this))
+                enemies.Add(this);
         }
 
         // OnTriggerEnter is called when the Collider other enters the trigger
@@ -55,10 +62,10 @@ namespace VLG
 
         }
 
-        // Runs the AI for the enemy.
-        public virtual void RunAI()
+        // Gets the enemy count.
+        public static int GetEnemyCount()
         {
-            // ...
+            return enemies.Count;
         }
 
         // Called when the player has attacked the enemy.
@@ -88,6 +95,12 @@ namespace VLG
         public override void KillEntity()
         {
             Destroy(gameObject);
+        }
+
+        // Runs the AI for the enemy.
+        public virtual void RunAI()
+        {
+            // ...
         }
 
         // Update is called once per frame
@@ -124,6 +137,10 @@ namespace VLG
                     }
                 }
             }
+
+            // Remove from the enemy list.
+            if (enemies.Contains(this))
+                enemies.Remove(this);
         }
 
     }
