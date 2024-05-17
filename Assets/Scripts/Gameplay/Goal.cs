@@ -21,6 +21,37 @@ namespace VLG
                 gameManager = GameplayManager.Instance;
         }
 
+        // Checks if the portal is locked.
+        public bool IsLocked()
+        {
+            return locked;
+        }
+
+        // Sets the locked state.
+        public void SetLocked(bool value)
+        {
+            locked = value;
+        }
+
+        // Locks the goal.
+        public void LockGoal()
+        {
+            SetLocked(true);
+        }
+
+        // Unlocks the goal.
+        public void UnlockGoal()
+        {
+            SetLocked(true);
+        }
+
+        // Toggles the locked setting for the goal.
+        public void ToggleLocked()
+        {
+            SetLocked(!locked);
+        }
+
+
         // Called when the player has interacted with the goal.
         public virtual bool TryEnterGoal(Player player)
         {
