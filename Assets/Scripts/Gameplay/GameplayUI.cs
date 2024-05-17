@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using util;
+using JetBrains.Annotations;
 
 namespace VLG
 {
@@ -134,31 +135,36 @@ namespace VLG
             gameProgressBar.SetValue(percent, true);
         }
 
-        // TODO: make this use enums instead of numbers, and implement objective setting in Goal.cs.
         // Updates the objective text.
-        public void UpdateObjectiveText(int objective)
+        public void UpdateObjectiveText()
+        {
+
+        }
+
+        // Updates the objective text.
+        public void UpdateObjectiveText(Goal.goalType objective)
         {
             // Updates the objective text.
             switch(objective)
             {
                 default:
-                case 0: // No specific objective.
-                    objectiveText.text = "";
-                    break;
-
-                case 1: // Reach the goal.
+                case Goal.goalType.none: // No specific objective. Reach for the goal.
                     objectiveText.text = "Reach the Goal!";
                     break;
 
-                case 2: // Kill all enemies
-                    objectiveText.text = "Kill all the Enemies!";
-                    break;
-
-                case 3: // Get all the keys
+                case Goal.goalType.keys: // Get all the keys.
                     objectiveText.text = "Get all the Keys!";
                     break;
 
-                case 4: // Defeat boss.
+                case Goal.goalType.enemy: // Kill all enemies.
+                    objectiveText.text = "Destroy All the Enemies!";
+                    break;
+
+                case Goal.goalType.button: // Use a button.
+                    objectiveText.text = "Use the Button to Unlock the Goal!";
+                    break;
+
+                case Goal.goalType.boss: // Defeat boss.
                     objectiveText.text = "Defeat the Boss!";
                         break;
 

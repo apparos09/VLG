@@ -11,31 +11,12 @@ namespace VLG
         // The goal for the game.
         public Goal goal;
 
-        // Sets the locked state.
-        public void SetLocked(bool value)
+        // Called when a ButtonBlock has its button clicked.
+        public override void OnButtonBlockClicked(FloorEntity entity)
         {
-            goal.SetLocked(value);
-        }
-
-        // Locks the goal.
-        public void LockGoal()
-        {
-            goal.SetLocked(true);
-        }
-
-        // Unlocks the goal.
-        public void UnlockGoal()
-        {
-            goal.SetLocked(true);
-        }
-
-        // Toggles the locked setting for the goal.
-        public void ToggleLocked()
-        {
+            // Toggles the goal's locked/unlocked state.
             goal.ToggleLocked();
         }
-
-        
 
         // Called when an element interacts with the goal.
         public override void OnEntityInteract(FloorEntity entity)

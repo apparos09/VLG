@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace VLG
@@ -7,8 +8,17 @@ namespace VLG
     // The goal for the player.
     public class Goal : MonoBehaviour
     {
+        // The type of the goal.
+        public enum goalType { none, keys, enemy, button, boss }
+
         // The game manager.
         public GameplayManager gameManager;
+
+        // The floor manager.
+        public FloorManager floorManager;
+
+        // The objective for this goal.
+        public goalType objective = goalType.none; 
 
         // Locks/unlocks the goal.
         public bool locked = false;
@@ -19,6 +29,14 @@ namespace VLG
             // Gets the instance.
             if (gameManager == null)
                 gameManager = GameplayManager.Instance;
+
+            // Gets the instance.
+            if (floorManager == null)
+                floorManager = FloorManager.Instance;
+
+            // Gives the floor manager the goal.
+            if (floorManager.goal == null)
+                floorManager.goal = this;
         }
 
         // Checks if the portal is locked.
@@ -68,10 +86,17 @@ namespace VLG
             return true;
         }
 
+        // Called by the goal to check if its unlock condition has been met.
+        public virtual bool ConditionMet()
+        {
+            // TODO: implement condition checking.
+            return true;
+        }
+
         // Update is called once per frame
         void Update()
         {
-
+            ConditionMet();
         }
     }
 }

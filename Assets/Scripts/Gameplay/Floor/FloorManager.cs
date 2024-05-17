@@ -17,6 +17,9 @@ namespace VLG
         // The gameplay manager.
         public GameplayManager gameManager;
 
+        // The goal for the game.
+        public Goal goal;
+
         [Header("Floor")]
         
         // The origin of all floor/the floor's parent (top left corner of the floor).
