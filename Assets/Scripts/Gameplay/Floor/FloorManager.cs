@@ -667,6 +667,17 @@ namespace VLG
                     copy.OnPlayerCopy(copySuccess);
                 }
             }
+
+            // Gives information to all bar enemies.
+            foreach(BarEnemy barEnemy in BarEnemy.barEnemies)
+            {
+                // Apply rotation if active.
+                if(barEnemy.isActiveAndEnabled && barEnemy.alternateBars)
+                {
+                    // Triggers the next alteration.
+                    barEnemy.AlternateBarsIncrement();
+                }
+            }
         }
 
         // Called on the player's attack input.

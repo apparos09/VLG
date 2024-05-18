@@ -204,6 +204,8 @@ MonoBehaviour:
   barCount: 1
   segmentCount: 1
   diagonal: 0
+  alternateBars: 1
+  reversed: 0
 --- !u!4 &1177080776811488577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3090351950504338783, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
