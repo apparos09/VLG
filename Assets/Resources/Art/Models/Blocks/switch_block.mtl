@@ -1,0 +1,24 @@
+# Blender 4.1.1 MTL File: 'VLG - Blocks.blend'
+# www.blender.org
+
+newmtl Switch_-_Blue_Material
+Ns 360.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd switch_block_-_blue_-_texture.png
+map_refl switch_block_-_metallic.png
+
+newmtl Switch_-_Red_Material
+Ns 360.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd switch_block_-_red_-_texture.png
+map_refl switch_block_-_metallic.png

@@ -59,8 +59,20 @@ namespace VLG
         // The array of floor items
         public Item[,] floorItems = new Item[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
 
+        [Header("Floor/Stats")]
+
         // The time spent on this floor.
         public float floorTime = 0.0F;
+
+        // The floor turns.
+        public int floorTurns = 0;
+
+        // The floor turn limit.
+        public int floorTurnsMax = -1;
+
+        // If 'true', the player has a limited number of turns on the floor.
+        [Tooltip("If 'true', the player has a limited number of turns to complete the floor.")]
+        public bool limitTurns = false;
 
         // Constructor
         private FloorManager()
@@ -309,8 +321,9 @@ namespace VLG
                 }
             }
 
-            // Reset the floor time.
+            // Reset the floor time and turns.
             floorTime = 0;
+            floorTurns = 0;
         }
 
         // Checks if a floor position is valid.
@@ -481,8 +494,9 @@ namespace VLG
             // Resets the player.
             gameManager.player.ResetEntity();
 
-            // Reset timer.
+            // Reset timer and turn count.
             floorTime = 0.0F;
+            floorTurns = 0;
         }
 
         // Tries entity movement.
@@ -678,6 +692,9 @@ namespace VLG
                     barEnemy.AlternateBarsIncrement();
                 }
             }
+
+            // Updates the turns information.
+            gameManager.UpdateTurns();
         }
 
         // Called on the player's attack input.
@@ -688,6 +705,31 @@ namespace VLG
             {
                 // Toggles the block's state.
                 switchBlock.ToggleBlock();
+            }
+
+            // Updates the turns information.
+            gameManager.UpdateTurns();
+        }
+
+        // Updates the number of turns.
+        public void UpdateTurns()
+        {
+            // If the game is paused, don't updatre the turns.
+            if (gameManager.paused)
+                return;
+
+            // Increment the turn count.
+            floorTurns++;
+
+            // If the turns should be limited...
+            if(limitTurns)
+            {
+                // The max has been reached.
+                if(floorTurns >= floorTurnsMax)
+                {
+                    // TODO: maybe check if the player has reached the goal?
+                    ResetFloor();
+                }
             }
         }
 

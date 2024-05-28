@@ -178,6 +178,12 @@ namespace VLG
             floorTimeText.text = "FT: " + StringFormatter.FormatTime(floorTime, true, true, false);
         }
 
+        // Updates the turns text.
+        public void UpdateTurnsText()
+        {
+            // TODO: implement the turns text.
+        }
+
         // Updates all the UI elements
         public void UpdateAllHUDElements()
         {
@@ -186,6 +192,7 @@ namespace VLG
             UpdateGameProgressBar();
             UpdateObjectiveText(0);
             UpdateTimerText(gameManager.gameTime, gameManager.floorManager.floorTime);
+            UpdateTurnsText();
         }
 
         // Update is called once per frame

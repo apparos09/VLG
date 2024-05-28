@@ -27,6 +27,9 @@ namespace VLG
         // The game time.
         public float gameTime = 0;
 
+        // The game turns (total).
+        public int gameTurns = 0;
+
         // Determines if the game is paused or not.
         public bool paused = false;
 
@@ -116,6 +119,20 @@ namespace VLG
             {
                 return instanced;
             }
+        }
+
+        // Updates game turns.
+        public void UpdateTurns()
+        {
+            // If the game is paused, don't updatre the turns.
+            if (paused)
+                return;
+
+            // TODO: implement turn update.
+            gameTurns++;
+
+            floorManager.UpdateTurns();
+            gameUI.UpdateTurnsText();
         }
 
         // Call when the goal is entered. 
