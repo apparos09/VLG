@@ -33,7 +33,10 @@ namespace VLG
         // The objective for the game.
         public TMP_Text objectiveText;
 
-        [Header("Time")]
+        [Header("Stats")]
+
+        // The text for the remaining amount of floor turns.
+        public TMP_Text floorTurnsLeftText;
 
         // The time text for the whole game.
         public TMP_Text gameTimeText;
@@ -171,17 +174,26 @@ namespace VLG
             }
         }
 
+        // Updates the turns text.
+        public void UpdateTurnsText()
+        {
+            // Checks if the turns are limited or not.
+            if(gameManager.floorManager.limitTurns) // Limited
+            {
+                floorTurnsLeftText.text = 
+                    (gameManager.floorManager.floorTurnsMax - gameManager.floorManager.floorTurns).ToString();
+            }
+            else // Not limited.
+            {
+                floorTurnsLeftText.text = "-";
+            }
+        }
+
         // Resets the timer text with the provided game time and floor time.
         public void UpdateTimerText(float gameTime, float floorTime)
         {
             gameTimeText.text = "GT: " + StringFormatter.FormatTime(gameTime, true, true, false);
             floorTimeText.text = "FT: " + StringFormatter.FormatTime(floorTime, true, true, false);
-        }
-
-        // Updates the turns text.
-        public void UpdateTurnsText()
-        {
-            // TODO: implement the turns text.
         }
 
         // Updates all the UI elements

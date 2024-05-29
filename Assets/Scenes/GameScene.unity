@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -348,12 +348,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 262689916}
+  goal: {fileID: 0}
   floorOrigin: {fileID: 95496498}
   originIsCenter: 1
   floorData: {fileID: 249887958}
   floorSpacing: {x: 5, y: 5}
   flipFloorVert: 0
   floorTime: 0
+  floorTurns: 0
+  floorTurnsMax: -1
+  limitTurns: 0
 --- !u!114 &262689916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,6 +374,7 @@ MonoBehaviour:
   player: {fileID: 1149663758}
   floorManager: {fileID: 262689915}
   gameTime: 0
+  gameTurns: 0
   paused: 0
 --- !u!4 &262689917
 Transform:
@@ -757,7 +762,7 @@ Transform:
   m_GameObject: {fileID: 1848987830}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 45, z: -3}
+  m_LocalPosition: {x: 0, y: 60, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

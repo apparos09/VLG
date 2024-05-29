@@ -346,7 +346,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 50, z: -3}
+  m_LocalPosition: {x: 0, y: 60, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -386,6 +386,7 @@ MonoBehaviour:
   player: {fileID: 940522949}
   floorManager: {fileID: 1696945534}
   gameTime: 0
+  gameTurns: 0
   paused: 0
 --- !u!4 &1696945533
 Transform:
@@ -422,6 +423,9 @@ MonoBehaviour:
   floorSpacing: {x: 5, y: 5}
   flipFloorVert: 0
   floorTime: 0
+  floorTurns: 0
+  floorTurnsMax: -1
+  limitTurns: 0
 --- !u!114 &1711864598 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7287269696183073041, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}

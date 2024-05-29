@@ -81,7 +81,7 @@ namespace VLG
         [Header("Geometry")]
 
         // 00 is a blank space
-        [Header("Geometry/Entrance")]
+        [Header("Geometry/Entry")]
         public Block g01A;
 
         // Goal
@@ -109,6 +109,7 @@ namespace VLG
 
         [Header("Geometry/Switch")]
         public Block g08A;
+        public Block g08B;
 
         [Header("Geometry/Button")]
         public Block g09A;
@@ -386,6 +387,11 @@ namespace VLG
                         default:
                             geoEntity = Instantiate(g08A);
                             break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g08B);
+                            break;
                     }
 
                     break;
@@ -618,7 +624,7 @@ namespace VLG
                 {"00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "00A"},
                 {"00A", "03A", "03A", "00A", "00A", "00A", "03A", "00A", "03A", "00A"},
                 {"00A", "07A", "03A", "09A", "00A", "00A", "03A", "03A", "03A", "00A"},
-                {"03A", "00A", "08A", "08A", "08A", "00A", "00A", "00A", "00A", "03A"}};
+                {"03A", "00A", "08A", "08B", "08A", "00A", "00A", "00A", "00A", "03A"}};
                       
             floor.geometry = geometry;
 
