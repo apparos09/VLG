@@ -1,0 +1,12 @@
+# Blender 4.1.1 MTL File: 'VLG - Doors.blend'
+# www.blender.org
+
+newmtl Door_(Single)_Material
+Ns 22.499992
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.100000 0.084961 0.000076
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd door_single_-_texture.png
