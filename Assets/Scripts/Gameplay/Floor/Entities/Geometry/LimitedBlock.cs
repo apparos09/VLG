@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 namespace VLG
@@ -22,6 +23,9 @@ namespace VLG
         [Tooltip("If true, the block is usable even if there are no uses left.")]
         public bool usableIfNoUses = false;
 
+        // The text for showing the amount of remaining uses.
+        public TMP_Text usesText;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -43,6 +47,9 @@ namespace VLG
         {
             // Sets uses.
             uses = Mathf.Clamp(newCount, 0, usesMax);
+
+            // Sets the uses text.
+            usesText.text = (uses - 1).ToString();
 
             // No uses left.
             if(uses == 0)
@@ -149,6 +156,9 @@ namespace VLG
         public override void ResetEntity()
         {
             base.ResetEntity();
+
+            // Turn on the object and set the uses count to max.
+            gameObject.SetActive(true);
             SetUsesCount(usesMax);
         }
     }

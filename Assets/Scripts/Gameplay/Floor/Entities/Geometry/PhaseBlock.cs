@@ -15,7 +15,11 @@ namespace VLG
         // Sets if the phase block is tangible or intangible.
         protected bool tangible = true;
 
-        public Material material;
+        // The block material.
+        public Material blockMaterial;
+
+        // The cover material.
+        public Material coverMaterial;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -37,8 +41,14 @@ namespace VLG
         {
             tangible = value;
 
-            // TODO: change this when you add tangible and intangible animations.
-            gameObject.SetActive(value);
+            // gameObject.SetActive(value); // Old
+
+            // Play Tangible/Intangible Animation
+            if (tangible)
+                PlayTangibleAnimation();
+            else
+                PlayIntangibleAnimation();
+
         }    
         
         // Makes the block tangible.
@@ -75,6 +85,19 @@ namespace VLG
             // Toggle tangibility.
             ToggleTangible();
         }
+
+        // Plays the tangible animation.
+        private void PlayTangibleAnimation()
+        {
+            animator.Play("Phase Block - Tangible Animation");
+        }
+
+        // Plays the intangible animation.
+        private void PlayIntangibleAnimation()
+        {
+            animator.Play("Phase Block - Intangible Animation");
+        }
+
 
         // Resets the floor entity.
         public override void ResetEntity()

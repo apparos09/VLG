@@ -38,11 +38,47 @@ namespace VLG
             }
         }
 
+        // Is the goal locked?
+        public bool IsGoalLocked()
+        {
+            return goal.IsLocked();
+        }
+
+        // Sets goal locked.
+        public void SetGoalLocked(bool locked)
+        {
+            goal.SetLocked(locked);
+
+            // Animation
+            if(IsGoalLocked())
+                PlayGoalLockAnimation();
+            else
+                PlayGoalUnlockAnimation();
+        }
+
+        // Locks the goal.
+        public void LockGoal()
+        {
+            SetGoalLocked(true);
+        }
+
+        // Unlocks the goal.
+        public void UnlockGoal()
+        {
+            SetGoalLocked(false);
+        }
+
+        // Toggles the goal locked.
+        public void ToggleGoalLocked()
+        {
+            SetGoalLocked(!IsGoalLocked());
+        }
+
         // Called when a ButtonBlock has its button clicked.
         public override void OnButtonBlockClicked(FloorEntity entity)
         {
             // Toggles the goal's locked/unlocked state.
-            goal.ToggleLocked();
+            ToggleGoalLocked();
         }
 
         // Called when an element interacts with the goal.
@@ -105,7 +141,7 @@ namespace VLG
                         // If the condition is met, unlock the goal.
                         if (goal.ConditionMet())
                         {
-                            goal.UnlockGoal();
+                            goal.Unlock();
                             PlayGoalUnlockAnimation();
                         }
 

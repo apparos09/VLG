@@ -94,25 +94,36 @@ namespace VLG
 
         // Hazard
         [Header("Geometry/Hazard")]
-        public Block g04A;
+        public Block g04A; // Active
+        public Block g04B; // Inactive
 
-        // Damaged
-        [Header("Geometry/Damaged")]
-        public Block g05A;
+        // Limited
+        [Header("Geometry/Limited")]
+        public Block g05A; // 2 Uses
+        public Block g05B; // 4 Uses
+        public Block g05C; // 6 Uses
+        public Block g05D; // 11 Uses
+        public Block g05E; // 13 Uses
+        public Block g05F; // 16 Uses
 
         // Phase
         [Header("Geometry/Phase")]
-        public Block g06A;
+        public Block g06A; // Active
+        public Block g06B; // Inactive
 
         [Header("Geometry/Portal")]
         public Block g07A;
 
         [Header("Geometry/Switch")]
-        public Block g08A;
-        public Block g08B;
+        public Block g08A; // On
+        public Block g08B; // Off
 
         [Header("Geometry/Button")]
-        public Block g09A;
+        public Block g09A; // Default
+        public Block g09B; // Goal
+        public Block g09C; // Hazard
+        public Block g09D; // Phase
+        public Block g09E; // Portal
 
         // Enemies (E-Group)
         [Header("Enemies")]
@@ -336,6 +347,11 @@ namespace VLG
                         default:
                             geoEntity = Instantiate(g04A);
                             break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g04B);
+                            break;
                     }
                     break;
 
@@ -404,6 +420,26 @@ namespace VLG
                         case 'a':
                         default:
                             geoEntity = Instantiate(g09A);
+                            break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g09B);
+                            break;
+
+                        case 'C':
+                        case 'c':
+                            geoEntity = Instantiate(g09C);
+                            break;
+
+                        case 'D':
+                        case 'd':
+                            geoEntity = Instantiate(g09D);
+                            break;
+
+                        case 'E':
+                        case 'e':
+                            geoEntity = Instantiate(g09E);
                             break;
                     }
 
@@ -621,9 +657,9 @@ namespace VLG
                 {"07A", "00A", "02A", "00A", "06A", "08A", "00A", "00A", "03A", "00A"},
                 {"00A", "00A", "00A", "00A", "00A", "03A", "00A", "00A", "00A", "00A"},
                 {"00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-                {"00A", "00A", "00A", "00A", "00A", "00A", "03A", "03A", "03A", "00A"},
+                {"00A", "00A", "09E", "00A", "00A", "00A", "03A", "03A", "03A", "00A"},
                 {"00A", "03A", "03A", "00A", "00A", "00A", "03A", "00A", "03A", "00A"},
-                {"00A", "07A", "03A", "09A", "00A", "00A", "03A", "03A", "03A", "00A"},
+                {"00A", "07A", "03A", "09D", "00A", "00A", "03A", "03A", "03A", "00A"},
                 {"03A", "00A", "08A", "08B", "08A", "00A", "00A", "00A", "00A", "03A"}};
                       
             floor.geometry = geometry;

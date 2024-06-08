@@ -52,13 +52,13 @@ namespace VLG
         }
 
         // Locks the goal.
-        public void LockGoal()
+        public void Lock()
         {
             SetLocked(true);
         }
 
         // Unlocks the goal.
-        public void UnlockGoal()
+        public void Unlock()
         {
             SetLocked(true);
         }

@@ -15,7 +15,7 @@ namespace VLG
 
         // Automically sets the end portal.
         [Tooltip("Automatically looks for the end portal, which is a portal that shares the same version.")]
-        public bool autoSetEndPortal = true;
+        public bool autoSetDestPortal = true;
 
         // The tags for triggering a portal.
         [Tooltip("Valid interactions for the portal. If none are listed, all entities can use the portal")]
@@ -44,39 +44,39 @@ namespace VLG
         protected virtual void PostStart()
         {
             // If the end portal needs to be set.
-            if(destPortal == null)
+            if(destPortal == null && autoSetDestPortal)
             {
-                // Goes through all he portalBlocks.
-                foreach (PortalBlock portalBlock in portalBlocks)
-                {
-                    // Add to the poral queue if the versions match.
-                    if (portalBlock != this)
-                    {
-                        // If a valid end portal has been found, and the end portal is either not set...
-                        // Or is set to this portal, add to the list.
-                        if (portalBlock.version == version && (portalBlock.destPortal == null || portalBlock.destPortal == this))
-                        {
-                            // Sets the destination portal.
-                            destPortal = portalBlock;
-                            portalBlock.destPortal = this;
-                            break;
-                        }
-                    }
-                        
-                }
-            }
-            
-
-            
+                SearchForDestinationPortal();
+            }        
 
             // Post start has been called.
             calledPostStart = true;
         }
 
         // Search for the end portal.
-        public void SearchForEndPortal()
+        public void SearchForDestinationPortal()
         {
+            // Set to null and search for it again.
+            destPortal = null;
 
+            // Goes through all he portalBlocks.
+            foreach (PortalBlock portalBlock in portalBlocks)
+            {
+                // Add to the poral queue if the versions match.
+                if (portalBlock != this)
+                {
+                    // If a valid end portal has been found, and the end portal is either not set...
+                    // Or is set to this portal, add to the list.
+                    if (portalBlock.version == version && (portalBlock.destPortal == null || portalBlock.destPortal == this))
+                    {
+                        // Sets the destination portal.
+                        destPortal = portalBlock;
+                        portalBlock.destPortal = this;
+                        break;
+                    }
+                }
+
+            }
         }
 
         // Is the button locked?
@@ -90,14 +90,14 @@ namespace VLG
         {
             locked = value;
 
-            // TODO: apply animation
-            if (locked)
+            // Play animation
+            if (locked) // Off
             {
-                // ...
+                PlayPortalOffAnimation();
             }
-            else
+            else // On
             {
-                // ...
+                PlayPortalOnAnimation();
             }
         }
 
@@ -152,6 +152,19 @@ namespace VLG
                 // TODO: apply animation.
                 entity.SetFloorPosition(destPortal.floorPos, false, false);
             }
+        }
+
+        // ANIMATIONS
+        // Play the Portal On Animation
+        private void PlayPortalOnAnimation()
+        {
+            animator.Play("Portal Block - On Animation");
+        }
+
+        // Play the Portal Off Animation
+        private void PlayPortalOffAnimation()
+        {
+            animator.Play("Portal Block - Off Animation");
         }
 
         // Update is called once per frame
