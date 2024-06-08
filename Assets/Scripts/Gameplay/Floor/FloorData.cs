@@ -112,7 +112,11 @@ namespace VLG
         public Block g06B; // Inactive
 
         [Header("Geometry/Portal")]
-        public Block g07A;
+        public Block g07A; // Purple
+        public Block g07B; // Red
+        public Block g07C; // Blue
+        public Block g07D; // Yellow
+        public Block g07E; // Green
 
         [Header("Geometry/Switch")]
         public Block g08A; // On
@@ -389,6 +393,26 @@ namespace VLG
                         case 'a':
                         default:
                             geoEntity = Instantiate(g07A);
+                            break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g07B);
+                            break;
+
+                        case 'C':
+                        case 'c':
+                            geoEntity = Instantiate(g07C);
+                            break;
+
+                        case 'D':
+                        case 'd':
+                            geoEntity = Instantiate(g07D);
+                            break;
+
+                        case 'E':
+                        case 'e':
+                            geoEntity = Instantiate(g07E);
                             break;
                     }
 
