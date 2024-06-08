@@ -86,7 +86,11 @@ namespace VLG
 
         // Goal
         [Header("Geometry/Goal")]
-        public Block g02A;
+        public Block g02A; // None
+        public Block g02B; // Key
+        public Block g02C; // Enemy
+        public Block g02D; // Button
+        public Block g02E; // Boss
 
         // Block
         [Header("Geometry/Blocks")]
@@ -325,6 +329,26 @@ namespace VLG
                         case 'a':
                         default:
                             geoEntity = Instantiate(g02A);
+                            break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g02B);
+                            break;
+
+                        case 'C':
+                        case 'c':
+                            geoEntity = Instantiate(g02C);
+                            break;
+
+                        case 'D':
+                        case 'd':
+                            geoEntity = Instantiate(g02D);
+                            break;
+
+                        case 'E':
+                        case 'e':
+                            geoEntity = Instantiate(g02E);
                             break;
                     }
                     break;

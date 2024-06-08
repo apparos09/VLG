@@ -9,7 +9,7 @@ namespace VLG
     public class Goal : MonoBehaviour
     {
         // The type of the goal.
-        public enum goalType { none, keys, enemy, button, boss }
+        public enum goalType { none, key, enemy, button, boss }
 
         // The game manager.
         public GameplayManager gameManager;
@@ -90,7 +90,7 @@ namespace VLG
 
                     break;
 
-                case goalType.keys: // Grab all the keys.
+                case goalType.key: // Grab all the key.
                     result = KeyItem.GetKeyItemCount() == 0;
 
                     break;
