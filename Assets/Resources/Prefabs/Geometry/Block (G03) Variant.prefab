@@ -158,3 +158,9 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 4
   jumpFactor: 7
+  animator: {fileID: 4294058132444039092}
+--- !u!95 &4294058132444039092 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+  m_PrefabInstance: {fileID: 6418783688188546752}
+  m_PrefabAsset: {fileID: 0}

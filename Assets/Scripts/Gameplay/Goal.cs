@@ -69,6 +69,12 @@ namespace VLG
             SetLocked(!locked);
         }
 
+        // Returns 'true', if the goal has unlock conditions.
+        public bool HasConditions()
+        {
+            return objective != goalType.none;
+        }
+
         // Called by the goal to check if its unlock condition has been met.
         public virtual bool ConditionMet()
         {

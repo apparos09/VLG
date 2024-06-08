@@ -49,19 +49,6 @@ namespace VLG
                 enemies.Add(this);
         }
 
-        // OnTriggerEnter is called when the Collider other enters the trigger
-        private void OnTriggerEnter(Collider other)
-        {
-            FloorEntity entity;
-
-            // Tries to get the floor entity component.
-            if (other.TryGetComponent(out entity))
-            {
-                OnEntityInteract(entity);
-            }
-
-        }
-
         // Gets the enemy count.
         public static int GetEnemyCount()
         {

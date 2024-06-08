@@ -136,6 +136,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5300018449998936233, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 16316c22421114248be80d55560a9ab0, type: 2}
     - target: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
       propertyPath: m_Name
       value: Button Block (G08) Variant
@@ -199,6 +207,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8278416656219007680, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
   m_PrefabInstance: {fileID: 8421238709313571645}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &1611630206385062473 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+  m_PrefabInstance: {fileID: 8421238709313571645}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1684949270924134564 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
@@ -227,4 +240,5 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
+  animator: {fileID: 1611630206385062473}
   validTags: []

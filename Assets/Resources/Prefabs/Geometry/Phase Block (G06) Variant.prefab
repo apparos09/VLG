@@ -99,7 +99,14 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
+  animator: {fileID: 6586918470808262265}
   tangibleDefault: 1
+  material: {fileID: 0}
+--- !u!95 &6586918470808262265 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+  m_PrefabInstance: {fileID: 4173422521930276621}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5671770213588402160
 PrefabInstance:
   m_ObjectHideFlags: 0

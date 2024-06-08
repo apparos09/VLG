@@ -68,6 +68,11 @@ namespace VLG
         [Tooltip("The jump factor for curved movement (applied to handles of bezier curve).")]
         public float jumpFactor = 7.0F;
 
+        [Header("Animation")]
+
+        // The animator for the floor entity.
+        public Animator animator;
+
         // Awake is called when the script instance is being loaded
         protected virtual void Awake()
         {
@@ -142,18 +147,24 @@ namespace VLG
             return infoCode;
         }
 
-        // Called when collision is entered.
-        private void OnCollisionEnter(Collision collision)
+        // Called when entering a trigger collision.
+        protected virtual void OnTriggerEnter(Collider other)
         {
             // An entity.
             FloorEntity entity;
 
             // Tries to get the entity's componenet.
-            if(collision.gameObject.TryGetComponent(out entity))
+            if (other.TryGetComponent(out entity))
             {
                 // Call entity interaction.
                 OnEntityInteract(entity);
             }
+        }
+
+        // Called when exiting a trigger collision.
+        protected virtual void OnTriggerExit(Collider other)
+        {
+            // ...
         }
 
         // Set the floor position of the asset.

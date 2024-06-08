@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: dc0a7a2e5e5fb3a449a5a60fd96268e7, type: 2}
     - target: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
       propertyPath: m_Name
       value: Goal Block (G02) Variant
@@ -74,6 +78,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8278416656219007680, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
   m_PrefabInstance: {fileID: 1899667158515297839}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &8709803248652855131 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+  m_PrefabInstance: {fileID: 1899667158515297839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8782268473655733686 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
@@ -102,6 +111,7 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
+  animator: {fileID: 8709803248652855131}
   goal: {fileID: 5963157428354276258}
   autoCheckGoalCondition: 1
 --- !u!114 &5963157428354276258

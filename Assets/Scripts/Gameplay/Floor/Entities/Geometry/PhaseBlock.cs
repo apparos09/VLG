@@ -15,6 +15,8 @@ namespace VLG
         // Sets if the phase block is tangible or intangible.
         protected bool tangible = true;
 
+        public Material material;
+
         // Start is called before the first frame update
         protected override void Start()
         {

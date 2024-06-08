@@ -48,19 +48,6 @@ namespace VLG
 
         }
 
-        // OnTriggerEnter is called when the Collider other enters the trigger
-        private void OnTriggerEnter(Collider other)
-        {
-            FloorEntity entity;
-            
-            // Tries to get the floor entity component.
-            if(other.TryGetComponent(out entity))
-            {
-                OnEntityInteract(entity);
-            }
-
-        }
-
         // Updates the player movements.
         public void UpdateInput()
         {

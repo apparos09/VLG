@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.EventSystems.EventTrigger;
 
 namespace VLG
 {
@@ -37,6 +38,22 @@ namespace VLG
         {
             // This function has been called.
             calledPostStart = true;
+        }
+
+        // Called when trigger collision is entered.
+        protected override void OnTriggerEnter(Collider other)
+        {
+            // If the tag is valid, play the button click animation.
+            if(IsValidTag(other.tag))
+            {
+                PlayButtonClickAnimation();
+            }
+        }
+
+        // Called when trigger collision is exited.
+        protected override void OnTriggerExit(Collider other)
+        {
+            PlayButtonReleaseAnimation();
         }
 
         // Is the button locked?
@@ -91,6 +108,28 @@ namespace VLG
             return list;
         }
 
+        // Checks if the provided tag is valid.
+        public bool IsValidTag(string tag)
+        {
+            bool result;
+
+            // Checks for valid tags.
+            if (validTags.Count == 0) // All tags are valid.
+            {
+                result = true;
+            }
+            else
+            {
+                // Checks for the valid tag.
+                if (validTags.Contains(tag))
+                    result = true;
+                else
+                    result = false;
+            }
+
+            return result;
+        }
+
         // Called when an element interact with this block, which is usually the player.
         public override void OnEntityInteract(FloorEntity entity)
         {
@@ -100,16 +139,10 @@ namespace VLG
             if (locked)
                 return;
 
-            // Checks for valid tags.
-            if (validTags.Count == 0)
+            // Checks if the tag is valid. If it is, click the button.
+            if(IsValidTag(entity.tag))
             {
                 ClickButtonBlock(entity);
-            }
-            else
-            {
-                // Checks for the valid tag.
-                if (validTags.Contains(entity.tag))
-                    ClickButtonBlock(entity);
             }
         }
 
@@ -132,6 +165,19 @@ namespace VLG
             if (buttonClickCallback != null)
                 buttonClickCallback(entity);
             
+        }
+
+        // ANIMATIONS
+        // Button click animation.
+        private void PlayButtonClickAnimation()
+        {
+            animator.Play("Button Block - Button Click Animation");
+        }
+
+        // Button release animation.
+        private void PlayButtonReleaseAnimation()
+        {
+            animator.Play("Button Block - Button Release Animation");
         }
 
         // Update is called once per frame

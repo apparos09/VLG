@@ -22,6 +22,10 @@ namespace VLG
             return true;
         }
 
+        // NOTE: the collider for blocks is disabled since there may be times where...
+        // An entity is placed on a block without the intention of triggering its effect.
+        // Some blocks will have the collider enabled though.
+
         // Called when an element interact with this block, which is usually the player.
         public override void OnEntityInteract(FloorEntity entity)
         {

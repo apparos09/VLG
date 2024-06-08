@@ -34,6 +34,12 @@ namespace VLG
         public virtual void SetHazardOn(bool value, bool animate = true)
         {
             hazardOn = value;
+
+            // Plays the proper animation based on the setting of the hazard.
+            if (hazardOn)
+                PlayHazardOnAnimation();
+            else
+                PlayHazardOffAnimation();
         }
 
         // Enables the hazard.
@@ -75,6 +81,19 @@ namespace VLG
             }
             
         }
+
+        // ANIMATIONS //
+        // Plays the hazard on animation.
+        private void PlayHazardOnAnimation()
+        {
+            animator.Play("Hazard Block - Hazard On Animation");
+        }
+
+        // Plays the hazard off animation.
+        public void PlayHazardOffAnimation()
+        {
+            animator.Play("Hazard Block - Hazard Off Animation");
+        }    
 
         // Resets the floor entity.
         public override void ResetEntity()
