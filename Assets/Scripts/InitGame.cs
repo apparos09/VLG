@@ -17,7 +17,12 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-
+            // If the game isn't running in the WebGL player, try to load the save data.
+            if(Application.platform != RuntimePlatform.WebGLPlayer)
+            {
+                // Load the game data.
+                SaveSystem.Instance.LoadGame();
+            }
         }
 
         // Update is called once per frame

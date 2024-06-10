@@ -129,7 +129,7 @@ namespace VLG
 
             // Enter the goal if the condition is mset.
             if(ConditionMet())
-                gameManager.OnGoalEntered();
+                floorManager.OnGoalTriggered();
 
             // Return true.
             return true;

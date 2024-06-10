@@ -470,7 +470,9 @@ namespace VLG
             {
                 for (int c = 0; c < floorEnemies.GetLength(1); c++) // Column
                 {
-                    // Object exists.
+                    // TODO: enemies are destroyed, so this doesn't work.
+
+                    // Resets all existing enemies.
                     if (floorEnemies[r, c] != null)
                     {
                         floorEnemies[r, c].ResetEntity();
@@ -733,16 +735,60 @@ namespace VLG
             }
         }
 
+        // Called when the goal is entered. This manages the setup for the next floor, or the ending of the game. 
+        public void OnGoalTriggered()
+        {
+            // No floor set, so just finish the game.
+            if (currFloor == null)
+            {
+                gameManager.FinishGame();
+            }
+            else
+            {
+                OnFloorComplete();
+            }
+        }
+
         // Called when the floor is completed.
+        // See OnGoalEntered in GameManager to see how the game handles a stage being completed.
         public void OnFloorComplete()
         {
-            // TODO: save floor completion time.
+            // Saves the floor turns and times to an array.
+            gameManager.floorTurns[currFloor.id] = floorTurns;
+            gameManager.floorTimes[currFloor.id] = floorTime;
+
+            // Gets the next ID.
+            int nextFloorId = currFloor.id + 1;
+
+            // There are remaining floors.
+            if (nextFloorId <= FloorData.FLOOR_COUNT)
+            {
+                // Generates the next floor.
+                GenerateFloor(nextFloorId);
+            }
+            else // No other floors, so finish the game.
+            {
+                gameManager.FinishGame();
+            }
+
+            // If the game should allow saves, save the game.
+            if (gameManager.allowSaves)
+                gameManager.SaveGame();
         }
 
         // Called when the floor is failed.
         public void OnFloorFailed()
         {
+            // Saves these values temporarily.
+            float timeTemp = floorTime;
+            int turnsTemp = floorTurns;
 
+            // Resets the floor.
+            ResetFloor();
+
+            // Updates the time and turns with the old values since the floor was failed.
+            floorTime = timeTemp;
+            floorTurns = turnsTemp;
         }
 
         // Update is called once per frame

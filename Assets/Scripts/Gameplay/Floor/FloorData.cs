@@ -45,7 +45,7 @@ namespace VLG
         }
 
 
-        // The floor count (ignores the debug floor/floor 0).
+        // The number of floors (ignores the debug floor/floor 0).
         public const int FLOOR_COUNT = 1;
 
         // All floors are the same size, but the amount of space used will vary.

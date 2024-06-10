@@ -113,22 +113,48 @@ namespace VLG
         // Starts the game.
         public void StartGame()
         {
+            // Clamp the floor ID in case its invalid.
             gameInfo.floorId = Mathf.Clamp(gameInfo.floorId, 0, FloorData.FLOOR_COUNT);
 
+            // Go to the game scene.
             ToGameScene();
         }
 
         // Starts a new game.
         public void StartNewGame()
         {
+            // New game.
+            gameInfo.loadFromSave = false;
+
+            // Starting floor.
             gameInfo.floorId = 1;
+
+            // Start the game.
             StartGame();
         }
 
         // Continues the game.
         public void ContinueGame()
         {
-            // TODO: load save data
+            // Grabs the save system.
+            SaveSystem saveSystem = SaveSystem.Instance;
+
+            // If there is no save data to load, start a new game.
+            gameInfo.loadFromSave = saveSystem.HasLoadedData();
+            
+            // If the game should be loaded from a save...
+            if(gameInfo.loadFromSave) 
+            { 
+                // Grab the floor ID.
+                gameInfo.floorId = saveSystem.loadedData.floorId;
+            }
+            else
+            {
+                // Start from floor 1.
+                gameInfo.floorId = 1;
+            }
+
+            // Start the game.
             StartGame();
         }
 

@@ -19,6 +19,13 @@ namespace VLG
         // The title manager.
         public TitleManager titleManager;
 
+        [Header("Title Window")]
+        
+        // The continue button.
+        public Button continueButton;
+
+        // The quit button.
+        public Button quitButton;
 
         // Constructor
         private TitleUI()
@@ -55,7 +62,20 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-            // ...
+            // Checks the game platform being run.
+            if(Application.platform == RuntimePlatform.WebGLPlayer) // WebGL
+            {
+                // Can't save in WebGL, so disable the continue button.
+                continueButton.interactable = false;
+
+                // Can't quit in WebGL, so disable the quit button.
+                quitButton.interactable = false;
+            }
+            else
+            {
+                // If the save system has loaded data, enable the continue button.
+                continueButton.interactable = SaveSystem.Instance.HasLoadedData();
+            }
         }
 
         // Gets the instance.

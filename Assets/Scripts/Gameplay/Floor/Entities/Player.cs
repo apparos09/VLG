@@ -198,9 +198,11 @@ namespace VLG
         // Kills the player.
         public override void KillEntity()
         {
-            // TODO: should the whole floor be reset?
-            ResetEntity();
-            // floorManager.ResetFloor();
+            // If the player dies, the floor has been failed.
+            floorManager.OnFloorFailed();
+
+            // Resets the player.
+            // ResetEntity();
         }
 
         // Resets the asset.
