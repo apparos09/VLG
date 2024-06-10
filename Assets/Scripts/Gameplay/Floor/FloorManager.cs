@@ -452,6 +452,7 @@ namespace VLG
         // Resets the floor.
         public void ResetFloor()
         {
+            // GEOMETRY
             // Resets the geometry floor assets.
             for (int r = 0; r < floorGeometry.GetLength(0); r++) // Row
             {
@@ -465,20 +466,27 @@ namespace VLG
                 }
             }
 
-            // Resets the enemy elements.
+            // NOTE: enemies are deleted when they're killed, so the game kills all existing enemies...
+            // And restores them from the floor data.
+
+            // ENEMIES 
+            // Deletes all existing enemies
             for (int r = 0; r < floorEnemies.GetLength(0); r++) // Row
             {
                 for (int c = 0; c < floorEnemies.GetLength(1); c++) // Column
                 {
-                    // TODO: enemies are destroyed, so this doesn't work.
-
-                    // Resets all existing enemies.
+                    // Kills all existing enemies.
                     if (floorEnemies[r, c] != null)
                     {
-                        floorEnemies[r, c].ResetEntity();
+                        floorEnemies[r, c].KillEntity();
                     }
                 }
             }
+
+            // Remakes all enemies from the floor data.
+            // TODO: move enemy instantiation into its own function that can be called.
+
+
 
             // Resets the item elements.
             for (int r = 0; r < floorItems.GetLength(0); r++) // Row
