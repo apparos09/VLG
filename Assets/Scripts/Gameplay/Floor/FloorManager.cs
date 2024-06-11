@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml;
 using UnityEngine;
 
 namespace VLG
@@ -196,36 +197,25 @@ namespace VLG
                 {
                     // Calculates the new position for the potential assets.
                     // New position in the grid.
-                    Vector2Int gridPos = new Vector2Int(col, row);
+                    Vector2Int gridPos = new Vector2Int(col, ConvertFloorRowPosition(row));
 
                     // The floor assets for geometry, items, and enemies.
                     Block geoEntity;
                     Enemy emyEntity;
                     Item itmEntity;
 
-                    // Calculates the new row value if the floor should be flipped vertically.
-                    int etyRow = flipFloorVert ? currFloor.geometry.GetLength(0) - 1 - row : row;
-
                     // Generates the geometry, enemy, and item elements.
-                    geoEntity = floorData.InstantiateGeometryElement(floor.geometry[col, etyRow]);
-                    emyEntity = floorData.InstantiateEnemyElement(floor.enemies[col, etyRow]);
-                    itmEntity = floorData.InstantiateItemElement(floor.items[col, etyRow]);
+                    // These use the base column and row values, not the converted values.
+                    geoEntity = floorData.InstantiateGeometryElement(floor.geometry[col, row]);
+                    emyEntity = floorData.InstantiateEnemyElement(floor.enemies[col, row]);
+                    itmEntity = floorData.InstantiateItemElement(floor.items[col, row]);
 
 
                     // Initialize the entity.
                     if (geoEntity != null)
                     {
-                        // Sets the floor manager.
-                        geoEntity.floorManager = this;
-
-                        // Sets the transform parent.
-                        geoEntity.transform.parent = floorOrigin.transform;
-
-                        // Sets the floor position.
-                        geoEntity.SetFloorPosition(gridPos, true, false);
-
-                        // Adds the asset to the list.
-                        floorGeometry[col, row] = geoEntity;
+                        // Sets the default values.
+                        SetDefaultEntityValues(geoEntity, gridPos);
 
                         // If the geo asset is the entry block, and this hasn't been set.
                         if(geoEntity is EntryBlock && entryBlock == null)
@@ -235,33 +225,15 @@ namespace VLG
                     // ENEMY //
                     if (emyEntity != null)
                     {
-                        // Sets the floor manager.
-                        emyEntity.floorManager = this;
-
-                        // Sets the transform parent.
-                        emyEntity.transform.parent = floorOrigin.transform;
-
-                        // Sets the floor position.
-                        emyEntity.SetFloorPosition(gridPos, true, false);
-
-                        // Adds the asset to the list.
-                        floorEnemies[col, row] = emyEntity;
+                        // Sets the default values.
+                        SetDefaultEntityValues(emyEntity, gridPos);
                     }
 
                     // ITEM //
                     if (itmEntity != null)
                     {
-                        // Sets the floor manager.
-                        itmEntity.floorManager = this;
-
-                        // Sets the transform parent.
-                        itmEntity.transform.parent = floorOrigin.transform;
-
-                        // Sets the floor position.
-                        itmEntity.SetFloorPosition(gridPos, true, false);
-
-                        // Adds the asset to the list.
-                        floorItems[col, row] = itmEntity;
+                        // Sets the default values.
+                        SetDefaultEntityValues(itmEntity, gridPos);
                     }
                 }
             }
@@ -272,6 +244,35 @@ namespace VLG
 
             // Update the floor text and game progress bar.
             gameManager.gameUI.UpdateAllHUDElements();
+        }
+
+        // Sets the default entity values.
+        // gridPos = (col, row)
+        private void SetDefaultEntityValues(FloorEntity entity, Vector2Int gridPos)
+        {
+            // Sets the floor manager.
+            entity.floorManager = this;
+
+            // Sets the transform parent.
+            entity.transform.parent = (floorOrigin != null) ? floorOrigin.transform : null;
+
+            // Sets the floor position.
+            entity.SetFloorPosition(gridPos, true, false);
+
+            // Adds the asset to the applicable array.
+            if(entity is Block) // Block
+            {
+                floorGeometry[gridPos.x, gridPos.y] = (Block)entity;
+            }
+            else if(entity is Enemy) // Enemy
+            {
+                floorEnemies[gridPos.x, gridPos.y] = (Enemy)entity;
+            }
+            else if(entity is Item) // Item
+            {
+                floorItems[gridPos.x, gridPos.y] = (Item)entity;
+            }
+            
         }
 
         // Clears the floor.
@@ -400,6 +401,16 @@ namespace VLG
             return worldPos;
         }
 
+        // Gets the provided floor row position in local space.
+        // If the floor is flipped, the final row position is reflected as such.
+        public int ConvertFloorRowPosition(int baseRow)
+        {
+            // Calculates the new row value if the floor should be flipped vertically.
+            int finalRow = flipFloorVert ? currFloor.geometry.GetLength(0) - 1 - baseRow : baseRow;
+
+            return finalRow;
+        }
+
         // Called when the floor entity's position has been changed.
         public void OnFloorEntityPositionChanged(FloorEntity entity)
         {
@@ -483,11 +494,8 @@ namespace VLG
                 }
             }
 
-            // Remakes all enemies from the floor data.
-            // TODO: move enemy instantiation into its own function that can be called.
 
-
-
+            // ITEMS
             // Resets the item elements.
             for (int r = 0; r < floorItems.GetLength(0); r++) // Row
             {
@@ -500,6 +508,30 @@ namespace VLG
                     }
                 }
             }
+
+            // Re-generate enemies (and possibly items depending on how I handle that)
+            // The row (Y) value.
+            for (int row = 0; row < currFloor.enemies.GetLength(0); row++)
+            {
+                // The column (X) value.
+                for (int col = 0; col < currFloor.enemies.GetLength(1); col++)
+                {
+                    // Calculates the new position for the potential assets.
+                    // New position in the grid.
+                    Vector2Int gridPos = new Vector2Int(col, ConvertFloorRowPosition(row));
+
+                    // Generates the enemy at the provided index (uses base array location)
+                    Enemy emyEntity = floorData.InstantiateEnemyElement(currFloor.enemies[col, row]);
+
+                    // Sets the default vlaues.
+                    if (emyEntity != null)
+                    {
+                        // Sets the default values.
+                        SetDefaultEntityValues(emyEntity, gridPos);
+                    }
+                }
+            }
+
 
             // Resets the player.
             gameManager.player.ResetEntity();
