@@ -52,12 +52,15 @@ namespace VLG
         // The list of bar enemies in the game.
         public static List<BarEnemy> barEnemies = new List<BarEnemy>();
 
-        // Start is called before the first frame update
-        protected override void Start()
-        {
-            base.Start();
 
-            // Generates the bars.
+
+        // Awake is called when the script instance is being loaded
+        protected override void Awake()
+        {
+            base.Awake();
+
+            // Assigns relevant member variables.
+            // This was moved here from Start() to address a null reference error.
             for (int i = 0; i < bars.Length; i++)
             {
                 // Generates a new bar, list of segments, and direction.
@@ -65,6 +68,12 @@ namespace VLG
                 bars[i].segments = new List<Enemy>();
                 bars[i].barDirec = new Vector2Int();
             }
+        }
+
+        // Start is called before the first frame update
+        protected override void Start()
+        {
+            base.Start();
 
             // Generates the bars.
             GenerateBars();
@@ -248,12 +257,17 @@ namespace VLG
             // Goes through each bar.
             for(int i = 0; i < bars.Length; i++)
             {
-                // Destroy all the segments.
-                for(int j = 0; j < bars[i].segments.Count; j++)
+
+                // Makes sure that the segments list exists (was initially used to address a null reference error)
+                if (bars[i].segments != null)
                 {
-                    // Destroy the segment if it still exists.
-                    if(bars[i].segments[j] != null)
-                        Destroy(bars[i].segments[j].gameObject);
+                    // Destroy all the segments.
+                    for (int j = 0; j < bars[i].segments.Count; j++)
+                    {
+                        // Destroy the segment if it still exists.
+                        if (bars[i].segments[j] != null)
+                            Destroy(bars[i].segments[j].gameObject);
+                    }
                 }
 
                 // Clear the segment list.

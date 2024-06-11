@@ -486,7 +486,7 @@ namespace VLG
             {
                 for (int c = 0; c < floorEnemies.GetLength(1); c++) // Column
                 {
-                    // Kills all existing enemies.
+                    // Kill the enemy.
                     if (floorEnemies[r, c] != null)
                     {
                         floorEnemies[r, c].KillEntity();
@@ -496,20 +496,20 @@ namespace VLG
 
 
             // ITEMS
-            // Resets the item elements.
+            // Deletes all items.
             for (int r = 0; r < floorItems.GetLength(0); r++) // Row
             {
                 for (int c = 0; c < floorItems.GetLength(1); c++) // Column
                 {
-                    // Object exists.
+                    // Kill the item.
                     if (floorItems[r, c] != null)
                     {
-                        floorItems[r, c].ResetEntity();
+                        floorItems[r, c].KillEntity();
                     }
                 }
             }
 
-            // Re-generate enemies (and possibly items depending on how I handle that)
+            // Re-generate enemies and items
             // The row (Y) value.
             for (int row = 0; row < currFloor.enemies.GetLength(0); row++)
             {
@@ -522,12 +522,20 @@ namespace VLG
 
                     // Generates the enemy at the provided index (uses base array location)
                     Enemy emyEntity = floorData.InstantiateEnemyElement(currFloor.enemies[col, row]);
+                    Item itmEntity = floorData.InstantiateItemElement(currFloor.items[col, row]);
 
-                    // Sets the default vlaues.
+                    // Sets the default values for the enemy.
                     if (emyEntity != null)
                     {
                         // Sets the default values.
                         SetDefaultEntityValues(emyEntity, gridPos);
+                    }
+
+                    // Sets the default values for the item.
+                    if (itmEntity != null)
+                    {
+                        // Sets the default values.
+                        SetDefaultEntityValues(itmEntity, gridPos);
                     }
                 }
             }
@@ -645,7 +653,7 @@ namespace VLG
                         if (floorGeometry[newFloorPos.x, newFloorPos.y] is Block)
                         {
                             // Gets the block.
-                            Block block = (Block)floorGeometry[newFloorPos.x, newFloorPos.y];
+                            Block block = floorGeometry[newFloorPos.x, newFloorPos.y];
 
                             // If the block is active and enabled, and if the block is usable.
                             if (block.isActiveAndEnabled && block.UsableBlock(entity))
@@ -800,8 +808,9 @@ namespace VLG
             // Gets the next ID.
             int nextFloorId = currFloor.id + 1;
 
-            // There are remaining floors.
-            if (nextFloorId <= FloorData.FLOOR_COUNT)
+            // Checks if there are remaining floors
+            // Keep in mind that the debug floor/floor 0 is part of the floor count.
+            if (nextFloorId < FloorData.FLOOR_COUNT)
             {
                 // Generates the next floor.
                 GenerateFloor(nextFloorId);

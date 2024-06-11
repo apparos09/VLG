@@ -31,13 +31,13 @@ namespace VLG
         public float gameTime = 0;
 
         // The floor times (total)
-        public float[] floorTimes = new float[FloorData.FLOOR_COUNT];
+        public float[] floorTimes;
 
         // The game turns (total)
         public int gameTurns = 0;
 
         // The floor turns (total)
-        public int[] floorTurns = new int[FloorData.FLOOR_COUNT];
+        public int[] floorTurns;
 
         // Determines if the game is paused or not.
         public bool paused = false;
@@ -77,6 +77,11 @@ namespace VLG
             // Run code for initialization.
             if (!instanced)
             {
+                // Initializes arrays.
+                // This is done here so that the inspector doesn't override these values.
+                floorTimes = new float[FloorData.FLOOR_COUNT];
+                floorTurns = new int[FloorData.FLOOR_COUNT];
+
                 instanced = true;
             }
         }

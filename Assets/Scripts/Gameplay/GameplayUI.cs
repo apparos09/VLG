@@ -132,7 +132,8 @@ namespace VLG
         public void UpdateGameProgressBar()
         {
             // Gets the clear percent.
-            float percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / FloorData.FLOOR_COUNT);
+            // It does FLOOR_COUNT - 1 because the debug floor/floor 0 is ignored.
+            float percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / (FloorData.FLOOR_COUNT - 1));
 
             // Sets the value.
             gameProgressBar.SetValue(percent, true);

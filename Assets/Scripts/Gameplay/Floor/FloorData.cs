@@ -45,8 +45,8 @@ namespace VLG
         }
 
 
-        // The number of floors (ignores the debug floor/floor 0).
-        public const int FLOOR_COUNT = 1;
+        // The number of floors (includes the debug floor/floor 0)
+        public const int FLOOR_COUNT = 2;
 
         // All floors are the same size, but the amount of space used will vary.
 
@@ -70,7 +70,7 @@ namespace VLG
         // The floor codes, which are used to skip floors on the title screen.
         // A floor code has 4 digits, but "0" and "O" aren't used because they look similar.
         // TODO: don't allow the player to use "0" or "O".
-        private string[] floorCodes = new string[FLOOR_COUNT + 1]
+        private string[] floorCodes = new string[FLOOR_COUNT]
         {
             "0000",
             "91AB"
