@@ -36,10 +36,55 @@ namespace VLG
                 copyEnemies.Add(this);
         }
 
+        // Copies the provided movement.
+        public bool CopyMovement(Vector2Int moveDirec)
+        {
+            // The direction of movement for the copy.
+            Vector2Int copyMoveDirec = new Vector2Int();
+            copyMoveDirec.x = reverseX ? moveDirec.x * -1 : moveDirec.x;
+            copyMoveDirec.y = reverseY ? moveDirec.y * -1 : moveDirec.y;
+
+            // The facing direction of the movement.
+            if (copyMoveDirec.y > 0) // Face Up
+            {
+                transform.forward = Vector3.forward;
+            }
+            else if (copyMoveDirec.y < 0) // Face Down
+            {
+                transform.forward = Vector3.back;
+            }
+            else if (copyMoveDirec.x < 0) // Face Left
+            {
+                transform.forward = Vector3.left;
+            }
+            else if (copyMoveDirec.x > 0) // Face Right
+            {
+                transform.forward = Vector3.right;
+            }
+
+            // Try to move the copy.
+            bool copySuccess = floorManager.TryEntityMovement(this, copyMoveDirec);
+
+            // Called when the movement has been copied.
+            OnCopyMovement(copySuccess);
+
+            return copySuccess;
+        }
+
+
         // Called when the enemy tries to copy the player
-        public void OnPlayerCopy(bool success)
+        public virtual void OnCopyMovement(bool success)
         {
             // ...
+        }
+
+        // Resets the asset.
+        public override void ResetEntity()
+        {
+            // Resets the rotation.
+            transform.rotation = Quaternion.identity;
+
+            base.ResetEntity();
         }
 
         // Update is called once per frame

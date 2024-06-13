@@ -719,16 +719,8 @@ namespace VLG
                 // The copy is active.
                 if (copy.isActiveAndEnabled)
                 {
-                    // The direction of movement for the copy.
-                    Vector2Int copyMoveDirec = new Vector2Int();
-                    copyMoveDirec.x = (copy.reverseX) ? moveDirec.x * -1 : moveDirec.x;
-                    copyMoveDirec.y = (copy.reverseY) ? moveDirec.y * -1 : moveDirec.y;
-
-                    // Try to move the copy.
-                    bool copySuccess = TryEntityMovement(copy, copyMoveDirec);
-
-                    // Tells the copy if it worked.
-                    copy.OnPlayerCopy(copySuccess);
+                    // Copies the movement.
+                    copy.CopyMovement(moveDirec);
                 }
             }
 

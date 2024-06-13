@@ -137,6 +137,7 @@ namespace VLG
         [Header("Enemies")]
         public Enemy e01A;
         public Enemy e02A;
+        public Enemy e02B;
         public Enemy e03A;
 
         // Items (I-Group)
@@ -545,6 +546,11 @@ namespace VLG
                         case 'A':
                         case 'a':
                             emyEntity = Instantiate(e02A);
+                            break;
+
+                        case 'B':
+                        case 'b':
+                            emyEntity = Instantiate(e02B);
                             break;
 
                         default:

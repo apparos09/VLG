@@ -208,6 +208,9 @@ namespace VLG
         // Resets the asset.
         public override void ResetEntity()
         {
+            // Resets the rotation.
+            transform.rotation = Quaternion.identity;
+
             base.ResetEntity();
         }
 

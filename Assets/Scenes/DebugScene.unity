@@ -386,8 +386,11 @@ MonoBehaviour:
   player: {fileID: 940522949}
   floorManager: {fileID: 1696945534}
   gameTime: 0
+  floorTimes: []
   gameTurns: 0
+  floorTurns: 
   paused: 0
+  allowSaves: 0
 --- !u!4 &1696945533
 Transform:
   m_ObjectHideFlags: 0
