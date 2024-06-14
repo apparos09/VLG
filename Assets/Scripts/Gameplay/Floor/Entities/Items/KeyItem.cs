@@ -15,8 +15,12 @@ namespace VLG
         {
             base.Start();
 
+            // Add the key to the list.
             if (!keyItems.Contains(this))
                 keyItems.Add(this);
+
+            // Play animation.
+            animator.Play("Key - Idle Animation");
         }
 
         // Gets the total number of key items.
