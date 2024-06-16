@@ -18,6 +18,8 @@ namespace VLG
             public Vector2Int barDirec;
         }
 
+        [Header("BarEnemy")]
+
         // THe prefab for the bar segment.
         public Enemy barSegmentPrefab;
 

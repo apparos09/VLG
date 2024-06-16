@@ -71,9 +71,19 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3521685432206053063}
   m_SourcePrefab: {fileID: 100100000, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+--- !u!95 &4531223405731406689 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+  m_PrefabInstance: {fileID: 7694721019674096018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4623509369753490637 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3090351950504338783, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+  m_PrefabInstance: {fileID: 7694721019674096018}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &4970776429797155699 stripped
+BoxCollider:
+  m_CorrespondingSourceObject: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
   m_PrefabInstance: {fileID: 7694721019674096018}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &6384334825612963322 stripped
@@ -104,14 +114,20 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 4
   jumpFactor: 7
-  animator: {fileID: 0}
-  collider: {fileID: 0}
-  rigidbody: {fileID: 0}
+  animator: {fileID: 4531223405731406689}
+  collider: {fileID: 4970776429797155699}
+  rigidbody: {fileID: 8401874709157097137}
   ignoreGeometry: 0
   vulnerable: 1
+  facePlayer: 0
   player: {fileID: 0}
   reverseX: 0
   reverseY: 0
+--- !u!54 &8401874709157097137 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2184341991406591779, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+  m_PrefabInstance: {fileID: 7694721019674096018}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8477387520048945122
 PrefabInstance:
   m_ObjectHideFlags: 0
