@@ -37,7 +37,7 @@ namespace VLG
             if(bgmLooper != null) 
             {
                 // Stop the audio and set the clip. This puts the audio at its start.
-                bgmLooper.StopAudio();
+                bgmLooper.StopAudio(true);
                 bgmLooper.audioSource.clip = bgmClip;
 
                 // Sets the start and end for the BGM.
@@ -45,7 +45,7 @@ namespace VLG
                 bgmLooper.clipEnd = clipEnd;
 
                 // Play the BGM through the looper
-                bgmLooper.PlayAudio();
+                bgmLooper.PlayAudio(true);
             }
             else // No looper, so change settings normally.
             {
