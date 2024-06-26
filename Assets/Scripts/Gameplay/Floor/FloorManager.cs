@@ -242,6 +242,9 @@ namespace VLG
             if (entryBlock != null)
                 gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
 
+            // Sets the Skybox
+            floorData.SetSkybox(floor);
+
             // Update the floor text and game progress bar.
             gameManager.gameUI.UpdateAllHUDElements();
         }

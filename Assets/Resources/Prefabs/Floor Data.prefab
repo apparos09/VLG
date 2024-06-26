@@ -79,3 +79,4 @@ MonoBehaviour:
   e02B: {fileID: 5986084741064882909, guid: 0d47cc441f5bbd2499c9e26d03a16977, type: 3}
   e03A: {fileID: 6683831301289505352, guid: ffc40ebed5508b941890126aac0bda04, type: 3}
   i01A: {fileID: 5384949875433752124, guid: 11690695d4e70ea40a8412b0b3a985b5, type: 3}
+  skyboxMat00: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}

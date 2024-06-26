@@ -26,6 +26,9 @@ namespace VLG
         // The items.
         public string[,] items;
 
+        // The skybox ID.
+        public int skyboxId;
+
     }
 
     // The floor data.
@@ -143,6 +146,10 @@ namespace VLG
         // Items (I-Group)
         [Header("Items")]
         public Item i01A;
+
+        // Skyboxes
+        [Header("Skyboxes")]
+        public Material skyboxMat00;
 
         // Constructor
         private FloorData()
@@ -638,6 +645,24 @@ namespace VLG
         }
 
 
+        // Sets the skybox using the provided ID.
+        public void SetSkybox(int skyboxId)
+        {
+            switch(skyboxId)
+            {
+                case 0: // Debug Skybox
+                default:
+                    RenderSettings.skybox = skyboxMat00;
+                    break;
+            }
+        }
+
+        // Sets the skybox ID.
+        public void SetSkybox(Floor floor)
+        {
+            SetSkybox(floor.skyboxId);
+        }
+
         // GETTING FLOOR DATA //
         // General Function
         // Gets the floor ID.
@@ -750,6 +775,8 @@ namespace VLG
 
             floor.items = items;
 
+            // Skybox
+            floor.skyboxId = 0;
 
             return floor;
         }
@@ -808,6 +835,8 @@ namespace VLG
 
             floor.items = items;
 
+            // Skybox
+            floor.skyboxId = 0;
 
             return floor;
         }    
