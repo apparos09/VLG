@@ -9,6 +9,7 @@ TagManager:
   - Item
   - BGM
   - SFX
+  - Manager
   layers:
   - Default
   - TransparentFX

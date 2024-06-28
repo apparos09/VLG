@@ -1,33 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using util;
 
 namespace VLG
 {
-    // The Title Audio
-    public class TitleAudio : GameAudio
+    // Audio for the ResultsScene.
+    public class ResultsAudio : GameAudio
     {
         // The singleton instance.
-        private static TitleAudio instance;
+        private static ResultsAudio instance;
 
         // Gets set to 'true' when the singleton has been instanced.
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
 
         // The BGM
-        [Header("Title Audio")]     
+        [Header("Results Audio")]
 
         // BGM
-        public AudioClip titleBgm;
+        public AudioClip resultsBgm;
 
         // Clip Start and End
-        public float titleClipStart = 0;
-        public float titleClipEnd = 0;
+        public float resultsClipStart = 0;
+        public float resultsClipEnd = 0;
 
 
         // Constructor
-        private TitleAudio()
+        private ResultsAudio()
         {
             // ...
         }
@@ -61,12 +60,12 @@ namespace VLG
             base.Start();
 
             // Auto-set title clip end
-            if(titleClipEnd == 0)
-                titleClipEnd = titleBgm.length;
+            if (resultsClipEnd == 0)
+                resultsClipEnd = resultsBgm.length;
         }
 
         // Gets the instance.
-        public static TitleAudio Instance
+        public static ResultsAudio Instance
         {
             get
             {
@@ -74,15 +73,15 @@ namespace VLG
                 if (instance == null)
                 {
                     // Tries to find the instance.
-                    instance = FindObjectOfType<TitleAudio>(true);
+                    instance = FindObjectOfType<ResultsAudio>(true);
 
 
                     // The instance doesn't already exist.
                     if (instance == null)
                     {
                         // Generate the instance.
-                        GameObject go = new GameObject("TitleAudio (singleton)");
-                        instance = go.AddComponent<TitleAudio>();
+                        GameObject go = new GameObject("ResultsAudio (singleton)");
+                        instance = go.AddComponent<ResultsAudio>();
                     }
 
                 }
@@ -101,10 +100,10 @@ namespace VLG
             }
         }
 
-        // Plays the Title BGM
-        public void PlayTitleBgm()
+        // Plays the Results BGM
+        public void PlayResultsBgm()
         {
-            PlayBackgroundMusic(titleBgm, titleClipStart, titleClipEnd);
+            PlayBackgroundMusic(resultsBgm, resultsClipStart, resultsClipEnd);
         }
 
         // This function is called when the MonoBehaviour will be destroyed.
@@ -116,5 +115,7 @@ namespace VLG
                 instanced = false;
             }
         }
+
+
     }
 }
