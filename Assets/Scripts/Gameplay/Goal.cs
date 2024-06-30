@@ -18,10 +18,11 @@ namespace VLG
         public FloorManager floorManager;
 
         // The objective for this goal.
-        public goalType objective = goalType.none; 
+        public goalType objective = goalType.none;
 
-        // Locks/unlocks the goal.
-        public bool locked = false;
+        // Shows if the goal is usable.
+        [Tooltip("Shows if the goal is usable. Whether the goal is locked/unlocked hinges on the condition being met.")]
+        public bool usable = false;
 
         // Start is called before the first frame update
         void Start()
@@ -39,34 +40,34 @@ namespace VLG
                 floorManager.goal = this;
         }
 
-        // Checks if the portal is locked.
-        public bool IsLocked()
+        // Checks if the goal is usable.
+        public bool IsUsable()
         {
-            return locked;
+            return usable;
         }
 
-        // Sets the locked state.
-        public void SetLocked(bool value)
+        // Sets the usable state.
+        public void SetUsable(bool value)
         {
-            locked = value;
+            usable = value;
         }
 
-        // Locks the goal.
-        public void Lock()
+        // Makes the goal usable.
+        public void MakeUsable()
         {
-            SetLocked(true);
+            SetUsable(true);
         }
 
-        // Unlocks the goal.
-        public void Unlock()
+        // Makes the goal unusable.
+        public void MakeUnusable()
         {
-            SetLocked(false);
+            SetUsable(false);
         }
 
-        // Toggles the locked setting for the goal.
-        public void ToggleLocked()
+        // Toggles the usable setting for the goal.
+        public void ToggleUsable()
         {
-            SetLocked(!locked);
+            SetUsable(!usable);
         }
 
         // Returns 'true', if the goal has unlock conditions.
@@ -101,7 +102,7 @@ namespace VLG
                     break;
 
                 case goalType.button: // Jump on a button.
-                    result = locked;
+                    result = usable;
 
                     break;
 
@@ -113,34 +114,31 @@ namespace VLG
             return result;
         }
 
-        // Returns 'true' if the goal is unlocked, and if the condition is met.
-        public bool IsUnlockedAndConditionMet()
+        // Returns 'true' if the goal is usable, and if the condition is met.
+        public bool IsUsableAndConditionMet()
         {
-            return !locked && ConditionMet();
+            return usable && ConditionMet();
         }
 
 
         // Called when the player has interacted with the goal.
         public virtual bool TryEnterGoal(Player player)
         {
-            // If the goal is locked, do nothing.
-            if (locked)
+            // If the goal is unusuable, do nothing.
+            if (!usable)
                 return false;
 
             // Enter the goal if the condition is mset.
             if(ConditionMet())
+            {
                 floorManager.OnGoalTriggered();
-
-            // Return true.
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-
-        
-
-        // Update is called once per frame
-        void Update()
-        {
-            // ...
-        }
+      
     }
 }

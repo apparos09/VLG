@@ -129,7 +129,7 @@ MonoBehaviour:
   gameManager: {fileID: 0}
   floorManager: {fileID: 0}
   objective: 0
-  locked: 0
+  usable: 1
 --- !u!1001 &2032466642673562697
 PrefabInstance:
   m_ObjectHideFlags: 0

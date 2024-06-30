@@ -13,6 +13,9 @@ namespace VLG
         // The goal for the game.
         public Goal goal;
 
+        // Tracks if the goal's unlock/lock condition has been met.
+        private bool goalConMet = false;
+
         // Automatically checks if the goal should be unlocked every frame.
         [Tooltip("If true, the goal's unlock condition is checked every frame.")]
         public bool autoCheckGoalCondition = true;
@@ -24,40 +27,19 @@ namespace VLG
         protected override void Start()
         {
             base.Start();
-
-            // Play animation for the goal locking/unlocking.
-            if(goal.HasConditions())
-            {
-                // Checks if the goal should is locked or not for playing animations.
-                if (goal.IsLocked())
-                    PlayGoalLockAnimation();
-                else
-                    PlayGoalUnlockAnimation();
-            }
-            else
-            {
-                // The goal is unlocked.
-                PlayGoalUnlockAnimation();
-            }
         }
 
         // Called on the first update frame.
         private void PostStart()
         {
-            // Saves the old locked value.
-            bool oldLocked = goal.locked;
-            
-            // Sets locked value.
-            goal.SetLocked(!goal.ConditionMet());
-
-            // If the locked value has changed, play the appropriate animation.
-            if(oldLocked != goal.IsLocked())
+            // Checks if the goal's condition has been met, and if the goal is usable.
+            if(goal.IsUsableAndConditionMet())
             {
-                // Lock/Unlock
-                if (goal.IsLocked())
-                    PlayGoalLockAnimation();
-                else
-                    PlayGoalUnlockAnimation();
+                OnConditionMet();   
+            }
+            else
+            {
+                OnConditionFailed();
             }
 
             // Updates the objective text with the goal's objective tpye.
@@ -67,47 +49,27 @@ namespace VLG
             calledPostStart = true;
         }
 
-        // Is the goal locked?
-        public bool IsGoalLocked()
+
+        // Called when the condition check for the goal has succeeded.
+        public void OnConditionMet()
         {
-            return goal.IsLocked();
+            goalConMet = true;
+            PlayGoalUnlockAnimation();
         }
 
-        // Sets goal locked.
-        public void SetGoalLocked(bool locked)
+        // Called when the condition check for the goal has failed.
+        public void OnConditionFailed()
         {
-            goal.SetLocked(locked);
-
-            // Animation
-            if(IsGoalLocked())
-                PlayGoalLockAnimation();
-            else
-                PlayGoalUnlockAnimation();
-        }
-
-        // Locks the goal.
-        public void LockGoal()
-        {
-            SetGoalLocked(true);
-        }
-
-        // Unlocks the goal.
-        public void UnlockGoal()
-        {
-            SetGoalLocked(false);
-        }
-
-        // Toggles the goal locked.
-        public void ToggleGoalLocked()
-        {
-            SetGoalLocked(!IsGoalLocked());
+            goalConMet = false;
+            PlayGoalLockAnimation();
         }
 
         // Called when a ButtonBlock has its button clicked.
         public override void OnButtonBlockClicked(FloorEntity entity)
         {
-            // Toggles the goal's locked/unlocked state.
-            ToggleGoalLocked();
+            // Toggles the goal's locked/unlocked state if it's tied to a button.
+            if (goal.objective == Goal.goalType.button)
+                goal.ToggleUsable();
         }
 
         // Called when an element interacts with the goal.
@@ -143,14 +105,6 @@ namespace VLG
 
             // Call PostStart again so that the goal animation replays.
             calledPostStart = false;
-
-            PlayGoalLockAnimation();
-
-            // // Lock the goal on reset if it has unlock conditions.
-            // if (goal.ConditionMet())
-            //     PlayGoalUnlockAnimation();
-            // else
-            //     PlayGoalLockAnimation();
         }
 
 
@@ -166,25 +120,23 @@ namespace VLG
 
             // TODO: this doesn't need to be checked every frame.
             // It shouldn't be too inefficient, but maybe don't check this every frame.
-           
-            // Does the goal have unlock conditions?
-            if(goal.HasConditions())
-            {
-                // If the goal unlock condition should be checked automatically.
-                if (autoCheckGoalCondition)
-                {
-                    // Checks if the goal is locked.
-                    if (goal.IsLocked())
-                    {
-                        // Checks if the goal condition is met.
-                        // If the condition is met, unlock the goal.
-                        if (goal.ConditionMet())
-                        {
-                            UnlockGoal();
-                        }
 
-                    }
+            // If the goal condition should be auto-checked.
+            if (autoCheckGoalCondition)
+            {
+                // If the goal is usable and the condition is met.
+                bool goalCheck = goal.IsUsableAndConditionMet();
+
+                // Checks if the goal condition has been met, and if the tracker value matches.
+                if (goalCheck && !goalConMet) // Goal Available
+                {
+                    OnConditionMet();
                 }
+                else if(!goalCheck && goalConMet) // Goal Not Available
+                {
+                    OnConditionFailed();
+                }
+                
             }
             
             
