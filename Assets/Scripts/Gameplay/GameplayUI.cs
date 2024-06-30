@@ -142,7 +142,11 @@ namespace VLG
         // Updates the objective text.
         public void UpdateObjectiveText()
         {
-
+            // Update to the current objective.
+            if(gameManager.floorManager.goal != null)
+                UpdateObjectiveText(gameManager.floorManager.goal.objective);
+            else
+                UpdateObjectiveText(0); // Default/Non-specific
         }
 
         // Updates the objective text.
@@ -203,7 +207,7 @@ namespace VLG
             // TODO: implement objective text into gameplay.
             UpdateFloorText();
             UpdateGameProgressBar();
-            UpdateObjectiveText(0);
+            UpdateObjectiveText();
             UpdateTimerText(gameManager.gameTime, gameManager.floorManager.floorTime);
             UpdateTurnsText();
         }

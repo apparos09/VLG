@@ -17,6 +17,9 @@ namespace VLG
         [Tooltip("If true, the goal's unlock condition is checked every frame.")]
         public bool autoCheckGoalCondition = true;
 
+        // Allows post start to be called.
+        private bool calledPostStart = false;
+
         // Start is called just before any of the Update methods are called for the first time.
         protected override void Start()
         {
@@ -36,6 +39,32 @@ namespace VLG
                 // The goal is unlocked.
                 PlayGoalUnlockAnimation();
             }
+        }
+
+        // Called on the first update frame.
+        private void PostStart()
+        {
+            // Saves the old locked value.
+            bool oldLocked = goal.locked;
+            
+            // Sets locked value.
+            goal.SetLocked(!goal.ConditionMet());
+
+            // If the locked value has changed, play the appropriate animation.
+            if(oldLocked != goal.IsLocked())
+            {
+                // Lock/Unlock
+                if (goal.IsLocked())
+                    PlayGoalLockAnimation();
+                else
+                    PlayGoalUnlockAnimation();
+            }
+
+            // Updates the objective text with the goal's objective tpye.
+            gameManager.gameUI.UpdateObjectiveText();
+
+            // Post Start Called
+            calledPostStart = true;
         }
 
         // Is the goal locked?
@@ -112,17 +141,27 @@ namespace VLG
         {
             base.ResetEntity();
 
-            // Lock the goal on reset if it has unlock conditions.
-            if (goal.HasConditions())
-                PlayGoalLockAnimation();
-            else
-                PlayGoalUnlockAnimation();
+            // Call PostStart again so that the goal animation replays.
+            calledPostStart = false;
+
+            PlayGoalLockAnimation();
+
+            // // Lock the goal on reset if it has unlock conditions.
+            // if (goal.ConditionMet())
+            //     PlayGoalUnlockAnimation();
+            // else
+            //     PlayGoalLockAnimation();
         }
 
 
         // Update is called once per frame
         protected override void Update()
         {
+            // Post Start hasn't been called yet, so call it.
+            if (!calledPostStart)
+                PostStart();
+
+            // Base Update
             base.Update();
 
             // TODO: this doesn't need to be checked every frame.
@@ -141,8 +180,7 @@ namespace VLG
                         // If the condition is met, unlock the goal.
                         if (goal.ConditionMet())
                         {
-                            goal.Unlock();
-                            PlayGoalUnlockAnimation();
+                            UnlockGoal();
                         }
 
                     }

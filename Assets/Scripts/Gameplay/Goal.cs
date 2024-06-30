@@ -60,7 +60,7 @@ namespace VLG
         // Unlocks the goal.
         public void Unlock()
         {
-            SetLocked(true);
+            SetLocked(false);
         }
 
         // Toggles the locked setting for the goal.

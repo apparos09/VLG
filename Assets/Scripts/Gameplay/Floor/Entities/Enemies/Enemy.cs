@@ -31,7 +31,12 @@ namespace VLG
         // The list of all enemies.
         private static List<Enemy> enemies = new List<Enemy>();
 
+        [Header("Enemy/Animation")]
+        // The animation for the model specifically.
+        public Animator modelAnimator;
 
+        // The idle animation for the enemy.
+        public string idleAnim = "";
 
         // Awake is called when the script instance is being loaded
         protected override void Awake()
@@ -57,6 +62,11 @@ namespace VLG
             {
                 rigidbody = GetComponent<Rigidbody>();
             }
+
+            // Animation
+            // Plays the model's idle animation.
+            if (modelAnimator != null)
+                modelAnimator.Play(idleAnim);
 
             // Add to the enemy list.
             if (!enemies.Contains(this))
