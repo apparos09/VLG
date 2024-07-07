@@ -218,6 +218,7 @@ MonoBehaviour:
   facePlayer: 0
   modelAnimator: {fileID: 5567234376360003372}
   idleAnim: Dramini FRE_Armature|Dramini_FRE_Idle
+  attackAnim: Dramini FRE_Armature|Dramini_FRE_Attack
   barSegmentPrefab: {fileID: 514627736884859508, guid: 24308c0daff75ad4ca0e9fccacafcb54, type: 3}
   barCount: 1
   segmentCount: 1

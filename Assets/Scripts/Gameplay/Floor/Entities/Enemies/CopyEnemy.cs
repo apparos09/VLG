@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace VLG
@@ -22,11 +23,17 @@ namespace VLG
         [Tooltip("Goes in the opposite direction on the y-axis from the player")]
         public bool reverseY = false;
 
-        // TODO: implement animation.
-        // [Header("CopyEnemy/Animation")]
-        // 
-        // // The attack animation for the enemy.
-        // public string attackAnim = "";
+        [Header("CopyEnemy/Animation")]
+
+        // The animation names.
+        public List<string> modelAnimNames = new List<string>();
+
+        // The animation clips.
+        public List<AnimationClip> modelAnimClips = new List<AnimationClip>();
+
+        // If set to true, all animations are copied.
+        // Since not all animations are copied, the sword is disabled since animations related to it are not used.
+        private bool copyAllAnims = false;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -84,6 +91,52 @@ namespace VLG
             // ...
         }
 
+        // Called to copy the player's current animation.
+        protected void CopyPlayerAnimation()
+        {
+            // The model animator is set.
+            if(modelAnimator != null)
+            {
+                // If there are animator clips to use.
+                if(player.modelAnimator.GetCurrentAnimatorClipInfo(0).Length != 0 &&
+                    modelAnimator.GetCurrentAnimatorClipInfo(0).Length != 0)
+                {
+                    // Gets the current animation clip for the player and the copy enemy's model.
+                    AnimationClip currPlayerClip = player.modelAnimator.GetCurrentAnimatorClipInfo(0)[0].clip;
+                    AnimationClip currCopyClip = modelAnimator.GetCurrentAnimatorClipInfo(0)[0].clip;
+
+                    // If the copy entity is not on the current animation.
+                    if (currCopyClip != currPlayerClip)
+                    {
+                        // Gets the index of the player clip in the model animation clip list.
+                        int index = modelAnimClips.IndexOf(currPlayerClip);
+
+                        // Proper index found.
+                        if (index != -1 && index >= 0 && index < modelAnimNames.Count)
+                        {
+                            // Gets the animation name.
+                            string animName = modelAnimNames[index];
+
+                            // Checks if all animations should be copied.
+                            if (copyAllAnims)
+                            {
+                                // Play the animation.
+                                modelAnimator.Play(animName);
+                            }
+                            else // Don't copy all animations.
+                            {
+                                // The attack animation shouldn't be copied.
+                                if (animName != attackAnim)
+                                    modelAnimator.Play(animName);
+                            }
+
+                        }
+                    }
+                }
+                
+            }
+        }
+
         // Resets the asset.
         public override void ResetEntity()
         {
@@ -97,6 +150,12 @@ namespace VLG
         protected override void Update()
         {
             base.Update();
+
+            // Tries to copy the player's animation.
+            if (!gameManager.paused && Time.timeScale > 0.0f)
+            {
+                CopyPlayerAnimation();
+            }
         }
 
         // Remove from the copy enemies list.

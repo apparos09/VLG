@@ -29,6 +29,9 @@ namespace VLG
         // The skybox ID.
         public int skyboxId;
 
+        // The BGM ID.
+        public int bgmId;
+
     }
 
     // The floor data.
@@ -754,7 +757,7 @@ namespace VLG
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "02A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "02B", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.enemies = enemies;
@@ -777,6 +780,9 @@ namespace VLG
 
             // Skybox
             floor.skyboxId = 0;
+
+            // BGM
+            floor.bgmId = 0;
 
             return floor;
         }
@@ -837,6 +843,9 @@ namespace VLG
 
             // Skybox
             floor.skyboxId = 0;
+
+            // BGM
+            floor.bgmId = 0;
 
             return floor;
         }    

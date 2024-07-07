@@ -38,6 +38,9 @@ namespace VLG
         // The idle animation for the enemy.
         public string idleAnim = "";
 
+        // The attack animation for the enemy (unused).
+        public string attackAnim = "";
+
         // Awake is called when the script instance is being loaded
         protected override void Awake()
         {

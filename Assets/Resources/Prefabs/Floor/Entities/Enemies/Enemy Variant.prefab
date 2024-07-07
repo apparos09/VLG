@@ -228,6 +228,7 @@ MonoBehaviour:
   facePlayer: 1
   modelAnimator: {fileID: 6078250758576649214}
   idleAnim: Dramini NML Armature|Dramini_NML_Idle
+  attackAnim: Dramini NML Armature|Dramini_NML_Attack
 --- !u!65 &8211207544824366416 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
