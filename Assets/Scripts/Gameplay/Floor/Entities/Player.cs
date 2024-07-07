@@ -28,6 +28,9 @@ namespace VLG
         // The player's animations.
         public enum plyrAnims { none, idle, jumpRise, jumpFall, jumpLand, attack }
 
+        // The empty animation.
+        public string emptyAnim = "Empty State";
+
         // The idle animation for the enemy.
         public string idleAnim = "";
 
@@ -255,7 +258,7 @@ namespace VLG
             {
                 case 0:
                 default: // Empty/None
-                    modelAnimator.Play("Empty State");
+                    modelAnimator.Play(emptyAnim);
                     break;
 
                 case plyrAnims.idle: // Idle
