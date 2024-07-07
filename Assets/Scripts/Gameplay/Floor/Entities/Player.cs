@@ -29,7 +29,7 @@ namespace VLG
         public Animator modelAnimator;
 
         // The player's animations.
-        public enum plyrAnims { none, idle, jumpRise, jumpFall, jumpLand, attack }
+        public enum plyrAnims { none, reset, idle, jumpRise, jumpFall, jumpLand, attack }
 
         // The empty animation.
         public string emptyAnim = "Empty State";
@@ -40,7 +40,10 @@ namespace VLG
 
         [Header("Player/Animation/Model")]
 
-        // The idle animation for the enemy.
+        // The reset animation for the player.
+        public string resetAnim = "";
+
+        // The idle animation for the player.
         public string idleAnim = "";
 
         // The animation for the rise of the jump.
@@ -56,7 +59,7 @@ namespace VLG
         // 0 = none, 1 = rise, 2 = fall, 3 = landing
         private int jumpAnimStage = 0;
 
-        // The attack animation for the enemy.
+        // The attack animation for the player.
         [Tooltip("The attack animation for the model animator (the one imported into Unity).")]
         public string attackModelAnim = "";
 
@@ -215,7 +218,7 @@ namespace VLG
         public override void OnMoveEnded(Vector3 localStart, Vector3 localEnd, float t)
         {
             base.OnMoveEnded(localStart, localEnd, t);
-            PlayAnimation(plyrAnims.idle);
+            PlayIdleAnimation();
             jumpAnimStage = 0; // Reset to no stage.
         }
 
@@ -250,15 +253,15 @@ namespace VLG
         // Called when the player's attack is started.
         public void OnAttackStarted()
         {
-            attacking = true;
             PlayAnimation(plyrAnims.attack);
+            attacking = true;
         }
 
         // Called when the player's attack is ended.
         public void OnAttackEnded()
         {
+            PlayIdleAnimation();
             attacking = false;
-            PlayAnimation(plyrAnims.idle);
         }
 
         // Gives the player the provided item.
@@ -297,6 +300,12 @@ namespace VLG
         // The animation to be played.
         public void PlayAnimation(plyrAnims anim)
         {
+            // Resets the attacking variable in case the attack animation isn't finished.
+            attacking = false;
+
+            // Resets the model animation to the reset position.
+            modelAnimator.Play(resetAnim);
+
             switch (anim)
             {
                 case 0:
@@ -304,9 +313,13 @@ namespace VLG
                     modelAnimator.Play(emptyAnim);
                     break;
 
+                case plyrAnims.reset: // Reset
+                    modelAnimator.Play(resetAnim);
+                    break;
+
                 case plyrAnims.idle: // Idle
                     modelAnimator.Play(idleAnim);
-                    // animator.Play(swordDisableAnim);
+                    animator.Play(swordDisableAnim);
                     break;
 
                 case plyrAnims.jumpRise: // Jump Rise
@@ -324,9 +337,9 @@ namespace VLG
                     animator.Play(swordDisableAnim);
                     break;
 
-                case plyrAnims.attack: // Jump Attack
-                    modelAnimator.Play(attackModelAnim);
-                    animator.Play(swordEnableAnim);
+                case plyrAnims.attack: // Attack
+                    modelAnimator.Play(attackModelAnim); // Model Animation
+                    animator.Play(attackMainAnim); // Main Animation
                     break;
 
             }

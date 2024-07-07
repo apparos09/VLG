@@ -40,19 +40,22 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1436143859114176634}
-    m_Position: {x: -120, y: 330, z: 0}
+    m_Position: {x: -120, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6972852090902622663}
-    m_Position: {x: 120, y: 330, z: 0}
+    m_Position: {x: 120, y: 390, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1198807662510302030}
-    m_Position: {x: 120, y: 400, z: 0}
+    m_Position: {x: 120, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1719926079133368765}
-    m_Position: {x: 350, y: 400, z: 0}
+    m_Position: {x: 350, y: 460, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8111290778779390994}
-    m_Position: {x: -140, y: 400, z: 0}
+    m_Position: {x: -140, y: 460, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 3449547602699505338}
+    m_Position: {x: 10, y: 320, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -158,6 +161,32 @@ AnimatorState:
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
   m_Motion: {fileID: 6596306384861743476, guid: 4c96323dbc3e11341bc69ca5ff1157c7, type: 3}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1102 &3449547602699505338
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Knight_Armature|Knight_Reset
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: -7023421620967906558, guid: 4c96323dbc3e11341bc69ca5ff1157c7, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
