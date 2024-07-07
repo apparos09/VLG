@@ -21,6 +21,9 @@ namespace VLG
         // Gets se to 'true' when attacking, false when not attacking.
         private bool attacking = false;
 
+        // If 'true', the player uses the attack animation.
+        private bool useAttackAnim = true;
+
         [Header("Player/Animation")]
         // The animation for the model specifically.
         public Animator modelAnimator;
@@ -30,6 +33,12 @@ namespace VLG
 
         // The empty animation.
         public string emptyAnim = "Empty State";
+
+        // The attack animation for main animator.
+        [Tooltip("The attack animation for the main animator (the one saved to the parent object).")]
+        public string attackMainAnim = "";
+
+        [Header("Player/Animation/Model")]
 
         // The idle animation for the enemy.
         public string idleAnim = "";
@@ -44,7 +53,8 @@ namespace VLG
         public string jumpLandingAnim = "";
 
         // The attack animation for the enemy.
-        public string attackAnim = "";
+        [Tooltip("The attack animation for the model animator (the one imported into Unity).")]
+        public string attackModelAnim = "";
 
         [Header("Player/Animation/Sword")]
         // The animation for turning the sword object on.
@@ -151,7 +161,18 @@ namespace VLG
                     // If the player should attack.
                     if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        Attack();
+                        // If the attack animation should be used, call OnAttackStarted.
+                        // If the attack animation won't be used, just call the attack function.
+                        if (useAttackAnim)
+                        {
+                            // Plays the main attack animation.
+                            animator.Play(attackMainAnim);
+                        }
+                        else
+                        {
+                            Attack();
+                        }
+                            
                     }
                 }
             }
@@ -263,7 +284,7 @@ namespace VLG
 
                 case plyrAnims.idle: // Idle
                     modelAnimator.Play(idleAnim);
-                    animator.Play(swordDisableAnim);
+                    // animator.Play(swordDisableAnim);
                     break;
 
                 case plyrAnims.jumpRise: // Jump Rise
@@ -282,7 +303,7 @@ namespace VLG
                     break;
 
                 case plyrAnims.attack: // Jump Attack
-                    modelAnimator.Play(attackAnim);
+                    modelAnimator.Play(attackModelAnim);
                     animator.Play(swordEnableAnim);
                     break;
 
