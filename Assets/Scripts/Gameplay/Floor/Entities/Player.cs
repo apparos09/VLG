@@ -292,6 +292,11 @@ namespace VLG
         {
             // Resets the rotation.
             transform.rotation = Quaternion.identity;
+
+            // Resets the animation.
+            PlayIdleAnimation();
+
+            // Resets the entity.
             base.ResetEntity();
         }
 

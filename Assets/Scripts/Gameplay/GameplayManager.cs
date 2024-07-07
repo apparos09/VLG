@@ -19,6 +19,9 @@ namespace VLG
         // The gameplay UI.
         public GameplayUI gameUI;
 
+        // The gameplay audio.
+        public GameplayAudio gameAudio;
+
         // The player for the game.
         public Player player;
 

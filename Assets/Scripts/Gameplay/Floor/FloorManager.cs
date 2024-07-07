@@ -245,6 +245,9 @@ namespace VLG
             // Sets the Skybox
             floorData.SetSkybox(floor);
 
+            // Sets the BGM
+            gameManager.gameAudio.PlayGameplayBgm(floor);
+
             // Update the floor text and game progress bar.
             gameManager.gameUI.UpdateAllHUDElements();
         }

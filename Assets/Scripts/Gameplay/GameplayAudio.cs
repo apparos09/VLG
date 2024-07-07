@@ -101,9 +101,18 @@ namespace VLG
         }
 
         // Plays the Gameplay BGM
-        public void PlayGameplayBgm()
+        public void PlayGameplayBgm(int bgmId)
         {
+            // TODO: implement BGM ID number.
+
             PlayBackgroundMusic(gameplayBgm, gameplayClipStart, gameplayClipEnd);
+        }
+
+        // Plays the Gameplay BGM
+        public void PlayGameplayBgm(Floor floor)
+        {
+            // Provides the ID
+            PlayGameplayBgm(floor.bgmId);
         }
 
         // This function is called when the MonoBehaviour will be destroyed.
