@@ -51,6 +51,10 @@ namespace VLG
 
         // The animation for the landing of the jump.
         public string jumpLandingAnim = "";
+        
+        // The stage of the jump animation.
+        // 0 = none, 1 = rise, 2 = fall, 3 = landing
+        private int jumpAnimStage = 0;
 
         // The attack animation for the enemy.
         [Tooltip("The attack animation for the model animator (the one imported into Unity).")]
@@ -189,12 +193,30 @@ namespace VLG
         public override void OnMoveStarted(Vector3 localStart, Vector3 localEnd, float t)
         {
             base.OnMoveStarted(localStart, localEnd, t);
+            PlayAnimation(plyrAnims.jumpRise);
+            jumpAnimStage = 1;
+        }
+
+        // Called when a movement is ongoing.
+        public override void OnMoveOngoing(Vector3 localStart, Vector3 localEnd, float t)
+        {
+            base.OnMoveOngoing(localStart, localEnd, t);
+
+            // If at the peak of the movement, play the fall animation.
+            if(t >= 0.5F && jumpAnimStage == 1)
+            {
+                PlayAnimation(plyrAnims.jumpFall);
+                jumpAnimStage = 2;
+            }
+            
         }
 
         // Called when a movement is ending.
         public override void OnMoveEnded(Vector3 localStart, Vector3 localEnd, float t)
         {
             base.OnMoveEnded(localStart, localEnd, t);
+            PlayAnimation(plyrAnims.idle);
+            jumpAnimStage = 0; // Reset to no stage.
         }
 
         // Call function to attack enemy.
