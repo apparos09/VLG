@@ -22,6 +22,12 @@ namespace VLG
         [Tooltip("Goes in the opposite direction on the y-axis from the player")]
         public bool reverseY = false;
 
+        // TODO: implement animation.
+        // [Header("CopyEnemy/Animation")]
+        // 
+        // // The attack animation for the enemy.
+        // public string attackAnim = "";
+
         // Start is called before the first frame update
         protected override void Start()
         {

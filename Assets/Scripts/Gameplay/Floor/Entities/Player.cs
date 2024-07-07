@@ -21,6 +21,35 @@ namespace VLG
         // Gets se to 'true' when attacking, false when not attacking.
         private bool attacking = false;
 
+        [Header("Player/Animation")]
+        // The animation for the model specifically.
+        public Animator modelAnimator;
+
+        // The player's animations.
+        public enum plyrAnims { none, idle, jumpRise, jumpFall, jumpLand, attack }
+
+        // The idle animation for the enemy.
+        public string idleAnim = "";
+
+        // The animation for the rise of the jump.
+        public string jumpRiseAnim = "";
+
+        // The animation for the fall of the jump.
+        public string jumpFallAnim = "";
+
+        // The animation for the landing of the jump.
+        public string jumpLandingAnim = "";
+
+        // The attack animation for the enemy.
+        public string attackAnim = "";
+
+        [Header("Player/Animation/Sword")]
+        // The animation for turning the sword object on.
+        public string swordEnableAnim = "";
+
+        // The animation for turning the sword off.
+        public string swordDisableAnim = "";
+
         // Start is called before the first frame update
         override protected void Start()
         {
@@ -46,6 +75,8 @@ namespace VLG
                 rigidbody = GetComponent<Rigidbody>();
             }
 
+            // Plays the idle animation.
+            PlayIdleAnimation();
         }
 
         // Updates the player movements.
@@ -174,12 +205,14 @@ namespace VLG
         public void OnAttackStarted()
         {
             attacking = true;
+            PlayAnimation(plyrAnims.attack);
         }
 
         // Called when the player's attack is ended.
         public void OnAttackEnded()
         {
             attacking = false;
+            PlayAnimation(plyrAnims.idle);
         }
 
         // Gives the player the provided item.
@@ -194,7 +227,7 @@ namespace VLG
         {
             // ...
         }
-
+        
         // Kills the player.
         public override void KillEntity()
         {
@@ -212,6 +245,57 @@ namespace VLG
             transform.rotation = Quaternion.identity;
 
             base.ResetEntity();
+        }
+
+        // ANIMATION
+        // The animation to be played.
+        public void PlayAnimation(plyrAnims anim)
+        {
+            switch (anim)
+            {
+                case 0:
+                default: // Empty/None
+                    modelAnimator.Play("Empty State");
+                    break;
+
+                case plyrAnims.idle: // Idle
+                    modelAnimator.Play(idleAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.jumpRise: // Jump Rise
+                    modelAnimator.Play(jumpRiseAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.jumpFall: // Jump Fall
+                    modelAnimator.Play(jumpFallAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.jumpLand: // Jump Landing
+                    modelAnimator.Play(jumpLandingAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.attack: // Jump Attack
+                    modelAnimator.Play(attackAnim);
+                    animator.Play(swordEnableAnim);
+                    break;
+
+            }
+        }
+
+        // Plays the idle animation.
+        public void PlayIdleAnimation()
+        {
+            PlayAnimation(plyrAnims.idle);
+        }
+
+        // Plays the attack animation.
+        public void PlayAttackAnimation()
+        {
+            PlayAnimation(plyrAnims.attack);
         }
 
         // Update is called once per frame
