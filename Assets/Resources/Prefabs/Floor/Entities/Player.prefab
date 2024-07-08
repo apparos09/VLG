@@ -131,7 +131,8 @@ MonoBehaviour:
   animator: {fileID: 6325870439102641563}
   collider: {fileID: 4885720312683704552}
   rigidbody: {fileID: 4788282775311535427}
-  allowInput: 1
+  enabledInput: 1
+  enabledAttack: 1
   modelAnimator: {fileID: 1149567869924096470}
   emptyAnim: Empty State
   attackMainAnim: Knight Attack
@@ -169,15 +170,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8018350679046748946, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9251476
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8018350679046748946, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8018350679046748946, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.3796074
       objectReference: {fileID: 0}
     - target: {fileID: 8018350679046748946, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_LocalRotation.z
