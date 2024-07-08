@@ -149,6 +149,7 @@ namespace VLG
         // Items (I-Group)
         [Header("Items")]
         public Item i01A;
+        public Item i02A;
 
         // Skyboxes
         [Header("Skyboxes")]
@@ -635,6 +636,19 @@ namespace VLG
                     }
 
                     break;
+
+                case 2:
+                    // Type
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
+                        default:
+                            itmEntity = Instantiate(i02A);
+                            break;
+                    }
+
+                    break;
             }
 
             // Sets the values
@@ -766,7 +780,7 @@ namespace VLG
             // Items
             string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "02A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "01A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},

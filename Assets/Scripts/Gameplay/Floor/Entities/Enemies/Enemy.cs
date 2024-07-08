@@ -15,7 +15,6 @@ namespace VLG
         // The rigidbody for the player.
         public new Rigidbody rigidbody;
 
-
         // If 'true', the level geometry is ignored for enemy movement.
         [Tooltip("If true, the enemy ignores the floor geometry for movement.")]
         public bool ignoreGeometry = false;
@@ -37,6 +36,9 @@ namespace VLG
 
         // The idle animation for the enemy.
         public string idleAnim = "";
+
+        // If true, the idle animation is played in Start().
+        public bool playIdleOnStart = true;
 
         // The attack animation for the enemy (unused).
         public string attackAnim = "";
@@ -68,7 +70,7 @@ namespace VLG
 
             // Animation
             // Plays the model's idle animation.
-            if (modelAnimator != null)
+            if (modelAnimator != null && playIdleOnStart)
                 modelAnimator.Play(idleAnim);
 
             // Add to the enemy list.

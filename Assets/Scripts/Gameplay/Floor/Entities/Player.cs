@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -16,7 +17,10 @@ namespace VLG
         public new Rigidbody rigidbody;
 
         // Enables input from the player.
-        public bool allowInput = true;
+        public bool enabledInput = true;
+
+        // If 'true', the player is able to attack.
+        public bool enabledAttack = true;
 
         // Gets se to 'true' when attacking, false when not attacking.
         private bool attacking = false;
@@ -54,7 +58,7 @@ namespace VLG
 
         // The animation for the landing of the jump.
         public string jumpLandingAnim = "";
-        
+
         // The stage of the jump animation.
         // 0 = none, 1 = rise, 2 = fall, 3 = landing
         private int jumpAnimStage = 0;
@@ -84,13 +88,13 @@ namespace VLG
 
 
             // If the collider is not set.
-            if(collider == null)
+            if (collider == null)
             {
                 collider = GetComponent<BoxCollider>();
             }
 
             // If the rigidbody is not set.
-            if(rigidbody == null)
+            if (rigidbody == null)
             {
                 rigidbody = GetComponent<Rigidbody>();
             }
@@ -99,11 +103,197 @@ namespace VLG
             PlayIdleAnimation();
         }
 
+
+
+        // Called when a movement has been started.
+        public override void OnMoveStarted(Vector3 localStart, Vector3 localEnd, float t)
+        {
+            base.OnMoveStarted(localStart, localEnd, t);
+            PlayAnimation(plyrAnims.jumpRise);
+            jumpAnimStage = 1;
+        }
+
+        // Called when a movement is ongoing.
+        public override void OnMoveOngoing(Vector3 localStart, Vector3 localEnd, float t)
+        {
+            base.OnMoveOngoing(localStart, localEnd, t);
+
+            // If at the peak of the movement, play the fall animation.
+            if (t >= 0.5F && jumpAnimStage == 1)
+            {
+                PlayAnimation(plyrAnims.jumpFall);
+                jumpAnimStage = 2;
+            }
+
+        }
+
+        // Called when a movement is ending.
+        public override void OnMoveEnded(Vector3 localStart, Vector3 localEnd, float t)
+        {
+            base.OnMoveEnded(localStart, localEnd, t);
+            PlayIdleAnimation();
+            jumpAnimStage = 0; // Reset to no stage.
+        }
+
+        // Call function to attack enemy.
+        public void Attack()
+        {
+            // TODO: trigger animation and make function calls.
+            // The attack direction.
+            Vector2Int attackDirec = new Vector2Int(Mathf.RoundToInt(transform.forward.x), Mathf.RoundToInt(transform.forward.z));
+
+            // The attack position on the floor.
+            Vector2Int attackFloorPos = floorPos + attackDirec;
+
+            // Validity check.
+            if (floorManager.IsFloorPositionValid(attackFloorPos))
+            {
+                // Gets the enemy.
+                Enemy enemy = floorManager.floorEnemies[attackFloorPos.x, attackFloorPos.y];
+
+                // There's an enemy at this index.
+                if (enemy != null)
+                {
+                    // The enemy has been hit by the player.
+                    enemy.OnPlayerAttackHit(this);
+                }
+            }
+
+            // The player used an attack.
+            floorManager.OnPlayerAttackInput(this, attackDirec, attackFloorPos);
+        }
+
+        // Called when the player's attack is started.
+        public void OnAttackStarted()
+        {
+            PlayAnimation(plyrAnims.attack);
+            attacking = true;
+        }
+
+        // Called when the player's attack is ended.
+        public void OnAttackEnded()
+        {
+            PlayIdleAnimation();
+            attacking = false;
+        }
+
+        // Gives the player the provided item.
+        public void GiveItem(Item item)
+        {
+            // Checks the item type.
+            switch(item.item)
+            {
+                case Item.itemType.none:
+                    Debug.LogWarning("Unknown item collected.");
+                    break;
+
+                case Item.itemType.key:
+                    // No behaviour
+                    break;
+
+                case Item.itemType.weapon: // Weapon
+                    // Got the weapon, so now they can attack.
+                    enabledAttack = true;
+                    break;
+            }
+
+            // The item has been given.
+            item.OnItemGiven(this);
+        }
+
+
+        // Called when an element interact with this block, which is usually the player.
+        public override void OnEntityInteract(FloorEntity entity)
+        {
+            // ...
+        }
+
+        // Kills the player.
+        public override void KillEntity()
+        {
+            // If the player dies, the floor has been failed.
+            floorManager.OnFloorFailed();
+
+            // Resets the player.
+            // ResetEntity();
+        }
+
+        // Resets the asset.
+        public override void ResetEntity()
+        {
+            // Resets the rotation.
+            transform.rotation = Quaternion.identity;
+
+            // Resets the animation.
+            PlayIdleAnimation();
+
+            // Resets the entity.
+            base.ResetEntity();
+        }
+
+        // ANIMATION
+        // The animation to be played.
+        public void PlayAnimation(plyrAnims anim)
+        {
+            // Resets the attacking variable in case the attack animation isn't finished.
+            attacking = false;
+
+            switch (anim)
+            {
+                case 0:
+                default: // Empty/None
+                    modelAnimator.Play(emptyAnim);
+                    break;
+
+                case plyrAnims.reset: // Reset
+                    modelAnimator.Play(resetAnim);
+                    break;
+
+                case plyrAnims.idle: // Idle
+                    modelAnimator.Play(idleAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.jumpRise: // Jump Rise
+                    modelAnimator.Play(jumpRiseAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.jumpFall: // Jump Fall
+                    modelAnimator.Play(jumpFallAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.jumpLand: // Jump Landing
+                    modelAnimator.Play(jumpLandingAnim);
+                    animator.Play(swordDisableAnim);
+                    break;
+
+                case plyrAnims.attack: // Attack
+                    modelAnimator.Play(attackModelAnim); // Model Animation
+                    animator.Play(attackMainAnim); // Main Animation
+                    break;
+
+            }
+        }
+
+        // Plays the idle animation.
+        public void PlayIdleAnimation()
+        {
+            PlayAnimation(plyrAnims.idle);
+        }
+
+        // Plays the attack animation.
+        public void PlayAttackAnimation()
+        {
+            PlayAnimation(plyrAnims.attack);
+        }
+
         // Updates the player movements.
         public void UpdateInput()
         {
             // If the player isn't in the process of moving, they can select their next move.
-            if(!Moving)
+            if (!Moving)
             {
                 // The move direction.
                 Vector2Int moveDirec = Vector2Int.zero;
@@ -163,10 +353,10 @@ namespace VLG
 
 
                 // Attack
-                if(!attacking)
+                if (!attacking)
                 {
-                    // If the player should attack.
-                    if (Input.GetKeyDown(KeyCode.Space))
+                    // If the player should attack, and is able to attack.
+                    if (Input.GetKeyDown(KeyCode.Space) && enabledAttack)
                     {
                         // If the attack animation should be used, call OnAttackStarted.
                         // If the attack animation won't be used, just call the attack function.
@@ -179,187 +369,19 @@ namespace VLG
                         {
                             Attack();
                         }
-                            
+
                     }
                 }
             }
-            
+
 
             // Reset Floor
-            if(Input.GetKeyDown(KeyCode.R))
+            if (Input.GetKeyDown(KeyCode.R))
             {
                 gameManager.floorManager.ResetFloor();
             }
         }
 
-        // Called when a movement has been started.
-        public override void OnMoveStarted(Vector3 localStart, Vector3 localEnd, float t)
-        {
-            base.OnMoveStarted(localStart, localEnd, t);
-            PlayAnimation(plyrAnims.jumpRise);
-            jumpAnimStage = 1;
-        }
-
-        // Called when a movement is ongoing.
-        public override void OnMoveOngoing(Vector3 localStart, Vector3 localEnd, float t)
-        {
-            base.OnMoveOngoing(localStart, localEnd, t);
-
-            // If at the peak of the movement, play the fall animation.
-            if(t >= 0.5F && jumpAnimStage == 1)
-            {
-                PlayAnimation(plyrAnims.jumpFall);
-                jumpAnimStage = 2;
-            }
-            
-        }
-
-        // Called when a movement is ending.
-        public override void OnMoveEnded(Vector3 localStart, Vector3 localEnd, float t)
-        {
-            base.OnMoveEnded(localStart, localEnd, t);
-            PlayIdleAnimation();
-            jumpAnimStage = 0; // Reset to no stage.
-        }
-
-        // Call function to attack enemy.
-        public void Attack()
-        {
-            // TODO: trigger animation and make function calls.
-            // The attack direction.
-            Vector2Int attackDirec = new Vector2Int(Mathf.RoundToInt(transform.forward.x), Mathf.RoundToInt(transform.forward.z));
-            
-            // The attack position on the floor.
-            Vector2Int attackFloorPos = floorPos + attackDirec;
-
-            // Validity check.
-            if(floorManager.IsFloorPositionValid(attackFloorPos))
-            {
-                // Gets the enemy.
-                Enemy enemy = floorManager.floorEnemies[attackFloorPos.x, attackFloorPos.y];
-
-                // There's an enemy at this index.
-                if (enemy != null)
-                {
-                    // The enemy has been hit by the player.
-                    enemy.OnPlayerAttackHit(this);
-                }
-            }
-
-            // The player used an attack.
-            floorManager.OnPlayerAttackInput(this, attackDirec, attackFloorPos);
-        }
-
-        // Called when the player's attack is started.
-        public void OnAttackStarted()
-        {
-            PlayAnimation(plyrAnims.attack);
-            attacking = true;
-        }
-
-        // Called when the player's attack is ended.
-        public void OnAttackEnded()
-        {
-            PlayIdleAnimation();
-            attacking = false;
-        }
-
-        // Gives the player the provided item.
-        public void GiveItem(Item item)
-        {
-            item.OnItemGiven(this);
-        }
-
-
-        // Called when an element interact with this block, which is usually the player.
-        public override void OnEntityInteract(FloorEntity entity)
-        {
-            // ...
-        }
-        
-        // Kills the player.
-        public override void KillEntity()
-        {
-            // If the player dies, the floor has been failed.
-            floorManager.OnFloorFailed();
-
-            // Resets the player.
-            // ResetEntity();
-        }
-
-        // Resets the asset.
-        public override void ResetEntity()
-        {
-            // Resets the rotation.
-            transform.rotation = Quaternion.identity;
-
-            // Resets the animation.
-            PlayIdleAnimation();
-
-            // Resets the entity.
-            base.ResetEntity();
-        }
-
-        // ANIMATION
-        // The animation to be played.
-        public void PlayAnimation(plyrAnims anim)
-        {
-            // Resets the attacking variable in case the attack animation isn't finished.
-            attacking = false;
-
-            // Resets the model animation to the reset position.
-            modelAnimator.Play(resetAnim);
-
-            switch (anim)
-            {
-                case 0:
-                default: // Empty/None
-                    modelAnimator.Play(emptyAnim);
-                    break;
-
-                case plyrAnims.reset: // Reset
-                    modelAnimator.Play(resetAnim);
-                    break;
-
-                case plyrAnims.idle: // Idle
-                    modelAnimator.Play(idleAnim);
-                    animator.Play(swordDisableAnim);
-                    break;
-
-                case plyrAnims.jumpRise: // Jump Rise
-                    modelAnimator.Play(jumpRiseAnim);
-                    animator.Play(swordDisableAnim);
-                    break;
-
-                case plyrAnims.jumpFall: // Jump Fall
-                    modelAnimator.Play(jumpFallAnim);
-                    animator.Play(swordDisableAnim);
-                    break;
-
-                case plyrAnims.jumpLand: // Jump Landing
-                    modelAnimator.Play(jumpLandingAnim);
-                    animator.Play(swordDisableAnim);
-                    break;
-
-                case plyrAnims.attack: // Attack
-                    modelAnimator.Play(attackModelAnim); // Model Animation
-                    animator.Play(attackMainAnim); // Main Animation
-                    break;
-
-            }
-        }
-
-        // Plays the idle animation.
-        public void PlayIdleAnimation()
-        {
-            PlayAnimation(plyrAnims.idle);
-        }
-
-        // Plays the attack animation.
-        public void PlayAttackAnimation()
-        {
-            PlayAnimation(plyrAnims.attack);
-        }
 
         // Update is called once per frame
         protected override void Update()
@@ -371,7 +393,7 @@ namespace VLG
                 return;
 
             // Updates the inputs from the player.
-            if (allowInput)
+            if (enabledInput)
                 UpdateInput();
         }
 

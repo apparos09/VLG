@@ -9,6 +9,10 @@ namespace VLG
     public class CopyEnemy : Enemy
     {
         [Header("CopyEnemy")]
+
+        // The copy enemy's weapon model.
+        public GameObject weaponModel;
+
         // The player that's being mimiced.
         public Player player;
 
@@ -47,6 +51,9 @@ namespace VLG
             // Add to the list.
             if(!copyEnemies.Contains(this))
                 copyEnemies.Add(this);
+
+            // Disalbe the weapon model by default since the idle animation is playing.
+            weaponModel.SetActive(false);
         }
 
         // Copies the provided movement.
@@ -117,6 +124,9 @@ namespace VLG
                             // Gets the animation name.
                             string animName = modelAnimNames[index];
 
+                            // Active the wepaon model if the attack model has been selected.
+                            // weaponModel.SetActive(animName == attackAnim ? true : false);
+
                             // Checks if all animations should be copied.
                             if (copyAllAnims)
                             {
@@ -126,8 +136,21 @@ namespace VLG
                             else // Don't copy all animations.
                             {
                                 // The attack animation shouldn't be copied.
-                                if (animName != attackAnim)
+                                // If the player is in the middle of jumping, but the copy enemy isn't...
+                                // Don't use the jump animation
+                                if (animName == attackAnim || (player.Moving && !Moving))
+                                {
+                                    //// Disable the wepaon model.
+                                    //if(weaponModel.activeSelf)
+                                    //    weaponModel.SetActive(false);
+                                }
+                                else
+                                {
+                                    // Play the animation.
                                     modelAnimator.Play(animName);
+                                }
+
+
                             }
 
                         }

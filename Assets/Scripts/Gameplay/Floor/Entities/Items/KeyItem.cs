@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace VLG
@@ -15,24 +16,19 @@ namespace VLG
         {
             base.Start();
 
+            // If the item type is not set, set it to key.
+            if (item == itemType.none)
+                item = itemType.key;
+
             // Add the key to the list.
             if (!keyItems.Contains(this))
                 keyItems.Add(this);
-
-            // Play animation.
-            animator.Play("Key - Idle Animation");
         }
 
         // Gets the total number of key items.
         public static int GetKeyItemCount()
         {
             return keyItems.Count;
-        }
-
-        // Update is called once per frame
-        protected override void Update()
-        {
-            base.Update();
         }
 
         // Remove from the switch block list.

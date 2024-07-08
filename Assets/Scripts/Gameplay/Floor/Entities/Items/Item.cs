@@ -7,6 +7,15 @@ namespace VLG
     // The item class.
     public class Item : FloorEntity
     {
+        // The enum for the itme.
+        public enum itemType { none, key, weapon }
+
+        // The item type for the object.
+        public itemType item = itemType.none;
+
+        // The idle animation for the item.
+        public string idleAnim = "";
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -14,6 +23,9 @@ namespace VLG
 
             // Sets the group.
             group = entityGroup.item;
+
+            // Play idle animation.
+            animator.Play(idleAnim);
         }
 
         // Call this function when the item is given to a player.

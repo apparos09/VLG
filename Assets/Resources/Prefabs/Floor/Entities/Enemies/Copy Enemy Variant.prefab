@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6224832857644393324, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7209479984705413544, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_Name
@@ -53,6 +53,11 @@ Transform:
 --- !u!95 &5683257889279611719 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7629020246203866583, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
+  m_PrefabInstance: {fileID: 2810604119554526864}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8170173002044861948 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6224832857644393324, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
   m_PrefabInstance: {fileID: 2810604119554526864}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7694721019674096018
@@ -186,6 +191,7 @@ MonoBehaviour:
   modelAnimator: {fileID: 5683257889279611719}
   idleAnim: Knight_Armature|Knight_Idle
   attackAnim: Knight_Armature|Knight_Attack
+  weaponModel: {fileID: 8170173002044861948}
   player: {fileID: 0}
   reverseX: 0
   reverseY: 0
