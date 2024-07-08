@@ -235,8 +235,9 @@ namespace VLG
         // The animation to be played.
         public void PlayAnimation(plyrAnims anim)
         {
-            // Resets the attacking variable in case the attack animation isn't finished.
+            // Resets the attacking and jumping variables in case their animations weren't finished.
             attacking = false;
+            jumpAnimStage = 0;
 
             switch (anim)
             {

@@ -71,7 +71,7 @@ namespace VLG
             // Animation
             // Plays the model's idle animation.
             if (modelAnimator != null && playIdleOnStart)
-                modelAnimator.Play(idleAnim);
+                PlayIdleAnimation();
 
             // Add to the enemy list.
             if (!enemies.Contains(this))
@@ -111,6 +111,18 @@ namespace VLG
         public override void KillEntity()
         {
             Destroy(gameObject);
+        }
+
+        // Plays the idle animation.
+        public void PlayIdleAnimation()
+        {
+            modelAnimator.Play(idleAnim);
+        }
+
+        // Plays the attack animation.
+        public void PlayAttackAnimation()
+        {
+            modelAnimator.Play(attackAnim);
         }
 
         // Runs the AI for the enemy.
