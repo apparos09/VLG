@@ -277,6 +277,8 @@ namespace VLG
             }
         }
 
+        // ANIMATION //
+
         // Plays the idle animation.
         public void PlayIdleAnimation()
         {
@@ -287,6 +289,23 @@ namespace VLG
         public void PlayAttackAnimation()
         {
             PlayAnimation(plyrAnims.attack);
+        }
+
+        // Returns 'true' if the jump animation is playing.
+        public bool PlayingJumpAnimation()
+        {
+            // Gets the animation clip and animation name.
+            AnimationClip animClip = modelAnimator.GetCurrentAnimatorClipInfo(0)[0].clip;
+            string animName = animClip.name;
+
+            // Checks if the anim name is equal to any of the jump animation names.
+            bool result =
+                animName == jumpRiseAnim ||
+                animName == jumpFallAnim ||
+                animName == jumpLandingAnim;
+
+            // Returns the result.
+            return result;
         }
 
         // Updates the player movements.

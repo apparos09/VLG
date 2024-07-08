@@ -52,8 +52,9 @@ namespace VLG
             if(!copyEnemies.Contains(this))
                 copyEnemies.Add(this);
 
+            // FIXME: for some reason, this doesn't work. So this is turned off by default.
             // Disalbe the weapon model by default since the idle animation is playing.
-            weaponModel.SetActive(false);
+            // weaponModel.SetActive(false);
         }
 
         // Copies the provided movement.
@@ -124,7 +125,8 @@ namespace VLG
                             // Gets the animation name.
                             string animName = modelAnimNames[index];
 
-                            // Active the wepaon model if the attack model has been selected.
+                            // FIXME: this didn't work for some reason.
+                            // Active the weapon model if the attack model has been selected.
                             // weaponModel.SetActive(animName == attackAnim ? true : false);
 
                             // Checks if all animations should be copied.
@@ -138,9 +140,12 @@ namespace VLG
                                 // The attack animation shouldn't be copied.
                                 // If the player is in the middle of jumping, but the copy enemy isn't...
                                 // Don't use the jump animation
-                                if (animName == attackAnim || (player.Moving && !Moving))
+                                if (animName == attackAnim || (!Moving && player.PlayingJumpAnimation()))
                                 {
-                                    //// Disable the wepaon model.
+                                    // ...
+
+                                    // FIXME: this didn't work for some reason, so right now nothing is done here.
+                                    // Disables the weapon model.
                                     //if(weaponModel.activeSelf)
                                     //    weaponModel.SetActive(false);
                                 }

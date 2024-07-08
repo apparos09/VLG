@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6224832857644393324, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7209479984705413544, guid: 482d64cf9cc73a144b54add3a26a9877, type: 3}
       propertyPath: m_Name
@@ -190,6 +190,7 @@ MonoBehaviour:
   facePlayer: 0
   modelAnimator: {fileID: 5683257889279611719}
   idleAnim: Knight_Armature|Knight_Idle
+  playIdleOnStart: 1
   attackAnim: Knight_Armature|Knight_Attack
   weaponModel: {fileID: 8170173002044861948}
   player: {fileID: 0}
