@@ -175,7 +175,7 @@ namespace VLG
                                 // The attack animation shouldn't be copied.
                                 // If the player is in the middle of jumping, but the copy enemy isn't, don't copy the aniamtion.
                                 // If the copy is jumping and the player isn't, don't copy the animation.
-                                if (animName == attackAnim || (!Moving && player.PlayingJumpAnimation()) || (Moving && !player.Moving))
+                                if ((!Moving && player.PlayingJumpAnimation()) || (Moving && !player.Moving))
                                 {
                                     // ...
 
@@ -184,12 +184,21 @@ namespace VLG
                                     //if(weaponModel.activeSelf)
                                     //    weaponModel.SetActive(false);
                                 }
+                                else if (animName == attackAnim) // If the copy enemy is attacking.
+                                {
+                                    // NOTE: the copy enemy cannot attack, so this has not been included.
+                                    // If this is included, the sword won't appear since the model is disabled.
+                                    // Using the SetActive function doesn't appear to fix this for some reason.
+                                    // If this is implemented, then this would need to be fixed.
+
+                                    // weaponModel.SetActive(true);
+                                    // modelAnimator.Play(animName);
+                                }
                                 else
                                 {
                                     // Play the animation.
                                     modelAnimator.Play(animName);
                                 }
-
 
                             }
 
