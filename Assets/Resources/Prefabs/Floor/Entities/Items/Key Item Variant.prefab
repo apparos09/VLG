@@ -181,3 +181,4 @@ MonoBehaviour:
   jumpFactor: 7
   animator: {fileID: 2365694461049510238}
   item: 1
+  idleAnim: Key - Idle Animation

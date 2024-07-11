@@ -175,7 +175,7 @@ namespace VLG
             base.Update();
 
             // The game is paused, so don't update anything.
-            if (!gameManager.paused)
+            if (!gameManager.IsPaused())
             {
                 RunAI();
             }

@@ -184,7 +184,7 @@ MonoBehaviour:
   floorManager: {fileID: 0}
   idNumber: -1
   version: 65
-  localYPos: 0
+  localYPos: 1
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}
   useMoveInter: 1
@@ -193,3 +193,4 @@ MonoBehaviour:
   jumpFactor: 7
   animator: {fileID: 1167415686155177744}
   item: 2
+  idleAnim: Weapon - Idle Animation

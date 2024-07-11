@@ -44,6 +44,10 @@ namespace VLG
         // The time text for the current floor.
         public TMP_Text floorTimeText;
 
+        [Header("Windows")]
+        // The pause window.
+        public GameObject settingsWindow;
+
         // Constructor
         private GameplayUI()
         {
@@ -212,11 +216,27 @@ namespace VLG
             UpdateTurnsText();
         }
 
+        // Called when the game pause state has changed.
+        public void OnPausedChanged(bool paused)
+        {
+            // Checks if the game is paused or not.
+            if(paused)
+            {
+                // Open the settings window.
+                settingsWindow.SetActive(true);
+            }
+            else
+            {
+                // Close the settings window.
+                settingsWindow.SetActive(false);
+            }
+        }
+
         // Update is called once per frame
         void Update()
         {
             // If the game is not paused.
-            if(!gameManager.paused)
+            if(!gameManager.IsPaused())
             {
                 // TODO: maybe change how often time text is updated so that it doesn't happen every frame.
 

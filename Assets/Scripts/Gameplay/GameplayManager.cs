@@ -43,7 +43,7 @@ namespace VLG
         public int[] floorTurns;
 
         // Determines if the game is paused or not.
-        public bool paused = false;
+        private bool paused = false;
 
         [Header("Other")]
 
@@ -186,6 +186,55 @@ namespace VLG
             floorManager.UpdateTurns();
             gameUI.UpdateTurnsText();
         }
+
+        // PAUSE
+
+        // Returns 'true 'if the game is paused.
+        public bool IsPaused()
+        {
+            return paused;
+        }
+
+        // Sets that the game is paused
+        public void SetPaused(bool pausedGame)
+        {
+            // Sets the value.
+            paused = pausedGame;
+
+            // Checks if the game is paused or unpaused.
+            if(paused)
+            {
+                // Stops time.
+                Time.timeScale = 0.0f;
+            }
+            else
+            {
+                // Resumes normal time.
+                Time.timeScale = 1.0f;
+            }
+
+            // Called to update on the game's paused event.
+            gameUI.OnPausedChanged(paused);
+        }
+
+        // Pauses the game.
+        public void PauseGame()
+        {
+            SetPaused(true);
+        }
+
+        // Unpauses the game.
+        public void UnpauseGame()
+        {
+            SetPaused(false);
+        }
+
+        // Toggles the paused value.
+        public void TogglePaused()
+        {
+            SetPaused(!paused);
+        }
+
 
         // SAVING/LOADING
         public VLG_GameData GenerateSaveData()

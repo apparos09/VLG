@@ -490,7 +490,7 @@ namespace VLG
         protected virtual void Update()
         {
             // The game is paused, so don't update anything.
-            if (gameManager.paused)
+            if (gameManager.IsPaused())
                 return;
 
             // If interpolation should be used.

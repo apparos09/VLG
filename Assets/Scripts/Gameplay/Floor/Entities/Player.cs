@@ -312,94 +312,105 @@ namespace VLG
         // Updates the player movements.
         public void UpdateInput()
         {
-            // If the player isn't in the process of moving, they can select their next move.
-            if (!Moving)
+            // If the game is not paused.
+            if(!gameManager.IsPaused())
             {
-                // The move direction.
-                Vector2Int moveDirec = Vector2Int.zero;
+                // If the player isn't in the process of moving, they can select their next move.
+                if (!Moving)
+                {
+                    // The move direction.
+                    Vector2Int moveDirec = Vector2Int.zero;
 
-                // Changes the direction the player is facing.
-                if (Input.GetKeyDown(KeyCode.UpArrow)) // Face Up
-                {
-                    transform.forward = Vector3.forward;
-                }
-                else if (Input.GetKeyDown(KeyCode.DownArrow)) // Face Down
-                {
-                    transform.forward = Vector3.back;
-                }
-
-                if (Input.GetKeyDown(KeyCode.LeftArrow)) // Face Left
-                {
-                    transform.forward = Vector3.left;
-                }
-                else if (Input.GetKeyDown(KeyCode.RightArrow)) // Face Right
-                {
-                    transform.forward = Vector3.right;
-                }
-
-                // Moves the player in a given direction, and has the player face said direction.
-                if (Input.GetKeyDown(KeyCode.W)) // Move Up
-                {
-                    moveDirec = Vector2Int.up;
-                    transform.forward = Vector3.forward;
-                }
-                else if (Input.GetKeyDown(KeyCode.S)) // Move Down
-                {
-                    moveDirec = Vector2Int.down;
-                    transform.forward = Vector3.back;
-                }
-
-                if (Input.GetKeyDown(KeyCode.A)) // Move Left
-                {
-                    moveDirec = Vector2Int.left;
-                    transform.forward = Vector3.left;
-                }
-                else if (Input.GetKeyDown(KeyCode.D)) // Move Right
-                {
-                    moveDirec = Vector2Int.right;
-                    transform.forward = Vector3.right;
-                }
-
-
-                // There is movement.
-                if (moveDirec != Vector2.zero)
-                {
-                    // Attempt movement.
-                    bool success = floorManager.TryEntityMovement(this, moveDirec);
-
-                    // Call on player movement input.
-                    floorManager.OnPlayerMovementInput(this, moveDirec, success);
-                }
-
-
-                // Attack
-                if (!attacking)
-                {
-                    // If the player should attack, and is able to attack.
-                    if (Input.GetKeyDown(KeyCode.Space) && enabledAttack)
+                    // Changes the direction the player is facing.
+                    if (Input.GetKeyDown(KeyCode.UpArrow)) // Face Up
                     {
-                        // If the attack animation should be used, call OnAttackStarted.
-                        // If the attack animation won't be used, just call the attack function.
-                        if (useAttackAnim)
-                        {
-                            // Plays the main attack animation.
-                            animator.Play(attackMainAnim);
-                        }
-                        else
-                        {
-                            Attack();
-                        }
+                        transform.forward = Vector3.forward;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.DownArrow)) // Face Down
+                    {
+                        transform.forward = Vector3.back;
+                    }
 
+                    if (Input.GetKeyDown(KeyCode.LeftArrow)) // Face Left
+                    {
+                        transform.forward = Vector3.left;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.RightArrow)) // Face Right
+                    {
+                        transform.forward = Vector3.right;
+                    }
+
+                    // Moves the player in a given direction, and has the player face said direction.
+                    if (Input.GetKeyDown(KeyCode.W)) // Move Up
+                    {
+                        moveDirec = Vector2Int.up;
+                        transform.forward = Vector3.forward;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.S)) // Move Down
+                    {
+                        moveDirec = Vector2Int.down;
+                        transform.forward = Vector3.back;
+                    }
+
+                    if (Input.GetKeyDown(KeyCode.A)) // Move Left
+                    {
+                        moveDirec = Vector2Int.left;
+                        transform.forward = Vector3.left;
+                    }
+                    else if (Input.GetKeyDown(KeyCode.D)) // Move Right
+                    {
+                        moveDirec = Vector2Int.right;
+                        transform.forward = Vector3.right;
+                    }
+
+
+                    // There is movement.
+                    if (moveDirec != Vector2.zero)
+                    {
+                        // Attempt movement.
+                        bool success = floorManager.TryEntityMovement(this, moveDirec);
+
+                        // Call on player movement input.
+                        floorManager.OnPlayerMovementInput(this, moveDirec, success);
+                    }
+
+
+                    // Attack
+                    if (!attacking)
+                    {
+                        // If the player should attack, and is able to attack.
+                        if (Input.GetKeyDown(KeyCode.Space) && enabledAttack)
+                        {
+                            // If the attack animation should be used, call OnAttackStarted.
+                            // If the attack animation won't be used, just call the attack function.
+                            if (useAttackAnim)
+                            {
+                                // Plays the main attack animation.
+                                animator.Play(attackMainAnim);
+                            }
+                            else
+                            {
+                                Attack();
+                            }
+
+                        }
                     }
                 }
+
+                // Reset Floor
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    gameManager.floorManager.ResetFloor();
+                }
             }
 
 
-            // Reset Floor
-            if (Input.GetKeyDown(KeyCode.R))
+            // Pause/Unpause
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                gameManager.floorManager.ResetFloor();
+                gameManager.TogglePaused();
             }
+            
         }
 
 
@@ -407,10 +418,6 @@ namespace VLG
         protected override void Update()
         {
             base.Update();
-
-            // The game is paused, so don't update anything.
-            if (gameManager.paused)
-                return;
 
             // Updates the inputs from the player.
             if (enabledInput)

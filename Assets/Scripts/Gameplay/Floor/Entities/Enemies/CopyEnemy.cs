@@ -227,7 +227,7 @@ namespace VLG
             base.Update();
 
             // Tries to copy the player's animation.
-            if (!gameManager.paused && Time.timeScale > 0.0f)
+            if (!gameManager.IsPaused() && Time.timeScale > 0.0f)
             {
                 CopyPlayerAnimation();
             }

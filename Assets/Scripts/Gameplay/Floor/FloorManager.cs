@@ -250,6 +250,9 @@ namespace VLG
 
             // Update the floor text and game progress bar.
             gameManager.gameUI.UpdateAllHUDElements();
+
+            // Resets the player.
+            gameManager.player.ResetEntity();
         }
 
         // Sets the default entity values.
@@ -763,7 +766,7 @@ namespace VLG
         public void UpdateTurns()
         {
             // If the game is paused, don't updatre the turns.
-            if (gameManager.paused)
+            if (gameManager.IsPaused())
                 return;
 
             // Increment the turn count.
@@ -842,7 +845,7 @@ namespace VLG
         void Update()
         {
             // If the game is not paused.
-            if(!gameManager.paused)
+            if(!gameManager.IsPaused())
             {
                 floorTime += Time.deltaTime;
             }
