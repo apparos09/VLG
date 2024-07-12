@@ -21,7 +21,10 @@ namespace VLG
         public GameplayManager gameManager;
 
         // The text that displays the floor.
-        public TMP_Text floorText;
+        public TMP_Text floorNumberText;
+
+        // The floor code text.
+        public TMP_Text floorCodeText;
 
         [Header("Progress")]
 
@@ -46,6 +49,9 @@ namespace VLG
 
         [Header("Windows")]
         // The pause window.
+        public GameObject pauseWindow;
+
+        // The settings window.
         public GameObject settingsWindow;
 
         // Constructor
@@ -125,11 +131,13 @@ namespace VLG
         // Updates the floor text.
         public void UpdateFloorText()
         {
-            // Gets the floor ID.
+            // Gets the floor ID and code.
             int floorId = gameManager.floorManager.currFloor.id;
+            string floorCode = gameManager.floorManager.currFloor.code;
 
             // Sets the floor text.
-            floorText.text = "Floor " + floorId.ToString();
+            floorNumberText.text = "Floor " + floorId.ToString();
+            floorCodeText.text = floorCode;
         }
 
         // Updates the game progress.
@@ -222,13 +230,13 @@ namespace VLG
             // Checks if the game is paused or not.
             if(paused)
             {
-                // Open the settings window.
-                settingsWindow.SetActive(true);
+                // Open the pause window.
+                pauseWindow.SetActive(true);
             }
             else
             {
-                // Close the settings window.
-                settingsWindow.SetActive(false);
+                // Close the pause window.
+                pauseWindow.SetActive(false);
             }
         }
 

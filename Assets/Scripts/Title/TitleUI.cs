@@ -27,6 +27,20 @@ namespace VLG
         // The quit button.
         public Button quitButton;
 
+        [Header("Windows")]
+        
+        // The title window.
+        public GameObject titleWindow;
+
+        // The code window.
+        public GameObject codeWindow;
+
+        // The instructions window.
+        public GameObject instructionsWindow;
+
+        // The settings window.
+        public GameObject settingsWindow;
+
         // Constructor
         private TitleUI()
         {
@@ -112,6 +126,22 @@ namespace VLG
             {
                 return instanced;
             }
+        }
+
+        // Opens the given window.
+        public void OpenWindow(GameObject window)
+        {
+            CloseAllWindows();
+            window.SetActive(true);
+        }
+
+        // Closes all windows.
+        public void CloseAllWindows()
+        {
+            titleWindow.SetActive(false);
+            codeWindow.SetActive(false);
+            instructionsWindow.SetActive(false);
+            settingsWindow.SetActive(false);
         }
 
         // Starts the game.

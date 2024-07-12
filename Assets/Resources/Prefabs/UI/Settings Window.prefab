@@ -219,6 +219,7 @@ GameObject:
   m_Component:
   - component: {fileID: 529393690263269642}
   - component: {fileID: 2027712903221997326}
+  - component: {fileID: 381572256059874111}
   m_Layer: 5
   m_Name: Settings Window
   m_TagString: Untagged
@@ -264,6 +265,23 @@ MonoBehaviour:
   gameSettings: {fileID: 0}
   bgmSlider: {fileID: 8254850590777051690}
   sfxSlider: {fileID: 2460811085276450739}
+--- !u!114 &381572256059874111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667817217365532315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64614b17bafae494791651f3270d0df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  firstSelected: {fileID: 4654040217570901767}
+  lastSelected: {fileID: 0}
+  setToLastOnEnable: 1
+  ignoreDeselectsForLast: 0
 --- !u!1 &6284328816584093596
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +723,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f0744e036caec2c4ea5c445e05711de9, type: 3}
+--- !u!1 &4654040217570901767 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 443078103917536977, guid: f0744e036caec2c4ea5c445e05711de9, type: 3}
+  m_PrefabInstance: {fileID: 5093669977525049814}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8254850590777051690 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3764806133244711932, guid: f0744e036caec2c4ea5c445e05711de9, type: 3}
