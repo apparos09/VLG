@@ -145,6 +145,19 @@ namespace VLG
             // Starts the game using the set ID.
             titleManager.StartGame();
         }
-        
+
+        // Submits the code and starts the game automatically if the code is valid.
+
+        public void SubmitAndStart()
+        {
+            // Submits the code.
+            SubmitCode();
+
+            // If the start button is now interactable, that means the code was valid.
+            // So start the game.
+            if (startButton.interactable)
+                StartGame();
+        }
+
     }
 }
