@@ -18,6 +18,9 @@ namespace VLG
         // The floor data to check the code of.
         public FloorData floorData;
 
+        // If 'true', debug codes are allowed to be submitted.
+        private bool allowDebugCodes = true;
+
         [Header("UI")]
 
         // The password field for the title screen (selects level).
@@ -109,6 +112,8 @@ namespace VLG
         {
             // Checks if the code is valid.
             bool valid = floorData.IsFloorCodeValid(code);
+
+            // TODO: add check to prevent debug codes from being used.
 
             // Checks if the code is valid.
             if (valid)
