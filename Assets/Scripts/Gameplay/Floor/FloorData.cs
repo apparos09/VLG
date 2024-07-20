@@ -156,7 +156,18 @@ namespace VLG
 
         // Skyboxes
         [Header("Skyboxes")]
+        // Debug Skybox
         public Material skyboxMat00;
+
+        // Regular Skyboxes
+        public Material skyboxMat01;
+        public Material skyboxMat02;
+        public Material skyboxMat03;
+        public Material skyboxMat04;
+        public Material skyboxMat05;
+
+        // Boss Skybox
+        public Material skyboxMat06;
 
         // Constructor
         private FloorData()
@@ -668,13 +679,45 @@ namespace VLG
         // Sets the skybox using the provided ID.
         public void SetSkybox(int skyboxId)
         {
+            // The skybox material.
+            Material skyboxMat;
+
+            // Grabs the proper skybox material.
             switch(skyboxId)
             {
                 case 0: // Debug Skybox
                 default:
-                    RenderSettings.skybox = skyboxMat00;
+                    skyboxMat = skyboxMat00;
+                    break;
+
+                case 1:
+                    skyboxMat = skyboxMat01;
+                    break;
+
+                case 2:
+                    skyboxMat = skyboxMat02;
+                    break;
+
+                case 3:
+                    skyboxMat = skyboxMat03;
+                    break;
+
+                case 4:
+                    skyboxMat = skyboxMat04;
+                    break;
+
+                case 5:
+                    skyboxMat = skyboxMat05;
+                    break;
+
+                case 6: // Boss
+                    skyboxMat = skyboxMat06;
                     break;
             }
+
+            // If the skybox isn't already set, set it.
+            if(RenderSettings.skybox != skyboxMat)
+                RenderSettings.skybox = skyboxMat;
         }
 
         // Sets the skybox ID.

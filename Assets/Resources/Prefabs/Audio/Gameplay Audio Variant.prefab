@@ -96,9 +96,28 @@ MonoBehaviour:
   bgmSource: {fileID: 6680603912942889799}
   bgmLooper: {fileID: 2106649519119595514}
   sfxSource: {fileID: 4203624583544196476}
-  gameplayBgm: {fileID: 0}
-  gameplayClipStart: 0
-  gameplayClipEnd: 0
+  restartBgmOnReplay: 0
+  gameplayBgm00: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm00ClipStart: 0
+  gameplayBgm00ClipEnd: 0
+  gameplayBgm01: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm01ClipStart: 0
+  gameplayBgm01ClipEnd: 0
+  gameplayBgm02: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm02ClipStart: 0
+  gameplayBgm02ClipEnd: 0
+  gameplayBgm03: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm03ClipStart: 0
+  gameplayBgm03ClipEnd: 0
+  gameplayBgm04: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm04ClipStart: 0
+  gameplayBgm04ClipEnd: 0
+  gameplayBgm05: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm05ClipStart: 0
+  gameplayBgm05ClipEnd: 0
+  gameplayBgm06: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+  gameplayBgm06ClipStart: 0
+  gameplayBgm06ClipEnd: 0
 --- !u!82 &4203624583544196476 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3862555908014757398, guid: b88962917b9fe164aac8546803e5b655, type: 3}

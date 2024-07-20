@@ -99,7 +99,8 @@ namespace VLG
             // allowSaves = Application.platform != RuntimePlatform.WebGLPlayer;
 
             // Finds the game info object.
-            GameInfo gameInfo = FindObjectOfType<GameInfo>(true);
+            // Ignores disabled GameInfo objects so that debug stages can be tested.
+            GameInfo gameInfo = FindObjectOfType<GameInfo>(false);
 
             // If the game info object couldn't be found...
             if(gameInfo != null)

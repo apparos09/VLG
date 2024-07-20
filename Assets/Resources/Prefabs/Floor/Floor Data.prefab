@@ -81,3 +81,9 @@ MonoBehaviour:
   i01A: {fileID: 5384949875433752124, guid: 11690695d4e70ea40a8412b0b3a985b5, type: 3}
   i02A: {fileID: 2529192907324512616, guid: 2c7cfbc38a881af4db2da064d4a40242, type: 3}
   skyboxMat00: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat01: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat02: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat03: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat04: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat05: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat06: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
