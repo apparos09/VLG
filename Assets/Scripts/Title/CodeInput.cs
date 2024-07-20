@@ -26,7 +26,11 @@ namespace VLG
         // The password field for the title screen (selects level).
         public TMP_InputField codeInputField;
 
+        // If 'true', the input field has a limited length.
+        private bool limitInputLength = true;
+
         // The start button (gets disabled if a code is invalid).
+        // TODO: this button is no longer used, and should be removed.
         public Button startButton;
 
         // Start is called before the first frame update
@@ -88,6 +92,14 @@ namespace VLG
         // Called when the input field has been edited.
         public void OnInputFieldEdited()
         {
+            // If the input length should be limited.
+            if(limitInputLength)
+            {
+                // If the limit on the input field has been reached, remove the additional characters.
+                if (codeInputField.text.Length > FloorData.FLOOR_CODE_CHAR_LIMIT)
+                    codeInputField.text = codeInputField.text.Substring(0, FloorData.FLOOR_CODE_CHAR_LIMIT);
+            }
+
             // Disables the start button until the code is submitted.
             if(startButton.interactable)
                 startButton.interactable = false;
@@ -113,7 +125,13 @@ namespace VLG
             // Checks if the code is valid.
             bool valid = floorData.IsFloorCodeValid(code);
 
-            // TODO: add check to prevent debug codes from being used.
+            // If debug codes should NOT be allowed, check if a debug code was sent.
+            if(!allowDebugCodes)
+            {
+                // If the provided code is the same as the debug code, set valid to false.
+                if (floorData.GetDebugFloorCode() == code)
+                    valid = false;
+            }
 
             // Checks if the code is valid.
             if (valid)

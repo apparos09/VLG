@@ -73,6 +73,9 @@ namespace VLG
         [Tooltip("Autosets ID information for prefabs generated instances.")]
         public bool autoSetIdInfo = true;
 
+        // The character limit for floor codes.
+        public const int FLOOR_CODE_CHAR_LIMIT = 4;
+
         // The floor codes, which are used to skip floors on the title screen.
         // A floor code has 4 digits, but "0" and "O" aren't used because they look similar.
         // TODO: don't allow the player to use "0" or "O".
