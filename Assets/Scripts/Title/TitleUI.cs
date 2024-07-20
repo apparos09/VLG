@@ -32,14 +32,17 @@ namespace VLG
         // The title window.
         public GameObject titleWindow;
 
-        // The code window.
-        public GameObject codeWindow;
-
         // The instructions window.
         public GameObject instructionsWindow;
 
+        // The code window.
+        public GameObject codeWindow;      
+
         // The settings window.
         public GameObject settingsWindow;
+
+        // The liscences window.
+        public GameObject licensesWindow;
 
         // Constructor
         private TitleUI()

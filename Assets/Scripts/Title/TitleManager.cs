@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using util;
 
 namespace VLG
 {
@@ -72,6 +73,7 @@ namespace VLG
 
             // Keep the game info object around for going to the gameplay scene.
             DontDestroyOnLoad(gameInfo);
+
         }
 
         // Gets the instance.
