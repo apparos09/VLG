@@ -135,6 +135,12 @@ namespace VLG
             window.SetActive(true);
         }
 
+        // Closes the given window.
+        public void CloseWindow(GameObject window)
+        {
+            window.SetActive(false);
+        }
+
         // Closes all windows.
         public void CloseAllWindows()
         {
