@@ -148,9 +148,10 @@ namespace VLG
         public void CloseAllWindows()
         {
             titleWindow.SetActive(false);
-            codeWindow.SetActive(false);
             instructionsWindow.SetActive(false);
+            codeWindow.SetActive(false);
             settingsWindow.SetActive(false);
+            licensesWindow.SetActive(false);
         }
 
         // Starts the game.
