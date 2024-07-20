@@ -47,9 +47,6 @@ namespace VLG
 
         [Header("Other")]
 
-        // Gets set to 'true' if the game manager should allow saves.
-        public bool allowSaves = false;
-
         // Gets set to 'true' when the post start function has been called.
         private bool calledPostStart = false;
 
@@ -95,8 +92,8 @@ namespace VLG
             // TODO: comment out when you want to test saving.
 
             // If the game isn't running in WebGL, allow the game to save.
-            allowSaves = false;
-            // allowSaves = Application.platform != RuntimePlatform.WebGLPlayer;
+            SaveSystem.Instance.allowSaveLoad = false;
+            // SaveSystem.Instance.allowSaveLoad = Application.platform != RuntimePlatform.WebGLPlayer;
 
             // Finds the game info object.
             // Ignores disabled GameInfo objects so that debug stages can be tested.
@@ -238,6 +235,27 @@ namespace VLG
 
 
         // SAVING/LOADING
+        
+        // Returns 'true' if data can be saved/loaded.
+        public bool IsSavingLoadingEnabled()
+        {
+            // Check if the save system is instantiated.
+            if(SaveSystem.Instantiated)
+            {
+                // If saving/loading is allowed, return true. If not, return false.
+                if (SaveSystem.Instance.allowSaveLoad)
+                    return true;
+                else
+                    return false;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        // Generate Save Data
         public VLG_GameData GenerateSaveData()
         {
             // The game data.

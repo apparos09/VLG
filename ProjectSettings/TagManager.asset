@@ -10,6 +10,7 @@ TagManager:
   - BGM
   - SFX
   - Manager
+  - VCE
   layers:
   - Default
   - TransparentFX

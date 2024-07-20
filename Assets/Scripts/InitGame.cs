@@ -9,14 +9,8 @@ namespace VLG
     // Initializes the game.
     public class InitGame : MonoBehaviour
     {
-        // TODO: put the volume settings in a file that is loaded up on Start.
-        [HideInInspector()]
-        // The starting BGM volume.
-        public float bgmVolume = 0.3F;
-
-        [HideInInspector()]
-        // The starting SFX volume.
-        public float sfxVolume = 0.6F;
+        // If 'true', saving/loading is allowed.
+        public bool allowSaveLoad = true;
 
         private void Awake()
         {
@@ -28,16 +22,35 @@ namespace VLG
         void Start()
         {
             // If the game isn't running in the WebGL player, try to load the save data.
-            if(Application.platform != RuntimePlatform.WebGLPlayer)
+            if(Application.platform == RuntimePlatform.WebGLPlayer)
             {
-                // Load the game data.
-                SaveSystem.Instance.LoadGame();
+                // Operating in WebGL, so don't allow saving and loading.
+                SaveSystem.Instance.allowSaveLoad = false; 
+            }
+            else
+            {
+                // Set allowing for saving/loading.
+                SaveSystem.Instance.allowSaveLoad = allowSaveLoad;
+
+                // If saving/loading is allowed, load the game.
+                if(SaveSystem.Instance.allowSaveLoad)
+                {
+                    // Load the game data.
+                    SaveSystem.Instance.LoadGame();
+                }
             }
 
-            // Auto-set the BGM and SFX volume.
-            AudioControls ac = AudioControls.Instance;
-            ac.BackgroundMusicVolume = bgmVolume;
-            ac.SoundEffectVolume = sfxVolume;
+
+            // GAME SETTINGS DATA 
+            // Loads the default settings.
+            GameSettings.Instance.LoadDefaultGameSettingsData();
+
+            // If saving/loading is allowed, load the settings data.
+            if (SaveSystem.Instance.allowSaveLoad)
+            {
+                GameSettings.Instance.LoadGameSettingsDataFromFile();
+            }
+
         }
 
         // Update is called once per frame

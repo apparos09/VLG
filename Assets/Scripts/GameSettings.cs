@@ -1,10 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using util;
 
 namespace VLG
 {
+    [System.Serializable]
+    // The save data for the game settings.
+    public class GameSettingsData
+    {
+        // Volume
+        public float bgmVolume = 1.0F;
+        public float sfxVolume = 1.0F;
+        public float vceVolume = 1.0F;
+
+        // Mute
+        public bool mute = false;
+    }
+
     // The game settings.
     public class GameSettings : MonoBehaviour
     {
@@ -19,6 +33,20 @@ namespace VLG
 
         // If 'true', tutorial elements are used.
         public bool useTutorial = true;
+
+        [Header("File")]
+
+        // The file reader for saving/loading game settings info.
+        public FileReaderBytes fileReader = null;
+
+        // The settings file.
+        public string file = "settings.dat";
+
+        // The primary file path.
+        public string filePath1 = "";
+
+        // The secondary file path.
+        public string filePath2 = "";
 
         // Constructor
         private GameSettings()
@@ -183,6 +211,139 @@ namespace VLG
             }
         }
 
+
+        // SAVE/LOAD
+        // Applies the file reader settings.
+        public string ApplyFileReaderSettings()
+        {
+            // The save file for the settings.
+            fileReader.fileName = file;
+
+            // The path to be returned.
+            string path;
+
+            // Checks if filePath1 exists.
+            if (FileReader.FilePathExists(filePath1))
+            {
+                fileReader.filePath = filePath1;
+                path = filePath1;
+            }
+            // Checks if filePath2 exists.
+            else if (FileReader.FilePathExists(filePath2))
+            {
+                fileReader.filePath = filePath2;
+                path = filePath2;
+            }
+            // Defulats to filePath1.
+            else
+            {
+                fileReader.filePath = filePath1; // Set path.
+                fileReader.CreateFilePath(); // Create path.
+                path = filePath1; // Save path.
+            }
+
+            return path;
+        }
+
+
+        // Generates game settings data.
+        public GameSettingsData GenerateGameSettingsData()
+        {
+            GameSettingsData data = new GameSettingsData();
+
+            // Audio Information
+            data.bgmVolume = audioControls.BackgroundMusicVolume;
+            data.sfxVolume = audioControls.SoundEffectVolume;
+            data.vceVolume = audioControls.VoiceVolume;
+            data.mute = audioControls.Mute;
+
+            return data;
+        }
+
+        // Saves the game settings data.
+        public void SaveGameSettingsDataToFile()
+        {
+            // Generates the file path.
+            ApplyFileReaderSettings();
+
+            // Generates the data.
+            GameSettingsData data = GenerateGameSettingsData();
+
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Seralize the data.
+            byte[] dataArr = SaveSystem.SerializeObject(data);
+
+            // If the data did not serialize properly, do nothing.
+            if (dataArr.Length == 0)
+                return;
+
+            // Write to the file.
+            File.WriteAllBytes(file, dataArr);
+        }
+
+        // Loads game settings data.
+        public void LoadGameSettingsData(GameSettingsData data)
+        {
+            // Audio Information
+            audioControls.BackgroundMusicVolume = data.bgmVolume;
+            audioControls.SoundEffectVolume = data.sfxVolume;
+            audioControls.VoiceVolume = data.vceVolume;
+            audioControls.Mute = data.mute;
+        }
+
+        // Loads game settings data from a file. Returns 'true' if successful.
+        public bool LoadGameSettingsDataFromFile()
+        {
+            // Generates the file path.
+            ApplyFileReaderSettings();
+
+            // Gets the file.
+            string file = fileReader.GetFileWithPath();
+
+            // Checks that the file exists.
+            if (!fileReader.FileExists())
+                return false;
+
+            // Read from the file.
+            byte[] dataArr = File.ReadAllBytes(file);
+
+            // Data did not serialize properly.
+            if (dataArr.Length == 0)
+                return false;
+
+            // Deseralize the data.
+            object data = SaveSystem.DeserializeObject(dataArr);
+
+            // Convert to loaded data.
+            GameSettingsData loadData = (GameSettingsData)(data);
+
+            // Use the loaded data.
+            LoadGameSettingsData(loadData);
+            return true;
+        }
+
+
+        // Generates the default game settings data.
+        public static GameSettingsData GenerateDefaultGameSettingsData()
+        {
+            // Game settings data.
+            GameSettingsData settingsData = new GameSettingsData();
+
+            // Default Values
+            settingsData.bgmVolume = 0.3F;
+            settingsData.sfxVolume = 0.6F;
+
+            // Return the data.
+            return settingsData;
+        }
+
+        // Loads the default game settings data.
+        public void LoadDefaultGameSettingsData()
+        {
+            LoadGameSettingsData(GenerateDefaultGameSettingsData());
+        }
 
         // Quits the application.
         public static void QuitApplication()

@@ -57,7 +57,15 @@ namespace VLG
         // This function is called when the behaviour becomes disabled or inactive.
         private void OnDisable()
         {
-            
+            // If the settings object has been instantiated.
+            if(SaveSystem.Instantiated)
+            {
+                // If saving/loading is enabled, save the game settings data.
+                if (SaveSystem.Instance.allowSaveLoad)
+                {
+                    gameSettings.SaveGameSettingsDataToFile();
+                }
+            }
         }
 
         // VOLUME //
@@ -100,6 +108,16 @@ namespace VLG
         public void OnMuteToggle(Toggle toggle)
         {
             audioControls.Mute = toggle.isOn;
+        }
+
+        // Applies the default game settings.
+        public void ApplyDefaultGameSettings()
+        {
+            // Loads the default game settings.
+            gameSettings.LoadDefaultGameSettingsData();
+            
+            // Change values in UI.
+            OnEnable();
         }
     }
 }

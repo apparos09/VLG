@@ -152,8 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d09c3b8fb1f164eb7bb715cea9732e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bgmVolume: 0.3
-  sfxVolume: 0.6
+  allowSaveLoad: 1
 --- !u!4 &298972524
 Transform:
   m_ObjectHideFlags: 0
@@ -366,6 +365,7 @@ GameObject:
   - component: {fileID: 1790061466}
   - component: {fileID: 1790061465}
   - component: {fileID: 1790061467}
+  - component: {fileID: 1790061468}
   m_Layer: 0
   m_Name: Game Settings
   m_TagString: Untagged
@@ -387,6 +387,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioControls: {fileID: 1790061467}
   useTutorial: 1
+  fileReader: {fileID: 1790061468}
+  file: settings.dat
+  filePath1: Assets\Resources\Data\
+  filePath2: Data\
 --- !u!4 &1790061466
 Transform:
   m_ObjectHideFlags: 0
@@ -415,6 +419,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   adjustAudioOnSceneLoaded: 1
+--- !u!114 &1790061468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1790061464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d7921717071b15448e5501bf6cd4681, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fileName: 
+  filePath: 
+  bytes: 
 --- !u!1 &2068394677
 GameObject:
   m_ObjectHideFlags: 0

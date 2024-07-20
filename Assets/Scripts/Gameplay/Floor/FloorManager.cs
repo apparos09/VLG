@@ -822,7 +822,7 @@ namespace VLG
             }
 
             // If the game should allow saves, save the game.
-            if (gameManager.allowSaves)
+            if (gameManager.IsSavingLoadingEnabled())
                 gameManager.SaveGame();
         }
 
