@@ -1297,7 +1297,7 @@ RectTransform:
   m_GameObject: {fileID: 786668422}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 859868856}
@@ -1411,7 +1411,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eventSystem: {fileID: 1309086087}
-  firstSelected: {fileID: 0}
+  firstSelected: {fileID: 1582569313}
   lastSelected: {fileID: 0}
   setToLastOnEnable: 1
   ignoreDeselectsForLast: 0
@@ -2518,6 +2518,11 @@ PrefabInstance:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1488325481949477558, guid: 3166c25b5ab77ab4587927a857fab9ab, type: 3}
   m_PrefabInstance: {fileID: 1542371859}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1582569313 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2349462480702721736, guid: 3166c25b5ab77ab4587927a857fab9ab, type: 3}
+  m_PrefabInstance: {fileID: 1312001886}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1614366952
 GameObject:

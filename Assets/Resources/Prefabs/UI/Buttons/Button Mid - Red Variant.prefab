@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 544769890, guid: 7ccc267e7ffc8014594fc75009ffed45, type: 3}
+    - target: {fileID: 2633915316405494500, guid: f913ab704958708459b34b6d3a2b1fb9, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.b
+      value: 0.3962976
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633915316405494500, guid: f913ab704958708459b34b6d3a2b1fb9, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.g
+      value: 0.3962976
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633915316405494500, guid: f913ab704958708459b34b6d3a2b1fb9, type: 3}
+      propertyPath: m_Colors.m_SelectedColor.r
+      value: 0.8679245
+      objectReference: {fileID: 0}
     - target: {fileID: 4913313587366449733, guid: f913ab704958708459b34b6d3a2b1fb9, type: 3}
       propertyPath: m_Name
       value: Button Mid - Red Variant
