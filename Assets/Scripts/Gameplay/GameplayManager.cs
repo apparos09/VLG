@@ -370,6 +370,13 @@ namespace VLG
             ToResultsScene();
         }
 
+        // Goes to the title scene.
+        public void ToTitleScene()
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
+
+
         // Goes to the results scene.
         public void ToResultsScene()
         {

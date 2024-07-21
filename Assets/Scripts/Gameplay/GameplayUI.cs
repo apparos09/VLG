@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using util;
 using JetBrains.Annotations;
+using UnityEditor.Profiling.Memory.Experimental;
 
 namespace VLG
 {
@@ -50,6 +51,12 @@ namespace VLG
         [Header("Windows")]
         // The pause window.
         public GameObject pauseWindow;
+
+        // The options window (main window).
+        public GameObject optionsWindow;
+
+        // The instructions window.
+        public GameObject instructionsWindow;
 
         // The settings window.
         public GameObject settingsWindow;
@@ -224,11 +231,41 @@ namespace VLG
             UpdateTurnsText();
         }
 
+        // RESET FLOOR
+        // Resets the floor.
+        public void ResetFloor()
+        {
+            gameManager.floorManager.ResetFloor();
+        }
+
+        // PAUSE //
+        // Sets Paused Game
+        public void SetPaused(bool pausedGame)
+        {
+            gameManager.SetPaused(pausedGame);
+        }
+
+        // Pauses the Game
+        public void PauseGame()
+        {
+            gameManager.PauseGame();
+        }
+
+        // Unpauses the Game
+        public void UnpauseGame()
+        {
+            gameManager.UnpauseGame();
+        }
+
         // Called when the game pause state has changed.
         public void OnPausedChanged(bool paused)
         {
+            // Closes all the windows, and opens the options window.
+            CloseAllWindows();
+            OpenWindow(optionsWindow);
+
             // Checks if the game is paused or not.
-            if(paused)
+            if (paused)
             {
                 // Open the pause window.
                 pauseWindow.SetActive(true);
@@ -238,6 +275,45 @@ namespace VLG
                 // Close the pause window.
                 pauseWindow.SetActive(false);
             }
+        }
+
+        // WINDOWS //
+
+        // Closes all windows
+        public void CloseAllWindows(bool includePauseWindow)
+        {
+            optionsWindow.SetActive(false);
+            instructionsWindow.SetActive(false);
+            settingsWindow.SetActive(false);
+
+            // The pause window is the parent of all the other windows.
+            // Hence why this is turned off last.
+            if(includePauseWindow)
+                pauseWindow.SetActive(false);
+        }
+
+        // Closes all windows.
+        public void CloseAllWindows()
+        {
+            // Closes all windows, including the pause window.
+            CloseAllWindows(true);
+        }
+
+        // Opens the provided window.
+        public void OpenWindow(GameObject window)
+        {
+            // Close all the windows, except the pause window.
+            CloseAllWindows(false);
+            
+            // Activate the window.
+            window.SetActive(true);
+        }
+
+        // SCENE //
+        // Goes to the title scene.
+        public void ToTitleScene()
+        {
+            gameManager.ToTitleScene();
         }
 
         // Update is called once per frame
