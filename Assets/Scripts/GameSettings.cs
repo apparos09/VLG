@@ -93,6 +93,17 @@ namespace VLG
                     audioControls = gameObject.AddComponent<AudioControls>();
 
             }
+
+            // If the file reader has not been set.
+            if(fileReader == null)
+            {
+                // Try to get the file reader.
+                if(!TryGetComponent<FileReaderBytes>(out fileReader))
+                {
+                    // The file reader couldn't be found, so add the file reader.
+                    fileReader = gameObject.AddComponent<FileReaderBytes>();
+                }
+            }
         }
 
         // Gets the instance.

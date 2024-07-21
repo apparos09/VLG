@@ -25,6 +25,15 @@ namespace VLG
         // The gameplay info object.
         public GameInfo gameInfo;
 
+        // If 'true', button combos are checked.
+        private bool checkButtonCombos = true;
+
+        // Gets set to 'true' when a button combo has been successfully pulled off.
+        private bool buttonComboSuccess = false;
+
+        // The floor select combination.
+        private Queue<KeyCode> floorSelectCombo = new Queue<KeyCode>();
+
         // Constructor
         private TitleManager()
         {
@@ -74,6 +83,10 @@ namespace VLG
             // Keep the game info object around for going to the gameplay scene.
             DontDestroyOnLoad(gameInfo);
 
+            // Adds the floor select combination to the queue.
+            floorSelectCombo.Enqueue(KeyCode.F);
+            floorSelectCombo.Enqueue(KeyCode.B);
+            floorSelectCombo.Enqueue(KeyCode.L);
         }
 
         // Gets the instance.
@@ -175,7 +188,60 @@ namespace VLG
         // Update is called once per frame
         void Update()
         {
+            // TODO: the button combonation needs to have all the buttons held instead of just pressed to work.
+            // Try to figure out a less finicky way of doing this.
 
+            // If button combos should be chcked (only happens on the title window).
+            if(checkButtonCombos && titleUI.titleWindow.activeSelf)
+            {
+                // Checks if any keys are being pressed.
+                if(Input.anyKey && !buttonComboSuccess)
+                {
+                    // Creates a temporary queue.
+                    Queue<KeyCode> tempQueue = new Queue<KeyCode>(floorSelectCombo);
+
+                    // While there are remaining values.
+                    while(tempQueue.Count > 0)
+                    {
+                        // If the next key has been pressed down.
+                        if(Input.GetKey(tempQueue.Peek()))
+                        {
+                            // Remove the value.
+                            tempQueue.Dequeue();
+
+                        }
+                        else
+                        {
+                            // Not right combination.
+                            break;
+                        }
+                    }
+
+                    // The right combination was provided.
+                    if(tempQueue.Count == 0)
+                    {
+                        // Toggle the buttons.
+                        titleUI.ToggleCodeAndFloorButtons();
+
+                        // A button combo was successful.
+                        buttonComboSuccess = true;
+
+                        // If in the editor, print a success message.
+                        if(Application.isEditor)
+                        {
+                            // The button combination was successful.
+                            Debug.Log("Button Combo Success!");
+                        }
+                    }
+                }
+                else
+                {
+                    // If no buttons are being pressed, reset the combo check.
+                    if(!Input.anyKey)
+                        buttonComboSuccess = false;
+                }
+
+            }
         }
     }
 }

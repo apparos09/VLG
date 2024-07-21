@@ -24,6 +24,12 @@ namespace VLG
         // The continue button.
         public Button continueButton;
 
+        // The code button.
+        public Button codeWindowButton;
+
+        // The floor button.
+        public Button floorWindowButton;
+
         // The quit button.
         public Button quitButton;
 
@@ -156,6 +162,14 @@ namespace VLG
             floorWindow.SetActive(false);
             settingsWindow.SetActive(false);
             licensesWindow.SetActive(false);
+        }
+
+        // Swpas the code input button and floor button.
+        public void ToggleCodeAndFloorButtons()
+        {
+            // Toggles the code and floor buttons. Only one should be active at a time.
+            codeWindowButton.gameObject.SetActive(!codeWindowButton.gameObject.activeSelf);
+            floorWindowButton.gameObject.SetActive(!floorWindowButton.gameObject.activeSelf);
         }
 
         // Starts the game.
