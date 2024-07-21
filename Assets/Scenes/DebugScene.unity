@@ -408,6 +408,8 @@ MonoBehaviour:
   gameAudio: {fileID: 543345295}
   player: {fileID: 940522949}
   floorManager: {fileID: 1696945534}
+  floorLoadingScreen: {fileID: 1882176440506653446}
+  useFloorCoroutine: 1
   gameTime: 0
   floorTimes: []
   gameTurns: 0
@@ -702,6 +704,14 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 1714425044}
+    - target: {fileID: 4172909264649179187, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 1696945532}
+    - target: {fileID: 4172909264649179187, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: floorManager
+      value: 
+      objectReference: {fileID: 1696945534}
     - target: {fileID: 4669053512702302869, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -724,6 +734,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+--- !u!114 &1882176440506653446 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4172909264649179187, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+  m_PrefabInstance: {fileID: 1882176440506653445}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db6e77add6b8d241a1bfff830de2915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3736792733711228259
 PrefabInstance:
   m_ObjectHideFlags: 0

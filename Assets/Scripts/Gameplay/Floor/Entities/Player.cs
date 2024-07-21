@@ -17,7 +17,7 @@ namespace VLG
         public new Rigidbody rigidbody;
 
         // Enables input from the player.
-        public bool enabledInput = true;
+        public bool enabledInputs = true;
 
         // If 'true', the player is able to attack.
         public bool enabledAttack = true;
@@ -441,7 +441,7 @@ namespace VLG
             base.Update();
 
             // Updates the inputs from the player.
-            if (enabledInput)
+            if (enabledInputs)
                 UpdateInput();
         }
 

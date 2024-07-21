@@ -21,6 +21,10 @@ namespace VLG
         // The game manager.
         public GameplayManager gameManager;
 
+        // The floor loading screen.
+        public FloorLoadingScreen floorLoadingScreen;
+
+        [Header("Floor Info")]
         // The text that displays the floor.
         public TMP_Text floorNumberText;
 
@@ -135,6 +139,18 @@ namespace VLG
             }
         }
 
+        // Show the floor loading screen.
+        public void ShowFloorLoadingScreen()
+        {
+            floorLoadingScreen.gameObject.SetActive(true);
+        }
+
+        // Hide the floor loading screen.
+        public void HideFloorLoadingScreen()
+        {
+            floorLoadingScreen.gameObject.SetActive(false);
+        }
+
         // Updates the floor text.
         public void UpdateFloorText()
         {
@@ -172,30 +188,7 @@ namespace VLG
         public void UpdateObjectiveText(Goal.goalType objective)
         {
             // Updates the objective text.
-            switch(objective)
-            {
-                default:
-                case Goal.goalType.none: // No specific objective. Reach for the goal.
-                    objectiveText.text = "Reach the Goal!";
-                    break;
-
-                case Goal.goalType.key: // Get all the keyItems.
-                    objectiveText.text = "Get all the Keys!";
-                    break;
-
-                case Goal.goalType.enemy: // Kill all enemies.
-                    objectiveText.text = "Destroy All the Enemies!";
-                    break;
-
-                case Goal.goalType.button: // Use a button.
-                    objectiveText.text = "Use the Button to Unlock the Goal!";
-                    break;
-
-                case Goal.goalType.boss: // Defeat boss.
-                    objectiveText.text = "Defeat the Boss!";
-                        break;
-
-            }
+            objectiveText.text = Goal.GetObjectiveDescription(objective);
         }
 
         // Updates the turns text.

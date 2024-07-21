@@ -70,6 +70,7 @@ namespace VLG
             SetUsable(!usable);
         }
 
+       
         // Returns 'true', if the goal has unlock conditions.
         public bool HasConditions()
         {
@@ -118,6 +119,48 @@ namespace VLG
         public bool IsUsableAndConditionMet()
         {
             return usable && ConditionMet();
+        }
+
+        // Gets the description of the objective.
+        public string GetObjectiveDescription()
+        {
+            return GetObjectiveDescription(objective);
+        }
+
+        // Gets the description of the objective.
+        public static string GetObjectiveDescription(goalType objective)
+        {
+            // The string to be returned.
+            string result;
+
+            // Updates the objective text.
+            switch (objective)
+            {
+                default:
+                case goalType.none: // No specific objective. Reach for the goal.
+                    result = "Reach the Goal!";
+                    break;
+
+                case goalType.key: // Get all the keyItems.
+                    result  = "Get all the Keys!";
+                    break;
+
+                case goalType.enemy: // Kill all enemies.
+                    result = "Destroy All the Enemies!";
+                    break;
+
+                case goalType.button: // Use a button.
+                    result = "Use the Button to Unlock the Goal!";
+                    break;
+
+                case goalType.boss: // Defeat boss.
+                    result = "Defeat the Boss!";
+                    break;
+
+            }
+
+            // Returns the result.
+            return result;
         }
 
 

@@ -28,6 +28,17 @@ namespace VLG
         // The floor manager.
         public FloorManager floorManager;
 
+        // The floor loading screen.
+        public FloorLoadingScreen floorLoadingScreen;
+
+        // If 'true', the floors are loaded using coroutines.
+        // If 'false', the direct function is called.
+        [HideInInspector]
+        public bool useFloorCoroutine = true;
+
+        // Gets set to 'true' when the post start function has been called.
+        private bool calledPostStart = false;
+
         [Header("Stats")]
 
         // The game time (total)
@@ -44,14 +55,6 @@ namespace VLG
 
         // Determines if the game is paused or not.
         private bool paused = false;
-
-        [Header("Other")]
-
-        // Gets set to 'true' when the post start function has been called.
-        private bool calledPostStart = false;
-
-
-        // TODO: add floor array for moving around entites.
 
         // Constructor
         private GameplayManager()
@@ -107,11 +110,22 @@ namespace VLG
                 {
                     // Loads the saved game. If the load failed, load from the game info floor ID.
                     if(!LoadGame())
-                        floorManager.GenerateFloor(gameInfo.floorId);
+                    {
+                        // Checks if a coroutine should be used or not.
+                        if(useFloorCoroutine)
+                            floorManager.GenerateFloorAsCoroutine(gameInfo.floorId);
+                        else
+                            floorManager.GenerateFloor(gameInfo.floorId);
+                    }
+                        
                 }
                 else // Start from applicable floor.
                 {
-                    floorManager.GenerateFloor(gameInfo.floorId);
+                    // Checks if a coroutine should be used or not.
+                    if (useFloorCoroutine)
+                        floorManager.GenerateFloorAsCoroutine(gameInfo.floorId);
+                    else
+                        floorManager.GenerateFloor(gameInfo.floorId);
                 }
 
                 // Destroy the game object now that it's done being used.
@@ -120,9 +134,12 @@ namespace VLG
             else // Default load.
             {
                 // TODO: change default floor load to floor 0, not floor one.
-                // Generates floor 1.
-                floorManager.GenerateFloor(0); // Debug
-                // floorManager.GenerateFloor(1);
+                
+                // Checks if a coroutine should be used or not.
+                if (useFloorCoroutine)
+                    floorManager.GenerateFloorAsCoroutine(0);
+                else
+                    floorManager.GenerateFloor(0);
             }
         }
 

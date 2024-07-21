@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace VLG
 {
@@ -20,6 +21,9 @@ namespace VLG
 
         // The goal for the game.
         public Goal goal;
+
+        // The coroutine for loading the floor assets.
+        private Coroutine floorGenCoroutine = null;
 
         [Header("Floor")]
         
@@ -155,6 +159,8 @@ namespace VLG
             }
         }
 
+
+
         // Generates the floor by the ID.
         public void GenerateFloor(int id)
         {
@@ -254,6 +260,70 @@ namespace VLG
             // Resets the player.
             gameManager.player.ResetEntity();
         }
+
+        // Coroutine Variants
+        // Generates the floor by the ID as a coroutine.
+        public void GenerateFloorAsCoroutine(int id)
+        {
+            // Gets the floor data and tries to generate it.
+            GenerateFloor(FloorData.Instance.GetFloor(id));
+        }
+
+        // Generates the floor using the provided code as a coroutine.
+        public void GenerateFloorAsCoroutine(string code)
+        {
+            GenerateFloor(FloorData.Instance.GetFloor(code));
+        }
+
+        // Generates the floor as a coroutine.
+        public void GenerateFloorAsCoroutine(Floor floor)
+        {
+            // A coroutine is already in progress.
+            if(floorGenCoroutine != null)
+            {
+                Debug.LogAssertion("A floor is already being generated.");
+                return;
+            }
+
+            // Starts the coroutine.
+            floorGenCoroutine = StartCoroutine(GenerateFloorCoroutine(floor));
+        }
+
+        // Generates a floor as a coroutine
+        private IEnumerator GenerateFloorCoroutine(Floor floor)
+        {
+            // Save the time scale.
+            float timeScale = Time.timeScale;
+
+            // Stop time, and disable all player inputs.
+            Time.timeScale = 0.0F; // Stop delta time.
+            gameManager.player.enabledInputs = false;
+
+            // TODO: show loading screen and stall.
+            // Wait for one second.
+            yield return new WaitForSecondsRealtime(1.0F);            
+
+            // Generate the floor, and stall.
+            GenerateFloor(floor);
+            yield return null;
+
+            // TODO: remove loading screen and stall.
+
+            // Resume time and enable player inputs.
+            Time.timeScale = timeScale;
+            gameManager.player.enabledInputs = true;
+
+            yield return null;
+
+            // Stops the coroutine once it's finished.
+            if (floorGenCoroutine != null)
+            {
+                StopCoroutine(floorGenCoroutine);
+                floorGenCoroutine = null;
+            }
+        }
+
+
 
         // Sets the default entity values.
         // gridPos = (col, row)
@@ -813,8 +883,11 @@ namespace VLG
             // Keep in mind that the debug floor/floor 0 is part of the floor count.
             if (nextFloorId < FloorData.FLOOR_COUNT)
             {
-                // Generates the next floor.
-                GenerateFloor(nextFloorId);
+                // Generates the next floor. Checks if a coroutine should be used or not.
+                if(gameManager.useFloorCoroutine)
+                    GenerateFloorAsCoroutine(nextFloorId);
+                else
+                    GenerateFloor(nextFloorId);
             }
             else // No other floors, so finish the game.
             {
