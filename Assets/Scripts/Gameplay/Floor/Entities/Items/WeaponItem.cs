@@ -15,9 +15,15 @@ namespace VLG
             // If the item type is not set, set it to weapon.
             if (item == itemType.none)
                 item = itemType.weapon;
+        }
 
+        // Called after the start function has been called.
+        protected override void PostStart()
+        {
             // The item exists, so the player should not be able to attack.
             gameManager.player.enabledAttack = false;
+
+            base.PostStart();
         }
 
         // Call this function when the item is given to a player.
@@ -31,7 +37,7 @@ namespace VLG
         {
             base.ResetEntity();     
 
-            // Disalbe the player's attack since the item's bene reset.
+            // Disable the player's attack since the item's bene reset.
             gameManager.player.enabledAttack = false;
         }
 

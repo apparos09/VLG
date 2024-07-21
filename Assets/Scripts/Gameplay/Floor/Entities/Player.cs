@@ -224,6 +224,27 @@ namespace VLG
             // Resets the rotation.
             transform.rotation = Quaternion.identity;
 
+            // This is a correction that's no longer needed.
+            // // Have the attack enabled by default.
+            // enabledAttack = true;
+
+            //// Goes through all the floor items.
+            //foreach(Item item in floorManager.floorItems)
+            //{
+            //    // Item exists.
+            //    if(item != null)
+            //    {
+            //        // If the item is a weapon, disable the player's attack.
+            //        if (item.item == Item.itemType.weapon && item is WeaponItem)
+            //        {
+            //            // Disable the attack and stop checking for other weapons.
+            //            enabledAttack = false;
+            //            break;
+            //        }
+            //    }
+                
+            //}
+
             // Resets the animation.
             PlayIdleAnimation();
 

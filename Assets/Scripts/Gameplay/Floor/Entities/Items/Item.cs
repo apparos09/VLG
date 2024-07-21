@@ -16,6 +16,9 @@ namespace VLG
         // The idle animation for the item.
         public string idleAnim = "";
 
+        // Gets set to 'true' when post start has been called.
+        private bool calledPostStart = false;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -26,6 +29,12 @@ namespace VLG
 
             // Play idle animation.
             animator.Play(idleAnim);
+        }
+
+        // Post Start function.
+        protected virtual void PostStart()
+        {
+            calledPostStart = true;
         }
 
         // Call this function when the item is given to a player.
@@ -51,6 +60,26 @@ namespace VLG
         public override void KillEntity()
         {
             Destroy(gameObject);
+        }
+
+        // Resets the floor entity.
+        public override void ResetEntity()
+        {
+            base.ResetEntity();
+
+            // Set this to false so that the function gets called again.
+            calledPostStart = false;
+        }
+
+        // Update is called once per frame
+        protected override void Update()
+        {
+            // If post start hasn't been called, call post start.
+            if (!calledPostStart)
+                PostStart();
+
+            // Base Update
+            base.Update();
         }
 
         // This function is called when the MonoBehaviour will be destroyed.
