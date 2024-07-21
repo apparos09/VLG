@@ -358,7 +358,13 @@ namespace VLG
             DontDestroyOnLoad(newObject);
 
             // Saving data.
+            // Game time and turns.
             resultsInfo.gameTime = gameTime;
+            resultsInfo.gameTurns = gameTurns;
+
+            // Stores the floor times and floor turns.
+            resultsInfo.floorTimes = floorTimes;
+            resultsInfo.floorTurns = floorTurns;
 
             // Results scene.
             ToResultsScene();

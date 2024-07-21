@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace VLG
 {
@@ -19,6 +20,12 @@ namespace VLG
 
         // The results info
         public ResultsInfo resultsInfo;
+
+        // The floor results entries.
+        public List<FloorResultsEntry.FloorResultsEntryInfo> resultsEntries = new List<FloorResultsEntry.FloorResultsEntryInfo>();
+
+        // The index for the floor results entries.
+        public int resultsEntryIndex = 0;
 
         // Constructor
         private ResultsManager()
@@ -54,9 +61,10 @@ namespace VLG
             // Checks if the results info object exists.
             if(resultsInfo == null)
             {
-                resultsInfo = FindObjectOfType<ResultsInfo>(true);
+                resultsInfo = FindObjectOfType<ResultsInfo>(false);
             }
 
+            // Loads the Results
             LoadResultsInfo();
         }
 
@@ -105,25 +113,44 @@ namespace VLG
         // Loads the results information.
         public void LoadResultsInfo(ResultsInfo info)
         {
-            // Loads the information for the UI.
+            // If there is no, do nothing.
+            if (info == null)
+                return;
+
+            // Clear the entries.
+            resultsEntries.Clear();
+
+            // Goes through all the floor times and turns.
+            for(int i = 0; i < resultsInfo.floorTimes.Length && i < resultsInfo.floorTurns.Length; i++)
+            {
+                // Generates the object.
+                FloorResultsEntry.FloorResultsEntryInfo entryInfo = new FloorResultsEntry.FloorResultsEntryInfo();
+
+                // Stores the information.
+                entryInfo.floorNumber = i; // Floor 0/Debug is included.
+                entryInfo.floorTime = resultsInfo.floorTimes[i]; // Time
+                entryInfo.floorTurns = resultsInfo.floorTurns[i]; // Turn
+
+                // Adds the entry info to the list.
+                resultsEntries.Add(entryInfo);
+            }
+
+            // Removes the first entry, since it's for floor 0.
+            resultsEntries.RemoveAt(0);
+
+            // Loads the rest of the information for the UI.
             resultsUI.LoadResultsInfo(info);
 
-            // Checks that the info exists.
-            if (info != null)
-            {
-                // ...
-            }
-            else // Doesn't exist, so load default values.
-            {
-                // ...
-            }
+            // Load Entries
+            resultsUI.LoadResultsEntries();
         }
 
-        // Update is called once per frame
-        void Update()
+        // Goes to the title scene.
+        public void ToTitleScene()
         {
-
+            SceneManager.LoadScene("TitleScene");
         }
+
 
         // This function is called when the MonoBehaviour will be destroyed
         private void OnDestroy()
