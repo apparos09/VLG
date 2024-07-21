@@ -36,7 +36,10 @@ namespace VLG
         public GameObject instructionsWindow;
 
         // The code window.
-        public GameObject codeWindow;      
+        public GameObject codeWindow;
+
+        // The floor window.
+        public GameObject floorWindow;
 
         // The settings window.
         public GameObject settingsWindow;
@@ -150,6 +153,7 @@ namespace VLG
             titleWindow.SetActive(false);
             instructionsWindow.SetActive(false);
             codeWindow.SetActive(false);
+            floorWindow.SetActive(false);
             settingsWindow.SetActive(false);
             licensesWindow.SetActive(false);
         }
