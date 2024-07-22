@@ -150,8 +150,8 @@ namespace VLG
         [Header("Enemies")]
         public Enemy e01A;
         public Enemy e02A;
-        public Enemy e02B;
         public Enemy e03A;
+        public Enemy e03B;
 
         // Items (I-Group)
         [Header("Items")]
@@ -577,11 +577,6 @@ namespace VLG
                             emyEntity = Instantiate(e02A);
                             break;
 
-                        case 'B':
-                        case 'b':
-                            emyEntity = Instantiate(e02B);
-                            break;
-
                         default:
                             emyEntity = null;
                             break;
@@ -596,6 +591,11 @@ namespace VLG
                         case 'A':
                         case 'a':
                             emyEntity = Instantiate(e03A);
+                            break;
+
+                        case 'B':
+                        case 'b':
+                            emyEntity = Instantiate(e03B);
                             break;
 
                         default:
@@ -815,13 +815,13 @@ namespace VLG
             string[,] enemies = new string[FLOOR_COLS, FLOOR_ROWS] {
                 { "00A", "01A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-                { "00A", "00A", "00A", "00A", "02A", "00A", "00A", "00A", "00A", "00A"},
-                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03A", "00A"},
+                { "00A", "00A", "00A", "00A", "03A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "02A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
-                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "02B", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "03B", "00A"},
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.enemies = enemies;
