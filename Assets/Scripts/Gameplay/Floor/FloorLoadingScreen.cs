@@ -42,7 +42,8 @@ namespace VLG
             // The floor number
             floorNumberText.text = "Floor " + floor.id.ToString();
             
-            // Note: this may not work since the goal doesn't exist yet.
+            // TODO: this may not work since the goal doesn't exist yet.
+            // I don't know if I'm going to fix this. I may just leave it out.
             // objectiveText.text = floorManager.goal.GetObjectiveDescription();
         }
 

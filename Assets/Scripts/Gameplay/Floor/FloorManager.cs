@@ -265,14 +265,15 @@ namespace VLG
         // Generates the floor by the ID as a coroutine.
         public void GenerateFloorAsCoroutine(int id)
         {
-            // Gets the floor data and tries to generate it.
-            GenerateFloor(FloorData.Instance.GetFloor(id));
+            // Gets the floor data and tries to generate it as a coroutine.
+            GenerateFloorAsCoroutine(FloorData.Instance.GetFloor(id));
         }
 
         // Generates the floor using the provided code as a coroutine.
         public void GenerateFloorAsCoroutine(string code)
         {
-            GenerateFloor(FloorData.Instance.GetFloor(code));
+            // Gets the floor data and tries to generate it as a coroutine.
+            GenerateFloorAsCoroutine(FloorData.Instance.GetFloor(code));
         }
 
         // Generates the floor as a coroutine.
@@ -295,25 +296,31 @@ namespace VLG
             // Save the time scale.
             float timeScale = Time.timeScale;
 
+            // Turn on the loading screen.
+            gameManager.floorLoadingScreen.gameObject.SetActive(true);
+            gameManager.floorLoadingScreen.UpdateFloorDisplay(floor);
+
             // Stop time, and disable all player inputs.
             Time.timeScale = 0.0F; // Stop delta time.
             gameManager.player.enabledInputs = false;
 
-            // TODO: show loading screen and stall.
             // Wait for one second.
-            yield return new WaitForSecondsRealtime(1.0F);            
+            yield return new WaitForSecondsRealtime(0.25F);            
 
             // Generate the floor, and stall.
             GenerateFloor(floor);
-            yield return null;
 
-            // TODO: remove loading screen and stall.
+            yield return null;
 
             // Resume time and enable player inputs.
             Time.timeScale = timeScale;
             gameManager.player.enabledInputs = true;
 
             yield return null;
+
+            // Turn off the loading screen.
+            gameManager.floorLoadingScreen.gameObject.SetActive(false);
+
 
             // Stops the coroutine once it's finished.
             if (floorGenCoroutine != null)
