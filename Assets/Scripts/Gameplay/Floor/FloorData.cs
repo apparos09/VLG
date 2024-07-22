@@ -26,6 +26,10 @@ namespace VLG
         // The items.
         public string[,] items;
 
+        // The turn limit.
+        // If 0 or less, then there is no turn limit.
+        public int turnsMax = -1;
+
         // The skybox ID.
         public int skyboxId;
 
@@ -838,6 +842,10 @@ namespace VLG
 
             floor.items = items;
 
+            // Turns Max
+            floor.turnsMax = 0; // Max
+            // floor.turnsMax = 6; // Minimum
+
             // Skybox
             floor.skyboxId = 0;
 
@@ -900,6 +908,9 @@ namespace VLG
                 { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
 
             floor.items = items;
+
+            // Turns Max
+            floor.turnsMax = 0;
 
             // Skybox
             floor.skyboxId = 0;

@@ -248,6 +248,19 @@ namespace VLG
             if (entryBlock != null)
                 gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
 
+            // Floor Turn Limit
+            if(floor.turnsMax <= 0) // If 0 or less, there is no limit.
+            {
+                limitTurns = false;
+                floorTurnsMax = 0;
+            }
+            else // There are limited turns.
+            {
+                limitTurns = true;
+                floorTurnsMax = floor.turnsMax;
+            }
+            
+
             // Sets the Skybox
             floorData.SetSkybox(floor);
 
@@ -855,7 +868,6 @@ namespace VLG
                 // The max has been reached.
                 if(floorTurns >= floorTurnsMax)
                 {
-                    // TODO: maybe check if the player has reached the goal?
                     ResetFloor();
                 }
             }

