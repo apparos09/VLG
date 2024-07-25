@@ -196,10 +196,14 @@ namespace VLG
             titleManager.QuitApplication();
         }
 
-        // Update is called once per frame
-        void Update()
+        // This function is called when the MonoBehaviour will be destroyed.
+        private void OnDestroy()
         {
-
+            // If the saved instance is being deleted, set 'instanced' to false.
+            if (instance == this)
+            {
+                instanced = false;
+            }
         }
     }
 }

@@ -155,10 +155,18 @@ namespace VLG
         // This function is called when the MonoBehaviour will be destroyed
         private void OnDestroy()
         {
-            // Destroys the game object.
-            // This is set to not destroy on load, hence why it must be destroyed this way.
-            if (resultsInfo != null)
-                Destroy(resultsInfo.gameObject);
+            // If the saved instance is being deleted, set 'instanced' to false.
+            if (instance == this)
+            {
+                instanced = false;
+
+                // Destroys the game object.
+                // This is set to not destroy on load, hence why it must be destroyed this way.
+                if (resultsInfo != null)
+                {
+                    Destroy(resultsInfo.gameObject);
+                }
+            }
         }
     }
 }

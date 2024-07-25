@@ -17,6 +17,14 @@ namespace VLG
 
         // Mute
         public bool mute = false;
+
+        // Cutscenes
+        public bool cutscenes = true;
+
+        // Resolution (Vectors cannot be serialized).
+        public bool fullScreen = false;
+        public int screenWidth = 1024;
+        public int screenHeight = 576;
     }
 
     // The game settings.
@@ -32,7 +40,11 @@ namespace VLG
         public AudioControls audioControls;
 
         // If 'true', tutorial elements are used.
+        // NOTE: there are no tutorial elements.
         public bool useTutorial = true;
+
+        // Cutscenes
+        public bool cutscenes = true;
 
         [Header("File")]
 
@@ -164,16 +176,16 @@ namespace VLG
         }
 
         // Called to change the screen size.
-        public void ChangeScreenSize(int width, int height, FullScreenMode mode)
+        public void SetScreenSize(int width, int height, FullScreenMode mode)
         {
             Screen.SetResolution(width, height, mode);
         }
 
 
         // Called to change the screen size.
-        public void ChangeScreenSize(int width, int height, FullScreenMode mode, bool fullScreen)
+        public void SetScreenSize(int width, int height, FullScreenMode mode, bool fullScreen)
         {
-            ChangeScreenSize(width, height, mode);
+            SetScreenSize(width, height, mode);
             Screen.fullScreen = fullScreen;
         }
 
@@ -181,13 +193,19 @@ namespace VLG
         // Set Screen Size (1080 Resolution - 16:9)
         public void SetScreenSize1920x1080(FullScreenMode mode = FullScreenMode.MaximizedWindow)
         {
-            ChangeScreenSize(1920, 1080, mode, false);
+            SetScreenSize(1920, 1080, mode, false);
         }
 
         // Set Screen Size (720 Resolution - 16:9)
         public void SetScreenSize1280x720(FullScreenMode mode = FullScreenMode.Windowed)
         {
-            ChangeScreenSize(1280, 720, mode, false);
+            SetScreenSize(1280, 720, mode, false);
+        }
+
+        // Set Screen Size (16:9 - WSVGA (Wide Super Video Graphics Array))
+        public void SetScreenSize1024x576(FullScreenMode mode = FullScreenMode.Windowed)
+        {
+            SetScreenSize(1024, 576, mode, false);
         }
 
 
@@ -268,6 +286,14 @@ namespace VLG
             data.vceVolume = audioControls.VoiceVolume;
             data.mute = audioControls.Mute;
 
+            // Cutscenes Information
+            data.cutscenes = cutscenes;
+
+            // Resolution
+            data.fullScreen = Screen.fullScreen;
+            data.screenWidth = Screen.width;
+            data.screenHeight = Screen.height;
+
             return data;
         }
 
@@ -302,6 +328,13 @@ namespace VLG
             audioControls.SoundEffectVolume = data.sfxVolume;
             audioControls.VoiceVolume = data.vceVolume;
             audioControls.Mute = data.mute;
+
+            // Cutscenes Information
+            cutscenes = data.cutscenes;
+
+            // Resolution
+            FullScreen = data.fullScreen;
+            SetScreenSize(data.screenWidth, data.screenHeight, FullScreenMode.Windowed, FullScreen);
         }
 
         // Loads game settings data from a file. Returns 'true' if successful.
@@ -343,8 +376,19 @@ namespace VLG
             GameSettingsData settingsData = new GameSettingsData();
 
             // Default Values
+            // Volume
             settingsData.bgmVolume = 0.3F;
             settingsData.sfxVolume = 0.6F;
+            settingsData.vceVolume = 1.0F;
+            settingsData.mute = false;
+
+            // Cutscenes
+            settingsData.cutscenes = true;
+            
+            // Resolution
+            settingsData.fullScreen = false;
+            settingsData.screenWidth = 1024;
+            settingsData.screenHeight = 576;
 
             // Return the data.
             return settingsData;
