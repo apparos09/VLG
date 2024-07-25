@@ -30,7 +30,7 @@ namespace VLG
         }
 
         // Called on the first update frame.
-        private void PostStart()
+        protected void PostStart()
         {
             // Checks if the goal's condition has been met, and if the goal is usable.
             if(goal.IsUsableAndConditionMet())

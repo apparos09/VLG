@@ -153,6 +153,9 @@ namespace VLG
         public Enemy e03A;
         public Enemy e03B;
 
+        // Final Boss
+        public Enemy e04A;
+
         // Items (I-Group)
         [Header("Items")]
         public Item i01A;
@@ -558,11 +561,8 @@ namespace VLG
                     {
                         case 'A':
                         case 'a':
-                            emyEntity = Instantiate(e01A);
-                            break;
-
                         default:
-                            emyEntity = null;
+                            emyEntity = Instantiate(e01A);
                             break;
                     }
 
@@ -574,11 +574,8 @@ namespace VLG
                     {
                         case 'A':
                         case 'a':
-                            emyEntity = Instantiate(e02A);
-                            break;
-
                         default:
-                            emyEntity = null;
+                            emyEntity = Instantiate(e02A);
                             break;
                     }
 
@@ -590,6 +587,7 @@ namespace VLG
                     {
                         case 'A':
                         case 'a':
+                        default:
                             emyEntity = Instantiate(e03A);
                             break;
 
@@ -598,8 +596,18 @@ namespace VLG
                             emyEntity = Instantiate(e03B);
                             break;
 
+                    }
+
+                    break;
+
+                case 4:
+                    // Version
+                    switch (elementInfo.version)
+                    {
+                        case 'A':
+                        case 'a':
                         default:
-                            emyEntity = null;
+                            emyEntity = Instantiate(e04A);
                             break;
                     }
 

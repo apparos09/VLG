@@ -144,7 +144,7 @@ namespace VLG
         }
 
         // Called after the Start function 
-        public void PostStart()
+        protected void PostStart()
         {
             // TODO: put any relevant code here.
 
