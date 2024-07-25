@@ -109,6 +109,7 @@ namespace VLG
             // Change button settings.
             EnableAllCreditButtons();
             bgmButton.interactable = false;
+            sfxButton.Select();
         }
 
         // Shows the SFX credits.
@@ -122,6 +123,8 @@ namespace VLG
             // Change button settings.
             EnableAllCreditButtons();
             sfxButton.interactable = false;
+            bgmButton.Select();
+
         }
 
         // Shows the font credits.
@@ -135,6 +138,7 @@ namespace VLG
             // Change button settings.
             EnableAllCreditButtons();
             fontsButton.interactable = false;
+            sfxButton.Select();
         }
     }
 }
