@@ -7,10 +7,25 @@ namespace VLG
     // The final boss of the game.
     public class FinalBoss : Boss
     {
+        // Outlines the lighting strike pattern.
+        protected struct LightningStrikePattern
+        {
+            // The positions for the lighting strikes.
+            public List<Vector2Int> positions;
+        }
+
         [Header("Final Boss")]
 
         // The lighting strike prefab
         public LightningStrike lightningStrikePrefab;
+
+        // The delay for the lighting strike patterns.
+        private float strikeDelay = 1.0F;
+
+        // The three lightning strike patterns.
+        private Queue<LightningStrikePattern> phase1StrikePatterns = new Queue<LightningStrikePattern>();
+        private Queue<LightningStrikePattern> phase2StrikePatterns = new Queue<LightningStrikePattern>();
+        private Queue<LightningStrikePattern> phase3StrikePatterns = new Queue<LightningStrikePattern>();
 
         // The pool of lighitng strikes to pull from.
         private Queue<LightningStrike> lightningStrikePool = new Queue<LightningStrike>();
@@ -31,6 +46,8 @@ namespace VLG
         protected override void Start()
         {
             base.Start();
+
+            // TOOD: load lightning patterns.
         }
 
         // Called on the first frame.
