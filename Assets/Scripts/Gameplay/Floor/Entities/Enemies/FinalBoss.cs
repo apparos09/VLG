@@ -140,6 +140,14 @@ namespace VLG
             lightningStrikePool.Enqueue(strike);
         }
 
+        // Called when damage has been taken.
+        public override void OnDamageTaken()
+        {
+            base.OnDamageTaken();
+
+            // TODO: change phase.
+        }
+
         // Run the AI for the Final Boss
         public override void UpdateAI()
         {
@@ -166,6 +174,8 @@ namespace VLG
         // This function is called when the MonoBehaviour will be destroyed.
         protected override void OnDestroy()
         {
+            base.OnDestroy();
+
             // If the saved instance is being deleted, set 'instanced' to false.
             if (instance == this)
             {

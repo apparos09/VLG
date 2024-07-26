@@ -108,7 +108,7 @@ namespace VLG
                     break;
 
                 case goalType.boss: // TODO: change win condition for the boss.
-                    result = Enemy.GetEnemyCount() == 0;
+                    result = Boss.GetBossCount() == 0;
                     break;
             }
 

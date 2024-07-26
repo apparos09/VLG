@@ -91,6 +91,18 @@ namespace VLG
             // ...
         }
 
+        // This function is called when the object has become enabled and active
+        protected virtual void OnEnable()
+        {
+            // ...
+        }
+
+        // This function is called when the behaviour has become disabled or inactive
+        protected virtual void OnDisable()
+        {
+            // ...
+        }
+
         // Checks if the entity is moving (in move animation)
         public bool Moving
         {

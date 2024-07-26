@@ -24,6 +24,26 @@ namespace VLG
                 keyItems.Add(this);
         }
 
+        // This function is called when the object has become enabled and active
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            // The key is enabled, so add it to the list.
+            if (!keyItems.Contains(this))
+                keyItems.Add(this);
+        }
+
+        // This function is called when the behaviour has become disabled or inactive
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            // The key is disabled, so remove it from the list.
+            if (keyItems.Contains(this))
+                keyItems.Remove(this);
+        }
+
         // Gets the total number of key items.
         public static int GetKeyItemCount()
         {

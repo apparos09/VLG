@@ -78,6 +78,26 @@ namespace VLG
                 enemies.Add(this);
         }
 
+        // This function is called when the object has become enabled and active
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            // The enemy is enabled, so add it to the list.
+            if (!enemies.Contains(this))
+                enemies.Add(this);
+        }
+
+        // This function is called when the behaviour has become disabled or inactive
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            // The enemy is disabled, so remove it from the list.
+            if (enemies.Contains(this))
+                enemies.Remove(this);
+        }
+
         // Gets the enemy count.
         public static int GetEnemyCount()
         {
@@ -87,6 +107,7 @@ namespace VLG
         // Called when the player has attacked the enemy.
         public virtual void OnPlayerAttackHit(Player player)
         {
+            // If the enemy is vulnerable, kill them.
             if(vulnerable)
                 KillEntity();
         }
