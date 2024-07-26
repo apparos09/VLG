@@ -11,6 +11,9 @@ namespace VLG
         // The boss's health. A boss dies in a fixed amount of hits.
         public float health = 1;
 
+        // The phase of the boss.
+        public int phase = 1;
+
         // Used to call post start.
         private bool calledPostStart = false;
 

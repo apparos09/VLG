@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Xml;
 using UnityEngine;
 
 namespace VLG
@@ -56,7 +54,7 @@ namespace VLG
 
 
         // The number of floors (includes the debug floor/floor 0)
-        public const int FLOOR_COUNT = 2;
+        public const int FLOOR_COUNT = 3;
 
         // All floors are the same size, but the amount of space used will vary.
 
@@ -86,7 +84,8 @@ namespace VLG
         private string[] floorCodes = new string[FLOOR_COUNT]
         {
             "0000",
-            "91AB"
+            "91AB",
+            "M2A3"
         };
 
 
@@ -757,6 +756,14 @@ namespace VLG
                 case 1:
                     floor = GetFloor01();
                     break;
+
+                case 2: // TODO: replace with floor 2
+                    floor = GetFloor50();
+                    break;
+
+                case 50: 
+                    floor = GetFloor50();
+                    break;
             }
 
             return floor;
@@ -927,7 +934,73 @@ namespace VLG
             floor.bgmId = 0;
 
             return floor;
-        }    
+        }
+
+        // Floor 50
+        public Floor GetFloor50()
+        {
+            Floor floor = new Floor();
+
+            // ID and Code
+            floor.id = 1;
+            floor.code = floorCodes[floor.id];
+
+            // Geometry
+            string[,] geometry = new string[FLOOR_COLS, FLOOR_ROWS]{
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "01A", "03A", "02A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"}};
+
+            floor.geometry = geometry;
+
+            // Enemies
+            string[,] enemies = new string[FLOOR_COLS, FLOOR_ROWS] {
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "04A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+
+            floor.enemies = enemies;
+
+            // Items
+            string[,] items = new string[FLOOR_COLS, FLOOR_ROWS] {
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"}};
+
+            floor.items = items;
+
+            // Turns Max
+            floor.turnsMax = 0;
+
+            // Skybox
+            floor.skyboxId = 0;
+
+            // BGM
+            floor.bgmId = 0;
+
+            return floor;
+        }
 
 
         // This function is called when the MonoBehaviour will be destroyed.

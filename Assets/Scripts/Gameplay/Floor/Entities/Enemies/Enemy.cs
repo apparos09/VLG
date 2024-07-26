@@ -126,7 +126,7 @@ namespace VLG
         }
 
         // Runs the AI for the enemy.
-        public virtual void RunAI()
+        public virtual void UpdateAI()
         {
             // ...
             
@@ -177,7 +177,7 @@ namespace VLG
             // The game is paused, so don't update anything.
             if (!gameManager.IsPaused())
             {
-                RunAI();
+                UpdateAI();
             }
                 
         }

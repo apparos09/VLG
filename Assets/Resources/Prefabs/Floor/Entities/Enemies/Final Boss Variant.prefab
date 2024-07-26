@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Final Boss Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: a64b1b1a95bb3db4a97d47d8c255ea36, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -108,17 +112,19 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 4
   jumpFactor: 7
-  animator: {fileID: 0}
+  animator: {fileID: 5268624312265822331}
   collider: {fileID: 3676191393248219241}
   rigidbody: {fileID: 245092977649425835}
   ignoreGeometry: 0
   vulnerable: 1
-  facePlayer: 0
+  facePlayer: 1
   modelAnimator: {fileID: 5268624312265822331}
   idleAnim: 
   playIdleOnStart: 1
   attackAnim: 
   health: 1
+  phase: 1
+  lightningStrikePrefab: {fileID: 5210408437182001944, guid: 89cefdf26c679064c984d0fdd870ff24, type: 3}
 --- !u!65 &3676191393248219241 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}

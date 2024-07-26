@@ -168,6 +168,8 @@ namespace VLG
         }
 
         // Set the floor position of the asset.
+        // NOTE: this does NOT change the position in the floor array.
+        // If you want do that, call UpdatePositionInFloorArray().
         public virtual void SetFloorPosition(Vector2Int newFloorPos, bool setResetPos, bool callInteract)
         {
             // If the position is valid.
@@ -439,6 +441,12 @@ namespace VLG
                 if (entity2 != null)
                     entity2.SetFloorPosition(oldFloorPos, false, false);
             }
+        }
+
+        // Updates the position in the floor array with the current position as the old position.
+        public void UpdatePositionInFloorArray(Vector2Int newFloorPos, bool callSetPosition)
+        {
+            UpdatePositionInFloorArray(floorPos, newFloorPos, callSetPosition);
         }
 
 
