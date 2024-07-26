@@ -94,16 +94,10 @@ namespace VLG
             // Don't destroy this object on load.
             DontDestroyOnLoad(this);
 
-            // Checks if audio controls exists.
+            // Checks if audio controls exists. If not, then grab the instance.
             if (audioControls == null)
             {
-                // Tries to grab the component.
-                audioControls = GetComponent<AudioControls>();
-
-                // Adds the component for audio controls.
-                if (audioControls == null)
-                    audioControls = gameObject.AddComponent<AudioControls>();
-
+                audioControls = AudioControls.Instance;
             }
 
             // If the file reader has not been set.

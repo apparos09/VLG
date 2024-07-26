@@ -145,6 +145,7 @@ namespace VLG
         // Refreshes the resolution dropdown to make sure it's displaying the right resolution.
         public void RefreshResolutionDropdown()
         {
+
             // Check if in full screen or not.
             if(Screen.fullScreen) // Full Screen
             {
@@ -157,6 +158,7 @@ namespace VLG
 
                 switch (height)
                 {
+                    default: // Set it to the first value by default.
                     case 576:
                         resolutionDropdown.value = 0;
                         break;
