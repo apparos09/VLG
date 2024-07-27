@@ -95,6 +95,35 @@ namespace VLG
             lightningStrikePool.Enqueue(strike);
         }
 
+        // Activates the hazards based on the current phase.
+        public void ActivateHazards()
+        {
+
+        }
+
+        // Disables all floor hazards.
+        public void DisableAllHazards()
+        {
+            // Row
+            for (int row = 0; row < floorManager.floorGeometry.GetLength(0); row++)
+            {
+                // Column
+                for (int col = 0; col < floorManager.floorGeometry.GetLength(1); col++)
+                {
+                    // If this is a hazard block.
+                    if (floorManager.floorGeometry[row, col] is HazardBlock)
+                    {
+                        // Gets the hazard.
+                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[row, col];
+
+                        // Disable the hazard.
+                        hazard.DisableHazard();
+                    }
+
+                }
+            }
+        }
+
         // Called when damage has been taken.
         public override void OnDamageTaken()
         {

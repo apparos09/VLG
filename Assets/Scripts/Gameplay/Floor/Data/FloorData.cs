@@ -755,6 +755,10 @@ namespace VLG
         // Gets the floor ID.
         public Floor GetFloor(int id)
         {
+            // Note: the row(y) and col(x) positions for the floor grids are swappped.
+            // So the object's position will be (x, y) = (col, row) when loaded in.
+            // I did this so that it would align with how the instantiated object storage grids are used.
+
             // Floor
             Floor floor;
 
@@ -1032,16 +1036,16 @@ namespace VLG
 
             // Geometry
             string[,] geometry = new string[FLOOR_COLS, FLOOR_ROWS]{
+                { "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B"},
+                { "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B"},
+                { "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B"},
+                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
+                { "03A", "03A", "03A", "01A", "03A", "03A", "02E", "03A", "03A", "03A"},
                 { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
                 { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "01A", "03A", "02E", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"},
-                { "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A", "03A"}};
+                { "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B"},
+                { "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B"},
+                { "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B", "04B"}};
 
             floor.geometry = geometry;
 
