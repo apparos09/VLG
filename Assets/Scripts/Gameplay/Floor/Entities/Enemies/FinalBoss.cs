@@ -36,6 +36,9 @@ namespace VLG
         // The countdown timer for firing off lightning.
         private float lightningTimer = 0.0F;
 
+        // The number of active lighting attacks.
+        private int activeLightningCount = 0;
+
         [Header("Final Boss/Animations")]
 
         // Animation for raising the final boss.
@@ -104,6 +107,9 @@ namespace VLG
             // Activates the object and triggers a ligthing strike.
             strike.gameObject.SetActive(true);
             strike.TriggerLightningStrike(strikePos);
+
+            // There is active lightning.
+            activeLightningCount++;
         }
 
         // Returns the lighting strike to the pool.
@@ -111,6 +117,9 @@ namespace VLG
         {
             strike.gameObject.SetActive(false);
             lightningStrikePool.Enqueue(strike);
+
+            // There is not active lightning.
+            activeLightningCount--;
         }
 
         // Spawns lightning strikes with the provided layout.
@@ -333,10 +342,10 @@ namespace VLG
             SetLightningTimerMax();
 
             // The boss should attack.
-            attacking = true;
+            // attacking = true; // Triggered by animation.
 
             // Raise the boss.
-            // animator.Play(riseAnim);
+            animator.Play(riseAnim);
         }
 
         // End the phase.
@@ -346,10 +355,22 @@ namespace VLG
             attacking = false;
 
             // Lower the boss.
-            // animator.Play(dropAnim);
+            animator.Play(dropAnim);
         }
 
-        // DAMAGE //
+        // ATTACK/DAMAGE //
+        // Start attacking.
+        public void StartAttacking()
+        {
+            attacking = true;
+        }
+
+        // Stop attacking.
+        public void StopAttacking()
+        {
+            attacking = false;
+        }
+
         // Called when damage has been taken.
         public override void OnDamageTaken()
         {
@@ -394,6 +415,12 @@ namespace VLG
                     // Set to the max.
                     lightningTimer = lightningTimerMax;
                 }
+            }
+
+            // If there is still active lightning, consider the boss to still be attacking.
+            if(!struckLightning)
+            {
+                struckLightning = activeLightningCount > 0;
             }
 
             // No attacks were done, so end the phase.

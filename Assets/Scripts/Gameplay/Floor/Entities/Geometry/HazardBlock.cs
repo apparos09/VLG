@@ -15,6 +15,10 @@ namespace VLG
         // Determines if the hazard is on or off.
         protected bool hazardOn = true;
 
+        // The hazard on and off animations.
+        public string hazardOnAnim = "Hazard Block - Hazard On Animation";
+        public string hazardOffAnim = "Hazard Block - Hazard Off Animation";
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -86,13 +90,13 @@ namespace VLG
         // Plays the hazard on animation.
         private void PlayHazardOnAnimation()
         {
-            animator.Play("Hazard Block - Hazard On Animation");
+            animator.Play(hazardOnAnim);
         }
 
         // Plays the hazard off animation.
         public void PlayHazardOffAnimation()
         {
-            animator.Play("Hazard Block - Hazard Off Animation");
+            animator.Play(hazardOffAnim);
         }    
 
         // Resets the floor entity.

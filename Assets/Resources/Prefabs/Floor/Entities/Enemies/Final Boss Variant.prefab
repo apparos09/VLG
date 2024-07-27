@@ -69,6 +69,10 @@ PrefabInstance:
       value: Final Boss Variant
       objectReference: {fileID: 0}
     - target: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: a64b1b1a95bb3db4a97d47d8c255ea36, type: 2}
@@ -120,7 +124,7 @@ MonoBehaviour:
   collider: {fileID: 3676191393248219241}
   rigidbody: {fileID: 245092977649425835}
   ignoreGeometry: 1
-  vulnerable: 0
+  vulnerable: 1
   facePlayer: 1
   modelAnimator: {fileID: 1752923701173165613}
   idleAnim: 
