@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -22,13 +23,18 @@ namespace VLG
 
         [Header("Final Boss")]
 
+        // LIGHTNING
+        [Header("Final Boss/Lightning")]
         // The lighting strike prefab
         public LightningStrike lightningStrikePrefab;
+
+        // If the lighting strikes are enabled.
+        public bool enabledLightningStrikes = true;
 
         // The lightning strike pattern.
         private Queue<LightningStrikeLayout> lightningQueue = new Queue<LightningStrikeLayout>();
 
-        // The pool of lighitng strikes to pull from.
+        // The pool of laser strikes to pull from.
         private Queue<LightningStrike> lightningStrikePool = new Queue<LightningStrike>();
 
         // The lighting timer max.
@@ -37,8 +43,28 @@ namespace VLG
         // The countdown timer for firing off lightning.
         private float lightningTimer = 0.0F;
 
-        // The number of active lighting attacks.
-        private int activeLightningCount = 0;
+        // The number of active lightning attacks.
+        private int activeLightningStrikesCount = 0;
+
+        // LASER 
+        [Header("Tracking Laser")]
+        // The laser strike prefab.
+        public TrackingLaser trackingLaserPrefab;
+
+        // If the tracking lasers are enabled.
+        public bool enabledTrackingLasers = true;
+
+        // The pool of laser strikes to pull from.
+        private Queue<TrackingLaser> trackingLasersPool = new Queue<TrackingLaser>();
+
+        // The laser timer max.
+        private float laserTimerMax = 3.0F;
+
+        // The countdown timer for starting a laser attack.
+        private float laserTimer = 0.0F;
+
+        // The number of active tracking laser attacks.
+        private int activeTrackingLasersCount = 0;
 
         [Header("Final Boss/Animations")]
 
@@ -82,6 +108,7 @@ namespace VLG
 
         }
 
+        // LIGHTNING //
         // Spawns a lighting strike at the provided position.
         public void SpawnLightingStrike(Vector2Int strikePos)
         {
@@ -110,7 +137,7 @@ namespace VLG
             strike.TriggerLightningStrike(strikePos);
 
             // There is active lightning.
-            activeLightningCount++;
+            activeLightningStrikesCount++;
         }
 
         // Returns the lighting strike to the pool.
@@ -119,10 +146,10 @@ namespace VLG
             strike.gameObject.SetActive(false);
             lightningStrikePool.Enqueue(strike);
 
-            // There is not active lightning.
-            activeLightningCount--;
+            // Reduce active count.
+            activeLightningStrikesCount--;
         }
-
+        
         // Spawns lightning strikes with the provided layout.
         public void SpawnLightningStrikes(LightningStrikeLayout layout)
         {
@@ -141,100 +168,6 @@ namespace VLG
                         Vector2Int gridPos = new Vector2Int(r, c);
                         SpawnLightingStrike(gridPos);
                     }
-                }
-            }
-        }
-
-        // Activates the hazards based on the current phase.
-        public void ActivateHazards()
-        {
-            // The hazard sets.
-            Vector2Int rowSet1 = new Vector2Int(0, 9);
-            Vector2Int rowSet2 = new Vector2Int(1, 8);
-            Vector2Int rowSet3 = new Vector2Int(2, 7);
-
-            // The rows to be activated.
-            Queue<Vector2Int> rowQueue = new Queue<Vector2Int>();
-
-            // Checks what rows should be enabled for the phases.
-            switch(phase)
-            {
-                case 0:
-                case 1: // Clear
-                    rowQueue.Clear();
-                    break;
-
-                case 2:
-                    rowQueue.Enqueue(rowSet1);
-                    break;
-
-                case 3:
-                    rowQueue.Enqueue(rowSet1);
-                    rowQueue.Enqueue(rowSet2);
-                    break;
-
-                case 4:
-                case 5:
-                    rowQueue.Enqueue(rowSet1);
-                    rowQueue.Enqueue(rowSet2);
-                    rowQueue.Enqueue(rowSet3);
-                    break;
-            }
-
-            // While there are still rows.
-            while (rowQueue.Count > 0)
-            {
-                // Gets the rows.
-                Vector2Int rows = rowQueue.Dequeue();
-
-                // Columns
-                for (int col = 0; col < floorManager.floorGeometry.GetLength(1); col++)
-                {
-                    // If this is a hazard block.
-                    if (floorManager.floorGeometry[rows.x, col] is HazardBlock)
-                    {
-                        // Gets the hazard.
-                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[rows.x, col];
-
-                        // Enable the hazard.
-                        if(!hazard.IsHazardOn())
-                            hazard.EnableHazard(true);
-                    }
-
-                    // If this is a hazard block.
-                    if (floorManager.floorGeometry[rows.y, col] is HazardBlock)
-                    {
-                        // Gets the hazard.
-                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[rows.y, col];
-
-                        // Enable the hazard.
-                        if (!hazard.IsHazardOn())
-                            hazard.EnableHazard(true);
-                    }
-
-                }
-            }
-        }
-
-        // Disables all floor hazards.
-        public void DisableAllHazards()
-        {
-            // Row
-            for (int row = 0; row < floorManager.floorGeometry.GetLength(0); row++)
-            {
-                // Column
-                for (int col = 0; col < floorManager.floorGeometry.GetLength(1); col++)
-                {
-                    // If this is a hazard block.
-                    if (floorManager.floorGeometry[row, col] is HazardBlock)
-                    {
-                        // Gets the hazard.
-                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[row, col];
-
-                        // Disable the hazard.
-                        hazard.DisableHazard();
-                    }
-
                 }
             }
         }
@@ -390,10 +323,10 @@ namespace VLG
         }
 
         // Sets the max of the lightning timer based on the current phase.
-        public void SetLightningTimerMax()
+        public void SetLightningStrikeTimerMax()
         {
             // Checks the phase for the new lighting max value.
-            switch(phase)
+            switch (phase)
             {
                 case 0:
                 case 1:
@@ -420,15 +353,208 @@ namespace VLG
         }
 
 
+
+        // LASERS //
+        // Spawns a laser strike at the provided position.
+        public void SpawnLaserStrike()
+        {
+            // The laser strike object.
+            TrackingLaser laser;
+
+            // Checks if there's already a saved lightning strike object.
+            if (trackingLasersPool.Count > 0)
+            {
+                laser = trackingLasersPool.Dequeue();
+            }
+            else // No object.
+            {
+                // Generate a new one.
+                laser = Instantiate(trackingLaserPrefab);
+
+                // Parent
+                laser.transform.parent = transform.parent;
+
+                // Return the lighting strike object to the pool when it's done.
+                laser.OnLaserStrikeEndAddCallback(ReturnTrackingLaser);
+            }
+
+            // Activates the object and triggers a tracking.
+            laser.gameObject.SetActive(true);
+            laser.StartTrackingPlayer();
+
+            // There is tracking lightning.
+            activeTrackingLasersCount++;
+        }
+
+        // Returns the tracking laser to the pool.
+        public void ReturnTrackingLaser(TrackingLaser laser)
+        {
+            laser.gameObject.SetActive(false);
+            trackingLasersPool.Enqueue(laser);
+
+            // Reduce active count.
+            activeTrackingLasersCount--;
+        }
+
+        // Sets the max of the laser timer based on the current phase.
+        public void SetTrackingLaserTimerMax()
+        {
+            // Checks the phase for the new laser timer max value.
+            switch (phase)
+            {
+                case 0:
+                case 1:
+                default:
+                    laserTimerMax = 4.0F;
+                    break;
+
+                case 2:
+                    laserTimerMax = 3.50F;
+                    break;
+
+                case 3:
+                    laserTimerMax = 3.00F;
+                    break;
+
+                case 4:
+                    laserTimerMax = 2.5F;
+                    break;
+
+                case 5:
+                    laserTimerMax = 2.0F;
+                    break;
+            }
+        }
+
+        // HAZARDS //
+
+        // Activates the hazards based on the current phase.
+        public void ActivateHazards()
+        {
+            // The hazard sets.
+            Vector2Int rowSet1 = new Vector2Int(0, 9);
+            Vector2Int rowSet2 = new Vector2Int(1, 8);
+            Vector2Int rowSet3 = new Vector2Int(2, 7);
+
+            // The rows to be activated.
+            Queue<Vector2Int> rowQueue = new Queue<Vector2Int>();
+
+            // Checks what rows should be enabled for the phases.
+            switch(phase)
+            {
+                case 0:
+                case 1: // Clear
+                    rowQueue.Clear();
+                    break;
+
+                case 2:
+                    rowQueue.Enqueue(rowSet1);
+                    break;
+
+                case 3:
+                    rowQueue.Enqueue(rowSet1);
+                    rowQueue.Enqueue(rowSet2);
+                    break;
+
+                case 4:
+                case 5:
+                    rowQueue.Enqueue(rowSet1);
+                    rowQueue.Enqueue(rowSet2);
+                    rowQueue.Enqueue(rowSet3);
+                    break;
+            }
+
+            // While there are still rows.
+            while (rowQueue.Count > 0)
+            {
+                // Gets the rows.
+                Vector2Int rows = rowQueue.Dequeue();
+
+                // Columns
+                for (int col = 0; col < floorManager.floorGeometry.GetLength(1); col++)
+                {
+                    // If this is a hazard block.
+                    if (floorManager.floorGeometry[rows.x, col] is HazardBlock)
+                    {
+                        // Gets the hazard.
+                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[rows.x, col];
+
+                        // Enable the hazard.
+                        if(!hazard.IsHazardOn())
+                            hazard.EnableHazard(true);
+                    }
+
+                    // If this is a hazard block.
+                    if (floorManager.floorGeometry[rows.y, col] is HazardBlock)
+                    {
+                        // Gets the hazard.
+                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[rows.y, col];
+
+                        // Enable the hazard.
+                        if (!hazard.IsHazardOn())
+                            hazard.EnableHazard(true);
+                    }
+
+                }
+            }
+        }
+
+        // Disables all floor hazards.
+        public void DisableAllHazards()
+        {
+            // Row
+            for (int row = 0; row < floorManager.floorGeometry.GetLength(0); row++)
+            {
+                // Column
+                for (int col = 0; col < floorManager.floorGeometry.GetLength(1); col++)
+                {
+                    // If this is a hazard block.
+                    if (floorManager.floorGeometry[row, col] is HazardBlock)
+                    {
+                        // Gets the hazard.
+                        HazardBlock hazard = (HazardBlock)floorManager.floorGeometry[row, col];
+
+                        // Disable the hazard.
+                        hazard.DisableHazard();
+                    }
+
+                }
+            }
+        }
+
+       
         // PHASE
 
         // Start the next phase.
         public void StartPhase()
         {
-            // Activates the hazards, generates the lightning pattern, and sets the timer max.
+            // Activates the hazards, generates the lightning pattern.
             ActivateHazards();
             GenerateLightningPattern();
-            SetLightningTimerMax();
+
+            // Set the timers to max.
+            SetLightningStrikeTimerMax();
+            SetTrackingLaserTimerMax();
+
+            // Lightning strikes are always enabled.
+            enabledLightningStrikes = true;
+
+            // Checks what phase it is for the lasers.
+            switch(phase)
+            {
+                case 0:
+                case 1:
+                case 2:
+                    enabledTrackingLasers = false;
+                    break;
+
+                default:
+                case 3:
+                case 4:
+                case 5:
+                    enabledTrackingLasers = true;
+                    break;
+            }
 
             // The boss should attack.
             // attacking = true; // Triggered by animation.
@@ -485,34 +611,59 @@ namespace VLG
             // Gets set to 'true' if lightning has been struck.
             bool struckLightning = false;
 
-            // While there are lightning strikes left.
-            if(lightningQueue.Count > 0)
+            // If lightning strikes are enabled.
+            if (enabledLightningStrikes)
             {
-                struckLightning = true;
-
-                // Reduce timer.
-                lightningTimer -= Time.deltaTime;
-                
-                // Fire off next pattern.
-                if(lightningTimer <= 0)
+                // While there are lightning strikes left.
+                if (lightningQueue.Count > 0)
                 {
-                    lightningTimer = 0;
+                    struckLightning = true;
 
-                    // Gets the layout.
-                    LightningStrikeLayout layout = lightningQueue.Dequeue();
+                    // Reduce timer.
+                    lightningTimer -= Time.deltaTime;
 
-                    // Spawn the lightning strikes.
-                    SpawnLightningStrikes(layout);
+                    // Shoot lightning.
+                    if (lightningTimer <= 0)
+                    {
+                        lightningTimer = 0;
 
-                    // Set to the max.
-                    lightningTimer = lightningTimerMax;
+                        // Gets the layout.
+                        LightningStrikeLayout layout = lightningQueue.Dequeue();
+
+                        // Spawn the lightning strikes.
+                        SpawnLightningStrikes(layout);
+
+                        // Set to the max.
+                        lightningTimer = lightningTimerMax;
+                    }
+                }
+
+                // If there is still active lightning, consider the boss to still be attacking.
+                if (!struckLightning)
+                {
+                    struckLightning = activeLightningStrikesCount > 0;
                 }
             }
 
-            // If there is still active lightning, consider the boss to still be attacking.
-            if(!struckLightning)
+            // NOTE: the boss comes down without chekcing if all the laser strikes were done.
+            
+            // If the lasers are enabled.
+            if(enabledTrackingLasers)
             {
-                struckLightning = activeLightningCount > 0;
+                // Reduce timer.
+                laserTimer -= Time.deltaTime;
+
+                // Activate laser.
+                if (laserTimer <= 0)
+                {
+                    laserTimer = 0;
+
+                    // Spawn a laser strike.
+                    SpawnLaserStrike();
+
+                    // Set the timer to max.
+                    laserTimer = laserTimerMax;
+                }
             }
 
             // No attacks were done, so end the phase.

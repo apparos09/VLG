@@ -135,6 +135,9 @@ MonoBehaviour:
   phaseCount: -1
   phase: 1
   lightningStrikePrefab: {fileID: 5210408437182001944, guid: 89cefdf26c679064c984d0fdd870ff24, type: 3}
+  enabledLightningStrikes: 1
+  trackingLaserPrefab: {fileID: 3571569405813918198, guid: ce6d9ed43f2e509499de397205799543, type: 3}
+  enabledTrackingLasers: 1
   riseAnim: Final Boss Rise Animation
   dropAnim: Final Boss Drop Animation
 --- !u!65 &3676191393248219241 stripped
