@@ -155,33 +155,30 @@ namespace VLG
             // The rows to be activated.
             Queue<Vector2Int> rowQueue = new Queue<Vector2Int>();
 
-            //switch(phase)
-            //{
-            //    case 0:
-            //    case 1: // Clear
-            //        rowQueue.Clear();
-            //        break;
+            // Checks what rows should be enabled for the phases.
+            switch(phase)
+            {
+                case 0:
+                case 1: // Clear
+                    rowQueue.Clear();
+                    break;
 
-            //    case 2: // 1
-            //        rowQueue.Enqueue(rowSet1);
-            //        break;
+                case 2:
+                    rowQueue.Enqueue(rowSet1);
+                    break;
 
-            //    case 3: // 2
-            //        rowQueue.Enqueue(rowSet1);
-            //        rowQueue.Enqueue(rowSet2);
-            //        break;
+                case 3:
+                    rowQueue.Enqueue(rowSet1);
+                    rowQueue.Enqueue(rowSet2);
+                    break;
 
-            //    case 4: // 3
-            //    case 5:
-            //        rowQueue.Enqueue(rowSet1);
-            //        rowQueue.Enqueue(rowSet2);
-            //        rowQueue.Enqueue(rowSet3);
-            //        break;
-            //}
-
-            rowQueue.Enqueue(rowSet1);
-            rowQueue.Enqueue(rowSet2);
-            rowQueue.Enqueue(rowSet3);
+                case 4:
+                case 5:
+                    rowQueue.Enqueue(rowSet1);
+                    rowQueue.Enqueue(rowSet2);
+                    rowQueue.Enqueue(rowSet3);
+                    break;
+            }
 
             // While there are still rows.
             while (rowQueue.Count > 0)
@@ -274,6 +271,21 @@ namespace VLG
                 { true, true, true, true, true, true, true, true, true, true},
             };
 
+            // Layout 2
+            LightningStrikeLayout layout2 = new LightningStrikeLayout();
+            layout2.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true},
+                { false, true, false, true, false, true, false, true, false, true}
+            };
+
 
             // Clears the queue.
             lightningQueue.Clear();
@@ -284,21 +296,31 @@ namespace VLG
                 case 0:
                 case 1:
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout1);
                     break;
 
                 case 2:
+                    lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
                     lightningQueue.Enqueue(layout1);
                     break;
 
                 case 3:
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout1);
                     break;
 
                 case 4:
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout1);
                     break;
 
                 case 5:
+                    lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
                     lightningQueue.Enqueue(layout1);
                     break;
             }
@@ -317,19 +339,19 @@ namespace VLG
                     break;
 
                 case 2:
-                    lightningTimerMax = 2.0F;
+                    lightningTimerMax = 2.50F;
                     break;
 
                 case 3:
-                    lightningTimerMax = 1.0F;
+                    lightningTimerMax = 2.25F;
                     break;
 
                 case 4:
-                    lightningTimerMax = 0.75F;
+                    lightningTimerMax = 2.0F;
                     break;
 
                 case 5:
-                    lightningTimerMax = 0.5F;
+                    lightningTimerMax = 1.75F;
                     break;
             }
         }
@@ -367,6 +389,9 @@ namespace VLG
         public void StartAttacking()
         {
             attacking = true;
+
+            // Start shooting lightning instantly.
+            lightningTimer = 0;
         }
 
         // Stop attacking.
@@ -398,7 +423,7 @@ namespace VLG
             bool struckLightning = false;
 
             // While there are lightning strikes left.
-            while(lightningQueue.Count > 0)
+            if(lightningQueue.Count > 0)
             {
                 struckLightning = true;
 
