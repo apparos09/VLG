@@ -8,6 +8,10 @@ namespace VLG
     public class HazardBlock : Block
     {
         [Header("HazardBlock")]
+
+        // The spikes for the hazard block.
+        public GameObject spikesModel;
+
         // The state of the hazard upon the game starting (on/off).
         [Tooltip("Determines the starting state of the hazard (on/off).")]
         public bool hazardOnDefault = true;
@@ -39,23 +43,31 @@ namespace VLG
         {
             hazardOn = value;
 
-            // Plays the proper animation based on the setting of the hazard.
-            if (hazardOn)
-                PlayHazardOnAnimation();
-            else
-                PlayHazardOffAnimation();
+            // Animate
+            if(animate)
+            {
+                // Plays the proper animation based on the setting of the hazard.
+                if (hazardOn)
+                    PlayHazardOnAnimation();
+                else
+                    PlayHazardOffAnimation();
+            }
+            else // Don't animate
+            {
+                spikesModel.SetActive(hazardOn);
+            }
         }
 
         // Enables the hazard.
         public void EnableHazard(bool animate = true)
         {
-            SetHazardOn(true);
+            SetHazardOn(true, animate);
         }
 
         // Disables the hazard.
         public void DisableHazard(bool animate = true)
         {
-            SetHazardOn(false);
+            SetHazardOn(false, animate);
         }
 
         // Toggle the hazard on/off.

@@ -155,32 +155,36 @@ namespace VLG
             // The rows to be activated.
             Queue<Vector2Int> rowQueue = new Queue<Vector2Int>();
 
-            switch(phase)
-            {
-                case 0:
-                case 1: // Clear
-                    rowQueue.Clear();
-                    break;
+            //switch(phase)
+            //{
+            //    case 0:
+            //    case 1: // Clear
+            //        rowQueue.Clear();
+            //        break;
 
-                case 2: // 1
-                    rowQueue.Enqueue(rowSet1);
-                    break;
+            //    case 2: // 1
+            //        rowQueue.Enqueue(rowSet1);
+            //        break;
 
-                case 3: // 2
-                    rowQueue.Enqueue(rowSet1);
-                    rowQueue.Enqueue(rowSet2);
-                    break;
+            //    case 3: // 2
+            //        rowQueue.Enqueue(rowSet1);
+            //        rowQueue.Enqueue(rowSet2);
+            //        break;
 
-                case 4: // 3
-                case 5:
-                    rowQueue.Enqueue(rowSet1);
-                    rowQueue.Enqueue(rowSet2);
-                    rowQueue.Enqueue(rowSet3);
-                    break;
-            }
+            //    case 4: // 3
+            //    case 5:
+            //        rowQueue.Enqueue(rowSet1);
+            //        rowQueue.Enqueue(rowSet2);
+            //        rowQueue.Enqueue(rowSet3);
+            //        break;
+            //}
+
+            rowQueue.Enqueue(rowSet1);
+            rowQueue.Enqueue(rowSet2);
+            rowQueue.Enqueue(rowSet3);
 
             // While there are still rows.
-            while(rowQueue.Count > 0)
+            while (rowQueue.Count > 0)
             {
                 // Gets the rows.
                 Vector2Int rows = rowQueue.Dequeue();
@@ -196,7 +200,7 @@ namespace VLG
 
                         // Enable the hazard.
                         if(!hazard.IsHazardOn())
-                            hazard.EnableHazard();
+                            hazard.EnableHazard(true);
                     }
 
                     // If this is a hazard block.
@@ -207,7 +211,7 @@ namespace VLG
 
                         // Enable the hazard.
                         if (!hazard.IsHazardOn())
-                            hazard.EnableHazard();
+                            hazard.EnableHazard(true);
                     }
 
                 }

@@ -62,6 +62,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bfe8cca81aa61924a8c687a7a565bd19, type: 3}
   m_PrefabInstance: {fileID: 68291350168049081}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &879318270538328296 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: bfe8cca81aa61924a8c687a7a565bd19, type: 3}
+  m_PrefabInstance: {fileID: 68291350168049081}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2433761045571279571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,7 +166,10 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 4847529175110456231}
+  spikesModel: {fileID: 879318270538328296}
   hazardOnDefault: 1
+  hazardOnAnim: Hazard Block - Hazard On Animation
+  hazardOffAnim: Hazard Block - Hazard Off Animation
 --- !u!95 &4847529175110456231 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
