@@ -100,7 +100,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3183904708813936297
 Transform:
   m_ObjectHideFlags: 0
@@ -216,6 +216,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      propertyPath: m_Size.y
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3625561857990270056, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
       propertyPath: m_Name
       value: Tracking Laser Variant
@@ -274,7 +282,7 @@ MonoBehaviour:
   floorManager: {fileID: 0}
   idNumber: -1
   version: 65
-  localYPos: 0
+  localYPos: 1
   floorPos: {x: -1, y: -1}
   resetPos: {x: -1, y: -1}
   useMoveInter: 1
@@ -294,8 +302,10 @@ MonoBehaviour:
   targetSprite: {fileID: 3493582560974273461}
   laserStrike: {fileID: 7127735313194649770}
   trackPlayer: 1
-  trackingTimerMax: 3
+  trackingTimerMax: 5
   trackingTimer: 0
+  trackingSpeed: 3
+  instantTracking: 0
   laserStrikeAnim: Laser Strike Animation
 --- !u!95 &6787268981918924474 stripped
 Animator:

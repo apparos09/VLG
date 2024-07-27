@@ -359,23 +359,23 @@ namespace VLG
                 case 0:
                 case 1:
                 default:
-                    lightningTimerMax = 3.0F;
+                    lightningTimerMax = 4.00F;
                     break;
 
                 case 2:
-                    lightningTimerMax = 2.50F;
+                    lightningTimerMax = 3.50F;
                     break;
 
                 case 3:
-                    lightningTimerMax = 2.25F;
+                    lightningTimerMax = 3.00F;
                     break;
 
                 case 4:
-                    lightningTimerMax = 2.0F;
+                    lightningTimerMax = 2.50F;
                     break;
 
                 case 5:
-                    lightningTimerMax = 1.75F;
+                    lightningTimerMax = 2.00F;
                     break;
             }
         }
@@ -433,23 +433,23 @@ namespace VLG
                 case 0:
                 case 1:
                 default:
-                    laserTimerMax = 4.0F;
+                    laserTimerMax = 5.00F;
                     break;
 
                 case 2:
-                    laserTimerMax = 3.50F;
+                    laserTimerMax = 4.50F;
                     break;
 
                 case 3:
-                    laserTimerMax = 3.00F;
+                    laserTimerMax = 4.00F;
                     break;
 
                 case 4:
-                    laserTimerMax = 2.5F;
+                    laserTimerMax = 3.50F;
                     break;
 
                 case 5:
-                    laserTimerMax = 2.0F;
+                    laserTimerMax = 3.00F;
                     break;
             }
         }
@@ -567,23 +567,6 @@ namespace VLG
             // Lightning strikes are always enabled.
             enabledLightningStrikes = true;
 
-            // Checks what phase it is for the lasers.
-            switch(phase)
-            {
-                case 0:
-                case 1:
-                case 2:
-                    enabledTrackingLasers = false;
-                    break;
-
-                default:
-                case 3:
-                case 4:
-                case 5:
-                    enabledTrackingLasers = true;
-                    break;
-            }
-
             // The boss should attack.
             // attacking = true; // Triggered by animation.
 
@@ -675,24 +658,24 @@ namespace VLG
 
             //// NOTE: the boss comes down without chekcing if all the laser strikes were done.
             
-            //// If the lasers are enabled.
-            //if(enabledTrackingLasers)
-            //{
-            //    // Reduce timer.
-            //    laserTimer -= Time.deltaTime;
+            // If the lasers are enabled.
+            if(enabledTrackingLasers)
+            {
+                // Reduce timer.
+                laserTimer -= Time.deltaTime;
 
-            //    // Activate laser.
-            //    if (laserTimer <= 0)
-            //    {
-            //        laserTimer = 0;
+                // Activate laser.
+                if (laserTimer <= 0)
+                {
+                    laserTimer = 0;
 
-            //        // Spawn a laser strike.
-            //        SpawnLaserStrike();
+                    // Spawn a laser strike.
+                    SpawnLaserStrike();
 
-            //        // Set the timer to max.
-            //        laserTimer = laserTimerMax;
-            //    }
-            //}
+                    // Set the timer to max.
+                    laserTimer = laserTimerMax;
+                }
+            }
 
             // No attacks were done, so end the phase.
             if(!struckLightning)

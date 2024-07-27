@@ -17,10 +17,18 @@ namespace VLG
         public bool trackPlayer = true;
 
         // The maximum time for tracking the player's position.
-        public float trackingTimerMax = 3.0F;
+        public float trackingTimerMax = 5.0F;
 
         // The timer for tracking the player's position.
         public float trackingTimer = 0.0F;
+
+        // The speed of the movement when tracking the player.
+        [Tooltip("The speed of the movement when tracking the player.")]
+        public float trackingSpeed = 1.0F;
+
+        // If 'true', the laser tracks the player's position instantly.
+        // If false, it lags behind the player.
+        public bool instantTracking = true;
 
         // Laser Strike Start Animation
         public string laserStrikeAnim = "Laser Strike Animation";
@@ -39,6 +47,10 @@ namespace VLG
         {
             base.Start();
 
+            // Set parent to the floor origin if it's not set already. 
+            if (transform.parent == null)
+                transform.parent = floorManager.floorOrigin.transform;
+
             // Start tracking the player from the beginning.
             StartTrackingPlayer();
         }
@@ -53,19 +65,49 @@ namespace VLG
             targetSprite.gameObject.SetActive(true);
             laserStrike.gameObject.SetActive(false);
 
+            // Set to the player's position at the start.
+            SetFloorPosition(gameManager.player.floorPos, true, false);
+
             // Go to the player's position.
-            SetToPlayerPosition();
+            MoveTowardsPlayer();
         }
 
         // Set to the player position.
-        public void SetToPlayerPosition()
+        public void MoveTowardsPlayer()
         {
-            // Get the new position.
-            Vector3 newPos = gameManager.player.transform.position;
-            newPos.y = transform.position.y;
+            Player player = gameManager.player;
 
-            // Set.
-            transform.position = newPos;
+            // If the player's position should be instantly jumped to.
+            if(instantTracking)
+            {
+                // Get the new position.
+                Vector3 newPos = player.transform.position;
+                newPos.y = transform.position.y;
+
+                // Change saved floor position.
+                SetFloorPosition(player.floorPos, false, false);
+
+                // Set world position.
+                transform.position = newPos;
+            }
+            else // Move towards player.
+            {
+                // Current
+                Vector3 pos1 = transform.position;
+
+                // Target
+                Vector3 pos2 = player.transform.position;
+                pos2.y = pos1.y;
+
+                // Result
+                Vector3 newPos = Vector3.MoveTowards(pos1, pos2, trackingSpeed * Time.deltaTime);
+
+                // Change saved floor position.
+                SetFloorPosition(player.floorPos, false, false);
+
+                // Set world position.
+                transform.position = newPos;
+            }
         }
 
         // Shoots the Laser
@@ -74,9 +116,8 @@ namespace VLG
             trackPlayer = false;
             trackingTimer = 0;
 
-            // Activate Laser
-            targetSprite.gameObject.SetActive(false);
-            laserStrike.gameObject.SetActive(true);
+            // Play the animation.
+            animator.Play(laserStrikeAnim);
         }
 
         // Called when the laser has started moving.
@@ -85,8 +126,6 @@ namespace VLG
             // Sprite and Model
             targetSprite.gameObject.SetActive(false);
             laserStrike.gameObject.SetActive(true);
-
-            animator.Play(laserStrikeAnim);
 
             // Callbacks.
             if (laserStartCallback != null)
@@ -156,7 +195,7 @@ namespace VLG
                         else
                         {
                             // Follow the player's position.
-                            SetToPlayerPosition();
+                            MoveTowardsPlayer();
                         }
                     }
                 }
