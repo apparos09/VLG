@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace VLG
 {
+    // TODO: have an intro animation that plays when the fight starts to give the player time to react.
     // The final boss of the game.
     public class FinalBoss : Boss
     {
@@ -259,7 +260,7 @@ namespace VLG
             // Layout 1
             LightningStrikeLayout layout1 = new LightningStrikeLayout();
             layout1.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
-                { true, true, true, true, true, true, true, true, true, true},
+                { true, false, true, false, true, false, true, false, true, false},
                 { true, false, true, false, true, false, true, false, true, true},
                 { true, false, true, false, true, false, true, false, true, true},
                 { true, false, true, false, true, false, true, false, true, true},
@@ -268,7 +269,7 @@ namespace VLG
                 { true, false, true, false, true, false, true, false, true, true},
                 { true, false, true, false, true, false, true, false, true, true},
                 { true, false, true, false, true, false, true, false, true, true},
-                { true, true, true, true, true, true, true, true, true, true},
+                { true, false, true, false, true, false, true, false, true, false},
             };
 
             // Layout 2
@@ -286,6 +287,36 @@ namespace VLG
                 { false, true, false, true, false, true, false, true, false, true}
             };
 
+            // Layout 3
+            LightningStrikeLayout layout3 = new LightningStrikeLayout();
+            layout3.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false}
+            };
+
+            // Layour 4
+            LightningStrikeLayout layout4 = new LightningStrikeLayout();
+            layout4.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true},
+                { false, false, false, false, false, false, false, false, false, false},
+                { true, true, true, true, true, true, true, true, true, true}
+            };
+
 
             // Clears the queue.
             lightningQueue.Clear();
@@ -297,31 +328,63 @@ namespace VLG
                 case 1:
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
-                    lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
                     break;
 
                 case 2:
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
                     break;
 
                 case 3:
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
                     break;
 
                 case 4:
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
+                    lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
                     break;
 
                 case 5:
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
                     lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+
+                    lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
                     break;
             }
         }

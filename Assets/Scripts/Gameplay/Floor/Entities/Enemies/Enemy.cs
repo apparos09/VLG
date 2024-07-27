@@ -154,39 +154,43 @@ namespace VLG
             // Faces the player.
             if(facePlayer)
             {
-                // The position difference.
-                Vector3 posDiff = gameManager.player.transform.position - transform.position;
-
-                // The new forward direction of the enemy.
-                transform.rotation = Quaternion.identity; // Reset rotation
-                
-                // The enemy's forward direction.
-                Vector3 forward;
-                
-                // The player is in the exact same position as the enemy.
-                if(posDiff == Vector3.zero)
+                // If the player's position is not equal to this enemy's position.
+                if(gameManager.player.transform.position != transform.position)
                 {
-                    forward = transform.forward;
-                }
-                // Change the facing direction.
-                else
-                {
-                    // Sets the forward direction.
-                    // 8-Directional
-                    forward.x = (posDiff.x > 0) ? 1 : (posDiff.x < 0) ? -1 : 0;
-                    forward.y = 0.0F;
-                    forward.z = (posDiff.z > 0) ? 1 : (posDiff.z < 0) ? -1 : 0;
+                    // The position difference.
+                    Vector3 posDiff = gameManager.player.transform.position - transform.position;
 
-                    // Free-Form
-                    // forward = posDiff;
-                    // forward.y = 0F; // Don't effect y-component.
+                    // The new forward direction of the enemy.
+                    transform.rotation = Quaternion.identity; // Reset rotation
 
-                    // Normalize the direction.
-                    forward.Normalize();
-                }
+                    // The enemy's forward direction.
+                    Vector3 forward;
 
-                // Sets the forward direction of the enemy.
-                transform.forward = forward;
+                    // The player is in the exact same position as the enemy.
+                    if (posDiff == Vector3.zero)
+                    {
+                        forward = transform.forward;
+                    }
+                    // Change the facing direction.
+                    else
+                    {
+                        // Sets the forward direction.
+                        // 8-Directional
+                        forward.x = (posDiff.x > 0) ? 1 : (posDiff.x < 0) ? -1 : 0;
+                        forward.y = 0.0F;
+                        forward.z = (posDiff.z > 0) ? 1 : (posDiff.z < 0) ? -1 : 0;
+
+                        // Free-Form
+                        // forward = posDiff;
+                        // forward.y = 0F; // Don't effect y-component.
+
+                        // Normalize the direction.
+                        forward.Normalize();
+                    }
+
+                    // Sets the forward direction of the enemy.
+                    transform.forward = forward;
+                }                
             }
         }
 
