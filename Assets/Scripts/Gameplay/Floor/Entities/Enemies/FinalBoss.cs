@@ -190,7 +190,7 @@ namespace VLG
             //    { false, false, false, false, false, false, false, false, false, false}
             //};
 
-            // Layout 1
+            // Layout 1 - Alt Rows (V1)
             LightningStrikeLayout layout1 = new LightningStrikeLayout();
             layout1.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
                 { true, false, true, false, true, false, true, false, true, false},
@@ -205,7 +205,7 @@ namespace VLG
                 { true, false, true, false, true, false, true, false, true, false},
             };
 
-            // Layout 2
+            // Layout 2 - Alt Rows (V2)
             LightningStrikeLayout layout2 = new LightningStrikeLayout();
             layout2.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
                 { false, true, false, true, false, true, false, true, false, true},
@@ -220,7 +220,7 @@ namespace VLG
                 { false, true, false, true, false, true, false, true, false, true}
             };
 
-            // Layout 3
+            // Layout 3 - Alt Cols (V1)
             LightningStrikeLayout layout3 = new LightningStrikeLayout();
             layout3.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
                 { true, true, true, true, true, true, true, true, true, true},
@@ -235,7 +235,7 @@ namespace VLG
                 { false, false, false, false, false, false, false, false, false, false}
             };
 
-            // Layour 4
+            // Layour 4 - Alt Cols (V2)
             LightningStrikeLayout layout4 = new LightningStrikeLayout();
             layout4.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
                 { false, false, false, false, false, false, false, false, false, false},
@@ -250,6 +250,36 @@ namespace VLG
                 { true, true, true, true, true, true, true, true, true, true}
             };
 
+            // Layout 5 (Left to Right)
+            LightningStrikeLayout layout5 = new LightningStrikeLayout();
+            layout5.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true}
+            };
+
+            // Layout 6 - Diagonal (Right to Left)
+            LightningStrikeLayout layout6 = new LightningStrikeLayout();
+            layout6.positions = new bool[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS]{
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false},
+                { false, true, false, true, false, true, false, true, false, true},
+                { true, false, true, false, true, false, true, false, true, false}
+            };
+
 
             // Clears the queue.
             lightningQueue.Clear();
@@ -258,7 +288,7 @@ namespace VLG
             switch (phase)
             {
                 case 0:
-                case 1:
+                case 1: // 4
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
                     lightningQueue.Enqueue(layout3);
@@ -266,21 +296,34 @@ namespace VLG
 
                     break;
 
-                case 2:
+                case 2: // 6
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
                     lightningQueue.Enqueue(layout3);
                     lightningQueue.Enqueue(layout4);
+                    lightningQueue.Enqueue(layout5);
+                    lightningQueue.Enqueue(layout6);
+                    break;
+
+                case 3: // 8
+                    lightningQueue.Enqueue(layout1);
+                    lightningQueue.Enqueue(layout2);
+                    lightningQueue.Enqueue(layout3);
+                    lightningQueue.Enqueue(layout4);
+                    lightningQueue.Enqueue(layout5);
+                    lightningQueue.Enqueue(layout6);
 
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
                     break;
 
-                case 3:
+                case 4: // 10
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
                     lightningQueue.Enqueue(layout3);
                     lightningQueue.Enqueue(layout4);
+                    lightningQueue.Enqueue(layout5);
+                    lightningQueue.Enqueue(layout6);
 
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
@@ -288,36 +331,21 @@ namespace VLG
                     lightningQueue.Enqueue(layout4);
                     break;
 
-                case 4:
+                case 5: // 12
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
                     lightningQueue.Enqueue(layout3);
                     lightningQueue.Enqueue(layout4);
 
+                    lightningQueue.Enqueue(layout5);
+                    lightningQueue.Enqueue(layout6);
                     lightningQueue.Enqueue(layout1);
                     lightningQueue.Enqueue(layout2);
+
                     lightningQueue.Enqueue(layout3);
                     lightningQueue.Enqueue(layout4);
-
-                    lightningQueue.Enqueue(layout1);
-                    lightningQueue.Enqueue(layout2);
-                    break;
-
-                case 5:
-                    lightningQueue.Enqueue(layout1);
-                    lightningQueue.Enqueue(layout2);
-                    lightningQueue.Enqueue(layout3);
-                    lightningQueue.Enqueue(layout4);
-
-                    lightningQueue.Enqueue(layout1);
-                    lightningQueue.Enqueue(layout2);
-                    lightningQueue.Enqueue(layout3);
-                    lightningQueue.Enqueue(layout4);
-
-                    lightningQueue.Enqueue(layout1);
-                    lightningQueue.Enqueue(layout2);
-                    lightningQueue.Enqueue(layout3);
-                    lightningQueue.Enqueue(layout4);
+                    lightningQueue.Enqueue(layout5);
+                    lightningQueue.Enqueue(layout6);
                     break;
             }
         }
@@ -645,26 +673,26 @@ namespace VLG
                 }
             }
 
-            // NOTE: the boss comes down without chekcing if all the laser strikes were done.
+            //// NOTE: the boss comes down without chekcing if all the laser strikes were done.
             
-            // If the lasers are enabled.
-            if(enabledTrackingLasers)
-            {
-                // Reduce timer.
-                laserTimer -= Time.deltaTime;
+            //// If the lasers are enabled.
+            //if(enabledTrackingLasers)
+            //{
+            //    // Reduce timer.
+            //    laserTimer -= Time.deltaTime;
 
-                // Activate laser.
-                if (laserTimer <= 0)
-                {
-                    laserTimer = 0;
+            //    // Activate laser.
+            //    if (laserTimer <= 0)
+            //    {
+            //        laserTimer = 0;
 
-                    // Spawn a laser strike.
-                    SpawnLaserStrike();
+            //        // Spawn a laser strike.
+            //        SpawnLaserStrike();
 
-                    // Set the timer to max.
-                    laserTimer = laserTimerMax;
-                }
-            }
+            //        // Set the timer to max.
+            //        laserTimer = laserTimerMax;
+            //    }
+            //}
 
             // No attacks were done, so end the phase.
             if(!struckLightning)
