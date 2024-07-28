@@ -188,8 +188,9 @@ namespace VLG
                         forward.Normalize();
                     }
 
-                    // Sets the forward direction of the enemy.
-                    transform.forward = forward;
+                    // Sets the forward direction of the enemy as long as it's not zero.
+                    if(forward != Vector3.zero)
+                        transform.forward = forward;
                 }                
             }
         }

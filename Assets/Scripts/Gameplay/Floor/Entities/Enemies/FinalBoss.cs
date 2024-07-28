@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -20,6 +21,9 @@ namespace VLG
 
         // Gets set to 'true' when the final boss is attacking.
         private bool attacking = false;
+
+        // The list of objects being used for attacks.
+        private List<GameObject> attackObjects = new List<GameObject>();
 
         [Header("Final Boss")]
 
@@ -105,12 +109,11 @@ namespace VLG
 
             // Starts the phase.
             StartPhase();
-
         }
 
         // LIGHTNING //
         // Spawns a lighting strike at the provided position.
-        public void SpawnLightingStrike(Vector2Int strikePos)
+        public LightningStrike SpawnLightningStrike(Vector2Int strikePos)
         {
             // The lighting strike object.
             LightningStrike strike;
@@ -138,6 +141,12 @@ namespace VLG
 
             // There is active lightning.
             activeLightningStrikesCount++;
+
+            // If the attack object is not in the list, add it.
+            if (!attackObjects.Contains(strike.gameObject))
+                attackObjects.Add(strike.gameObject);
+
+            return strike;
         }
 
         // Returns the lighting strike to the pool.
@@ -166,7 +175,7 @@ namespace VLG
                     if (layout.positions[r, c] == true)
                     {
                         Vector2Int gridPos = new Vector2Int(r, c);
-                        SpawnLightingStrike(gridPos);
+                        SpawnLightningStrike(gridPos);
                     }
                 }
             }
@@ -359,11 +368,11 @@ namespace VLG
                 case 0:
                 case 1:
                 default:
-                    lightningTimerMax = 4.00F;
+                    lightningTimerMax = 3.50F;
                     break;
 
                 case 2:
-                    lightningTimerMax = 3.50F;
+                    lightningTimerMax = 3.25F;
                     break;
 
                 case 3:
@@ -371,11 +380,11 @@ namespace VLG
                     break;
 
                 case 4:
-                    lightningTimerMax = 2.50F;
+                    lightningTimerMax = 2.75F;
                     break;
 
                 case 5:
-                    lightningTimerMax = 2.00F;
+                    lightningTimerMax = 2.50F;
                     break;
             }
         }
@@ -384,7 +393,7 @@ namespace VLG
 
         // LASERS //
         // Spawns a laser strike at the provided position.
-        public void SpawnLaserStrike()
+        public TrackingLaser SpawnTrackingLaser()
         {
             // The laser strike object.
             TrackingLaser laser;
@@ -412,6 +421,12 @@ namespace VLG
 
             // There is tracking lightning.
             activeTrackingLasersCount++;
+
+            // If the attack object is not in the list, add it.
+            if (!attackObjects.Contains(laser.gameObject))
+                attackObjects.Add(laser.gameObject);
+
+            return laser;
         }
 
         // Returns the tracking laser to the pool.
@@ -437,19 +452,19 @@ namespace VLG
                     break;
 
                 case 2:
-                    laserTimerMax = 4.50F;
+                    laserTimerMax = 4.75F;
                     break;
 
                 case 3:
-                    laserTimerMax = 4.00F;
+                    laserTimerMax = 4.50F;
                     break;
 
                 case 4:
-                    laserTimerMax = 3.50F;
+                    laserTimerMax = 4.25F;
                     break;
 
                 case 5:
-                    laserTimerMax = 3.00F;
+                    laserTimerMax = 4.00F;
                     break;
             }
         }
@@ -590,8 +605,9 @@ namespace VLG
         {
             attacking = true;
 
-            // Start shooting lightning instantly.
-            lightningTimer = 0;
+            // Delay the start of the round.
+            lightningTimer = 1.5F;
+            laserTimer = 2.5F;
         }
 
         // Stop attacking.
@@ -670,7 +686,7 @@ namespace VLG
                     laserTimer = 0;
 
                     // Spawn a laser strike.
-                    SpawnLaserStrike();
+                    SpawnTrackingLaser();
 
                     // Set the timer to max.
                     laserTimer = laserTimerMax;
@@ -696,6 +712,17 @@ namespace VLG
         protected override void OnDestroy()
         {
             base.OnDestroy();
+
+            // Destroys all the attack objects.
+            for(int i = 0; i < attackObjects.Count; i++)
+            {
+                // Destroy the object.
+                if (attackObjects[i] != null)
+                    Destroy(attackObjects[i].gameObject);
+            }
+
+            // Clears the attack objects.
+            attackObjects.Clear();
         }
 
     }

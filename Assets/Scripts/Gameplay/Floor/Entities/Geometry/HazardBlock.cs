@@ -7,7 +7,7 @@ namespace VLG
     // A block with a hazard on it.
     public class HazardBlock : Block
     {
-        [Header("HazardBlock")]
+        [Header("Hazard Block")]
 
         // The spikes for the hazard block.
         public GameObject spikesModel;
@@ -18,6 +18,11 @@ namespace VLG
 
         // Determines if the hazard is on or off.
         protected bool hazardOn = true;
+
+        [Header("Hazard Block/Animations")]
+
+        // If animations are being used.
+        public bool useAnimations = true;
 
         // The hazard on and off animations.
         public string hazardOnAnim = "Hazard Block - Hazard On Animation";
@@ -115,7 +120,10 @@ namespace VLG
         public override void ResetEntity()
         {
             base.ResetEntity();
-            SetHazardOn(hazardOnDefault, false); // Set value to default.
+
+            // If the hazard was changed using an animation, it must be put back to its default...
+            // Using an animation as well, for some reason.
+            SetHazardOn(hazardOnDefault, useAnimations); // Set value to default.
         }
     }
 

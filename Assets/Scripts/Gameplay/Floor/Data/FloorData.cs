@@ -1083,10 +1083,10 @@ namespace VLG
             floor.turnsMax = 0;
 
             // Skybox
-            floor.skyboxId = 0;
+            floor.skyboxId = 6;
 
             // BGM
-            floor.bgmId = 0;
+            floor.bgmId = 6;
 
             return floor;
         }

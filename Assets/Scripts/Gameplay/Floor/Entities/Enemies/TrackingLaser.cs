@@ -62,6 +62,7 @@ namespace VLG
             trackingTimer = trackingTimerMax;
 
             // Activate Target
+            // I don't think this works because they're tied to animations, so the laser is off by default.
             targetSprite.gameObject.SetActive(true);
             laserStrike.gameObject.SetActive(false);
 
