@@ -55,7 +55,7 @@ namespace VLG
 
             // If the runtime platform is WebGL, disable the resolution dropdown.
             if (Application.platform == RuntimePlatform.WebGLPlayer)
-                resolutionDropdown.enabled = false;
+                resolutionDropdown.interactable = false;
         }
 
         // This function is called when the object becomes enabled and active
