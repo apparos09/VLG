@@ -176,9 +176,9 @@ namespace VLG
             
             // Checks what should be used as the floor count calculation.
             if(gameManager.floorCount - 1 > 0)
-                percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / (gameManager.floorCount - 1));
+                percent = Mathf.Clamp01((float)gameManager.floorManager.currFloor.id / (gameManager.floorCount - 1));
             else
-                percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / (FloorData.FLOOR_COUNT_MAX - 1));
+                percent = Mathf.Clamp01((float)gameManager.floorManager.currFloor.id / (FloorData.FLOOR_COUNT_MAX - 1));
 
             // Sets the value.
             gameProgressBar.SetValue(percent, true);

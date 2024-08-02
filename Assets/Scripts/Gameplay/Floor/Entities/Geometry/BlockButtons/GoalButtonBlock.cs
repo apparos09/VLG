@@ -7,13 +7,17 @@ namespace VLG
     // Portal goal toggle button
     public class GoalButtonBlock : ButtonBlock
     {
+        // NOTE: blocks are not destroyed on reset, so this shouldn't cause issues.
+        // The list of goal blocks.
+        private List<GoalBlock> goalBlocks;
+
         // Called on the first update frame.
         protected override void PostStart()
         {
             base.PostStart();
 
             // Finds all the portal blocks and adds them to this button.
-            AddAllFloorEntitiesOfType<GoalBlock>(true);
+            goalBlocks = AddAllFloorEntitiesOfType<GoalBlock>(true);
 
             // Resets the entity so that the goal is turned off by default.
             ResetEntity();
@@ -25,12 +29,16 @@ namespace VLG
             base.ResetEntity();
 
             // Disable the goal at the start.
-            Goal goal = floorManager.goal;
-
-            // Makes the goal unusable at the start.
-            if (goal.objective == Goal.goalType.button)
+            foreach (GoalBlock goalBlock in goalBlocks)
             {
-                goal.SetUsable(false);
+                // Gets the goal.
+                Goal goal = goalBlock.goal;
+
+                // Makes the goal unusable at the start.
+                if (goal.objective == Goal.goalType.button)
+                {
+                    goal.SetUsable(false);
+                }
             }
         }
     }
