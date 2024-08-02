@@ -900,7 +900,7 @@ namespace VLG
 
             // Checks if there are remaining floors
             // Keep in mind that the debug floor/floor 0 is part of the floor count.
-            if (nextFloorId < FloorData.FLOOR_COUNT)
+            if (nextFloorId < gameManager.floorCount && nextFloorId < FloorData.FLOOR_COUNT_MAX)
             {
                 // Generates the next floor. Checks if a coroutine should be used or not.
                 if(gameManager.useFloorCoroutine)

@@ -36,6 +36,10 @@ namespace VLG
         [HideInInspector]
         public bool useFloorCoroutine = true;
 
+        // The number of floors the player will do. This is used for testing purposes.
+        [Tooltip("The number of floors the player will do. This is for testing purposes.")]
+        public int floorCount = 0;
+
         // Gets set to 'true' when the post start function has been called.
         private bool calledPostStart = false;
 
@@ -82,8 +86,12 @@ namespace VLG
             {
                 // Initializes arrays.
                 // This is done here so that the inspector doesn't override these values.
-                floorTimes = new float[FloorData.FLOOR_COUNT];
-                floorTurns = new int[FloorData.FLOOR_COUNT];
+                floorTimes = new float[FloorData.FLOOR_COUNT_MAX];
+                floorTurns = new int[FloorData.FLOOR_COUNT_MAX];
+
+                // If the floor count is 0, set it to the max.
+                if (floorCount <= 0)
+                    floorCount = FloorData.FLOOR_COUNT_MAX;
 
                 instanced = true;
             }

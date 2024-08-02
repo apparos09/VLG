@@ -27,13 +27,13 @@ namespace VLG
         public float gameTime = 0.0F;
 
         // The floor times.
-        public float[] floorTimes = new float[FloorData.FLOOR_COUNT];
+        public float[] floorTimes = new float[FloorData.FLOOR_COUNT_MAX];
 
         // The game turns. 
         public int gameTurns = 0;
 
         // The floor turns.
-        public int[] floorTurns = new int[FloorData.FLOOR_COUNT];
+        public int[] floorTurns = new int[FloorData.FLOOR_COUNT_MAX];
     }
 
     // The save system class.

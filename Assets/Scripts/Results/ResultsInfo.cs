@@ -14,9 +14,9 @@ namespace VLG
         public float gameTurns = 0;
 
         // The floor times.
-        public float[] floorTimes = new float[FloorData.FLOOR_COUNT];
+        public float[] floorTimes = new float[FloorData.FLOOR_COUNT_MAX];
 
         // The floor turn counts.
-        public int[] floorTurns = new int[FloorData.FLOOR_COUNT];
+        public int[] floorTurns = new int[FloorData.FLOOR_COUNT_MAX];
     }
 }

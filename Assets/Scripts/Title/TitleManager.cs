@@ -129,7 +129,7 @@ namespace VLG
         public void StartGame()
         {
             // Clamp the floor ID in case its invalid.
-            gameInfo.floorId = Mathf.Clamp(gameInfo.floorId, 0, FloorData.FLOOR_COUNT - 1);
+            gameInfo.floorId = Mathf.Clamp(gameInfo.floorId, 0, FloorData.FLOOR_COUNT_MAX - 1);
 
             // Go to the game scene.
             ToGameScene();

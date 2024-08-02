@@ -321,6 +321,7 @@ MonoBehaviour:
   floorManager: {fileID: 1696945534}
   floorLoadingScreen: {fileID: 1882176440506653446}
   useFloorCoroutine: 1
+  floorCount: 3
   gameTime: 0
   floorTimes: []
   gameTurns: 0
