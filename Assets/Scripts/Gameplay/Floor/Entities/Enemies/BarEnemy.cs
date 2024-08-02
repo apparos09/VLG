@@ -148,6 +148,7 @@ namespace VLG
                     // Calculate segment local position (this is manually calculated since the segment might go off the floor).
                     Vector3 segLocalPos = new Vector3();
                     segLocalPos.x = bars[i].barDirec.x * (j + 1) * floorManager.floorSpacing.x;
+                    segLocalPos.y = bars[i].segments[j].localYPos;
                     segLocalPos.z = bars[i].barDirec.y * (j + 1) * floorManager.floorSpacing.y;
 
                     // Setting the local position.
