@@ -130,6 +130,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bar Segment Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: dbbd70ec1a1ba3d4aadbe80675d05896, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -141,6 +145,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 514627736884859508}
   m_SourcePrefab: {fileID: 100100000, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+--- !u!95 &523176541756043347 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+  m_PrefabInstance: {fileID: 6010531008108438176}
+  m_PrefabAsset: {fileID: 0}
 --- !u!54 &5564731068759965059 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 2184341991406591779, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
@@ -174,14 +183,14 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 4
   jumpFactor: 7
-  animator: {fileID: 0}
+  animator: {fileID: 523176541756043347}
   collider: {fileID: 9032865392859574337}
   rigidbody: {fileID: 5564731068759965059}
   ignoreGeometry: 0
   vulnerable: 1
   facePlayer: 0
-  modelAnimator: {fileID: 0}
-  idleAnim: 
+  modelAnimator: {fileID: 523176541756043347}
+  idleAnim: Bar Segment Idle Animation
   playIdleOnStart: 1
   attackAnim: 
 --- !u!4 &8757971453275080703 stripped
