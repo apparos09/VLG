@@ -27,6 +27,14 @@ namespace VLG
         // The list of all bosses.
         private static List<Boss> bosses = new List<Boss>();
 
+        [Header("Boss/Animations")]
+
+        // Animation for resetting the boss effect.
+        public string effectResetAnim = "";
+
+        // Animation for the boss taking damage.
+        public string damageAnim = "";
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -104,7 +112,23 @@ namespace VLG
         // Called when damage has been taken.
         public virtual void OnDamageTaken()
         {
+            // Plays the damage animation for the boss.
+            if(damageAnim != string.Empty)
+                animator.Play(damageAnim);
+        }
+
+        // Called when the damage animation has started.
+        public virtual void OnDamageAnimationStart()
+        {
             // ...
+        }
+
+        // Called when the damage animation has finished.
+        public virtual void OnDamageAnimationEnd()
+        {
+            // Plays the reset effect animation.
+            if (effectResetAnim != string.Empty)
+                animator.Play(effectResetAnim);
         }
 
         // Kills the entity. Called when the entity has been damaged.

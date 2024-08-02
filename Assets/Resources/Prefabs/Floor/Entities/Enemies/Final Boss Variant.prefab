@@ -134,6 +134,8 @@ MonoBehaviour:
   health: 5
   phaseCount: -1
   phase: 1
+  effectResetAnim: Final Boss Effect Reset Animation
+  damageAnim: Final Boss Damage Animation
   lightningStrikePrefab: {fileID: 5210408437182001944, guid: 89cefdf26c679064c984d0fdd870ff24, type: 3}
   enabledLightningStrikes: 1
   trackingLaserPrefab: {fileID: 3571569405813918198, guid: ce6d9ed43f2e509499de397205799543, type: 3}
@@ -200,6 +202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4871733318207474793, guid: a32bd29c8ffe4094189e517551641043, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f906ae816edca0f418ad6085d2ea20b6, type: 2}
     - target: {fileID: 919132149155446097, guid: a32bd29c8ffe4094189e517551641043, type: 3}
       propertyPath: m_Name
       value: dragon
