@@ -211,10 +211,15 @@ namespace VLG
                 turnsLeft -= 1;
 
                 // Updates Text
-                floorTurnsLeftText.text = turnsLeft.ToString();
+                // Old
+                // floorTurnsLeftText.text = turnsLeft.ToString();
+
+                // New
+                floorTurnsLeftText.text = gameManager.floorManager.floorTurns.ToString() + "/" +
+                    gameManager.floorManager.floorTurnsMax.ToString(); 
 
                 // Changes colour of text based on how many turns are left.
-                if(turnsLeft > 0) // Turns left.
+                if (turnsLeft > 0) // Turns left.
                     floorTurnsLeftText.color = turnsLeftColor;
                 else // No turns left.
                     floorTurnsLeftText.color = noTurnsLeftColor;
@@ -222,7 +227,7 @@ namespace VLG
             }
             else // Not limited.
             {
-                floorTurnsLeftText.text = "-";
+                floorTurnsLeftText.text = gameManager.floorManager.floorTurns.ToString();
                 floorTurnsLeftText.color = turnsLeftColor;
             }
         }

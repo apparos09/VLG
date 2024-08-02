@@ -646,6 +646,9 @@ namespace VLG
             // Reset timer and turn count.
             floorTime = 0.0F;
             floorTurns = 0;
+
+            // Updates all the HUD elements.
+            gameManager.gameUI.UpdateAllHUDElements();
         }
 
         // Tries entity movement.
@@ -929,14 +932,14 @@ namespace VLG
         {
             // Saves these values temporarily.
             float timeTemp = floorTime;
-            int turnsTemp = floorTurns;
+            // int turnsTemp = floorTurns; // Taken out to account for floors with limited turns.
 
             // Resets the floor.
             ResetFloor();
 
             // Updates the time and turns with the old values since the floor was failed.
             floorTime = timeTemp;
-            floorTurns = turnsTemp;
+            // floorTurns = turnsTemp;
         }
 
         // Update is called once per frame
