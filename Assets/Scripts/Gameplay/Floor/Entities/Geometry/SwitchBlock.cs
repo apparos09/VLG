@@ -10,7 +10,7 @@ namespace VLG
     // The switch block - turns on/off when the player jumps.
     public class SwitchBlock : Block
     {
-        [Header("SwitchBlock")]
+        [Header("Switch Block")]
 
         // Determines default state of the block (on/off)
         [Tooltip("If 'true', the block is on by default. If false, the block is off by default.")]
@@ -29,6 +29,17 @@ namespace VLG
         
         // The list of active switch blocks.
         public static List<SwitchBlock> switchBlocks = new List<SwitchBlock>();
+
+        [Header("Switch Block/Animations")]
+
+        // The on animation.
+        public string onAnim = "Switch Block - On Animation";
+
+        // The off animation.
+        public string offAnim = "Switch Block - Off Animation";
+
+        // If 'true', the blocks use the animations.
+        private bool useAnims = true;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -54,11 +65,19 @@ namespace VLG
         {
             blockOn = value;
 
-            // TODO: remove when not used.
-            // Change block active
-            gameObject.SetActive(value);
-
-            // TODO: trigger animation
+            // If the animations should be used.
+            if(useAnims)
+            {
+                // Checks if the on or off animations should be used.
+                if (blockOn) // On
+                    animator.Play(onAnim);
+                else // Off
+                    animator.Play(offAnim);
+            }
+            else // No animation.
+            {
+                gameObject.SetActive(value);
+            }
 
             // Checks for entities on the platform.
             if(!blockOn && killWhenOff) // The block is off.

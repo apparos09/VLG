@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b2d1112eac5528f479df14b2a5714a29, type: 2}
     - target: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
       propertyPath: m_Name
       value: Switch Block (G09) Variant
@@ -63,6 +67,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8944270158349089599}
   m_SourcePrefab: {fileID: 100100000, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+--- !u!95 &476853789909075938 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+  m_PrefabInstance: {fileID: 7214072955375767190}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &549881930644442383 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
@@ -91,9 +100,12 @@ MonoBehaviour:
   curvedMovement: 1
   moveSpeed: 1
   jumpFactor: 7
+  animator: {fileID: 476853789909075938}
   blockOnDefault: 1
   usableWhenOff: 0
   killWhenOff: 1
+  onAnim: Switch Block - On Animation
+  offAnim: Switch Block - Off Animation
 --- !u!4 &1657132484836500566 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8278416656219007680, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
