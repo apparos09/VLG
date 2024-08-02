@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1035122655958969540
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6427775481031140}
+  m_Layer: 0
+  m_Name: Bar Center
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6427775481031140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1035122655958969540}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1177080776811488577}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &815729939928105056
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -177,6 +208,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3090351950504338783, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
       insertIndex: -1
       addedObject: {fileID: 925691430266840971}
+    - targetCorrespondingSourceObject: {fileID: 3090351950504338783, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6427775481031140}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3625561857990270056, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
       insertIndex: -1
@@ -221,11 +255,13 @@ MonoBehaviour:
   playIdleOnStart: 1
   attackAnim: Dramini FRE_Armature|Dramini_FRE_Attack
   barSegmentPrefab: {fileID: 514627736884859508, guid: 24308c0daff75ad4ca0e9fccacafcb54, type: 3}
+  barCenter: {fileID: 1035122655958969540}
   barCount: 1
   segmentCount: 1
   diagonal: 0
-  alternateBars: 1
+  rotateBars: 1
   reversed: 0
+  rotationSpeed: 70
 --- !u!4 &1177080776811488577 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3090351950504338783, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}

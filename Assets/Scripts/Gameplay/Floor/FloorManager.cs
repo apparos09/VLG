@@ -823,16 +823,22 @@ namespace VLG
                 }
             }
 
-            // Gives information to all bar enemies.
-            foreach(BarEnemy barEnemy in BarEnemy.barEnemies)
+            // If the movement was successful.
+            if(success)
             {
-                // Apply rotation if active.
-                if(barEnemy.isActiveAndEnabled && barEnemy.alternateBars)
+                // Gives information to all bar enemies.
+                foreach (BarEnemy barEnemy in BarEnemy.barEnemies)
                 {
-                    // Triggers the next alteration.
-                    barEnemy.AlternateBarsIncrement();
+                    // Apply rotation if active.
+                    if (barEnemy.isActiveAndEnabled && barEnemy.rotateBars)
+                    {
+                        // Triggers the next rotation.
+                        barEnemy.RotateBarsBy45Degrees();
+                        // barEnemy.RotateBarsBy90Degrees();
+                    }
                 }
             }
+            
 
             // Updates the turns information.
             gameManager.UpdateTurns();

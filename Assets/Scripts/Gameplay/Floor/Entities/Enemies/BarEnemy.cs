@@ -23,6 +23,10 @@ namespace VLG
         // THe prefab for the bar segment.
         public Enemy barSegmentPrefab;
 
+        // The centre of the bar that gets rotated.
+        [Tooltip("The bar centre that gets rotated.")]
+        public GameObject barCenter;
+
         // Maximum number of bars for the enemy.
         private int BARS_COUNT_MAX = 4;
 
@@ -36,21 +40,24 @@ namespace VLG
         // The four bars for the enemy.
         private Bar[] bars = new Bar[4];
 
-        // The number of times the bars have been alternated (0-3, loops back).
-        private int barAltCount = 0;
-
         // If 'true', the bars are angled diagonally ("x" shape).
         // If false, the bars are perpedicular to one another ("+" shape).
         [Tooltip("If true, the bars form a \"x\" shape. If false, the bars form a \"+\" shape. ")]
         public bool diagonal = false;
 
-        // If 'true', the bars are alternated to simulate a rotation.
-        [Tooltip("If true, bars are toggled to simulate a rotation. In other words, the bars \"move\" if true.")]
-        public bool alternateBars = true;
+        // If 'true', the bars are rotated when the player moves.
+        [Tooltip("If true, bars are rotated when the player moves")]
+        public bool rotateBars = true;
 
         // If 'true', the alternation order is reversed.
-        [Tooltip("If true, the bars are alternated in reverse (they \"move\" backwards).")]
+        [Tooltip("If true, the bars are rotated in reverse (counter-clockwise)")]
         public bool reversed = false;
+
+        // The rotation speed.
+        public float rotationSpeed = 10.0F;
+
+        // The rotation for the bar enemy's center.
+        private float rotation = 0;
 
         // The list of bar enemies in the game.
         public static List<BarEnemy> barEnemies = new List<BarEnemy>();
@@ -78,12 +85,36 @@ namespace VLG
         {
             base.Start();
 
+            // Set to this game object if the bar centre has not been set.
+            if (barCenter == null)
+                barCenter = gameObject;
+
             // Generates the bars.
             GenerateBars();
 
             // Add to the list.
             if (!barEnemies.Contains(this))
                 barEnemies.Add(this);
+        }
+
+        // This function is called when the object has become enabled and active
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            // The enemy is enabled, so add it to the list.
+            if (!barEnemies.Contains(this))
+                barEnemies.Add(this);
+        }
+
+        // This function is called when the behaviour has become disabled or inactive
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            // The enemy is disabled, so remove it from the list.
+            if (barEnemies.Contains(this))
+                barEnemies.Remove(this);
         }
 
         // Generates bars for the enemy.
@@ -152,7 +183,7 @@ namespace VLG
                     segLocalPos.z = bars[i].barDirec.y * (j + 1) * floorManager.floorSpacing.y;
 
                     // Setting the local position.
-                    bars[i].segments[j].transform.parent = transform;
+                    bars[i].segments[j].transform.parent = barCenter.transform;
                     bars[i].segments[j].transform.localPosition = segLocalPos;
 
 
@@ -166,76 +197,27 @@ namespace VLG
             }
 
             // Resets the alternation count.
-            barAltCount = 0;
-
-            // If 'reversed' is true, alternate the bars so that the bar enemy starts off properly.
-            if (reversed)
-                AlternateBars(0);
+            rotation = 0;
         }
 
-        // Alternates the bars by putting in the number of rotations the bar is simulating.
-        public void AlternateBars(int alts)
+        // Rotates the bars by the provided amount. If the element is re
+        public void RotateBars(float degrees)
         {
-            // Increases the bar alternation count and clamps it to reset the loop if applicable.
-            barAltCount = alts % bars.Length;
-
-            // The active value for the bars. A copy is kept to know how values will be shifted.
-            bool[] barsActive = new bool[bars.Length];
-            bool[] barsActiveDefault = new bool[bars.Length];
-
-            // Default active values for the bars (no alternations).
-            // Unused bars have active set to false.
-            for (int i = 0; i < barCount; i++)
-            {
-                barsActive[i] = true;
-                barsActiveDefault[i] = true;
-            }
-
-            // Recalculating bars active.
-            for(int i = 0; i < bars.Length; i++)
-            {
-                // Gets the original value and offsets its position...
-                // To get the new index.
-                // If 'reversed' is true, the value shifts in the opposite direction.
-                bool value = barsActiveDefault[i]; // Original value
-
-                // The new index for the value.
-                int newIndex = (i + barAltCount) % bars.Length;
-
-                // Change Value
-                barsActive[newIndex] = value; 
-                
-                // Updates the segments at the bar indicated by the new index.
-                for(int j = bars[newIndex].segments.Count - 1; j >= 0; j--)
-                {
-                    bars[newIndex].segments[j].gameObject.SetActive(barsActive[newIndex]);
-                }
-            }
-
-            // TODO: this isn't an efficient way to do it, so maybe try optimizing it later.
-            // If the rotation order should be reversed.
-            if(reversed)
-            {
-                // Reverse the active list.
-                System.Array.Reverse(barsActive);
-
-                // Recalculating bars active.
-                for (int i = 0; i < bars.Length; i++)
-                {
-                    // Updates the segments at the bar indicated by the new index.
-                    for (int j = 0; j < bars[i].segments.Count ; j++)
-                    {
-                        bars[i].segments[j].gameObject.SetActive(barsActive[i]);
-                    }
-                }
-            }
+            rotation += degrees;
         }
 
-        // Alternates the bars by simulating the next alteration.
-        public void AlternateBarsIncrement()
+        // Rotates the bar by 45 degrees in the set direction.
+        public void RotateBarsBy45Degrees()
         {
-            // Alternates the bar a certain number of times.
-            AlternateBars(barAltCount + 1);
+            float degrees = (reversed) ? -45 : 45;
+            RotateBars(degrees);
+        }
+
+        // Rotates the bar by 90 degrees in the set direction.
+        public void RotateBarsBy90Degrees()
+        {
+            float degrees = (reversed) ? -90 : 90;
+            RotateBars(degrees);
         }
 
         // Resets the floor entity.
@@ -243,14 +225,43 @@ namespace VLG
         {
             base.ResetEntity();
 
-            // Set the alteration to 0.
-            AlternateBars(0);
+            // Resets the rotation of the bar.
+            rotation = 0;
+            barCenter.transform.rotation = Quaternion.identity;
         }
 
         // Update is called once per frame
         protected override void Update()
         {
             base.Update();
+
+            // If the bars should rotate.
+            if(rotateBars)
+            {
+                // Modulus operation to cap 360 degrees.
+                rotation = rotation % 360.0F;
+
+                // If the rotation is not set to 0.
+                if (rotation != 0)
+                {
+                    // The rotation in degrees. Clamps it so that the rotation won't go over.
+                    float rotDegrees = rotationSpeed * Time.deltaTime;
+                    rotDegrees = Mathf.Clamp(rotDegrees, 0.0F, Mathf.Abs(rotation));
+
+                    // Checks the rotation direction.
+                    if (rotation > 0) // Counter-clockwise (Positive)
+                    {
+                        barCenter.transform.Rotate(Vector3.up, rotDegrees);
+                        rotation -= rotDegrees;
+                    }
+                    else // Clockwise (Negative)
+                    {
+                        barCenter.transform.Rotate(Vector3.up, -rotDegrees);
+                        rotation += rotDegrees;
+                    }
+                }
+            }
+            
         }
 
         // This function is called when the MonoBehaviour will be destroyed
