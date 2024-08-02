@@ -138,6 +138,7 @@ MonoBehaviour:
   enabledLightningStrikes: 1
   trackingLaserPrefab: {fileID: 3571569405813918198, guid: ce6d9ed43f2e509499de397205799543, type: 3}
   enabledTrackingLasers: 1
+  introAnim: Final Boss Intro Animation
   riseAnim: Final Boss Rise Animation
   dropAnim: Final Boss Drop Animation
 --- !u!65 &3676191393248219241 stripped

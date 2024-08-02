@@ -107,6 +107,8 @@ MonoBehaviour:
   tangibleDefault: 1
   blockMaterial: {fileID: 2100000, guid: 4cec3fa9fa8057e4586adbae4cee6f3f, type: 2}
   coverMaterial: {fileID: 2100000, guid: b1d4cd08127f1d64787627f4364b7ff4, type: 2}
+  tangibleAnim: Phase Block - Tangible Animation
+  intangibleAnim: Phase Block - Intangible Animation
 --- !u!95 &6586918470808262265 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}

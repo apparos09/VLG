@@ -21,6 +21,12 @@ namespace VLG
         // The cover material.
         public Material coverMaterial;
 
+        // The tangible animation.
+        public string tangibleAnim;
+
+        // The intangible animation.
+        public string intangibleAnim;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -89,13 +95,13 @@ namespace VLG
         // Plays the tangible animation.
         private void PlayTangibleAnimation()
         {
-            animator.Play("Phase Block - Tangible Animation");
+            animator.Play(tangibleAnim);
         }
 
         // Plays the intangible animation.
         private void PlayIntangibleAnimation()
         {
-            animator.Play("Phase Block - Intangible Animation");
+            animator.Play(intangibleAnim);
         }
 
 

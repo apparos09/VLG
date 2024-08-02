@@ -72,6 +72,12 @@ namespace VLG
 
         [Header("Final Boss/Animations")]
 
+        // The intro animation.
+        public string introAnim = "";
+
+        // If the intro animation should be used.
+        private bool useIntroAnim = true;
+
         // Animation for raising the final boss.
         public string riseAnim = "";
 
@@ -107,8 +113,11 @@ namespace VLG
             // // Lighting Strike Test - Make Sure to Remove
             // SpawnLightingStrike(new Vector2Int(6, 0));
 
-            // Starts the phase.
-            StartPhase();
+            // Plays the intro animation, or starts the phase.
+            if(useIntroAnim)
+                PlayBossIntroAnimation();
+            else
+                StartPhase();
         }
 
         // LIGHTNING //
@@ -625,6 +634,35 @@ namespace VLG
             phase++;
             StartPhase();
         }
+
+        // ANIMATIONS //
+        // Called to play the boss's intro animation.
+        public void PlayBossIntroAnimation()
+        {
+            animator.Play(introAnim);
+        }
+        
+        // Called when the boss intro animation starts.
+        public void OnBossIntroAnimationStart()
+        {
+            // Play the attack animation, and stop the player from moving.
+            PlayAttackAnimation();
+            gameManager.player.enabledInputs = false;
+        }
+
+        // Called when the boss intro animation is finished.
+        public void OnBossIntroAnimationEnd()
+        {
+            // Play the idle animation.
+            PlayIdleAnimation();
+
+            // Start the phase.
+            gameManager.player.enabledInputs = true;
+            StartPhase();
+        }
+
+
+        // Updates the AI
 
         // Run the AI for the Final Boss
         public override void UpdateAI()
