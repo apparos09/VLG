@@ -42,6 +42,15 @@ namespace VLG
         [Tooltip("The attack animation for the main animator (the one saved to the parent object).")]
         public string attackMainAnim = "";
 
+        // The reset effect animation.
+        public string effectResetAnim = "";
+
+        // The damage animation for the main animation.
+        public string deathMainAnim = "";
+
+        // If the death animation should be used.
+        private bool useDeathAnim = true;
+
         [Header("Player/Animation/Model")]
 
         // The reset animation for the player.
@@ -211,6 +220,20 @@ namespace VLG
         // Kills the player.
         public override void KillEntity()
         {
+            // Checks if the death animation should be used.
+            if(useDeathAnim) // Play Animation
+            {
+                PlayDeathAnimation();
+            }
+            else // No Animation
+            {
+                OnPlayerDeath();
+            }
+        }
+
+        // Called wehn the player has been killed.
+        private void OnPlayerDeath()
+        {
             // If the player dies, the floor has been failed.
             floorManager.OnFloorFailed();
 
@@ -328,6 +351,35 @@ namespace VLG
 
             // Returns the result.
             return result;
+        }
+
+        // Called to play the player's death animation.
+        public void PlayDeathAnimation()
+        {
+            // Show the damage effect.
+            if (deathMainAnim != string.Empty)
+                animator.Play(deathMainAnim);
+        }
+
+        // Player Death Animation Start
+        public void OnDeathAnimationStart()
+        {
+            // Disable Inputs
+            enabledInputs = false;
+        }
+
+        // Player Death Animation End
+        public void OnDeathAnimationEnd()
+        {
+            // Stop playing the effect.
+            if (effectResetAnim != string.Empty)
+                animator.Play(effectResetAnim);
+
+            // Allow Inputs
+            enabledInputs = true;
+
+            // Run the death code.
+            OnPlayerDeath();
         }
 
         // Updates the player movements.

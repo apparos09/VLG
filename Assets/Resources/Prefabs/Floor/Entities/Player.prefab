@@ -131,11 +131,13 @@ MonoBehaviour:
   animator: {fileID: 6325870439102641563}
   collider: {fileID: 4885720312683704552}
   rigidbody: {fileID: 4788282775311535427}
-  enabledInput: 1
+  enabledInputs: 1
   enabledAttack: 1
   modelAnimator: {fileID: 1149567869924096470}
   emptyAnim: Empty State
-  attackMainAnim: Knight Attack
+  attackMainAnim: Knight Attack Animation
+  effectResetAnim: Effect Reset Animation
+  deathMainAnim: Knight Death Animation
   resetAnim: Knight_Armature|Knight_Reset
   idleAnim: Knight_Armature|Knight_Idle
   jumpRiseAnim: Knight_Armature|Knight_Jump_Rise

@@ -134,7 +134,7 @@ MonoBehaviour:
   health: 5
   phaseCount: -1
   phase: 1
-  effectResetAnim: Final Boss Effect Reset Animation
+  effectResetAnim: Effect Reset Animation
   damageAnim: Final Boss Damage Animation
   lightningStrikePrefab: {fileID: 5210408437182001944, guid: 89cefdf26c679064c984d0fdd870ff24, type: 3}
   enabledLightningStrikes: 1
