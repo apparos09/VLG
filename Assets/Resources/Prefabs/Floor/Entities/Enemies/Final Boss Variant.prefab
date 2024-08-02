@@ -127,9 +127,9 @@ MonoBehaviour:
   vulnerable: 1
   facePlayer: 1
   modelAnimator: {fileID: 1752923701173165613}
-  idleAnim: 
-  playIdleOnStart: 0
-  attackAnim: 
+  idleAnim: Dragon_Armature|Dragon_Idle
+  playIdleOnStart: 1
+  attackAnim: Dragon_Armature|Dragon_Attack
   maxHealth: 5
   health: 5
   phaseCount: -1
@@ -165,15 +165,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
       propertyPath: m_LocalScale.x
-      value: 50
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
       propertyPath: m_LocalScale.y
-      value: 50
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
       propertyPath: m_LocalPosition.x
@@ -185,22 +185,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
-      propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a32bd29c8ffe4094189e517551641043, type: 3}
