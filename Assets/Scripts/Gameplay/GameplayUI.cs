@@ -172,7 +172,13 @@ namespace VLG
         {
             // Gets the clear percent.
             // It does FLOOR_COUNT - 1 because the debug floor/floor 0 is ignored.
-            float percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / (FloorData.FLOOR_COUNT_MAX - 1));
+            float percent = 0;
+            
+            // Checks what should be used as the floor count calculation.
+            if(gameManager.floorCount - 1 > 0)
+                percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / (gameManager.floorCount - 1));
+            else
+                percent = Mathf.Clamp01(gameManager.floorManager.currFloor.id / (FloorData.FLOOR_COUNT_MAX - 1));
 
             // Sets the value.
             gameProgressBar.SetValue(percent, true);

@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &217629879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadFromSave: 0
-  floorId: 1
-  floorCount: 3
+  floorId: 50
+  floorCount: 50
 --- !u!4 &217629880
 Transform:
   m_ObjectHideFlags: 0
@@ -613,11 +613,39 @@ PrefabInstance:
       propertyPath: floorManager
       value: 
       objectReference: {fileID: 1696945534}
+    - target: {fileID: 4186639538591613943, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4233702624856251517, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4669053512702302869, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4669053512702302869, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854002733609748450, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854002733609748450, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854002733609748450, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126989830531319087, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5126989830531319087, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
