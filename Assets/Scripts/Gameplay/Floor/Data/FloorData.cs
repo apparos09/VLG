@@ -207,7 +207,15 @@ namespace VLG
         // Enemies (E-Group)
         [Header("Enemies")]
         public Enemy e01A;
-        public Enemy e02A;
+
+        // Bar
+        public Enemy e02A; // Default
+        public Enemy e02B; // 1 Bar - Length 3
+        public Enemy e02C; // 2 Bars - Length 3
+        public Enemy e02D; // 3 Bars - Length 3
+        public Enemy e02E; // 4 Bars - Length 3
+
+        // Copy
         public Enemy e03A;
         public Enemy e03B;
 
@@ -496,6 +504,31 @@ namespace VLG
                         default:
                             geoEntity = Instantiate(g05A);
                             break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g05B);
+                            break;
+
+                        case 'C':
+                        case 'c':
+                            geoEntity = Instantiate(g05C);
+                            break;
+
+                        case 'D':
+                        case 'd':
+                            geoEntity = Instantiate(g05D);
+                            break;
+
+                        case 'E':
+                        case 'e':
+                            geoEntity = Instantiate(g05E);
+                            break;
+
+                        case 'F':
+                        case 'f':
+                            geoEntity = Instantiate(g05F);
+                            break;
                     }
 
                     break;
@@ -652,6 +685,26 @@ namespace VLG
                         case 'a':
                         default:
                             emyEntity = Instantiate(e02A);
+                            break;
+
+                        case 'B':
+                        case 'b':
+                            emyEntity = Instantiate(e02B);
+                            break;
+
+                        case 'C':
+                        case 'c':
+                            emyEntity = Instantiate(e02C);
+                            break;
+
+                        case 'D':
+                        case 'd':
+                            emyEntity = Instantiate(e02D);
+                            break;
+
+                        case 'E':
+                        case 'e':
+                            emyEntity = Instantiate(e02E);
                             break;
                     }
 

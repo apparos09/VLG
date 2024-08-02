@@ -41,14 +41,15 @@ namespace VLG
 
         // If 'true', the bars are angled diagonally ("x" shape).
         // If false, the bars are perpedicular to one another ("+" shape).
+        [Tooltip("If true, the bars form a \"x\" shape. If false, the bars form a \"+\" shape. ")]
         public bool diagonal = false;
 
         // If 'true', the bars are alternated to simulate a rotation.
-        [Tooltip("If true, bars are toggled on/off to simulate a rotation.")]
+        [Tooltip("If true, bars are toggled to simulate a rotation. In other words, the bars \"move\" if true.")]
         public bool alternateBars = true;
 
         // If 'true', the alternation order is reversed.
-        [Tooltip("If true, the bars are alternated in reverse.")]
+        [Tooltip("If true, the bars are alternated in reverse (they \"move\" backwards).")]
         public bool reversed = false;
 
         // The list of bar enemies in the game.
