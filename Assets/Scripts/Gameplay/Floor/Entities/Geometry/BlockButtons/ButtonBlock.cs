@@ -159,7 +159,7 @@ namespace VLG
         }
 
         // Called when the button block has been interacted with. The provided entity is the one that clicked it.
-        private void ClickButtonBlock(FloorEntity entity)
+        protected void ClickButtonBlock(FloorEntity entity)
         {
             // Checks if there are functions to call.
             if (buttonClickCallback != null)

@@ -12,5 +12,8 @@ namespace VLG
 
         // The id of the floor to be loaded.
         public int floorId = -1;
+
+        // The number of floors the player will go through.
+        public int floorCount = 0;
     }
 }

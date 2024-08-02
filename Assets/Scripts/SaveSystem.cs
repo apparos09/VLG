@@ -17,6 +17,9 @@ namespace VLG
         // Shows if the game data is valid.
         public bool valid = false;
 
+        // The floor count.
+        public int floorCount = 0;
+
         // The id for the current floor.
         public int floorId = 0;
 

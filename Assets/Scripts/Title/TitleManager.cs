@@ -131,6 +131,9 @@ namespace VLG
             // Clamp the floor ID in case its invalid.
             gameInfo.floorId = Mathf.Clamp(gameInfo.floorId, 0, FloorData.FLOOR_COUNT_MAX - 1);
 
+            // Autoset the maximum number of floors.
+            gameInfo.floorCount = FloorData.FLOOR_COUNT_MAX;
+
             // Go to the game scene.
             ToGameScene();
         }

@@ -509,6 +509,11 @@ namespace VLG
                         default:
                             geoEntity = Instantiate(g06A);
                             break;
+
+                        case 'B':
+                        case 'b':
+                            geoEntity = Instantiate(g06B);
+                            break;
                     }
 
                     break;
@@ -821,8 +826,25 @@ namespace VLG
             // Floor
             Floor floor;
 
-            // Gets the floor (Debug)
-            switch(id)
+            // // Gets the floor (Debug)
+            // switch(id)
+            // {
+            //     default:
+            //     case 0:
+            //         floor = GetFloor00();
+            //         break;
+            // 
+            //     case 1:
+            //         floor = Floors01_10.GetFloor01();
+            //         break;
+            // 
+            //     case 2: // TODO: replace with floor 2
+            //         floor = Floors01_10.GetFloor02();
+            //         break;
+            // }
+
+            // Gets the floor (finalized version)
+            switch (id)
             {
                 default:
                 case 0:
@@ -830,87 +852,70 @@ namespace VLG
                     break;
 
                 case 1:
-                    floor = Floors01_10.GetFloor01();
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    floor = Floors01_10.GetFloor(id);
                     break;
 
-                case 2: // TODO: replace with floor 2
-                    floor = Floors01_10.GetFloor02();
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                case 20:
+                    floor = Floors11_20.GetFloor(id);
+                    break;
+
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+                case 30:
+                    floor = Floors21_30.GetFloor(id);
+                    break;
+
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
+                case 36:
+                case 37:
+                case 38:
+                case 39:
+                case 40:
+                    floor = Floors31_40.GetFloor(id);
+                    break;
+
+                case 41:
+                case 42:
+                case 43:
+                case 44:
+                case 45:
+                case 46:
+                case 47:
+                case 48:
+                case 49:
+                case 50:
+                    floor = Floors41_50.GetFloor(id);
                     break;
             }
-
-            //// Gets the floor (finalized version)
-            //switch (id)
-            //{
-            //    default:
-            //    case 0:
-            //        floor = GetFloor00();
-            //        break;
-
-            //    case 1:
-            //    case 2:
-            //    case 3:
-            //    case 4:
-            //    case 5:
-            //    case 6:
-            //    case 7:
-            //    case 8:
-            //    case 9:
-            //    case 10:
-            //        floor = Floors01_10.GetFloor(id);
-            //        break;
-
-            //    case 11:
-            //    case 12:
-            //    case 13:
-            //    case 14:
-            //    case 15:
-            //    case 16:
-            //    case 17:
-            //    case 18:
-            //    case 19:
-            //    case 20:
-            //        floor = Floors11_20.GetFloor(id);
-            //        break;
-
-            //    case 21:
-            //    case 22:
-            //    case 23:
-            //    case 24:
-            //    case 25:
-            //    case 26:
-            //    case 27:
-            //    case 28:
-            //    case 29:
-            //    case 30:
-            //        floor = Floors21_30.GetFloor(id);
-            //        break;
-
-            //    case 31:
-            //    case 32:
-            //    case 33:
-            //    case 34:
-            //    case 35:
-            //    case 36:
-            //    case 37:
-            //    case 38:
-            //    case 39:
-            //    case 40:
-            //        floor = Floors31_40.GetFloor(id);
-            //        break;
-
-            //    case 41:
-            //    case 42:
-            //    case 43:
-            //    case 44:
-            //    case 45:
-            //    case 46:
-            //    case 47:
-            //    case 48:
-            //    case 49:
-            //    case 50:
-            //        floor = Floors41_50.GetFloor(id);
-            //        break;
-            //}
 
             return floor;
         }

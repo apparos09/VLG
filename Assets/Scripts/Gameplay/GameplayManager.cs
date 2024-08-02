@@ -113,8 +113,15 @@ namespace VLG
             // If the game info object couldn't be found...
             if(gameInfo != null)
             {
+                // Set to the floor count.
+                floorCount = gameInfo.floorCount;
+
+                // If 0 or negative, set it to the max.
+                if (floorCount <= 0)
+                    floorCount = FloorData.FLOOR_COUNT_MAX;
+
                 // Checks if saved data should be loaded.
-                if(gameInfo.loadFromSave) // Load from save.
+                if (gameInfo.loadFromSave) // Load from save.
                 {
                     // Loads the saved game. If the load failed, load from the game info floor ID.
                     if(!LoadGame())
@@ -286,6 +293,9 @@ namespace VLG
             // The game data.
             VLG_GameData data = new VLG_GameData();
 
+            // Saves the floor count.
+            data.floorCount = floorCount;
+
             // Saves the floor id and code.
             data.floorId = floorManager.currFloor.id;
             data.floorCode = floorManager.currFloor.code;
@@ -358,6 +368,9 @@ namespace VLG
                 Debug.LogError("The loaded data is invalid.");
                 return false;
             }
+
+            // Loads the floor count.
+            floorCount = data.floorCount;
 
             // Loads the time data.
             gameTime = data.gameTime;
