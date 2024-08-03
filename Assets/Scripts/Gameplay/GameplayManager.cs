@@ -397,6 +397,9 @@ namespace VLG
 
             // Saving data.
             // Game time and turns.
+            // NOTE: this is the number of turns (moves) it took to reach the goal.
+            // As such, it will be one less what's displayed, since what's displayed is...
+            // The current move. e.g., current move 3 = 2 moves have already been made. 
             resultsInfo.gameTime = gameTime;
             resultsInfo.gameTurns = gameTurns;
 
