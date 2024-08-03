@@ -7,7 +7,7 @@ namespace VLG
     // The portal block.
     public class PortalBlock : Block
     {
-        [Header("PortalBlock")]
+        [Header("Portal Block")]
 
         // The end portal that this portal is connected to.
         [Tooltip("The destination portal.")]
@@ -30,6 +30,17 @@ namespace VLG
         // Gets set to 'true' when the post start function has been called.
         private bool calledPostStart = false;
 
+        [Header("Portal Block/Animations")]
+
+        // The idle animation.
+        public string portalIdleAnim = "Portal Block - Idle Animation";
+
+        // Portal Block - On Animation
+        public string portalOnAnim = "Portal Block - On Animation";
+
+        // Portal Block - Off Animation
+        public string portalOffAnim = "Portal Block - Off Animation";
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -38,6 +49,12 @@ namespace VLG
             // Add to the list.
             if(!portalBlocks.Contains(this))
                 portalBlocks.Add(this);
+
+            // If the idle animation is set.
+            if(portalIdleAnim != string.Empty)
+            {
+                PlayPortalIdleAnimation();
+            }
         }
 
         // Called on the first update frame.
@@ -155,17 +172,24 @@ namespace VLG
         }
 
         // ANIMATIONS
+        // Play the Portal Idle Animation
+        public void PlayPortalIdleAnimation()
+        {
+            animator.Play(portalIdleAnim);
+        }
+
         // Play the Portal On Animation
         private void PlayPortalOnAnimation()
         {
-            animator.Play("Portal Block - On Animation");
+            animator.Play(portalOnAnim);
         }
 
         // Play the Portal Off Animation
         private void PlayPortalOffAnimation()
         {
-            animator.Play("Portal Block - Off Animation");
+            animator.Play(portalOffAnim);
         }
+
 
         // Update is called once per frame
         protected override void Update()
