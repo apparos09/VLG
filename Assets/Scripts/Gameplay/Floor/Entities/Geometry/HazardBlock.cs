@@ -61,6 +61,9 @@ namespace VLG
             {
                 spikesModel.SetActive(hazardOn);
             }
+
+            // Checks the entities on the block.
+            CheckEntitiesOnBlock();
         }
 
         // Enables the hazard.
@@ -101,6 +104,36 @@ namespace VLG
                 entity.KillEntity();
             }
             
+        }
+
+        // Checks for an entity is standing on the hazard block.
+        public void CheckEntitiesOnBlock()
+        {
+            // If the block has the hazard off, do nothing.
+            if (!hazardOn)
+                return;
+
+            // If the floor position is valid.
+            if (floorManager.IsFloorPositionValid(floorPos))
+            {
+                // If the player is standing on the block, and the hazard is active, kill the player.
+                if (gameManager.player.floorPos == floorPos)
+                {
+                    gameManager.player.KillEntity();
+                }
+
+                // Tries to find the enemy.
+                Enemy enemy = floorManager.GetFloorEnemyEntity(floorPos);
+
+                // The enemy object exists.
+                if (enemy != null)
+                {
+                    // If the enemy shouldn't ignore the geometry, kill the enemy. 
+                    if (!enemy.ignoreGeometry)
+                        enemy.KillEntity();
+                }
+            }
+
         }
 
         // ANIMATIONS //

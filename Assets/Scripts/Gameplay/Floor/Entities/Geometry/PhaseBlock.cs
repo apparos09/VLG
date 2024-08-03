@@ -49,12 +49,15 @@ namespace VLG
 
             // gameObject.SetActive(value); // Old
 
+            // New
             // Play Tangible/Intangible Animation
             if (tangible)
                 PlayTangibleAnimation();
             else
                 PlayIntangibleAnimation();
 
+            // Checks for entity standing on the phase block.
+            CheckEntitiesOnBlock();
         }    
         
         // Makes the block tangible.
@@ -92,6 +95,38 @@ namespace VLG
             ToggleTangible();
         }
 
+        // Checks for an entity standing on the phase block.
+        public void CheckEntitiesOnBlock()
+        {
+            // If the block is tangible, do nothing.
+            if (tangible)
+                return;
+
+            // If the floor position is valid.
+            if (floorManager.IsFloorPositionValid(floorPos))
+            {
+                // If the player is standing on the block, and the block is now intangible, kill the player.
+                if (gameManager.player.floorPos == floorPos)
+                {
+                    gameManager.player.KillEntity();
+                }
+
+                // Tries to find the enemy.
+                Enemy enemy = floorManager.GetFloorEnemyEntity(floorPos);
+
+                // The enemy object exists.
+                if (enemy != null)
+                {
+                    // If the enemy shouldn't ignore the geometry, kill the enemy. 
+                    if (!enemy.ignoreGeometry)
+                        enemy.KillEntity();
+                }
+            }
+            
+        }
+
+
+        // ANIMATIONS //
         // Plays the tangible animation.
         private void PlayTangibleAnimation()
         {

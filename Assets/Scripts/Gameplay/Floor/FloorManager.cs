@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
@@ -212,6 +213,7 @@ namespace VLG
 
                     // Generates the geometry, enemy, and item elements.
                     // These use the base column and row values, not the converted values.
+                    // TODO: this should probably be [row, col], but it's too late to change that right now.
                     geoEntity = floorData.InstantiateGeometryElement(floor.geometry[col, row]);
                     emyEntity = floorData.InstantiateEnemyElement(floor.enemies[col, row]);
                     itmEntity = floorData.InstantiateItemElement(floor.items[col, row]);
@@ -444,6 +446,7 @@ namespace VLG
         }
 
         // Gets the floor position in local space.
+        // NOTE: this treats (rows, cols) as (y, x), which is different from how the grid is read.
         public Vector3 GetFloorPositionInLocalSpace(Vector2Int floorPos, float localYPos)
         {
             // The local position.
@@ -468,6 +471,7 @@ namespace VLG
         }
 
         // Gets the floor position in world space.
+        // NOTE: this treats (rows, cols) as (y, x), which is different from how the grid is read.
         public Vector3 GetFloorPositionInWorldSpace(Vector2Int floorPos, float localYPos)
         {
             // The world position.
@@ -509,6 +513,50 @@ namespace VLG
 
             return finalRow;
         }
+
+        // Gets the floor entities.
+        // Gets the floor geometry entity.
+        public Block GetFloorGeometryEntity(Vector2Int floorPos)
+        {
+            // If the floor position is valid.
+            if (IsFloorPositionValid(floorPos))
+            {
+                return floorGeometry[floorPos.x, floorPos.y];
+            }
+            else // Not valid.
+            {
+                return null;
+            }
+        }
+
+        // Gets the floor enemy entity.
+        public Enemy GetFloorEnemyEntity(Vector2Int floorPos)
+        {
+            // If the floor position is valid.
+            if (IsFloorPositionValid(floorPos))
+            {
+                return floorEnemies[floorPos.x, floorPos.y];
+            }
+            else // Not valid.
+            {
+                return null;
+            }
+        }
+
+        // Gets the floor item entity.
+        public Item GetFloorItemEntity(Vector2Int floorPos)
+        {
+            // If the floor position is valid.
+            if (IsFloorPositionValid(floorPos))
+            {
+                return floorItems[floorPos.x, floorPos.y];
+            }
+            else // Not valid.
+            {
+                return null;
+            }
+        }
+
 
         // Called when the floor entity's position has been changed.
         public void OnFloorEntityPositionChanged(FloorEntity entity)
