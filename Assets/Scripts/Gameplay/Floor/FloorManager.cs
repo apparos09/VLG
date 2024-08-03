@@ -562,6 +562,10 @@ namespace VLG
         // Resets the floor.
         public void ResetFloor()
         {
+            // Inital reset based on the current floor status.
+            // This is done twice to avoid triggering the player's death animation.
+            gameManager.player.ResetEntity();
+
             // GEOMETRY
             // Resets the geometry floor assets.
             for (int r = 0; r < floorGeometry.GetLength(0); r++) // Row

@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadFromSave: 0
-  floorId: 20
-  floorCount: 20
+  floorId: 25
+  floorCount: 25
 --- !u!4 &217629880
 Transform:
   m_ObjectHideFlags: 0
