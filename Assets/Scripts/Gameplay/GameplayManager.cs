@@ -16,6 +16,9 @@ namespace VLG
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
 
+        // The gameplay  camera.
+        public GameplayCamera gameCamera;
+
         // The gameplay UI.
         public GameplayUI gameUI;
 
@@ -101,10 +104,9 @@ namespace VLG
         void Start()
         {
             // TODO: comment out when you want to test saving.
-
             // If the game isn't running in WebGL, allow the game to save.
-            SaveSystem.Instance.allowSaveLoad = false;
-            // SaveSystem.Instance.allowSaveLoad = Application.platform != RuntimePlatform.WebGLPlayer;
+            // SaveSystem.Instance.allowSaveLoad = false;
+            SaveSystem.Instance.allowSaveLoad = Application.platform != RuntimePlatform.WebGLPlayer;
 
             // Finds the game info object.
             // Ignores disabled GameInfo objects so that debug stages can be tested.

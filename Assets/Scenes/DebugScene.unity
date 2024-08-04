@@ -286,6 +286,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1b9ba94779b9024eb3f46d30a6afce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1210967271 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 337154163785066119, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
+  m_PrefabInstance: {fileID: 1823859363}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77dbfa2cc52e0245b29e1f7273f0a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1696945531
 GameObject:
   m_ObjectHideFlags: 0
@@ -316,6 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0944120d1bc899448215dc6af9e56f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameCamera: {fileID: 1210967271}
   gameUI: {fileID: 1711864598}
   gameAudio: {fileID: 543345295}
   player: {fileID: 940522949}
@@ -452,22 +464,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 966380516132724735, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 966380516132724735, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 966380516132724735, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 966380516132724735, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 966380516132724735, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 90

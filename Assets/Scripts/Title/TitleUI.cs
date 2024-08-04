@@ -38,6 +38,9 @@ namespace VLG
         // The title window.
         public GameObject titleWindow;
 
+        // The story window.
+        public GameObject storyWindow;
+
         // The instructions window.
         public GameObject instructionsWindow;
 
@@ -157,6 +160,7 @@ namespace VLG
         public void CloseAllWindows()
         {
             titleWindow.SetActive(false);
+            storyWindow.SetActive(false);
             instructionsWindow.SetActive(false);
             codeWindow.SetActive(false);
             floorWindow.SetActive(false);

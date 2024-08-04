@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 966380516132724735}
   - component: {fileID: 7317863275300669721}
   - component: {fileID: 8917608301727791340}
+  - component: {fileID: 337154163785066119}
   m_Layer: 0
-  m_Name: Game Camera
+  m_Name: Gameplay Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -92,3 +93,25 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7427734685362256487}
   m_Enabled: 1
+--- !u!114 &337154163785066119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7427734685362256487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77dbfa2cc52e0245b29e1f7273f0a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  camera: {fileID: 7317863275300669721}
+  allowViewSwitching: 1
+  autoSetView1: 1
+  switchKey: 48
+  switchKeyAlt: 256
+  view1Position: {x: -2.5, y: 30, z: -38.5}
+  view1Rotation: {x: 45, y: 0, z: 0}
+  view2Position: {x: -2.5, y: 65, z: -2.5}
+  view2Rotation: {x: 90, y: 0, z: 0}

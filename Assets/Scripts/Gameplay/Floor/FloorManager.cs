@@ -274,6 +274,9 @@ namespace VLG
 
             // Resets the player.
             gameManager.player.ResetEntity();
+
+            // Set to the default view.
+            gameManager.gameCamera.SetView(0);
         }
 
         // Coroutine Variants
@@ -976,7 +979,24 @@ namespace VLG
 
             // If the game should allow saves, save the game.
             if (gameManager.IsSavingLoadingEnabled())
-                gameManager.SaveGame();
+            {
+                // If a coroutine is being used, increment the ID by one...
+                // So that the current floor is saved.
+                if(gameManager.useFloorCoroutine)
+                {
+                    // The floor isn't finished generating yet, so this workaround is needed.
+                    currFloor.id++;
+                    gameManager.SaveGame();
+                    currFloor.id--;
+                }
+                else // No coroutine, so just save like normal.
+                {
+                    // Since there's no coroutine, this won't be reached until the floor is generated.
+                    gameManager.SaveGame();
+                }
+                
+            }
+                
         }
 
         // Called when the floor is failed.

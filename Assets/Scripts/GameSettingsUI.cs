@@ -67,7 +67,7 @@ namespace VLG
             muteToggle.isOn = audioControls.Mute;
 
             // Auto-set cutscenes.
-            cutscenesToggle.isOn = gameSettings.cutscenes;
+            cutscenesToggle.isOn = gameSettings.playCutscenes;
 
             // Auto-set resolution.
             RefreshResolutionDropdown();
@@ -139,7 +139,7 @@ namespace VLG
         // Called when the cutscenes option has been toggled.
         public void OnCutscenesToggle(Toggle toggle)
         {
-            gameSettings.cutscenes = toggle.isOn;
+            gameSettings.playCutscenes = toggle.isOn;
         }
 
         // Refreshes the resolution dropdown to make sure it's displaying the right resolution.

@@ -276,12 +276,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0944120d1bc899448215dc6af9e56f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameCamera: {fileID: 8049757314619468152}
   gameUI: {fileID: 628705015}
   gameAudio: {fileID: 5797382299903206457}
   player: {fileID: 1149663758}
   floorManager: {fileID: 262689915}
   floorLoadingScreen: {fileID: 628705016}
   useFloorCoroutine: 1
+  floorCount: 0
   gameTime: 0
   floorTimes: []
   gameTurns: 0
@@ -414,6 +416,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4669053512702302869, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4854002733609748450, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -796,6 +802,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
+--- !u!114 &8049757314619468152 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 337154163785066119, guid: 7bff94dde34b2b24083679ecc102e841, type: 3}
+  m_PrefabInstance: {fileID: 8049757314619468151}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f77dbfa2cc52e0245b29e1f7273f0a2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

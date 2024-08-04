@@ -470,6 +470,18 @@ namespace VLG
                     }
                 }
 
+                // Change View
+                // If view switching is allowed.
+                if(gameManager.gameCamera.allowViewSwitching)
+                {
+                    // If the view should be switched.
+                    if (Input.GetKeyDown(KeyCode.Alpha0) || Input.GetKeyDown(KeyCode.Keypad0))
+                    {
+                        gameManager.gameCamera.SwapViews();
+                    }
+                }
+                
+
                 // Reset Floor
                 if (Input.GetKeyDown(KeyCode.R))
                 {

@@ -18,8 +18,11 @@ namespace VLG
         // Mute
         public bool mute = false;
 
+        // Tutorial
+        public bool useTutorials = false;
+
         // Cutscenes
-        public bool cutscenes = true;
+        public bool playCutscenes = true;
 
         // Resolution (Vectors cannot be serialized).
         public bool fullScreen = false;
@@ -41,10 +44,10 @@ namespace VLG
 
         // If 'true', tutorial elements are used.
         // NOTE: there are no tutorial elements.
-        public bool useTutorial = true;
+        public bool useTutorials = true;
 
         // Cutscenes
-        public bool cutscenes = true;
+        public bool playCutscenes = true;
 
         [Header("File")]
 
@@ -281,7 +284,8 @@ namespace VLG
             data.mute = audioControls.Mute;
 
             // Cutscenes Information
-            data.cutscenes = cutscenes;
+            data.useTutorials = useTutorials;
+            data.playCutscenes = playCutscenes;
 
             // Resolution
             data.fullScreen = Screen.fullScreen;
@@ -323,8 +327,9 @@ namespace VLG
             audioControls.VoiceVolume = data.vceVolume;
             audioControls.Mute = data.mute;
 
-            // Cutscenes Information
-            cutscenes = data.cutscenes;
+            // Tutorials and Cutscenes
+            useTutorials = data.useTutorials;
+            playCutscenes = data.playCutscenes;
 
             // Resolution
             FullScreen = data.fullScreen;
@@ -376,8 +381,11 @@ namespace VLG
             settingsData.vceVolume = 1.0F;
             settingsData.mute = false;
 
+            // Tutorial
+            settingsData.useTutorials = true;
+
             // Cutscenes
-            settingsData.cutscenes = true;
+            settingsData.playCutscenes = true;
             
             // Resolution
             settingsData.fullScreen = false;
