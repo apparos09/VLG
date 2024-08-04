@@ -52,11 +52,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrontTex:
-        m_Texture: {fileID: 2800000, guid: 1e400fdcbe32b6d4e918cb6ce6ad58d5, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa96206b063631c44b0adeeeae47e304, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LeftTex:
-        m_Texture: {fileID: 2800000, guid: 812e297955883504391202c12db52ad1, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa96206b063631c44b0adeeeae47e304, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -76,7 +76,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RightTex:
-        m_Texture: {fileID: 2800000, guid: bf6314ba6e6f0044c9d87846525f4de6, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa96206b063631c44b0adeeeae47e304, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UpTex:
