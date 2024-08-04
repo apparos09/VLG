@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using util;
+using UnityEngine.UI;
 
 namespace VLG
 {
@@ -63,11 +64,22 @@ namespace VLG
         // The options window (main window).
         public GameObject optionsWindow;
 
+        // The button for going back to the title screen.
+        public Button titleButton;
+
         // The instructions window.
         public GameObject instructionsWindow;
 
         // The settings window.
         public GameObject settingsWindow;
+
+        [Header("Saving")]
+
+        // The object for saving.
+        public GameObject savingObject;
+
+        // The text for saving.
+        public TMP_Text savingText;
 
         // Constructor
         private GameplayUI()
@@ -334,6 +346,25 @@ namespace VLG
             window.SetActive(true);
         }
 
+        // SAVING
+        // Called when a game save has started.
+        public void OnSaveStarted()
+        {
+            // If saving and loading is enabled.
+            if(gameManager.IsSavingLoadingEnabled())
+            {
+                // Gets the save system.
+                SaveSystem saveSystem = SaveSystem.Instance;
+
+                // Sets the object and the text.
+                saveSystem.feedbackObject = savingObject;
+                saveSystem.feedbackText = savingText;
+
+                // Refreshes the feedback elements.
+                saveSystem.RefreshFeedbackElements();
+            }
+        }
+
         // SCENE //
         // Goes to the title scene.
         public void ToTitleScene()
@@ -356,6 +387,36 @@ namespace VLG
                 // Updates the timer text.
                 UpdateTimerText(gt, ft);
             }
+
+            // Disables the title button while saving - No longer needed.
+
+            //// If a save is in progress, the user can't leave the gameplay scene.
+            //// If saving and loading is enabled.
+            //if (gameManager.IsSavingLoadingEnabled())
+            //{
+            //    // Grabs the instance.
+            //    SaveSystem saveSystem = SaveSystem.Instance;
+
+            //    // Checks if the title button is interactable or not.
+            //    if (titleButton.interactable) // Interactable
+            //    {
+            //        // If a save is in progress, disable the title button.
+            //        if (saveSystem.IsSaveInProgress())
+            //        {
+            //            titleButton.interactable = false;
+            //        }
+            //    }
+            //    else // Not Interactable
+            //    {
+            //        // If no save is in progress, enable the title button.
+            //        if (!saveSystem.IsSaveInProgress())
+            //        {
+            //            titleButton.interactable = true;
+            //        }
+            //    }
+                
+            //}
+            
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

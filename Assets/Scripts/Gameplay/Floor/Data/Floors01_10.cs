@@ -553,7 +553,7 @@ namespace VLG
 
             // Geometry
             string[,] geometry = new string[FloorData.FLOOR_COLS, FloorData.FLOOR_ROWS]{
-                { "00A", "00A", "00A", "00A", "09A", "00A", "00A", "00A", "00A", "00A"},
+                { "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A", "00A"},
                 { "00A", "05B", "05B", "05B", "09C", "05A", "05A", "05C", "00A", "00A"},
                 { "00A", "05B", "00A", "00A", "05A", "00A", "00A", "05C", "00A", "00A"},
                 { "00A", "05B", "00A", "00A", "05A", "00A", "00A", "05C", "00A", "00A"},

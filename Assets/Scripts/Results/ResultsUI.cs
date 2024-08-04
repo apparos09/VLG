@@ -48,6 +48,14 @@ namespace VLG
         // The pages text.
         public TMP_Text pageNumberText;
 
+        [Header("Saving")]
+
+        // The object for saving.
+        public GameObject savingObject;
+
+        // The text for saving.
+        public TMP_Text savingText;
+
         // Constructor
         private ResultsUI()
         {
@@ -83,7 +91,19 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-            // ...
+            // If the save system exists, and has been instantiated.
+            if (SaveSystem.Instantiated)
+            {
+                // Gets the save system.
+                SaveSystem saveSystem = SaveSystem.Instance;
+
+                // Sets the object and the text.
+                saveSystem.feedbackObject = savingObject;
+                saveSystem.feedbackText = savingText;
+
+                // Refreshes the feedback elements.
+                saveSystem.RefreshFeedbackElements();
+            }
         }
 
         // Gets the instance.

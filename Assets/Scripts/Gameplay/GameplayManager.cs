@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 
 namespace VLG
 {
@@ -163,7 +162,10 @@ namespace VLG
         // Called after the Start function 
         protected void PostStart()
         {
-            // TODO: put any relevant code here.
+            // For some reason, when going back to the title screen and continuing the game...
+            // The game will be paused by default. This automatically unpauses the game.
+            // I don't know why it happens, but this fix seems to work.
+            SetPaused(false);
 
             // This function has been called.
             calledPostStart = true;
@@ -326,8 +328,17 @@ namespace VLG
             // Sets the game manager.
             saveSystem.gameManager = this;
 
+            // Called when a save has been started.
+            gameUI.OnSaveStarted();
+
             // Saves the game asynchronously.
             bool result = saveSystem.SaveGame(true);
+
+            // If the save was successful, set the last save as the loaded data.
+            // This makes sure the player can go to the title screen and start...
+            // The game back up again as normal. It doesn't check for a successful...
+            // Result, but this should be fine.
+            saveSystem.SetLastSaveAsLoadedData();
 
             // Return the result of the save.
             return result;

@@ -56,6 +56,14 @@ namespace VLG
         // The liscences window.
         public GameObject licensesWindow;
 
+        [Header("Saving")]
+
+        // The object for saving.
+        public GameObject savingObject;
+
+        // The text for saving.
+        public TMP_Text savingText;
+
         // Constructor
         private TitleUI()
         {
@@ -104,6 +112,20 @@ namespace VLG
             {
                 // If the save system has loaded data, enable the continue button.
                 continueButton.interactable = SaveSystem.Instance.HasLoadedData();
+            }
+
+            // If the save system exists, and has been instantiated.
+            if (SaveSystem.Instantiated)
+            {
+                // Gets the save system.
+                SaveSystem saveSystem = SaveSystem.Instance;
+
+                // Sets the object and the text.
+                saveSystem.feedbackObject = savingObject;
+                saveSystem.feedbackText = savingText;
+
+                // Refreshes the feedback elements.
+                saveSystem.RefreshFeedbackElements();
             }
         }
 
