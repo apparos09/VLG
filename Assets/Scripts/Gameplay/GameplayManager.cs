@@ -427,6 +427,7 @@ namespace VLG
         // Goes to the title scene.
         public void ToTitleScene()
         {
+            UnpauseGame(); // Make sure the game isn't paused so that the timer is running.
             SceneManager.LoadScene("TitleScene");
         }
 
@@ -434,6 +435,7 @@ namespace VLG
         // Goes to the results scene.
         public void ToResultsScene()
         {
+            UnpauseGame(); // Make sure the game isn't paused so that the timer is running.
             SceneManager.LoadScene("ResultsScene");
         }
 
