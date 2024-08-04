@@ -17,6 +17,9 @@ namespace VLG
         // Shows if the game data is valid.
         public bool valid = false;
 
+        // Shows if the game is complete or not.
+        public bool gameComplete = false;
+
         // The floor count.
         public int floorCount = 0;
 
@@ -94,8 +97,8 @@ namespace VLG
         // The default saving data.
         private const string FEEDBACK_STRING_DEFAULT = "Saving Data";
 
-        // The string shown when having feedback.
-        private string feedbackString = "Saving Data";
+        // The string shown when having save feedback.
+        public string feedbackString = "Saving Data";
 
         // Becomes 'true' when a save is in progress.
         private bool saveInProgress = false;

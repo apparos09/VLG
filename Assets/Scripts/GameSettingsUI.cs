@@ -25,8 +25,11 @@ namespace VLG
         public Slider sfxSlider;
 
         [Header("Toggles")]
-        // The Mute toggle.
+        // The mute toggle.
         public Toggle muteToggle;
+
+        // The tutorials toggle.
+        public Toggle tutorialsToggle;
 
         // The cutscenes toggle.
         public Toggle cutscenesToggle;
@@ -64,9 +67,10 @@ namespace VLG
             // Auto-set the volume settings.
             bgmSlider.value = Mathf.Lerp(bgmSlider.minValue, bgmSlider.maxValue, audioControls.BackgroundMusicVolume);
             sfxSlider.value = Mathf.Lerp(sfxSlider.minValue, sfxSlider.maxValue, audioControls.SoundEffectVolume);
+            
+            // Auto-set the toggles
             muteToggle.isOn = audioControls.Mute;
-
-            // Auto-set cutscenes.
+            tutorialsToggle.isOn = gameSettings.useTutorials;
             cutscenesToggle.isOn = gameSettings.playCutscenes;
 
             // Auto-set resolution.
@@ -122,6 +126,18 @@ namespace VLG
         public void OnMuteToggle()
         {
             OnMuteToggle(muteToggle);
+        }
+
+        // Called when the tutorial option has been toggled.
+        public void OnTutorialsToggle(Toggle toggle)
+        {
+            gameSettings.useTutorials = toggle.isOn;
+        }
+
+        // Called when the tutorial option has been toggled.
+        public void OnTutorialsToggle()
+        {
+            OnTutorialsToggle(tutorialsToggle);
         }
 
         // Called when the mute option has been toggled.

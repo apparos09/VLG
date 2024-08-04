@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,9 @@ namespace VLG
         // The number of floors the player will do. This is used for testing purposes.
         [Tooltip("The number of floors the player will do. This is for testing purposes.")]
         public int floorCount = 0;
+
+        // Gets set to 'true', when the game is completed.
+        private bool gameComplete = false;
 
         // Gets set to 'true' when the post start function has been called.
         private bool calledPostStart = false;
@@ -297,6 +301,11 @@ namespace VLG
             // The game data.
             VLG_GameData data = new VLG_GameData();
 
+            // Valid is changed last in this function.
+
+            // Checks if the game is complete.
+            data.gameComplete = IsGameComplete();
+
             // Saves the floor count.
             data.floorCount = floorCount;
 
@@ -382,6 +391,20 @@ namespace VLG
                 return false;
             }
 
+            // If the game is completed, ignore the save data.
+            if(data.gameComplete)
+            {
+                // Message to show that the game is complete.
+                if (Application.platform.IsEditor())
+                    Debug.LogWarning("The continued game was completed, so the game is restarting...");
+
+                return false;
+            }
+
+            // These values should both be false regardless, but for clarity, this value is overwritten anyway.
+            // In practice, this line shouldn't change anything.
+            gameComplete = data.gameComplete;
+
             // Loads the floor count.
             floorCount = data.floorCount;
 
@@ -400,9 +423,18 @@ namespace VLG
             return true;
         }
 
+        // Returns 'true' if the game is complete, false otherwise.
+        public bool IsGameComplete()
+        {
+            return gameComplete;
+        }
+
         // Called to finish the game.
         public void FinishGame()
         {
+            // The game has been finished, meaning that it is complete.
+            gameComplete = true;
+
             // Creates the results info object.
             GameObject newObject = new GameObject("Results Info");
             ResultsInfo resultsInfo = newObject.AddComponent<ResultsInfo>();
@@ -427,7 +459,8 @@ namespace VLG
         // Goes to the title scene.
         public void ToTitleScene()
         {
-            UnpauseGame(); // Make sure the game isn't paused so that the timer is running.
+            // UnpauseGame(); // Make sure the game isn't paused so that the timer is running.
+            Time.timeScale = 1.0F; // Reset the time scale.
             SceneManager.LoadScene("TitleScene");
         }
 
@@ -435,7 +468,8 @@ namespace VLG
         // Goes to the results scene.
         public void ToResultsScene()
         {
-            UnpauseGame(); // Make sure the game isn't paused so that the timer is running.
+            // UnpauseGame(); // Make sure the game isn't paused so that the timer is running.
+            Time.timeScale = 1.0F; // Reset the time scale.
             SceneManager.LoadScene("ResultsScene");
         }
 

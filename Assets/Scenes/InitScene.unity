@@ -386,7 +386,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioControls: {fileID: 1790061467}
-  useTutorial: 1
+  useTutorials: 1
+  playCutscenes: 1
   fileReader: {fileID: 1790061468}
   file: settings.dat
   filePath1: Assets\Resources\Data\
@@ -467,6 +468,8 @@ MonoBehaviour:
   allowSaveLoad: 1
   lastSave:
     valid: 0
+    gameComplete: 0
+    floorCount: 0
     floorId: 0
     floorCode: 
     gameTime: 0
@@ -476,6 +479,8 @@ MonoBehaviour:
     floorTurns: 00000000
   loadedData:
     valid: 0
+    gameComplete: 0
+    floorCount: 0
     floorId: 0
     floorCode: 
     gameTime: 0
@@ -488,7 +493,9 @@ MonoBehaviour:
   fileName: save.dat
   filePath1: Assets\Resources\Data\
   filePath2: Data\
+  feedbackObject: {fileID: 0}
   feedbackText: {fileID: 0}
+  feedbackString: Saving...
 --- !u!4 &2068394679
 Transform:
   m_ObjectHideFlags: 0

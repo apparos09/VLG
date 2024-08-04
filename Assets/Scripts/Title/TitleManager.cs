@@ -159,17 +159,39 @@ namespace VLG
 
             // If there is no save data to load, start a new game.
             gameInfo.loadFromSave = saveSystem.HasLoadedData();
-            
+
+            // The default floor ID if the save data can't be used.
+            int defaultFloorId = 1;
+
             // If the game should be loaded from a save...
             if(gameInfo.loadFromSave) 
             { 
-                // Grab the floor ID.
-                gameInfo.floorId = saveSystem.loadedData.floorId;
+                // Grab the floor ID if the game data is valid.
+                if(saveSystem.loadedData.valid)
+                {
+                    // If the game is complete...
+                    if (saveSystem.loadedData.gameComplete)
+                    {
+                        // Reset the game.
+                        gameInfo.floorId = defaultFloorId;
+                    }
+                    else // If the game is not complete...
+                    {
+                        // Start from the saved floor.
+                        gameInfo.floorId = saveSystem.loadedData.floorId;
+                    }
+                }
+                else
+                {
+                    // Invalid data, so start from floor 1.
+                    gameInfo.floorId = defaultFloorId;
+                }
+                
             }
             else
             {
                 // Start from floor 1.
-                gameInfo.floorId = 1;
+                gameInfo.floorId = defaultFloorId;
             }
 
             // Start the game.
