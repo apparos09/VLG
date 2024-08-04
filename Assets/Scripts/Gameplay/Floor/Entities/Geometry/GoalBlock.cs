@@ -55,6 +55,12 @@ namespace VLG
         {
             goalConMet = true;
             PlayGoalUnlockAnimation();
+
+            // If the player is standing on the goal when it's unlocked, trigger the goal entry.
+            if(gameManager.player.floorPos == floorPos)
+            {
+                floorManager.OnGoalTriggered();
+            }
         }
 
         // Called when the condition check for the goal has failed.
