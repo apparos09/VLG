@@ -23,6 +23,9 @@ namespace VLG
         // The floor loading screen.
         public FloorLoadingScreen floorLoadingScreen;
 
+        // The tutorial UI.
+        public TutorialUI tutorialUI;
+
         [Header("Floor Info")]
         // The text that displays the floor.
         public TMP_Text floorNumberText;
