@@ -86,9 +86,9 @@ MonoBehaviour:
   i01A: {fileID: 5384949875433752124, guid: 11690695d4e70ea40a8412b0b3a985b5, type: 3}
   i02A: {fileID: 2529192907324512616, guid: 2c7cfbc38a881af4db2da064d4a40242, type: 3}
   skyboxMat00: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
-  skyboxMat01: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
-  skyboxMat02: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
-  skyboxMat03: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
-  skyboxMat04: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
-  skyboxMat05: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
-  skyboxMat06: {fileID: 2100000, guid: a3815897d72435146a31a5ce79912599, type: 2}
+  skyboxMat01: {fileID: 2100000, guid: e03c0076c4749ac4c82f0bfb36f64868, type: 2}
+  skyboxMat02: {fileID: 2100000, guid: 7740dba81d0ecf945af6449f6b18f85f, type: 2}
+  skyboxMat03: {fileID: 2100000, guid: 7bb9fb6d77200404984fe83978fe9bf1, type: 2}
+  skyboxMat04: {fileID: 2100000, guid: e78f40aa403831f47af3bf41077bdcc1, type: 2}
+  skyboxMat05: {fileID: 2100000, guid: b73f801b1f892154e8d7ca43d4a2f2e8, type: 2}
+  skyboxMat06: {fileID: 2100000, guid: b678160993a561949b907c445f3cbd9c, type: 2}
