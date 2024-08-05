@@ -24,7 +24,7 @@ namespace VLG
         public FloorLoadingScreen floorLoadingScreen;
 
         // The tutorial UI.
-        public TutorialUI tutorialUI;
+        public TutorialsUI tutorialUI;
 
         [Header("Floor Info")]
         // The text that displays the floor.

@@ -235,6 +235,10 @@ PrefabInstance:
       propertyPath: eventSystem
       value: 
       objectReference: {fileID: 929664214}
+    - target: {fileID: 2474831107957416976, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+      propertyPath: tutorials
+      value: 
+      objectReference: {fileID: 1656831674}
     - target: {fileID: 2804604501681438393, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -376,6 +380,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0db6e77add6b8d241a1bfff830de2915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &628705017 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2474831107957416976, guid: ae2ed2607fe3fc449ac61483927e253b, type: 3}
+  m_PrefabInstance: {fileID: 628705014}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f20c8fd16bdef364c81b83934c7ba3e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &929664212
@@ -557,7 +572,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1218252118413987619, guid: 06e3fc115d3def74dac6f7cbcf4d142a, type: 3}
       propertyPath: m_Name
-      value: Gameplay Manager
+      value: Manager
       objectReference: {fileID: 0}
     - target: {fileID: 3459617041228750324, guid: 06e3fc115d3def74dac6f7cbcf4d142a, type: 3}
       propertyPath: floorData
@@ -571,6 +586,14 @@ PrefabInstance:
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3512049731854650810, guid: 06e3fc115d3def74dac6f7cbcf4d142a, type: 3}
+      propertyPath: tutorialUI
+      value: 
+      objectReference: {fileID: 628705017}
+    - target: {fileID: 3512049731854650810, guid: 06e3fc115d3def74dac6f7cbcf4d142a, type: 3}
+      propertyPath: tutorialsUI
+      value: 
+      objectReference: {fileID: 628705017}
     - target: {fileID: 7073366820712042381, guid: 06e3fc115d3def74dac6f7cbcf4d142a, type: 3}
       propertyPath: gameUI
       value: 
@@ -649,6 +672,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0944120d1bc899448215dc6af9e56f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1656831674 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3512049731854650810, guid: 06e3fc115d3def74dac6f7cbcf4d142a, type: 3}
+  m_PrefabInstance: {fileID: 1656831672}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d937c580d784714aad742ea040a3919, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1759290679

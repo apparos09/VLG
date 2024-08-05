@@ -7,14 +7,20 @@ using util;
 namespace VLG
 {
     // The UI for the tutorial.
-    public class TutorialUI : MonoBehaviour
+    public class TutorialsUI : MonoBehaviour
     {
         // The singleton instance.
-        private static TutorialUI instance;
+        private static TutorialsUI instance;
 
         // Gets set to 'true' when the singleton has been instanced.
         // This isn't needed, but it helps with the clarity.
         private static bool instanced = false;
+
+        // The game UI.
+        public GameplayUI gameUI;
+
+        // The tutorials object.
+        public Tutorials tutorials;
 
         // The tutorial text box.
         public TextBox textBox;
@@ -30,7 +36,7 @@ namespace VLG
         public Sprite alpha0Sprite;
 
         // Constructor
-        private TutorialUI()
+        private TutorialsUI()
         {
             // ...
         }
@@ -64,6 +70,14 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
+            // Gets the instance if it's not set.
+            if (gameUI == null)
+                gameUI = GameplayUI.Instance;
+
+            // Gets the tutorials object.
+            if (tutorials == null)
+                tutorials = Tutorials.Instance;
+
             // If the text box is open, close it.
             if(textBox.gameObject.activeSelf)
             {
@@ -72,7 +86,7 @@ namespace VLG
         }
 
         // Gets the instance.
-        public static TutorialUI Instance
+        public static TutorialsUI Instance
         {
             get
             {
@@ -80,7 +94,7 @@ namespace VLG
                 if (instance == null)
                 {
                     // Tries to find the instance.
-                    instance = FindObjectOfType<TutorialUI>(true);
+                    instance = FindObjectOfType<TutorialsUI>(true);
 
 
                     // The instance doesn't already exist.
@@ -88,7 +102,7 @@ namespace VLG
                     {
                         // Generate the instance.
                         GameObject go = new GameObject("Tutorial UI (singleton)");
-                        instance = go.AddComponent<TutorialUI>();
+                        instance = go.AddComponent<TutorialsUI>();
                     }
 
                 }
@@ -107,7 +121,33 @@ namespace VLG
             }
         }
 
-        // Text Box
+        // Is the tutorial active?
+        public bool IsTutorialRunning()
+        {
+            // If the textbox is isible, then the tutorial is active.
+            return textBox.IsVisible();
+        }
+
+        // Starts a tutorial.
+        public void StartTutorial()
+        {
+            textBox.SetPage(0);
+            OpenTextBox();
+        }
+
+        // Called when a tutorial is started.
+        public void OnTutorialStart()
+        {
+            // ...
+        }
+
+        // Called when a tutorail ends.
+        public void OnTutorialEnd()
+        {
+            // ...
+        }
+
+        // TEXT BOX
         // Loads pages for the textbox.
         public void LoadPages(ref List<Page> pages, bool clearPages)
         {
@@ -138,6 +178,9 @@ namespace VLG
         {
             // Hides the diagram by default.
             HideDiagram();
+
+            // The tutorial has started.
+            tutorials.OnTutorialStart();
         }
 
         // Called when the text box is closed.
@@ -155,6 +198,9 @@ namespace VLG
             // Clear the diagram and hides it.
             ClearDiagram();
             HideDiagram();
+
+            // The tutorial has ended.
+            tutorials.OnTutorialEnd();
         }
 
         // Diagram

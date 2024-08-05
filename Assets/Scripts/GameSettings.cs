@@ -43,8 +43,7 @@ namespace VLG
         public AudioControls audioControls;
 
         // If 'true', tutorial elements are used.
-        // NOTE: there are no tutorial elements.
-        public bool useTutorials = true;
+        public bool useTutorials = false;
 
         // Cutscenes
         public bool playCutscenes = true;
@@ -382,7 +381,7 @@ namespace VLG
             settingsData.mute = false;
 
             // Tutorial
-            settingsData.useTutorials = true;
+            settingsData.useTutorials = false;
 
             // Cutscenes
             settingsData.playCutscenes = true;

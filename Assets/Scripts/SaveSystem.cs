@@ -40,6 +40,9 @@ namespace VLG
 
         // The floor turns.
         public int[] floorTurns = new int[FloorData.FLOOR_COUNT_MAX];
+
+        // Tutorials
+        public bool[] clearedTutorials = new bool[Tutorials.TUTORIAL_TYPE_COUNT];
     }
 
     // The save system class.

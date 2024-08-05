@@ -385,8 +385,8 @@ namespace VLG
         // Updates the player movements.
         public void UpdateInput()
         {
-            // If the game is not paused.
-            if(!gameManager.IsPaused())
+            // If the game is not paused, and if a tutorial is not running.
+            if(!gameManager.IsPaused() && !gameManager.IsTutorialRunning())
             {
                 // If the player isn't in the process of moving, they can select their next move.
                 if (!Moving)

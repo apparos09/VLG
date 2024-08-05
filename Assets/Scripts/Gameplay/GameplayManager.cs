@@ -25,6 +25,9 @@ namespace VLG
         // The gameplay audio.
         public GameplayAudio gameAudio;
 
+        // The tutorials.
+        public Tutorials tutorials;
+
         // The player for the game.
         public Player player;
 
@@ -108,6 +111,7 @@ namespace VLG
         {
             // TODO: comment out when you want to test saving.
             // If the game isn't running in WebGL, allow the game to save.
+            // This is already done in the InitScene, but it's done again here.
             // SaveSystem.Instance.allowSaveLoad = false;
             SaveSystem.Instance.allowSaveLoad = Application.platform != RuntimePlatform.WebGLPlayer;
 
@@ -171,6 +175,18 @@ namespace VLG
             // I don't know why it happens, but this fix seems to work.
             SetPaused(false);
 
+            // TODO: uncomment when ready to test the tutorial.
+            // INTRO TUTORIAL
+            // If tutorials are being used.
+            if (UsingTutorials)
+            {
+                // If the intro has not been cleared, trigger the intro.
+                if (!tutorials.IsTutorialCleared(Tutorials.tutorialType.intro))
+                {
+                    LoadIntroTutorial();
+                }
+            }
+
             // This function has been called.
             calledPostStart = true;
         }
@@ -211,19 +227,6 @@ namespace VLG
             }
         }
 
-        // Updates game turns.
-        public void UpdateTurns()
-        {
-            // If the game is paused, don't updatre the turns.
-            if (paused)
-                return;
-
-            // TODO: implement turn update.
-            gameTurns++;
-
-            floorManager.UpdateTurns();
-            gameUI.UpdateTurnsText();
-        }
 
         // PAUSE
 
@@ -239,16 +242,28 @@ namespace VLG
             // Sets the value.
             paused = pausedGame;
 
+            // Checks if the time scale should be changed.
+            bool changeTimeScale = true;
+
+            // If tutorials are being used.
+            if(UsingTutorials)
+            {
+                // If a tutorial is running, don't change the time scale.
+                changeTimeScale = !tutorials.IsTutorialRunning();
+            }
+
             // Checks if the game is paused or unpaused.
             if(paused)
             {
                 // Stops time.
-                Time.timeScale = 0.0f;
+                if(changeTimeScale)
+                    Time.timeScale = 0.0f;
             }
             else
             {
                 // Resumes normal time.
-                Time.timeScale = 1.0f;
+                if(changeTimeScale)
+                    Time.timeScale = 1.0f;
             }
 
             // Called to update on the game's paused event.
@@ -273,9 +288,72 @@ namespace VLG
             SetPaused(!paused);
         }
 
+        // TUTORIAL
+        // If the tutorial is being used or not.
+        public bool UsingTutorials
+        {
+            get
+            {
+                return GameSettings.Instance.useTutorials;
+            }
+
+            set
+            {
+                GameSettings.Instance.useTutorials = value;
+            }
+        }
+
+        // Checks if a tutorial is running.
+        public bool IsTutorialRunning()
+        {
+            return tutorials.IsTutorialRunning();
+        }
+
+        // Loads the intro tutorial.
+        public void LoadIntroTutorial()
+        {
+            // Gets the current list of pages.
+            List<util.Page> currPages = new List<util.Page>();
+
+            // If the pages count is greater than 0.
+            if (tutorials.tutorialsUI.textBox.pages.Count > 0)
+            {
+                // Get the current pages.
+                currPages = tutorials.tutorialsUI.textBox.pages;
+
+                // Clear the current pages.
+                tutorials.tutorialsUI.textBox.ClearPages();
+            }
+
+            // Load the intro tutorial.
+            tutorials.LoadIntroTutorial();
+
+            // Put back the old pages. This makes sure that the intro tutorial plays first.
+            if (currPages.Count > 0)
+                tutorials.tutorialsUI.textBox.pages.AddRange(currPages);
+
+            // Make sure to start at page 0 since the intro tutorial has been loaded.
+            tutorials.tutorialsUI.textBox.SetPage(0);
+        }
+
+        // UPDATE TURNS
+        // Updates game turns.
+        public void UpdateTurns()
+        {
+            // If the game is paused, don't updatre the turns.
+            if (paused)
+                return;
+
+            // TODO: implement turn update.
+            gameTurns++;
+
+            floorManager.UpdateTurns();
+            gameUI.UpdateTurnsText();
+        }
+
 
         // SAVING/LOADING
-        
+
         // Returns 'true' if data can be saved/loaded.
         public bool IsSavingLoadingEnabled()
         {
@@ -320,6 +398,9 @@ namespace VLG
             // Saves the turns.
             data.gameTurns = gameTurns;
             data.floorTurns = floorTurns;
+
+            // Fill the cleared tutorials array.
+            tutorials.FillClearedTutorialsArray(ref data.clearedTutorials);
 
             // The data is safe to read from.
             data.valid = true;
@@ -415,6 +496,9 @@ namespace VLG
             // Loads the floor data.
             gameTurns = data.gameTurns;
             floorTurns = data.floorTurns;
+
+            // Add the cleared tutorials.
+            tutorials.AddClearedTutorials(data.clearedTutorials, true);
 
             // Loads the floor using the ID number (could also use code).
             floorManager.GenerateFloor(data.floorId);
