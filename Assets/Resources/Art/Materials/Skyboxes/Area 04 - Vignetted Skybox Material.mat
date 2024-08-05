@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Area 05 (Vignetted) Skybox Material
+  m_Name: Area 04 - Vignetted Skybox Material
   m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BackTex:
-        m_Texture: {fileID: 2800000, guid: 8f63186002bb70b409d805f66411a4cd, type: 3}
+        m_Texture: {fileID: 2800000, guid: a8db328c1d44a2142b1af2ecaf0b0b20, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -44,7 +44,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DownTex:
-        m_Texture: {fileID: 2800000, guid: 23313e00ad30cd046b3afb9192300ead, type: 3}
+        m_Texture: {fileID: 2800000, guid: f6181cffb5006bc4c8392cdb604568b7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -52,11 +52,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrontTex:
-        m_Texture: {fileID: 2800000, guid: 5cc2155772e41f446848718647d7ae57, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4562c63b54f180849997af0c048b37e2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LeftTex:
-        m_Texture: {fileID: 2800000, guid: a582c8a4605ad5444ba735abba9e5bce, type: 3}
+        m_Texture: {fileID: 2800000, guid: 56bdb50081874f9409a9e6c0d8a831a6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -76,11 +76,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RightTex:
-        m_Texture: {fileID: 2800000, guid: 22d252673fd903c4eb35f13fad9e1a14, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2b0e14ecb76cfc34c8011e368009e6ce, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UpTex:
-        m_Texture: {fileID: 2800000, guid: 79a632f81ff06b04ba65281708d29092, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1f2e70b23c44fb548b5fa41f76ab5ef1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
@@ -97,7 +97,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rotation: 360
+    - _Rotation: 270
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
