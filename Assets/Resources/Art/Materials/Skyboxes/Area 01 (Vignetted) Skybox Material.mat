@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Area 01 Skybox Material
+  m_Name: Area 01 (Vignetted) Skybox Material
   m_Shader: {fileID: 104, guid: 0000000000000000f000000000000000, type: 0}
   m_Parent: {fileID: 2100000, guid: b73f801b1f892154e8d7ca43d4a2f2e8, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -24,32 +24,31 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BackTex:
-        m_Texture: {fileID: 2800000, guid: c22ea9a7dd6360947a9f78a931958855, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6f285c307e9d3f547a08ce8ec7681dec, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DownTex:
-        m_Texture: {fileID: 2800000, guid: 0b99cfa8fd232214e9f2ebd415489919, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9dd9536d4e8e54f4c9d014b0c941c5c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrontTex:
-        m_Texture: {fileID: 2800000, guid: 8fbf5f49b5425ac4ab01b72274e64f59, type: 3}
+        m_Texture: {fileID: 2800000, guid: 70afa586c77e3274f876b9919018a33f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LeftTex:
-        m_Texture: {fileID: 2800000, guid: d492f64b59dd46546936cf8c5c598d18, type: 3}
+        m_Texture: {fileID: 2800000, guid: b38d965fce81ef94da44e23f1c1d6baa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RightTex:
-        m_Texture: {fileID: 2800000, guid: 7bf02e4086da5d74db549df7b1da8fe4, type: 3}
+        m_Texture: {fileID: 2800000, guid: 4eec31e25ac6a4b41817b98ff3c2de2f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UpTex:
-        m_Texture: {fileID: 2800000, guid: b36dac64f049be140b2920dff2c2d912, type: 3}
+        m_Texture: {fileID: 2800000, guid: 80a422473b7bb1c45b4fa24bd94d3cd2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats:
-    - _Exposure: 0.2
+    m_Floats: []
     m_Colors:
     - _Tint: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.5019608}
   m_BuildTextureStacks: []
