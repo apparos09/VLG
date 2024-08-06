@@ -339,6 +339,13 @@ namespace VLG
             // Turn off the loading screen.
             gameManager.floorLoadingScreen.gameObject.SetActive(false);
 
+            // If a tutorial is running, restart the tutorial to make sure...
+            // The player's inputs are disabled, and the time scale is set to 0.
+            if(gameManager.IsTutorialRunning())
+            {
+                // Restarts the tutorial.
+                gameManager.tutorials.RestartTutorial();
+            }
 
             // Stops the coroutine once it's finished.
             if (floorGenCoroutine != null)

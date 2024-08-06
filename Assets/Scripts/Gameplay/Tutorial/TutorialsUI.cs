@@ -160,6 +160,30 @@ namespace VLG
             OpenTextBox();
         }
 
+        // Restarts the tutorial.
+        public void RestartTutorial()
+        {
+            // Gets the pages from the text box.
+            List<Page> pages = textBox.pages;
+
+            // Ends the tutorial, sets the textbox pages, and starts the tutorial again.
+            EndTutorial();
+            textBox.pages = pages;
+            StartTutorial();
+        }
+
+        // Ends the tutorial.
+        public void EndTutorial()
+        {
+            // If the tutorial is running, end it.
+            if(IsTutorialRunning())
+            {
+                // Sets to the last page and closes the text box.
+                textBox.SetPage(textBox.GetPageCount() - 1);
+                CloseTextBox();
+            }
+        }
+
         // Called when a tutorial is started.
         public void OnTutorialStart()
         {
@@ -201,8 +225,9 @@ namespace VLG
         // Called when the text box is opened.
         private void OnTextBoxOpened()
         {
+            // These should be handled by the pages.
             // Hides the diagram by default.
-            HideDiagram();
+            // HideDiagram();
 
             // The tutorial has started.
             tutorials.OnTutorialStart();
@@ -220,9 +245,10 @@ namespace VLG
             // Remove all the pages.
             textBox.ClearPages();
 
-            // Clear the diagram and hides it.
-            ClearDiagram();
-            HideDiagram();
+            // These should be handled by the pages.
+            // // Clear the diagram and hides it.
+            // ClearDiagram();
+            // HideDiagram();
 
             // The tutorial has ended.
             tutorials.OnTutorialEnd();

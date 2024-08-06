@@ -257,13 +257,13 @@ namespace VLG
             {
                 // Stops time.
                 if(changeTimeScale)
-                    Time.timeScale = 0.0f;
+                    Time.timeScale = 0.0F;
             }
             else
             {
                 // Resumes normal time.
                 if(changeTimeScale)
-                    Time.timeScale = 1.0f;
+                    Time.timeScale = 1.0F;
             }
 
             // Called to update on the game's paused event.

@@ -131,6 +131,18 @@ namespace VLG
             tutorialsUI.StartTutorial();
         }
 
+        // Restarts the tutorial.
+        public void RestartTutorial()
+        {
+            tutorialsUI.RestartTutorial();
+        }
+
+        // Ends the tutorial.
+        public void EndTutorial()
+        {
+            tutorialsUI.EndTutorial();
+        }
+
         // Called when a tutorial is started.
         public void OnTutorialStart()
         {
