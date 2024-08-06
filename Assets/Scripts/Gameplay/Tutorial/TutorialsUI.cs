@@ -48,12 +48,13 @@ namespace VLG
         public Sprite phaseBlockSprite;
         public Sprite portalBlockSprite;
         public Sprite switchBlockSprite;
+        public Sprite buttonBlockSprite;
 
         [Header("Diagram/Images/Enemy")]
         public Sprite stationaryEnemySprite;
         public Sprite barEnemySprite;
         public Sprite copyEnemySprite;
-        public Sprite finalBossSprite;
+        public Sprite finalBossEnemySprite;
 
         [Header("Diagram/Images/Items")]
         public Sprite keyItemSprite;
@@ -252,6 +253,178 @@ namespace VLG
             // Clear out the sprite.
             textBoxDiagramImage.sprite = alpha0Sprite;
         }
+
+        // DIAGRAM IMAGES
+        // Set diagram image by type.
+        public void SetDiagramImageByTutorialType(Tutorials.tutorialType tutorial)
+        {
+                // Checks the tutorial type to see what to load.
+            switch (tutorial)
+            {
+                default:
+                case Tutorials.tutorialType.none: // Clear if no specific type
+                    textBoxDiagramImage.sprite = alpha0Sprite;
+                    break;
+
+                // GEOMETRY
+                case Tutorials.tutorialType.entryBlock:
+                    textBoxDiagramImage.sprite = entryBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.goalBlock:
+                    textBoxDiagramImage.sprite = goalBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.block:
+                    textBoxDiagramImage.sprite = blockSprite;
+                    break;
+
+                case Tutorials.tutorialType.hazardBlock:
+                    textBoxDiagramImage.sprite = hazardBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.limitedBlock:
+                    textBoxDiagramImage.sprite = limitedBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.phaseBlock:
+                    textBoxDiagramImage.sprite = phaseBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.portalBlock:
+                    textBoxDiagramImage.sprite = portalBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.switchBlock:
+                    textBoxDiagramImage.sprite = switchBlockSprite;
+                    break;
+
+                case Tutorials.tutorialType.buttonBlock:
+                    textBoxDiagramImage.sprite = buttonBlockSprite;
+                    break;
+
+
+                // ENEMY
+                case Tutorials.tutorialType.stationaryEnemy:
+                    textBoxDiagramImage.sprite = stationaryEnemySprite;
+                    break;
+
+                case Tutorials.tutorialType.barEnemy:
+                    textBoxDiagramImage.sprite = barEnemySprite;
+                    break;
+
+                case Tutorials.tutorialType.copyEnemy:
+                    textBoxDiagramImage.sprite = copyEnemySprite;
+                    break;
+
+                case Tutorials.tutorialType.finalBossEnemy:
+                    textBoxDiagramImage.sprite = finalBossEnemySprite;
+                    break;
+
+                // ITEM
+                case Tutorials.tutorialType.keyItem:
+                    textBoxDiagramImage.sprite = keyItemSprite;
+                    break;
+
+                case Tutorials.tutorialType.weaponItem:
+                    textBoxDiagramImage.sprite = weaponItemSprite;
+                    break;
+            }
+        }
+
+        // BLOCKS
+        // Sets the diagram to the entry block diagram.
+        public void SetDiagramToEntryBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = entryBlockSprite;
+        }
+
+        // Sets the diagram to the goal block diagram.
+        public void SetDiagramToGoalBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = goalBlockSprite;
+        }
+
+        // Sets the diagram to the block diagram.
+        public void SetDiagramToBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = blockSprite;
+        }
+
+        // Sets the diagram to the hazard block diagram.
+        public void SetDiagramToHazardBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = hazardBlockSprite;
+        }
+
+        // Sets the diagram to the limited block diagram.
+        public void SetDiagramToLimitedBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = limitedBlockSprite;
+        }
+
+        // Sets the diagram to the phase block diagram.
+        public void SetDiagramToPhaseBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = phaseBlockSprite;
+        }
+
+        // Sets the diagram to the portal block diagram.
+        public void SetDiagramToPortalBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = portalBlockSprite;
+        }
+
+        // Sets the diagram to the switch block diagram.
+        public void SetDiagramToSwitchBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = switchBlockSprite;
+        }
+
+        // ENEMIES
+        // Sets the diagram to the button block diagram.
+        public void SetDiagramToButtonBlockDiagram()
+        {
+            textBoxDiagramImage.sprite = buttonBlockSprite;
+        }
+
+        // Sets the diagram to the stationary enemy diagram.
+        public void SetDiagramToStationaryEnemyDiagram()
+        {
+            textBoxDiagramImage.sprite = stationaryEnemySprite;
+        }
+
+        // Sets the diagram to the bar enemy diagram.
+        public void SetDiagramToBarEnemyDiagram()
+        {
+            textBoxDiagramImage.sprite = barEnemySprite;
+        }
+
+        // Sets the diagram to the copy enemy diagram.
+        public void SetDiagramToCopyEnemyDiagram()
+        {
+            textBoxDiagramImage.sprite = copyEnemySprite;
+        }
+
+        // Sets the diagram to the final boss enemy diagram.
+        public void SetDiagramToFinalBossEnemyDiagram()
+        {
+            textBoxDiagramImage.sprite = finalBossEnemySprite;
+        }
+
+        // ITEMS
+        // Sets the diagram to the key item diagram.
+        public void SetDiagramToKeyItemDiagram()
+        {
+            textBoxDiagramImage.sprite = keyItemSprite;
+        }
+
+        // Sets the diagram to the weapon item diagram.
+        public void SetDiagramToWeaponItemDiagram()
+        {
+            textBoxDiagramImage.sprite = weaponItemSprite;
+        }
+
 
         // This function is called when the MonoBehaviour will be destroyed.
         private void OnDestroy()

@@ -430,6 +430,21 @@ MonoBehaviour:
   textBoxDiagram: {fileID: 8887261828714741579}
   textBoxDiagramImage: {fileID: 6183598380397573869}
   alpha0Sprite: {fileID: 21300000, guid: 84c3031f2f1d35e4881e13499359a9d4, type: 3}
+  entryBlockSprite: {fileID: 21300000, guid: 1f8678dfbf27e8140bd3c96cb92cf59d, type: 3}
+  goalBlockSprite: {fileID: 21300000, guid: 7362ec1796d30e14bb6c245e9ff149f8, type: 3}
+  blockSprite: {fileID: 21300000, guid: 6ea6572a59693664b8076c19700094ea, type: 3}
+  hazardBlockSprite: {fileID: 21300000, guid: a5dd8e0a03ad4224a8d8496ae4f1cb9a, type: 3}
+  limitedBlockSprite: {fileID: 21300000, guid: ef21e9a27db9ec840afc9010962fb5e9, type: 3}
+  phaseBlockSprite: {fileID: 21300000, guid: ae3ab6cbf9c95e94c97765a2748c5d29, type: 3}
+  portalBlockSprite: {fileID: 21300000, guid: badbab186fe051742896a1f9ba673352, type: 3}
+  switchBlockSprite: {fileID: 21300000, guid: 246239bf036b55749baf04127c9fe3b7, type: 3}
+  buttonBlockSprite: {fileID: 21300000, guid: 96afe71919a046940b8804ec4e28ef6b, type: 3}
+  stationaryEnemySprite: {fileID: 21300000, guid: 8ba8cea3dc6d2894ba2ae96b0bbea99b, type: 3}
+  barEnemySprite: {fileID: 21300000, guid: b62a3b1207a8c0848b76bac816624876, type: 3}
+  copyEnemySprite: {fileID: 21300000, guid: 7e885be89fdc3fb4a8fc0e74f08c9b8d, type: 3}
+  finalBossEnemySprite: {fileID: 21300000, guid: 0666bf96390248d4e89292248bcb9b5f, type: 3}
+  keyItemSprite: {fileID: 21300000, guid: 7f275c3b276c64b48bc1a2c844abb56a, type: 3}
+  weaponItemSprite: {fileID: 21300000, guid: 5bc2bacd7f33cc14fb8b2c1cc8452dce, type: 3}
 --- !u!1 &1830686109628078933
 GameObject:
   m_ObjectHideFlags: 0

@@ -362,6 +362,11 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            // No image to display, so just hide the diagram.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.HideDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ClearDiagram);
+            pages[3].OnPageOpenedAddCallback(tutorialsUI.ClearDiagram);
+            pages[3].OnPageOpenedAddCallback(tutorialsUI.HideDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -381,6 +386,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToEntryBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -399,6 +406,10 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToGoalBlockDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToGoalBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -416,6 +427,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -433,6 +446,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToHazardBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -451,6 +466,10 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToLimitedBlockDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToLimitedBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -468,6 +487,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToPhaseBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -486,6 +507,10 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToPortalBlockDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToPortalBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -504,6 +529,10 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToSwitchBlockDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToSwitchBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -525,6 +554,10 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToButtonBlockDiagram);
+            pages[4].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[4].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToButtonBlockDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -543,6 +576,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToStationaryEnemyDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -560,6 +595,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToBarEnemyDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -578,6 +615,11 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToCopyEnemyDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[1].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToCopyEnemyDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -595,6 +637,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToFinalBossEnemyDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -613,6 +657,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToKeyItemDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
@@ -630,6 +676,8 @@ namespace VLG
             };
 
             // Change the display image when certain pages are opened using callbacks.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ShowDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.SetDiagramToWeaponItemDiagram);
 
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
