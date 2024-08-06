@@ -44,9 +44,10 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
-            // Loads the credits.
+            // Loads all the credits.
             LoadBackgroundMusicCredits();
             LoadSoundEffectCredits();
+            LoadFontCredits();
 
             // Sets this if it has not been set already.
             if(creditsInterface == null)
@@ -77,7 +78,21 @@ namespace VLG
         {
             AudioCredits.AudioCredit credit = new AudioCredits.AudioCredit();
 
-            // TODO: load SFX credits
+            // Loads the font credit.
+            credit.title = "Cinzel";
+            credit.artist = "Natanael Gama";
+            credit.collection = "";
+            credit.source = "1001Fonts.com";
+            credit.link1 = "https://www.1001fonts.com/cinzel-font.html";
+            credit.link2 = "";
+            credit.copyright = 
+                "\"Cinzel\"\n" +
+                "Natanael Gama\n" + 
+                "Licensed under SIL Open Font Licence: By Attribution Version 1.1\n" + 
+                "https://openfontlicense.org/open-font-license-official-text/";
+
+            // Adds the font credit.
+            fontsCredits.audioCredits.Add(credit);
         }
 
         // Enables all the credit buttons.

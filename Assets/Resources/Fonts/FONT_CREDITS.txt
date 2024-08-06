@@ -1,0 +1,10 @@
+== Gameplay HUD ==
+Font: Cinzel
+Creator: Natanael Gama
+Link: https://www.1001fonts.com/cinzel-font.html
+
+=== Copyright ===
+"Cinzel"
+Natanael Gama
+Licensed under SIL Open Font Licence: By Attribution Version 1.1
+https://openfontlicense.org/open-font-license-official-text/
