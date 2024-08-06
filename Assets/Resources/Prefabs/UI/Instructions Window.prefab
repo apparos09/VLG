@@ -199,9 +199,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Reach the goal to clear the floor and keep acsending up the tower. The
-    challenges and hazards can vary from floor to floor. The boss will be challenged
-    on the final floor to beat the game.
+  m_text: Reach the goal to clear the floor and keep ascending the tower. The challenges
+    and hazards can vary from floor to floor. The boss will be challenged on the
+    final floor to beat the game.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
