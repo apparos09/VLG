@@ -64,17 +64,7 @@ namespace VLG
         // This function is called when the object becomes enabled and active
         private void OnEnable()
         {
-            // Auto-set the volume settings.
-            bgmSlider.value = Mathf.Lerp(bgmSlider.minValue, bgmSlider.maxValue, audioControls.BackgroundMusicVolume);
-            sfxSlider.value = Mathf.Lerp(sfxSlider.minValue, sfxSlider.maxValue, audioControls.SoundEffectVolume);
-            
-            // Auto-set the toggles
-            muteToggle.isOn = audioControls.Mute;
-            tutorialsToggle.isOn = gameSettings.useTutorials;
-            cutscenesToggle.isOn = gameSettings.playCutscenes;
-
-            // Auto-set resolution.
-            RefreshResolutionDropdown();
+            RefreshGameSettingsUI();
             
         }
 
@@ -90,6 +80,22 @@ namespace VLG
                     gameSettings.SaveGameSettingsDataToFile();
                 }
             }
+        }
+
+        // Refreshes the game settings UI.
+        public void RefreshGameSettingsUI()
+        {
+            // Auto-set the volume settings.
+            bgmSlider.value = Mathf.Lerp(bgmSlider.minValue, bgmSlider.maxValue, audioControls.BackgroundMusicVolume);
+            sfxSlider.value = Mathf.Lerp(sfxSlider.minValue, sfxSlider.maxValue, audioControls.SoundEffectVolume);
+
+            // Auto-set the toggles
+            muteToggle.isOn = audioControls.Mute;
+            tutorialsToggle.isOn = gameSettings.useTutorials;
+            cutscenesToggle.isOn = gameSettings.playCutscenes;
+
+            // Auto-set resolution.
+            RefreshResolutionDropdown();
         }
 
         // VOLUME //
@@ -220,9 +226,9 @@ namespace VLG
         {
             // Loads the default game settings.
             gameSettings.LoadDefaultGameSettingsData();
-            
+
             // Change values in UI.
-            OnEnable();
+            RefreshGameSettingsUI();
         }
     }
 }
