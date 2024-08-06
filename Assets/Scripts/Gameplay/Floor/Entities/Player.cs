@@ -383,7 +383,7 @@ namespace VLG
         }
 
         // Updates the player movements.
-        public void UpdateInput()
+        public void UpdateInputs()
         {
             // If the game is not paused, and if a tutorial is not running.
             if(!gameManager.IsPaused() && !gameManager.IsTutorialRunning())
@@ -506,7 +506,7 @@ namespace VLG
 
             // Updates the inputs from the player.
             if (enabledInputs)
-                UpdateInput();
+                UpdateInputs();
         }
 
     }
