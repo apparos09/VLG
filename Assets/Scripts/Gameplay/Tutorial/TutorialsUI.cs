@@ -32,8 +32,32 @@ namespace VLG
         // The text box image.
         public Image textBoxDiagramImage;
 
-        // The alpha 0 sprite.
+
+        [Header("Diagram/Images")]
+        
+        // The alpha 0 sprite. Used to hide the diagram if there's no image.
+        [Tooltip("Used to hide the text box diagram image.")]
         public Sprite alpha0Sprite;
+
+        [Header("Digram/Images/Geometry")]
+        public Sprite entryBlockSprite;
+        public Sprite goalBlockSprite;
+        public Sprite blockSprite;
+        public Sprite hazardBlockSprite;
+        public Sprite limitedBlockSprite;
+        public Sprite phaseBlockSprite;
+        public Sprite portalBlockSprite;
+        public Sprite switchBlockSprite;
+
+        [Header("Diagram/Images/Enemy")]
+        public Sprite stationaryEnemySprite;
+        public Sprite barEnemySprite;
+        public Sprite copyEnemySprite;
+        public Sprite finalBossSprite;
+
+        [Header("Diagram/Images/Items")]
+        public Sprite keyItemSprite;
+        public Sprite weaponItemSprite;
 
         // Constructor
         private TutorialsUI()

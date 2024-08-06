@@ -50,6 +50,10 @@ namespace VLG
 
             // Disalbe the start button by default.
             startButton.interactable = false;
+
+            // If running inside the Unity editor, allow debug codes.
+            // If not, don't allow debug codes.
+            allowDebugCodes = Application.isEditor;
         }
 
         // This function is called when the object becomes enabled and active.
