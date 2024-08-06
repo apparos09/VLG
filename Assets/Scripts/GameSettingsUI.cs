@@ -16,6 +16,9 @@ namespace VLG
         // The audio controls for the game.
         public AudioControls audioControls;
 
+        // Used to call post start.
+        private bool calledPostStart = false;
+
         [Header("Sliders")]
 
         // The BGM slider
@@ -59,6 +62,18 @@ namespace VLG
             // If the runtime platform is WebGL, disable the resolution dropdown.
             if (Application.platform == RuntimePlatform.WebGLPlayer)
                 resolutionDropdown.interactable = false;
+        }
+
+        // Called after the Start function.
+        void PostStart()
+        {
+            // Refreshes the game settings UI another time to make sure it updated properly.
+            // This is used to correct the resolution dropdown, which doesn't get updated...
+            // The first time a reset occurs for some reason.
+            // ...It didn't work.
+            RefreshGameSettingsUI();
+
+            calledPostStart = true;
         }
 
         // This function is called when the object becomes enabled and active
@@ -229,6 +244,20 @@ namespace VLG
 
             // Change values in UI.
             RefreshGameSettingsUI();
+
+            // Make the post start function get called again to correct the UI.
+            calledPostStart = false;
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+            // If PostStart has not been called, call it.
+            if(!calledPostStart)
+            {
+                PostStart();
+            }
+
         }
     }
 }
