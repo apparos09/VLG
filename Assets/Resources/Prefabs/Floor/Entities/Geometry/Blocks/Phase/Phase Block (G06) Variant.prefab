@@ -69,6 +69,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4945928519724281521}
+    - targetCorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6520591370923973803}
   m_SourcePrefab: {fileID: 100100000, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
 --- !u!4 &5406608437651486157 stripped
 Transform:
@@ -109,6 +112,22 @@ MonoBehaviour:
   coverMaterial: {fileID: 2100000, guid: b1d4cd08127f1d64787627f4364b7ff4, type: 2}
   tangibleAnim: Phase Block - Tangible Animation
   intangibleAnim: Phase Block - Intangible Animation
+--- !u!114 &6520591370923973803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6509639068632997012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa6a5e7216968846856f7f481a9716a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  activeTrigger: 1
+  tutorial: 7
+  constantTrigger: 0
 --- !u!95 &6586918470808262265 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}

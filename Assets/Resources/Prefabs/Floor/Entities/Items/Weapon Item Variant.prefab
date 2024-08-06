@@ -152,6 +152,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1806398463856570705, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2529192907324512616}
+    - targetCorrespondingSourceObject: {fileID: 1806398463856570705, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -8007722826422988905}
   m_SourcePrefab: {fileID: 100100000, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
 --- !u!95 &1167415686155177744 stripped
 Animator:
@@ -194,3 +197,19 @@ MonoBehaviour:
   animator: {fileID: 1167415686155177744}
   item: 2
   idleAnim: Weapon - Idle Animation
+--- !u!114 &-8007722826422988905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6676008281426518622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa6a5e7216968846856f7f481a9716a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  activeTrigger: 1
+  tutorial: 16
+  constantTrigger: 0

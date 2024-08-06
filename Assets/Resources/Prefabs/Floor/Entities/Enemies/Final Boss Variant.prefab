@@ -86,6 +86,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3625561857990270056, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7136646540195812106}
+    - targetCorrespondingSourceObject: {fileID: 3625561857990270056, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4395874659263155968}
   m_SourcePrefab: {fileID: 100100000, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
 --- !u!54 &245092977649425835 stripped
 Rigidbody:
@@ -143,6 +146,22 @@ MonoBehaviour:
   introAnim: Final Boss Intro Animation
   riseAnim: Final Boss Rise Animation
   dropAnim: Final Boss Drop Animation
+--- !u!114 &4395874659263155968
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3415554778120969952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa6a5e7216968846856f7f481a9716a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  activeTrigger: 1
+  tutorial: 14
+  constantTrigger: 0
 --- !u!65 &3676191393248219241 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}

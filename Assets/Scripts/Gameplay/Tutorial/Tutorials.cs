@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using util;
+using static Unity.Collections.AllocatorManager;
 
 namespace VLG
 {
@@ -253,7 +255,76 @@ namespace VLG
             switch(tutorial)
             {
                 default:
-                case tutorialType.none:
+                case tutorialType.none: // No behaviour.
+                    break;
+
+                    // OTHER/GENERAL
+                case tutorialType.intro:
+                    LoadIntroTutorial();
+                    break;
+
+                    // GEOMETRY
+                case tutorialType.entryBlock:
+                    LoadEntryBlockTutorial();
+                    break;
+
+                case tutorialType.goalBlock:
+                    LoadGoalBlockTutorial();
+                    break;
+
+                case tutorialType.block:
+                    LoadBlockTutorial();
+                    break;
+
+                case tutorialType.hazardBlock:
+                    LoadHazardBlockTutorial();
+                    break;
+
+                case tutorialType.limitedBlock:
+                    LoadLimitedBlockTutorial();
+                    break;
+
+                case tutorialType.phaseBlock:
+                    LoadPhaseBlockTutorial();
+                    break;
+
+                case tutorialType.portalBlock:
+                    LoadPortalBlockTutorial();
+                    break;
+
+                case tutorialType.switchBlock:
+                    LoadSwitchBlockTutorial();
+                    break;
+
+                case tutorialType.buttonBlock:
+                    LoadButtonBlockTutorial();
+                    break;
+
+
+                    // ENEMY
+                case tutorialType.stationaryEnemy:
+                    LoadStationaryEnemyTutorial();
+                    break;
+
+                case tutorialType.barEnemy:
+                    LoadBarEnemyTutorial();
+                    break;
+
+                case tutorialType.copyEnemy:
+                    LoadCopyEnemyTutorial();
+                    break;
+
+                case tutorialType.finalBossEnemy:
+                    LoadFinalBossTutorial();
+                    break;
+
+                    // ITEM
+                case tutorialType.keyItem:
+                    LoadKeyItemTutorial();
+                    break;
+
+                case tutorialType.weaponItem:
+                    LoadWeaponItemTutorial();
                     break;
             }
         }
@@ -263,10 +334,11 @@ namespace VLG
         private void LoadTutorialTemplate()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("Insert text here.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -280,10 +352,14 @@ namespace VLG
         public void LoadIntroTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("Welcome to <b>Tribulation Tower</b>! Your task is to ascend the tower and challenge the monster that rests at the top."),
+                new Page("Use the <b>WASD keys</b> to move across the floor, and the <b>space bar</b> to attack. You always attack in the direction that you’re facing, and the attack covers one block in front of you. To change directions, use the <b>arrow keys</b>."),
+                new Page("You can use the <b>0 key</b> to change the camera view, the <b>R key</b> to reset the floor, and the <b>P key</b> to pause/unpause the game."),
+                new Page("There are 50 floors in the tower, and the game autosaves each time a floor is completed. Good luck!")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -298,10 +374,11 @@ namespace VLG
         public void LoadEntryBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is an <b>Entry Block</b>! You always start on this block when a floor begins, or when it’s reset.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -314,10 +391,12 @@ namespace VLG
         public void LoadGoalBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Goal Block</b>! To complete a floor, you must reach the goal. If the goal isn’t visible, then it must be unlocked."),
+                new Page("The way to unlock the goal is shown as part of the floor objective at the top of the screen.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -330,10 +409,11 @@ namespace VLG
         public void LoadBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Block</b>! You and some other entities use it to get around the floor.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -346,10 +426,11 @@ namespace VLG
         public void LoadHazardBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Hazard Block</b>! If you step on it while the hazard is active, you will be destroyed. Entities vulnerable to the hazard will also be destroyed if they step on it.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -362,10 +443,12 @@ namespace VLG
         public void LoadLimitedBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Limited Block</b>! Limited blocks can only be used a certain number of times, which is displayed on the top of each block."),
+                new Page("If a limited block is used when there are no more uses left, the block breaks, and the entity using the block is destroyed.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -378,10 +461,11 @@ namespace VLG
         public void LoadPhaseBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Phase Block</b>! When a phase block is intangible (transparent), it cannot be used. If a phase block becomes intangible when a vulnerable entity is using it, the entity will be destroyed.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -394,10 +478,12 @@ namespace VLG
         public void LoadPortalBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("These are <b>Portal Blocks</b>! Portals are used to travel to different parts of the floor, with each portal colour being connected to a different portal of the same colour."),
+                new Page("If a portal block isn’t active, its portal cannot be used to teleport. However, it can still be used as a regular block in such a state.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -410,10 +496,12 @@ namespace VLG
         public void LoadSwitchBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("These are <b>Switch Blocks</b>! When the red block is active, the blue block is inactive, and vice versa. If an entity is standing on a switch block when it switches off, the entity is destroyed."),
+                new Page("To switch the state of all switch blocks on a floor, perform an attack.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -426,10 +514,15 @@ namespace VLG
         public void LoadButtonBlockTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("These are <b>Button Blocks</b>! These blocks change elements on the floor when an applicable entity presses their buttons."),
+                new Page("<b>Yellow button blocks</b> unlock the goal."),
+                new Page("<b>Blue button blocks</b> turn on/off the hazards on hazard blocks."),
+                new Page("<b>Green button blocks</b> change the state of phase blocks, making them go from tangible to intangible, or vice versa."),
+                new Page("<b>Purple button blocks</b> turn on/off all the portals on the current floor.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -443,10 +536,11 @@ namespace VLG
         public void LoadStationaryEnemyTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Blue Dramini</b>! It will stay in place and act as an obstacle. If you collide with a Blue Dramini, you’ll be destroyed. To destroy a Blue Dramini, just attack it.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -459,10 +553,11 @@ namespace VLG
         public void LoadBarEnemyTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Red Dramini</b>! It has flaming bars that rotate every time you jump to another block. If you touch the bars, you’ll be destroyed. To destroy a Red Dramini, just attack it.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -475,10 +570,12 @@ namespace VLG
         public void LoadCopyEnemyTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("These are <b>Mimics</b>! <b>Red Mimics</b> copy your movements, while <b>Blue Mimics</b> do the opposite of your movements. Mimics only copy your movements, and not your attacks."),
+                new Page("If you collide with a Mimic, you will be destroyed. To destroy a Mimic, simply attack it.")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -491,10 +588,11 @@ namespace VLG
         public void LoadFinalBossTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("It’s the <b>dastardly dragon</b>, the boss of the tower! This ancient evil will attack you with lightning strikes and homing lasers. Dodge its attacks and you’ll get a chance to strike back!")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -508,10 +606,11 @@ namespace VLG
         public void LoadKeyItemTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Key</b>! Collect all the keys on the floor to unlock the goal!")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 
@@ -524,10 +623,11 @@ namespace VLG
         public void LoadWeaponItemTutorial()
         {
             // Create the pages list.
-            List<Page> pages = new List<Page>();
-
-            // Load the pages.
-            pages.Add(new Page("Insert text here."));
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>Weapon</b>! When a weapon is present on a floor, it means that you have lost your weapon! Without a weapon, you can’t attack! Collect a weapon to regain the ability to attack!")
+            };
 
             // Change the display image when certain pages are opened using callbacks.
 

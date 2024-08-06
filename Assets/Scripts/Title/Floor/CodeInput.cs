@@ -27,7 +27,7 @@ namespace VLG
         public TMP_InputField codeInputField;
 
         // If 'true', the input field has a limited length.
-        private bool limitInputLength = false;
+        private bool limitInputLength = true;
 
         // The start button (gets disabled if a code is invalid).
         // TODO: this button is no longer used, and should be removed.

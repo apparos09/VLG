@@ -181,6 +181,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3625561857990270056, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7761450314900307815}
+    - targetCorrespondingSourceObject: {fileID: 3625561857990270056, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3298154820894237529}
   m_SourcePrefab: {fileID: 100100000, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
 --- !u!95 &859497844409386306 stripped
 Animator:
@@ -228,7 +231,24 @@ MonoBehaviour:
   facePlayer: 1
   modelAnimator: {fileID: 6078250758576649214}
   idleAnim: Dramini NML Armature|Dramini_NML_Idle
+  playIdleOnStart: 1
   attackAnim: Dramini NML Armature|Dramini_NML_Attack
+--- !u!114 &3298154820894237529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7896527175692766169}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa6a5e7216968846856f7f481a9716a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  activeTrigger: 1
+  tutorial: 11
+  constantTrigger: 0
 --- !u!65 &8211207544824366416 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}

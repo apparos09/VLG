@@ -136,6 +136,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
       insertIndex: -1
       addedObject: {fileID: 490658154947718476}
+    - targetCorrespondingSourceObject: {fileID: 7186649420473762713, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -3691912076227483765}
   m_SourcePrefab: {fileID: 100100000, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
 --- !u!1 &4790263564355934538 stripped
 GameObject:
@@ -168,8 +171,25 @@ MonoBehaviour:
   animator: {fileID: 4847529175110456231}
   spikesModel: {fileID: 879318270538328296}
   hazardOnDefault: 1
+  useAnimations: 1
   hazardOnAnim: Hazard Block - Hazard On Animation
   hazardOffAnim: Hazard Block - Hazard Off Animation
+--- !u!114 &-3691912076227483765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4790263564355934538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baa6a5e7216968846856f7f481a9716a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 0}
+  activeTrigger: 1
+  tutorial: 5
+  constantTrigger: 0
 --- !u!95 &4847529175110456231 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7098683323357628788, guid: 3711c5c99ea81f140b6a0ef868925b09, type: 3}
