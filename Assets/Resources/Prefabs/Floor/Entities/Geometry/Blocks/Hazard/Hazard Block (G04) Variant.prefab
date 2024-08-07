@@ -188,7 +188,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   activeTrigger: 1
-  tutorial: 5
+  tutorial: 6
   constantTrigger: 0
 --- !u!95 &4847529175110456231 stripped
 Animator:

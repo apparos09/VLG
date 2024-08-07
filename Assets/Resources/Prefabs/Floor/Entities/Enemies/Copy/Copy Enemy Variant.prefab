@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   activeTrigger: 1
-  tutorial: 13
+  tutorial: 14
   constantTrigger: 0
 --- !u!54 &8401874709157097137 stripped
 Rigidbody:

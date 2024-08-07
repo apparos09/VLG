@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   activeTrigger: 1
-  tutorial: 3
+  tutorial: 4
   constantTrigger: 0
 --- !u!1001 &2032466642673562697
 PrefabInstance:

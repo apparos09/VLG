@@ -126,7 +126,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 12;
+            floor.turnsMax = 16;
 
             // Skybox
             floor.skyboxId = 2;
@@ -192,7 +192,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 18;
+            floor.turnsMax = 20;
 
             // Skybox
             floor.skyboxId = 2;
@@ -258,7 +258,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 22;
+            floor.turnsMax = 24;
 
             // Skybox
             floor.skyboxId = 2;
@@ -324,7 +324,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 26;
+            floor.turnsMax = 28;
 
             // Skybox
             floor.skyboxId = 2;
@@ -390,7 +390,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 12;
+            floor.turnsMax = 14;
 
             // Skybox
             floor.skyboxId = 2;
@@ -456,7 +456,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 24;
+            floor.turnsMax = 26;
 
             // Skybox
             floor.skyboxId = 2;
@@ -522,7 +522,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 16;
+            floor.turnsMax = 18;
 
             // Skybox
             floor.skyboxId = 2;
@@ -588,7 +588,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 10;
+            floor.turnsMax = 12;
 
             // Skybox
             floor.skyboxId = 2;
@@ -654,7 +654,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 28;
+            floor.turnsMax = 30;
 
             // Skybox
             floor.skyboxId = 2;
@@ -720,7 +720,7 @@ namespace VLG
             floor.items = items;
 
             // Turns Max
-            floor.turnsMax = 48;
+            floor.turnsMax = 50;
 
             // Skybox
             floor.skyboxId = 2;

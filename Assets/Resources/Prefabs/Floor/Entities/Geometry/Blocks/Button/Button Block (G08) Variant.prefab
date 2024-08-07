@@ -259,5 +259,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   activeTrigger: 1
-  tutorial: 10
+  tutorial: 11
   constantTrigger: 0

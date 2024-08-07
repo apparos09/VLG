@@ -123,7 +123,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   activeTrigger: 1
-  tutorial: 9
+  tutorial: 10
   constantTrigger: 0
 --- !u!4 &1657132484836500566 stripped
 Transform:

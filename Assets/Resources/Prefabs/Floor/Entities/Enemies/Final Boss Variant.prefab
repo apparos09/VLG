@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 0}
   activeTrigger: 1
-  tutorial: 14
+  tutorial: 15
   constantTrigger: 0
 --- !u!65 &3676191393248219241 stripped
 BoxCollider:

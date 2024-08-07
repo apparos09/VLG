@@ -11,7 +11,7 @@ namespace VLG
         // The tutorial types.
         public enum tutorialType 
         {
-            none, intro, 
+            none, intro, limitedTurns,
             entryBlock, goalBlock, block, hazardBlock, limitedBlock, phaseBlock, portalBlock, switchBlock, buttonBlock,
             stationaryEnemy, barEnemy, copyEnemy, finalBossEnemy,
             keyItem, weaponItem
@@ -32,7 +32,7 @@ namespace VLG
         public TutorialsUI tutorialsUI; 
 
         // The tutorial type count.
-        public const int TUTORIAL_TYPE_COUNT = 17;
+        public const int TUTORIAL_TYPE_COUNT = 18;
 
         // The cleared tutorials.
         public List<tutorialType> clearedTutorials = new List<tutorialType>();
@@ -273,7 +273,11 @@ namespace VLG
                     LoadIntroTutorial();
                     break;
 
-                    // GEOMETRY
+                case tutorialType.limitedTurns:
+                    LoadLimitedTurnsTutorial();
+                    break;
+
+                // GEOMETRY
                 case tutorialType.entryBlock:
                     LoadEntryBlockTutorial();
                     break;
@@ -381,6 +385,27 @@ namespace VLG
             // Loads the tutorial, and adds it to the cleared list.
             LoadTutorial(ref pages);
             AddClearedTutorial(tutorialType.intro);
+
+        }
+
+        // Loads the limited turns tutorial
+        public void LoadLimitedTurnsTutorial()
+        {
+            // Create the pages list.
+            List<Page> pages = new List<Page>
+            {
+                // Load the pages.
+                new Page("This is a <b>limited moves floor</b>! That means you have a limited number of moves to reach the goal. When you have limited moves, the move number at the bottom of the screen will be shown as a fraction."),
+            };
+
+            // Change the display image when certain pages are opened using callbacks.
+            // No image to display, so just hide the diagram.
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.HideDiagram);
+            pages[0].OnPageOpenedAddCallback(tutorialsUI.ClearDiagram);
+
+            // Loads the tutorial, and adds it to the cleared list.
+            LoadTutorial(ref pages);
+            AddClearedTutorial(tutorialType.limitedTurns);
 
         }
 

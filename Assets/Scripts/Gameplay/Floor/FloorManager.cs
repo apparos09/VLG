@@ -262,7 +262,6 @@ namespace VLG
                 floorTurnsMax = floor.turnsMax;
             }
             
-
             // Sets the Skybox
             floorData.SetSkybox(floor);
 
@@ -277,6 +276,9 @@ namespace VLG
 
             // Set to the default view.
             gameManager.gameCamera.SetView(0);
+
+            // A function called when a floor has been generated.
+            OnFloorGenerated();
         }
 
         // Coroutine Variants
@@ -356,6 +358,31 @@ namespace VLG
         }
 
 
+        // A function called when a floor has been generated.
+        public void OnFloorGenerated()
+        {
+            // If tutorials are being used.
+            if(gameManager.UsingTutorials)
+            {
+                // If turns are limited.
+                if (limitTurns)
+                {
+                    // If the limtied turns tutorial hasn't been cleared yet, trigger it.
+                    if (!gameManager.tutorials.IsTutorialCleared(Tutorials.tutorialType.limitedTurns))
+                    {
+                        // Loads the tutorial.
+                        gameManager.tutorials.LoadLimitedTurnsTutorial();
+                    }
+                }
+            }
+            
+        }
+
+        // Returns 'true' if the floor has limited turns.
+        public bool IsLimitingTurns()
+        {
+            return limitTurns;
+        }
 
         // Sets the default entity values.
         // gridPos = (col, row)
@@ -711,6 +738,15 @@ namespace VLG
 
             // Updates all the HUD elements.
             gameManager.gameUI.UpdateAllHUDElements();
+
+            // The floor has been reset.
+            OnFloorReset();
+        }
+
+        // Called when the floor has been reset.
+        public void OnFloorReset()
+        {
+            // ...
         }
 
         // Tries entity movement.
