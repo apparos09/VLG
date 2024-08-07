@@ -314,6 +314,17 @@ namespace VLG
             {
                 // Close the pause window.
                 pauseWindow.SetActive(false);
+
+                // If the tutorial is running, select the forward arrow button.
+                if(gameManager.IsTutorialRunning())
+                {
+                    // Gets the button.
+                    Button button = tutorialUI.textBox.nextPageButton;
+
+                    // Selects the button if the tutorial is running.
+                    if(button != null)
+                        tutorialUI.textBox.nextPageButton.Select();
+                }
             }
         }
 
