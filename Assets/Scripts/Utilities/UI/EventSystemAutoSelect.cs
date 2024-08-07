@@ -11,6 +11,8 @@ namespace util
         // The event system.
         public EventSystem eventSystem;
 
+        // Maybe you should've used selectables for this.
+
         // The first object selected.
         public GameObject firstSelected;
 

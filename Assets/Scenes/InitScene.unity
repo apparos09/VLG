@@ -477,6 +477,7 @@ MonoBehaviour:
     - 0
     gameTurns: 0
     floorTurns: 00000000
+    clearedTutorials: 0000000000000000000000000000000000
   loadedData:
     valid: 0
     gameComplete: 0
@@ -488,6 +489,7 @@ MonoBehaviour:
     - 0
     gameTurns: 0
     floorTurns: 00000000
+    clearedTutorials: 0000000000000000000000000000000000
   fileReader: {fileID: 2068394680}
   gameManager: {fileID: 0}
   fileName: save.dat

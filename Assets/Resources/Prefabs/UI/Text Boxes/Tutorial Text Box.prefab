@@ -593,6 +593,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5485879377532832779}
   - component: {fileID: 4788693097026923546}
+  - component: {fileID: 2915120025792793946}
   m_Layer: 5
   m_Name: Tutorial Text Box
   m_TagString: Untagged
@@ -648,13 +649,30 @@ MonoBehaviour:
   closeOnEnd: 1
   prevPageButton: {fileID: 4835090885271355247}
   nextPageButton: {fileID: 5040673412352013570}
-  autoDisablePrevButtonOnFirstPage: 1
+  autoDisablePrevButtonOnFirstPage: 0
   instantText: 1
   enableAnimationSkip: 1
   enableAnimationBackSkip: 1
   DisableControlsIfAnimSkipDisabled: 1
   charsPerLoad: 1
   textSpeed: 0
+--- !u!114 &2915120025792793946
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8618932464544660665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64614b17bafae494791651f3270d0df5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventSystem: {fileID: 0}
+  firstSelected: {fileID: 1350824902694202769}
+  lastSelected: {fileID: 0}
+  setToLastOnEnable: 1
+  ignoreDeselectsForLast: 0
 --- !u!1001 &3653278209999568990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -843,19 +861,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -875,12 +893,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7351591026089803441, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
       propertyPath: m_Name
       value: Previous Page Button
       objectReference: {fileID: 0}
+    - target: {fileID: 8656998842596319833, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 554395714, guid: 6999dab7d89bea446adc69eb5e0553cd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1022,6 +1044,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Next Page Button
       objectReference: {fileID: 0}
+    - target: {fileID: 8656998842596319833, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -2057100868, guid: 6999dab7d89bea446adc69eb5e0553cd, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1032,12 +1058,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7316805808177955924, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
   m_PrefabInstance: {fileID: 8410754886972396320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1350824902694202769 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7351591026089803441, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
+  m_PrefabInstance: {fileID: 8410754886972396320}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5040673412352013570 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3552514110654621218, guid: 11f69e663c20d484bb282fc706de4f94, type: 3}
   m_PrefabInstance: {fileID: 8410754886972396320}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1350824902694202769}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
