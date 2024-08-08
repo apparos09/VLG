@@ -437,6 +437,9 @@ namespace VLG
                     }
 
 
+                    // Gets set to 'true' if a move input was made.
+                    bool inputtedMove = false;
+
                     // There is movement.
                     if (moveDirec != Vector2.zero)
                     {
@@ -445,11 +448,20 @@ namespace VLG
 
                         // Call on player movement input.
                         floorManager.OnPlayerMovementInput(this, moveDirec, success);
+                        
+                        // A move has been inputted.
+                        inputtedMove = true;
+                    }
+                    else
+                    {
+                        // No move has been inputted.
+                        inputtedMove = false;
                     }
 
 
                     // Attack
-                    if (!attacking)
+                    // The player can't move and attack at the same time. Moves take priority.
+                    if (!attacking && !inputtedMove)
                     {
                         // If the player should attack, and is able to attack.
                         if (Input.GetKeyDown(KeyCode.Space) && enabledAttack)
