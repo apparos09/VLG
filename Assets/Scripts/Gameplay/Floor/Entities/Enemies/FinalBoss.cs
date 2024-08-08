@@ -83,6 +83,16 @@ namespace VLG
         // Animation for dropping the final boss.
         public string dropAnim = "";
 
+        [Header("Final Boss/Audio")]
+
+        // Dragon roar sfx.
+        public AudioClip dragonRoarSfx;
+
+        // Dragon fly up sfx.
+        public AudioClip dragonFlyUpSfx;
+
+        // Dragon fly down SFX.
+        public AudioClip dragonFlyDownSfx;
 
         // Awake is called when the script is being loaded
         protected override void Awake()
@@ -101,6 +111,11 @@ namespace VLG
             // Set to phase 1.
             if (phase <= 0)
                 phase = 1;
+
+            // If the intro animation will play, stop the BGM.
+            // This is to prevent a short play before it's cut-off.
+            if (useIntroAnim)
+                gameManager.gameAudio.bgmSource.Stop();
         }
 
         // Called on the first frame.
@@ -647,6 +662,9 @@ namespace VLG
             // Play the attack animation, and stop the player from moving.
             PlayAttackAnimation();
             gameManager.player.enabledInputs = false;
+
+            // Stops the background music.
+            gameManager.gameAudio.bgmSource.Stop();
         }
 
         // Called when the boss intro animation is finished.
@@ -658,6 +676,32 @@ namespace VLG
             // Start the phase.
             gameManager.player.enabledInputs = true;
             StartPhase();
+
+            // Plays the background music. The clip should already be set.
+            gameManager.gameAudio.bgmSource.Play();
+        }
+
+
+        // AUDIO
+        // Plays the dragon roar sound effect.
+        public void PlayDragonRoarSfx()
+        {
+            if (dragonRoarSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(dragonRoarSfx);
+        }
+
+        // Plays the dragon fly up sound effect.
+        public void PlayDragonFlyUpSfx()
+        {
+            if (dragonFlyUpSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(dragonFlyUpSfx);
+        }
+
+        // Plays the dragon fly down sound effect.
+        public void PlayDragonFlyDownSfx()
+        {
+            if (dragonFlyDownSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(dragonFlyDownSfx);
         }
 
 

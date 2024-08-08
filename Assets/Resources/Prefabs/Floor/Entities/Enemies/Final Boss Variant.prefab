@@ -148,6 +148,9 @@ MonoBehaviour:
   introAnim: Final Boss Intro Animation
   riseAnim: Final Boss Rise Animation
   dropAnim: Final Boss Drop Animation
+  dragonRoarSfx: {fileID: 8300000, guid: 476c1f27a328d464a9a031efe18ced80, type: 3}
+  dragonFlyUpSfx: {fileID: 8300000, guid: e0a3187f7575a934da4bece7957a04b3, type: 3}
+  dragonFlyDownSfx: {fileID: 8300000, guid: c722f20eb7614344bbbeff4b8fa7030a, type: 3}
 --- !u!114 &4395874659263155968
 MonoBehaviour:
   m_ObjectHideFlags: 0

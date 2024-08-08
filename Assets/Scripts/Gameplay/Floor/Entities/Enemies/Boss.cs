@@ -115,6 +115,9 @@ namespace VLG
             // Plays the damage animation for the boss.
             if(damageAnim != string.Empty)
                 animator.Play(damageAnim);
+
+            // Plays the hurt sound effect.
+            PlayHurtSfx();
         }
 
         // Called when the damage animation has started.
