@@ -279,6 +279,8 @@ MonoBehaviour:
   moveSpeed: 4
   jumpFactor: 7
   animator: {fileID: 7495365460095833445}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   collider: {fileID: 1305338357622068599}
   rigidbody: {fileID: 2485903474518481077}
   ignoreGeometry: 0
@@ -291,6 +293,8 @@ MonoBehaviour:
   targetSprite: {fileID: 490881642172393663}
   effectSprite: {fileID: 7342571008901329198}
   strikeAnim: Lightning Strike
+  thunderSfx: {fileID: 8300000, guid: 21f5156bbf4944c4ca7202aee56f0caa, type: 3}
+  lightningStrikeSfx: {fileID: 8300000, guid: 37535844f7904ab4caaf6b3a62e0b3f5, type: 3}
 --- !u!65 &1305338357622068599 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 3328895887498171105, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}

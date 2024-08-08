@@ -25,6 +25,11 @@ namespace VLG
         // The lighting strike end callback.
         private LightningStrikeCallback strikeEndCallback;
 
+        // Thunder sound effect.
+        public AudioClip thunderSfx;
+
+        // Lightning osund effect.
+        public AudioClip lightningStrikeSfx;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -91,6 +96,21 @@ namespace VLG
         public void OnLightingStrikeEndRemoveCallback(LightningStrikeCallback callback)
         {
             strikeEndCallback -= callback;
+        }
+
+        // Audio
+        // Plays the thunder sound.
+        public void PlayThunderSfx()
+        {
+            if (thunderSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(thunderSfx);
+        }
+
+        // Plays the lightning strike sound.
+        public void PlayLightningStrikeSfx()
+        {
+            if (lightningStrikeSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(lightningStrikeSfx);
         }
 
     }

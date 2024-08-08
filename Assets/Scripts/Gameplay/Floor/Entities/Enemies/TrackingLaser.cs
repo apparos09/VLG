@@ -42,6 +42,9 @@ namespace VLG
         // The laser end callback.
         private LaserStrikeCallback laserEndCallback;
 
+        // The laser sound effect.
+        public AudioClip laserBlastSfx;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -167,6 +170,13 @@ namespace VLG
         public void OnLaserStrikeEndRemoveCallback(LaserStrikeCallback callback)
         {
             laserEndCallback -= callback;
+        }
+
+        // Plays the laser shot sfx.
+        public void PlayLaserBlastSfx()
+        {
+            if(laserBlastSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(laserBlastSfx);
         }
 
         // Update is called once per frame

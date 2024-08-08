@@ -290,6 +290,8 @@ MonoBehaviour:
   moveSpeed: 4
   jumpFactor: 7
   animator: {fileID: 6787268981918924474}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   collider: {fileID: 2605513048830656168}
   rigidbody: {fileID: 1462102025786766186}
   ignoreGeometry: 1
@@ -307,6 +309,7 @@ MonoBehaviour:
   trackingSpeed: 2.75
   instantTracking: 0
   laserStrikeAnim: Laser Strike Animation
+  laserBlastSfx: {fileID: 8300000, guid: cba085d52138baa41b24cc542abf7b0e, type: 3}
 --- !u!95 &6787268981918924474 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 6064941673893958387, guid: 1d060a4b23fa3f447b26da1307270132, type: 3}
