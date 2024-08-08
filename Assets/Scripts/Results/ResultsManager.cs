@@ -18,6 +18,9 @@ namespace VLG
         // The Results UI.
         public ResultsUI resultsUI;
 
+        // The Results Audio.
+        public ResultsAudio resultsAudio;
+
         // The results info
         public ResultsInfo resultsInfo;
 
@@ -58,8 +61,17 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
+            // Sets the instance.
+            if (resultsUI == null)
+                resultsUI = ResultsUI.Instance;
+
+            // Sets the instance.
+            if (resultsAudio == null)
+                resultsAudio = ResultsAudio.Instance;
+
+
             // Checks if the results info object exists.
-            if(resultsInfo == null)
+            if (resultsInfo == null)
             {
                 resultsInfo = FindObjectOfType<ResultsInfo>(false);
             }

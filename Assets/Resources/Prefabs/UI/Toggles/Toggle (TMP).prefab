@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 532739400393373411}
   - component: {fileID: 5951791710279523630}
+  - component: {fileID: 2368356421904662547}
+  - component: {fileID: 5093783957943353054}
   m_Layer: 5
   m_Name: Toggle (TMP)
   m_TagString: Untagged
@@ -86,6 +88,35 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 1
+--- !u!114 &2368356421904662547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535891179542683211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b697de0513409b4ca2710b4228bcdf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 781d69b9b7916734b91fedc7cdafd782, type: 3}
+  toggle: {fileID: 5951791710279523630}
+--- !u!114 &5093783957943353054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1535891179542683211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5459955f76c08e4b8a2f307a10559a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameAudio: {fileID: 0}
+  uiElementAudio: {fileID: 2368356421904662547}
 --- !u!1 &3179392420265238726
 GameObject:
   m_ObjectHideFlags: 0

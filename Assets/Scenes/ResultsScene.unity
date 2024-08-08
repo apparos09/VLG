@@ -344,6 +344,9 @@ MonoBehaviour:
   bgmSource: {fileID: 723000716}
   bgmLooper: {fileID: 723000715}
   sfxSource: {fileID: 723000714}
+  button01Sfx: {fileID: 8300000, guid: 781d69b9b7916734b91fedc7cdafd782, type: 3}
+  button02Sfx: {fileID: 8300000, guid: c218c13f395ad0348b7da81d5864f96a, type: 3}
+  sliderSfx: {fileID: 8300000, guid: 831633ae61361354784505587b163172, type: 3}
   resultsBgm: {fileID: 8300000, guid: 9caec2ffcd8dac94f853ecff4b001a1b, type: 3}
   resultsClipStart: 1.821
   resultsClipEnd: 67.818
@@ -948,6 +951,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resultsUI: {fileID: 2027135954}
+  resultsAudio: {fileID: 723000717}
   resultsInfo: {fileID: 0}
   resultsEntryIndex: 0
 --- !u!1 &1507593476

@@ -478,6 +478,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6053523895399481187}
   - component: {fileID: 3764806133244711932}
+  - component: {fileID: 3554951559446396161}
+  - component: {fileID: 5135994184549954771}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -558,3 +560,32 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3554951559446396161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359844788205184053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eed3d5c30ce3f654eb0f5bca35b3d828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 831633ae61361354784505587b163172, type: 3}
+  slider: {fileID: 3764806133244711932}
+--- !u!114 &5135994184549954771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8359844788205184053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5459955f76c08e4b8a2f307a10559a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameAudio: {fileID: 0}
+  uiElementAudio: {fileID: 3554951559446396161}

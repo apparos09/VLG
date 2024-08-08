@@ -109,6 +109,14 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
+            // If the game UI is not set.
+            if (gameUI == null)
+                gameUI = GameplayUI.Instance;
+
+            // If the game audio is not set.
+            if(gameAudio == null)
+                gameAudio = GameplayAudio.Instance;
+
             // TODO: comment out when you want to test saving.
             // If the game isn't running in WebGL, allow the game to save.
             // This is already done in the InitScene, but it's done again here.

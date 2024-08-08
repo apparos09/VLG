@@ -19,6 +19,9 @@ namespace VLG
         // The title UI.
         public TitleUI titleUI;
 
+        // The title audio.
+        public TitleAudio titleAudio;
+
         // The code input.
         public CodeInput codeInput;
 
@@ -65,6 +68,14 @@ namespace VLG
         // Start is called before the first frame update
         void Start()
         {
+            // Sets the instance.
+            if (titleUI == null)
+                titleUI = TitleUI.Instance;
+
+            // Sets the instance.
+            if(titleAudio == null)
+                titleAudio = TitleAudio.Instance;
+
             // If the game info object is null.
             if(gameInfo == null)
             {

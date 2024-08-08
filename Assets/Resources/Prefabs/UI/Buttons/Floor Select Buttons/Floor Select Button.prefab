@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 647880058166877687}
   - component: {fileID: 348733132116270771}
   - component: {fileID: 4539961489963527575}
+  - component: {fileID: 8895205582749153884}
+  - component: {fileID: -1580236954279818437}
   m_Layer: 5
   m_Name: Floor Select Button
   m_TagString: Untagged
@@ -151,6 +153,35 @@ MonoBehaviour:
   text: {fileID: 1043821395818571663}
   floorId: -1
   autoSetFloorId: 0
+--- !u!114 &8895205582749153884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549191469705257056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: c218c13f395ad0348b7da81d5864f96a, type: 3}
+  button: {fileID: 348733132116270771}
+--- !u!114 &-1580236954279818437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 549191469705257056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5459955f76c08e4b8a2f307a10559a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameAudio: {fileID: 0}
+  uiElementAudio: {fileID: 8895205582749153884}
 --- !u!1 &2507551951169989297
 GameObject:
   m_ObjectHideFlags: 0

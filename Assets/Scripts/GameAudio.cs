@@ -14,6 +14,16 @@ namespace VLG
 
         public AudioSource sfxSource;
 
+        [Header("Clips")]
+        // Button 1
+        public AudioClip button01Sfx;
+
+        // Button 2
+        public AudioClip button02Sfx;
+
+        // Slider Sfx
+        public AudioClip sliderSfx;
+
         // Start is called before the first frame update
         protected virtual void Start()
         {
@@ -92,6 +102,25 @@ namespace VLG
         public void StopSoundEffect() 
         { 
             sfxSource.Stop();
+        }
+
+        // Audio Clips
+        // Button 1 Use
+        public void PlayButton01Sfx()
+        {
+            PlaySoundEffect(button01Sfx);
+        }
+
+        // Button 2 Use
+        public void PlayButton02Sfx()
+        {
+            PlaySoundEffect(button02Sfx);
+        }
+
+        // Slider Use Sfx
+        public void PlaySliderSfx()
+        {
+            PlaySoundEffect(sliderSfx);
         }
     }
 }
