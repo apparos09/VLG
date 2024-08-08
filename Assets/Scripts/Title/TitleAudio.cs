@@ -16,7 +16,7 @@ namespace VLG
         private static bool instanced = false;
 
         // The BGM
-        [Header("Title Audio")]     
+        [Header("Title Audio/BGMs")]     
 
         // BGM
         public AudioClip titleBgm;
@@ -25,6 +25,13 @@ namespace VLG
         public float titleClipStart = 0;
         public float titleClipEnd = 0;
 
+        [Header("Title Audio/Sfx")]
+
+        // Audio clip for a valid code.
+        public AudioClip codeValid;
+
+        // Audio clip for an invalid code.
+        public AudioClip codeInvalid;
 
         // Constructor
         private TitleAudio()
@@ -108,6 +115,18 @@ namespace VLG
         public void PlayTitleBgm()
         {
             PlayBackgroundMusic(titleBgm, titleClipStart, titleClipEnd);
+        }
+
+        // Valid code SFX.
+        public void PlayCodeValidSfx()
+        {
+            PlaySoundEffect(codeValid);
+        }
+
+        // Invalid code SFX.
+        public void PlayCodeInvalidSfx()
+        {
+            PlaySoundEffect(codeInvalid);
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

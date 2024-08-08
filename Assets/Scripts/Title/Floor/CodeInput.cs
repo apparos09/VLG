@@ -159,10 +159,16 @@ namespace VLG
             if(success)
             {
                 startButton.interactable = true;
+
+                // Valid Code SFX
+                titleManager.titleAudio.PlayCodeValidSfx();
             }
             else
             {
                 startButton.interactable = false;
+
+                // Invalid Code SFX
+                titleManager.titleAudio.PlayCodeInvalidSfx();
             }
         }
 

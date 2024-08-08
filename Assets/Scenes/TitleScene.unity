@@ -2960,6 +2960,8 @@ MonoBehaviour:
   titleBgm: {fileID: 8300000, guid: 92fcb5d060d19cb499c0bf6253afebbc, type: 3}
   titleClipStart: 2.961
   titleClipEnd: 60.56
+  codeValid: {fileID: 8300000, guid: 56dd7975ec200344fbc01027912693d5, type: 3}
+  codeInvalid: {fileID: 8300000, guid: 1cce94163d5396f478ea0d1d4d890542, type: 3}
 --- !u!224 &1173824780 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2136998266722717911, guid: 30e15f017f9aec64691412de7146e423, type: 3}
