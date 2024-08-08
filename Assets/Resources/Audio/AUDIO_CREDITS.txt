@@ -1,0 +1,315 @@
+VLG - AUDIO CREDITS
+
+= Background Music (BGMs) =
+== Title ==
+Middle Earth - Jason Shaw
+* https://gamesounds.xyz/?dir=Audionautix/Soundtrack
+* https://audionautix.com/
+
+=== Copyright ===
+"Middle Earth"
+Music by Jason Shaw on Audionautix.com (https://audionautix.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+== Area 1 ==
+Magic Escape Room - Kevin MacLeod
+* https://incompetech.com/music/royalty-free/music.html
+
+=== Copyright ===
+"Magic Escape Room" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+* http://creativecommons.org/licenses/by/4.0/
+
+
+== Area 2 ==
+Dream Fantasy - Rafael Krux
+* https://music.orchestralis.net/track/28566231
+
+=== Copyright ===
+'Dream Fantasy' by Rafael Krux (orchestralis.net)
+Creative Commons 4.0 License.
+https://creativecommons.org/licenses/by/4.0/
+
+
+== Area 3 ==
+Witch Waltz - Kevin MacLeod
+* https://freepd.com/misc.php
+
+=== Copyright === 
+"Witch Waltz"
+Kevin MacLeod
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+== Area 4 ==
+Eternal Story - Rafael Krux
+* https://music.orchestralis.net/track/28566230
+
+=== Copyright ===
+'Eternal Story' by Rafael Krux (orchestralis.net)
+Creative Commons 4.0 License.
+https://creativecommons.org/licenses/by/4.0/
+
+
+== Area 5 == 
+Fantasy Adventure - Rafael Krux
+* https://music.orchestralis.net/track/28566238
+
+=== Copyright ===
+'Fantasy Adventure' by Rafael Krux (orchestralis.net)
+Creative Commons 4.0 License.
+https://creativecommons.org/licenses/by/4.0/
+		
+
+== Area 6/Final Boss
+Nightmare Machine - Kevin MacLeod
+* https://incompetech.com/music/royalty-free/music.html
+
+=== Copyright ===
+"Nightmare Machine" Kevin MacLeod (incompetech.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+== Results ==
+Act Three - Jason Shaw
+* https://gamesounds.xyz/?dir=Audionautix/Soundtrack
+* https://audionautix.com/
+
+=== Copyright ===
+"Act Three"
+Music by Jason Shaw on Audionautix.com (https://audionautix.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+
+== Sound Effects (SFXs) ==
+= Button Click (UI) =
+Button 41 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Slider Use (UI) ==
+Button 16 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Floor Ambience ==
+Wind-01 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects
+
+== Floor Failed ==
+Original creation.
+
+== Floor Reset ==
+Text Message Alert 4 - Daniel Simon
+* https://soundbible.com/2157-Text-Message-Alert-4.html
+
+=== Copyright ===
+"Text Message Alert 4"
+Daniel Simon
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Player - Jump ==
+Jump - snottyboy
+* https://soundbible.com/1343-Jump.html
+
+=== Copyright ===
+"Jump"
+snottyboy
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Player - Attack ==
+Sword Swing - Mike Koeing:
+https://soundbible.com/1176-Sword-Swing.html
+
+=== Copyright ===
+"Sword Swing"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Player - Damaged ==
+Button 4 - Unknown:
+* https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Goal Block - Goal Lock/Unlock ==
+Doorbell-1 - Unknown:
+* https://gamesounds.xyz/?dir=Sound%20Effects/Doors%20and%20Floors
+
+
+== Hazard Block - Hazard On/Off ==
+Knife Scrape Horror - Mike Koenig
+* https://soundbible.com/405-Knife-Scrape-Horror.html
+
+=== Copyright ===
+"Knife Scrape Horror"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Limited Block - Break ==
+Walking in Snow 1 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects
+
+
+== Phase Block - Phase In, Phase Out ==
+Original creation.
+
+
+== Portal Block - On ==
+Laser Cannon - Mike Koenig:
+* https://soundbible.com/1771-Laser-Cannon.html
+
+=== Copyright ===
+"Laser Canon"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Portal Block - Off ==
+Power Failure - Mike Koenig:
+* https://soundbible.com/1610-Power-Failure.html
+
+=== Copyright ===
+"Power Failure"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Portal Block - Warp ==
+Button 14 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Switch Block - On ==
+Pill Bottle 1 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects
+
+
+== Switch Block - Off ==
+Pill Bottle 2 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects
+
+
+== Button Block - Button Down ==
+Button - Mike Koeing
+* https://soundbible.com/772-Button.html
+
+== Copyright ==
+"Button"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Enemy - Jump ==
+Jump - snottyboy:
+https://soundbible.com/1343-Jump.html
+
+=== Copyright ===
+"Jump"
+snottyboy
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Enemy - Damage/Death ==
+Button 4 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Dragon - Roar ==
+Dinosaur Growl 3 Mono - Unknown (Sonniss.com)
+* https://gamesounds.xyz/?dir=Sonniss.com%20-%20GDC%202020%20-%20Game%20Audio%20Bundle/Audiomeals%20-%20Dark%20Creature%20Sounds
+
+			
+== Dragon - Fly Up/Fly Down ==
+Flapping Wings - Mike Koenig:
+* https://soundbible.com/627-Flapping-Wings.html
+
+	
+=== Copyright ===
+"Flapping Wings"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+	
+== Thunder ==
+Perfect Thunder Storm - Mike Koenig
+https://soundbible.com/916-Perfect-Thunder-Storm.html
+
+
+=== Copyright ===
+"Perfect Thunder Storm"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Lightning Strike ==
+Thunder Strike 1 - Mike Koenig
+* https://soundbible.com/2015-Thunder-Strike-1.html
+
+
+=== Copyright ===
+"Thunder Strike 1"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+== Laser Blast ==
+Button 2 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Item - Get ==
+Twitch - Mike Koenig
+* https://soundbible.com/1138-Twitch.html
+
+=== Copyright ===
+"Twitch"
+Mike Koenig
+Licensed under Creative Commons: By Attribution 3.0 License
+https://creativecommons.org/licenses/by/3.0/
+
+
+
+=== Jingles (JNGs) ===
+== Floor Clear/Goal Reached ==
+Big Horns Intro - Jason Shaw
+* https://gamesounds.xyz/?dir=Audionautix/Soundtrack
+* https://audionautix.com/
+
+=== Copyright ===
+"Big Intro"
+Music by Jason Shaw on Audionautix.com (https://audionautix.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+
+== Boss Clear/Boss Goal Reached ===
+Big Horns Intro - Jason Shaw
+* https://gamesounds.xyz/?dir=Audionautix/Soundtrack
+* https://audionautix.com/
+
+=== Copyright ===
+"Big Intro"
+Music by Jason Shaw on Audionautix.com (https://audionautix.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
