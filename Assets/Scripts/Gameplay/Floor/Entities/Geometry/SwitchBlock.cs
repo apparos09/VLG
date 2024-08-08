@@ -49,14 +49,14 @@ namespace VLG
         // The switch on SFX.
         public AudioClip switchOnSfx;
 
-        // Calles for the switch on SFX.
-        static private int switchOnCalls = 0;
+        // Switch on Sfx timer.
+        static private float switchOnSfxTimer = 0.0F;
 
         // The switch off SFX.
         public AudioClip switchOffSfx;
 
-        // Calles for the switch off SFX.
-        static private int switchOffCalls = 0;
+        // Switch off SFX timer.
+        static private float switchOffSfxTimer = 0.0F;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -187,30 +187,10 @@ namespace VLG
             animator.Play(onAnim);
         }
 
-        // Switch On Animation End
-        public void OnSwitchOnAnimationEnd()
-        {
-            switchOnCalls--;
-
-            // Bounds
-            if (switchOnCalls < 0)
-                switchOnCalls = 0;
-        }
-
         // Switch Off Animation
         public void PlaySwitchOffAnimation()
         {
             animator.Play(offAnim);
-        }
-
-        // Switch Off Animation End
-        public void OnSwitchOffAnimationEnd()
-        {
-            switchOffCalls--;
-
-            // Bounds
-            if (switchOffCalls < 0)
-                switchOffCalls = 0;
         }
 
 
@@ -228,11 +208,11 @@ namespace VLG
                 }
                 else
                 {
-                    // No calls have been made, so allow the SFX to play.
-                    if (switchOnCalls <= 0)
+                    // Current sound isn't playing, so allow the SFX to play.
+                    if (switchOnSfxTimer <= 0)
                     {
                         gameManager.gameAudio.PlaySoundEffect(switchOnSfx);
-                        switchOnCalls++;
+                        switchOnSfxTimer = switchOnSfx.length;
                     }
                 }
             }
@@ -251,16 +231,43 @@ namespace VLG
                 }
                 else
                 {
-                    // No calls have been made, so allow the SFX to play.
-                    if (switchOffCalls <= 0)
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (switchOffSfxTimer <= 0)
                     {
                         gameManager.gameAudio.PlaySoundEffect(switchOffSfx);
-                        switchOffCalls++;
+                        switchOffSfxTimer = switchOffSfx.length;
                     }
                 }
             }
         }
 
+        // Update is called once per frame
+        protected override void Update()
+        {
+            // Switch On Timer
+            if(switchOnSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                switchOnSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (switchOnSfxTimer <= 0)
+                    switchOnSfxTimer = 0.0F;
+            }
+
+            // Switch Off Timer
+            if(switchOffSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                switchOffSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (switchOffSfxTimer <= 0)
+                    switchOffSfxTimer = 0.0F;
+
+            }
+
+        }
 
 
         // Remove from the switch block list.
@@ -275,8 +282,8 @@ namespace VLG
             // If there are no switch blocks left, reset the call counts.
             if (GetSwitchBlockCount() <= 0)
             {
-                switchOnCalls = 0;
-                switchOffCalls = 0;
+                switchOnSfxTimer = 0.0F;
+                switchOffSfxTimer = 0.0F;
             }
         }
     }

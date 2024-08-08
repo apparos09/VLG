@@ -29,7 +29,11 @@ namespace VLG
         public string hazardOffAnim = "Hazard Block - Hazard Off Animation";
 
         [Header("Hazard Block/Audio")]
-        
+
+        // If 'true', sounds can be overlayed.
+        [Tooltip("If 'true', the same sounds can be overlayed with one another. If false, only one is allowed to play at a time.")]
+        public bool overlaySameSounds = true;
+
         // The hazard block on effect.
         public AudioClip hazardBlockOnSfx;
 

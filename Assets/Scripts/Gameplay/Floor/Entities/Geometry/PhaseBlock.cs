@@ -27,6 +27,8 @@ namespace VLG
         // The intangible animation.
         public string intangibleAnim;
 
+        [Header("PhaseBlock/Audio")]
+
         // Phase In Sfx
         public AudioClip phaseInSfx;
 
