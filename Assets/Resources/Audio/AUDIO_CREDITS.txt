@@ -20,7 +20,7 @@ Magic Escape Room - Kevin MacLeod
 === Copyright ===
 "Magic Escape Room" Kevin MacLeod (incompetech.com)
 Licensed under Creative Commons: By Attribution 4.0 License
-* http://creativecommons.org/licenses/by/4.0/
+http://creativecommons.org/licenses/by/4.0/
 
 
 == Area 2 ==
@@ -300,7 +300,7 @@ https://creativecommons.org/licenses/by/3.0/
 
 === Jingles (JNGs) ===
 == Floor Clear/Goal Reached ==
-Big Horns Intro - Jason Shaw
+Big Intro - Jason Shaw
 * https://gamesounds.xyz/?dir=Audionautix/Soundtrack
 * https://audionautix.com/
 
@@ -312,7 +312,7 @@ http://creativecommons.org/licenses/by/4.0/
 
 
 == Boss Clear/Boss Goal Reached ===
-Big Horns Intro - Jason Shaw
+Big Intro - Jason Shaw
 * https://gamesounds.xyz/?dir=Audionautix/Soundtrack
 * https://audionautix.com/
 

@@ -60,9 +60,130 @@ namespace VLG
         // Loads the BGM credits.
         private void LoadBackgroundMusicCredits()
         {
-            AudioCredits.AudioCredit credit = new AudioCredits.AudioCredit();
+            AudioCredits.AudioCredit credit;
 
-            // TODO: load BGM credits
+            // Title
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Middle Earth";
+            credit.artist = "Jason Shaw";
+            credit.collection = "SLOW";
+            credit.source = "GameSounds.xyz, Audionautix.com";
+            credit.link1 = "https://gamesounds.xyz/?dir=Audionautix/Soundtrack";
+            credit.link2 = "https://audionautix.com/";
+            credit.copyright =
+                "\"Middle Earth\"\n" +
+                "Music by Jason Shaw on Audionautix.com (https://audionautix.com)\n" +
+                "Licensed under Creative Commons: By Attribution 4.0 License\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Area 1
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Magic Escape Room";
+            credit.artist = "Kevin MacLeod";
+            credit.collection = "Magic Escape Room";
+            credit.source = "Incompetech.com";
+            credit.link1 = "https://incompetech.com/music/royalty-free/music.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Magic Escape Room\" Kevin MacLeod (incompetech.com)\n" +
+                "Licensed under Creative Commons: By Attribution 4.0 License\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Area 2
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Dream Fantasy";
+            credit.artist = "Rafael Krux";
+            credit.collection = "Fantasy - FREE MUSIC (CC-BY)";
+            credit.source = "Orchestralis.net";
+            credit.link1 = "https://music.orchestralis.net/track/28566231";
+            credit.link2 = "";
+            credit.copyright =
+                "'Dream Fantasy' by Rafael Krux (orchestralis.net)\n" +
+                "Creative Commons 4.0 License.\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Area 3
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Witch Waltz";
+            credit.artist = "Kevin MacLeod";
+            credit.collection = "FreePD Music";
+            credit.source = "FreePD.com";
+            credit.link1 = "https://freepd.com/misc.php";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Witch Waltz\"\n" +
+                "Kevin MacLeod\n" +
+                "Licensed under Creative Commons: By Attribution 4.0 License\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Area 4
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Eternal Story";
+            credit.artist = "Rafael Krux";
+            credit.collection = "Fantasy - FREE MUSIC (CC-BY)";
+            credit.source = "Orchestralis.net";
+            credit.link1 = "https://music.orchestralis.net/track/28566230";
+            credit.link2 = "";
+            credit.copyright =
+                "'Eternal Story' by Rafael Krux (orchestralis.net)\n" +
+                "Creative Commons 4.0 License.\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Area 5
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Fantasy Adventure";
+            credit.artist = "Rafael Krux";
+            credit.collection = "Fantasy - FREE MUSIC (CC-BY)";
+            credit.source = "Orchestralis.net";
+            credit.link1 = "https://music.orchestralis.net/track/28566238";
+            credit.link2 = "";
+            credit.copyright =
+                "'Fantasy Adventure' by Rafael Krux (orchestralis.net)\n" +
+                "Creative Commons 4.0 License.\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Area 6/Final Boss
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Nightmare Machine";
+            credit.artist = "Kevin MacLeod";
+            credit.collection = "Destruction Device";
+            credit.source = "Incompetech.com";
+            credit.link1 = "https://incompetech.com/music/royalty-free/music.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Nightmare Machine\" Kevin MacLeod (incompetech.com)\n" +
+                "Licensed under Creative Commons: By Attribution 4.0 License\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
+
+            // Results
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Act Three";
+            credit.artist = "Jason Shaw";
+            credit.collection = "SLOW";
+            credit.source = "GameSounds.xyz, Audionautix.com";
+            credit.link1 = "https://gamesounds.xyz/?dir=Audionautix/Soundtrack";
+            credit.link2 = "https://audionautix.com/";
+            credit.copyright =
+                "\"Act Three\"\n" +
+                "Music by Jason Shaw on Audionautix.com (https://audionautix.com)\n" +
+                "Licensed under Creative Commons: By Attribution 4.0 License\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            bgmCredits.audioCredits.Add(credit);
         }
 
         // Loads the SFX credits.
@@ -71,6 +192,25 @@ namespace VLG
             AudioCredits.AudioCredit credit = new AudioCredits.AudioCredit();
 
             // TODO: load SFX credits
+
+
+
+            // JINGLES //
+            // Floor Clear/Goal Reached, Boss Clear/Boss Goal Reached
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Big Intro";
+            credit.artist = "Jason Shaw";
+            credit.collection = "SLOW";
+            credit.source = "GameSounds.xyz, Audionautix.com";
+            credit.link1 = "https://gamesounds.xyz/?dir=Audionautix/Soundtrack";
+            credit.link2 = "https://audionautix.com/";
+            credit.copyright =
+                "\"Big Intro\"\n" +
+                "Music by Jason Shaw on Audionautix.com (https://audionautix.com)\n" +
+                "Licensed under Creative Commons: By Attribution 4.0 License\n" +
+                "http://creativecommons.org/licenses/by/4.0/";
+
+            sfxCredits.audioCredits.Add(credit);
         }
 
         // Loads the font credits.
