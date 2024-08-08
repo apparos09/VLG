@@ -63,6 +63,9 @@ namespace VLG
             // Auto-set title clip end
             if(titleClipEnd == 0)
                 titleClipEnd = titleBgm.length;
+
+            // Plays the Title BGM
+            PlayTitleBgm();
         }
 
         // Gets the instance.

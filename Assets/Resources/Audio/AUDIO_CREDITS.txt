@@ -98,6 +98,14 @@ Button 16 - Unknown
 * https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
 
 
+== Code Valid ==
+Original creation.
+
+
+== Code Invalid ==
+Original creation.
+
+
 == Floor Ambience ==
 Wind-01 - Unknown
 * https://gamesounds.xyz/?dir=Sound%20Effects

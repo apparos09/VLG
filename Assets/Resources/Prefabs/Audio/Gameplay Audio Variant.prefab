@@ -12,10 +12,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Gameplay Audio Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 3308025476305867039, guid: b88962917b9fe164aac8546803e5b655, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4421473394005684315, guid: b88962917b9fe164aac8546803e5b655, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -97,27 +93,27 @@ MonoBehaviour:
   bgmLooper: {fileID: 2106649519119595514}
   sfxSource: {fileID: 4203624583544196476}
   restartBgmOnReplay: 0
-  gameplayBgm00: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm00ClipStart: 0
-  gameplayBgm00ClipEnd: 0
-  gameplayBgm01: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm01ClipStart: 0
-  gameplayBgm01ClipEnd: 0
-  gameplayBgm02: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm02ClipStart: 0
-  gameplayBgm02ClipEnd: 0
-  gameplayBgm03: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm03ClipStart: 0
-  gameplayBgm03ClipEnd: 0
-  gameplayBgm04: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm04ClipStart: 0
-  gameplayBgm04ClipEnd: 0
-  gameplayBgm05: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm05ClipStart: 0
-  gameplayBgm05ClipEnd: 0
-  gameplayBgm06: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  gameplayBgm06ClipStart: 0
-  gameplayBgm06ClipEnd: 0
+  gameplayBgm00: {fileID: 8300000, guid: d12e40b9e0d01fe4d9c5944f3c7fbafb, type: 3}
+  gameplayBgm00ClipStart: 52.619
+  gameplayBgm00ClipEnd: 206.055
+  gameplayBgm01: {fileID: 8300000, guid: d12e40b9e0d01fe4d9c5944f3c7fbafb, type: 3}
+  gameplayBgm01ClipStart: 52.619
+  gameplayBgm01ClipEnd: 206.055
+  gameplayBgm02: {fileID: 8300000, guid: 42b87f9e4649dd74e8f9b40b0bb6eee6, type: 3}
+  gameplayBgm02ClipStart: 3.224
+  gameplayBgm02ClipEnd: 138.544
+  gameplayBgm03: {fileID: 8300000, guid: bbc6a0a4da6e147428387442317c618b, type: 3}
+  gameplayBgm03ClipStart: 38.501
+  gameplayBgm03ClipEnd: 173.513
+  gameplayBgm04: {fileID: 8300000, guid: b9b9361c69f29f7409cab0b98d0a5d2f, type: 3}
+  gameplayBgm04ClipStart: 1.514
+  gameplayBgm04ClipEnd: 141.209
+  gameplayBgm05: {fileID: 8300000, guid: 7b5486b50083d9d458f39ec74a3ce3f0, type: 3}
+  gameplayBgm05ClipStart: 3.924
+  gameplayBgm05ClipEnd: 151.627
+  gameplayBgm06: {fileID: 8300000, guid: fa6e58c5e635e724c86385a8bb2609bd, type: 3}
+  gameplayBgm06ClipStart: 15.294
+  gameplayBgm06ClipEnd: 124.242
 --- !u!82 &4203624583544196476 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3862555908014757398, guid: b88962917b9fe164aac8546803e5b655, type: 3}

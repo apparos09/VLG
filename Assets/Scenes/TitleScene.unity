@@ -5563,6 +5563,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1364761078047763600, guid: b88962917b9fe164aac8546803e5b655, type: 3}
+      propertyPath: clipEnd
+      value: 60.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 1364761078047763600, guid: b88962917b9fe164aac8546803e5b655, type: 3}
+      propertyPath: clipStart
+      value: 2.961
+      objectReference: {fileID: 0}
     - target: {fileID: 3308025476305867039, guid: b88962917b9fe164aac8546803e5b655, type: 3}
       propertyPath: m_Name
       value: Title Audio
@@ -5614,7 +5622,7 @@ PrefabInstance:
     - target: {fileID: 6015276066422501421, guid: b88962917b9fe164aac8546803e5b655, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
+      objectReference: {fileID: 8300000, guid: 92fcb5d060d19cb499c0bf6253afebbc, type: 3}
     m_RemovedComponents:
     - {fileID: 5171681625929081835, guid: b88962917b9fe164aac8546803e5b655, type: 3}
     m_RemovedGameObjects: []
@@ -5665,9 +5673,9 @@ MonoBehaviour:
   bgmSource: {fileID: 1824666748}
   bgmLooper: {fileID: 1824666747}
   sfxSource: {fileID: 1824666746}
-  titleBgm: {fileID: 8300000, guid: 85d66cd04ed41c94cbcf3595b0e34c48, type: 3}
-  titleClipStart: 0
-  titleClipEnd: 0
+  titleBgm: {fileID: 8300000, guid: 92fcb5d060d19cb499c0bf6253afebbc, type: 3}
+  titleClipStart: 2.961
+  titleClipEnd: 60.56
 --- !u!1001 &1834781472
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -202,7 +202,7 @@ namespace VLG
             }
 
             // Play the background music.
-            PlayBackgroundMusic(gameplayBgm00, clipStart, clipEnd);
+            PlayBackgroundMusic(bgmClip, clipStart, clipEnd);
         }
 
         // Plays the Gameplay BGM

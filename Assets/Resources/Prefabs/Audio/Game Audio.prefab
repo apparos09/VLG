@@ -193,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioSource: {fileID: 6015276066422501421}
   maxVolume: 1
-  autoSetMaxVolume: 1
+  autoSetMaxVolume: 0
 --- !u!114 &1364761078047763600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +209,7 @@ MonoBehaviour:
   audioSource: {fileID: 6015276066422501421}
   clipStart: 0
   clipEnd: 0
-  playAtClipStart: 1
+  playAtClipStart: 0
   loopRelative: 1
 --- !u!1 &8142218834273946437
 GameObject:
@@ -220,8 +220,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6398991593383484294}
-  - component: {fileID: 6158790740538778730}
   - component: {fileID: 3862555908014757398}
+  - component: {fileID: 6158790740538778730}
   m_Layer: 0
   m_Name: SFX Audio Source
   m_TagString: SFX
@@ -244,21 +244,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4421473394005684315}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6158790740538778730
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8142218834273946437}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 052f69ae20921ef4ea1c5a3a69eb04d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 3862555908014757398}
-  maxVolume: 1
-  autoSetMaxVolume: 1
 --- !u!82 &3862555908014757398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -355,3 +340,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &6158790740538778730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8142218834273946437}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 052f69ae20921ef4ea1c5a3a69eb04d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 3862555908014757398}
+  maxVolume: 1
+  autoSetMaxVolume: 0
