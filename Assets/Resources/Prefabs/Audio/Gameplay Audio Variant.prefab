@@ -264,7 +264,7 @@ MonoBehaviour:
   gameplayBgm06: {fileID: 8300000, guid: fa6e58c5e635e724c86385a8bb2609bd, type: 3}
   gameplayBgm06ClipStart: 15.294
   gameplayBgm06ClipEnd: 124.242
-  floorFailedSfx: {fileID: 8300000, guid: 92ba47d75f801814bbe9d2310161e33c, type: 3}
+  floorFailedSfx: {fileID: 8300000, guid: 7b5531cbd6e6c2848bee5a487cd8675c, type: 3}
   floorResetSfx: {fileID: 8300000, guid: 3f312cc68c809d64095d5f02783df06d, type: 3}
   floorClearSfx: {fileID: 8300000, guid: 5c25cb4e14c4de04f973b5c568410689, type: 3}
   floorClearFinalBossSfx: {fileID: 8300000, guid: 6631cc051f8f157449922edf6b5a3259, type: 3}

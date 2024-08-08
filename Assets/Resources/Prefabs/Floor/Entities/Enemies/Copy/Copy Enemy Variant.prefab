@@ -187,7 +187,7 @@ MonoBehaviour:
   jumpFactor: 7
   animator: {fileID: 4531223405731406689}
   moveSfx: {fileID: 8300000, guid: 262af79b01857eb49b176767bbc3f66a, type: 3}
-  hurtSfx: {fileID: 8300000, guid: 6c2e6d05964d54249b57935dcc705afb, type: 3}
+  hurtSfx: {fileID: 8300000, guid: c454ab233d3137c4eadd9e3e9722685a, type: 3}
   collider: {fileID: 4970776429797155699}
   rigidbody: {fileID: 8401874709157097137}
   ignoreGeometry: 0

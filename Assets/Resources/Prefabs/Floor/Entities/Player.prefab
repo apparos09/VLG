@@ -130,6 +130,7 @@ MonoBehaviour:
   jumpFactor: 7
   animator: {fileID: 6325870439102641563}
   moveSfx: {fileID: 8300000, guid: 734ef87d41b72af45955b1123e62bf6c, type: 3}
+  hurtSfx: {fileID: 8300000, guid: e939bfa4a8521d84688ba79f60fe834c, type: 3}
   collider: {fileID: 4885720312683704552}
   rigidbody: {fileID: 4788282775311535427}
   enabledInputs: 1
@@ -150,7 +151,7 @@ MonoBehaviour:
   swordDisableAnim: Knight Sword Disable Animation
   playerJumpSfx: {fileID: 8300000, guid: 734ef87d41b72af45955b1123e62bf6c, type: 3}
   playerAttackSfx: {fileID: 8300000, guid: c45f60c06fedd144fad802d0c36c6413, type: 3}
-  playerHurtSfx: {fileID: 8300000, guid: 804e2b4037cef3e47825184a60733c13, type: 3}
+  playerHurtSfx: {fileID: 8300000, guid: e939bfa4a8521d84688ba79f60fe834c, type: 3}
 --- !u!1001 &7362167807439119361
 PrefabInstance:
   m_ObjectHideFlags: 0
