@@ -244,7 +244,13 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 1611630206385062473}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   validTags: []
+  buttonClickAnim: Button Block - Button Click Animation
+  buttonReleaseAnim: Button Block - Button Release Animation
+  buttonDownSfx: {fileID: 8300000, guid: 98760affd7491424d99d3d78cae7a2ad, type: 3}
+  buttonUpSfx: {fileID: 8300000, guid: c452dbe869d1c7b42bcc4c2cb2cb1359, type: 3}
 --- !u!114 &-7605301153397684472
 MonoBehaviour:
   m_ObjectHideFlags: 0

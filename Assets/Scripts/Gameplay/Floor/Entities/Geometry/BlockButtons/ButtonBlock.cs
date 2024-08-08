@@ -24,6 +24,20 @@ namespace VLG
         // Callback for the textbox being opened.
         private ButtonBlockCallback buttonClickCallback;
 
+        // Aimations
+        // Button click animation.
+        public string buttonClickAnim = "Button Block - Button Click Animation";
+
+        // Button release animation.
+        public string buttonReleaseAnim = "Button Block - Button Release Animation";
+
+        // Sound Effects
+        // Button Down Sfx
+        public AudioClip buttonDownSfx;
+
+        // Button Up Sfx
+        public AudioClip buttonUpSfx;
+
         // Gets set to 'true' when the post start function has been called.
         private bool calledPostStart = false;
 
@@ -169,15 +183,30 @@ namespace VLG
 
         // ANIMATIONS
         // Button click animation.
-        private void PlayButtonClickAnimation()
+        public void PlayButtonClickAnimation()
         {
-            animator.Play("Button Block - Button Click Animation");
+            animator.Play(buttonClickAnim);
         }
 
         // Button release animation.
-        private void PlayButtonReleaseAnimation()
+        public void PlayButtonReleaseAnimation()
         {
-            animator.Play("Button Block - Button Release Animation");
+            animator.Play(buttonReleaseAnim);
+        }
+
+        // AUDIO
+        // Plays the button click sound effect.
+        public void PlayButtonDownSfx()
+        {
+            if (buttonDownSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(buttonDownSfx);
+        }
+
+        // Plays the button release sound effect.
+        public void PlayButtonUpSfx()
+        {
+            if (buttonUpSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(buttonUpSfx);
         }
 
         // Update is called once per frame
