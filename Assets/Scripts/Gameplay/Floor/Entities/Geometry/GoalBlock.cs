@@ -20,6 +20,20 @@ namespace VLG
         [Tooltip("If true, the goal's unlock condition is checked every frame.")]
         public bool autoCheckGoalCondition = true;
 
+        [Header("Animations")]
+        // Locks the goal.
+        public string goalLockAnim = "Goal Block - Lock Animation";
+
+        // Unlocks the goal.
+        public string goalUnlockAnim = "Goal Block - Unlock Animation";
+
+        [Header("Audio")]
+        // Lock SFX
+        public AudioClip goalLockSfx;
+        
+        // Unlock Sfx
+        public AudioClip goalUnlockSfx;
+
         // Allows post start to be called.
         private bool calledPostStart = false;
 
@@ -35,11 +49,11 @@ namespace VLG
             // Checks if the goal's condition has been met, and if the goal is usable.
             if(goal.IsUsableAndConditionMet())
             {
-                OnConditionMet();   
+                OnConditionMet(false);   
             }
             else
             {
-                OnConditionFailed();
+                OnConditionFailed(false);
             }
 
             // Updates the objective text with the goal's objective tpye.
@@ -51,7 +65,7 @@ namespace VLG
 
 
         // Called when the condition check for the goal has succeeded.
-        public void OnConditionMet()
+        public void OnConditionMet(bool playSound = true)
         {
             goalConMet = true;
             PlayGoalUnlockAnimation();
@@ -61,13 +75,22 @@ namespace VLG
             {
                 floorManager.OnGoalTriggered();
             }
+
+            // Plays the unlock sound effect.
+            if (playSound)
+                PlayGoalUnlockSfx();
         }
 
         // Called when the condition check for the goal has failed.
-        public void OnConditionFailed()
+        public void OnConditionFailed(bool playSound = true)
         {
             goalConMet = false;
             PlayGoalLockAnimation();
+            
+            // Plays the lock sound effect.
+            if (playSound)
+                PlayGoalLockSfx();
+
         }
 
         // Called when a ButtonBlock has its button clicked.
@@ -94,14 +117,29 @@ namespace VLG
         // Unlock the goal animation.
        
         // Lock the goal animation.
-        private void PlayGoalLockAnimation()
+        public void PlayGoalLockAnimation()
         {
-            animator.Play("Goal Block - Lock Animation");
+            animator.Play(goalLockAnim);
         }
 
-        private void PlayGoalUnlockAnimation()
+        public void PlayGoalUnlockAnimation()
         {
-            animator.Play("Goal Block - Unlock Animation");
+            animator.Play(goalUnlockAnim);
+        }
+
+        // AUDIO
+        // Plays the goal lock sfx.
+        public void PlayGoalLockSfx()
+        {
+            if(goalLockSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(goalLockSfx);
+        }
+
+        // Plays the goal unlock sfx.
+        public void PlayGoalUnlockSfx()
+        {
+            if (goalUnlockSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(goalUnlockSfx);
         }
 
         // Resets the floor entity.

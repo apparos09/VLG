@@ -746,7 +746,8 @@ namespace VLG
         // Called when the floor has been reset.
         public void OnFloorReset()
         {
-            // ...
+            // Floor reset - this is now triggered only when the player resets the floor.
+            // gameManager.gameAudio.PlayFloorResetSfx();
         }
 
         // Tries entity movement.
@@ -998,6 +999,9 @@ namespace VLG
         // See OnGoalEntered in GameManager to see how the game handles a stage being completed.
         public void OnFloorComplete()
         {
+            // Floor complete jingle is not being used since it's too long.
+            bool playAudio = false;
+
             // Saves the floor turns and times to an array.
             gameManager.floorTurns[currFloor.id] = floorTurns;
             gameManager.floorTimes[currFloor.id] = floorTime;
@@ -1014,10 +1018,18 @@ namespace VLG
                     GenerateFloorAsCoroutine(nextFloorId);
                 else
                     GenerateFloor(nextFloorId);
+
+                // The floor has been cleared.
+                if(playAudio)
+                    gameManager.gameAudio.PlayFloorClearSfx();
             }
             else // No other floors, so finish the game.
             {
                 gameManager.FinishGame();
+
+                // The game has been cleared.
+                if(playAudio)
+                    gameManager.gameAudio.PlayFloorClearFinalBossSfx();
             }
 
             // If the game should allow saves, save the game.
@@ -1055,6 +1067,9 @@ namespace VLG
             // Updates the time and turns with the old values since the floor was failed.
             floorTime = timeTemp;
             // floorTurns = turnsTemp;
+
+            // Floor failed.
+            gameManager.gameAudio.PlayFloorFailedSfx();
         }
 
         // Update is called once per frame

@@ -115,8 +115,14 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 8709803248652855131}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   goal: {fileID: 5963157428354276258}
   autoCheckGoalCondition: 1
+  goalLockAnim: Goal Block - Lock Animation
+  goalUnlockAnim: Goal Block - Unlock Animation
+  goalLockSfx: {fileID: 8300000, guid: 3cccfa0fe076dac4685d534f238c2a4a, type: 3}
+  goalUnlockSfx: {fileID: 8300000, guid: 5f94e8439ba5b404d9ad26c33a14b16f, type: 3}
 --- !u!114 &5963157428354276258
 MonoBehaviour:
   m_ObjectHideFlags: 0

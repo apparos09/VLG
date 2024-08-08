@@ -531,7 +531,11 @@ namespace VLG
                 // Reset Floor
                 if (Input.GetKeyDown(KeyCode.R))
                 {
+                    // Reset the floor.
                     gameManager.floorManager.ResetFloor();
+
+                    // Play the reset sound.
+                    gameManager.gameAudio.PlayFloorResetSfx();
                 }
             }
 

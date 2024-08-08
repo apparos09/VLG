@@ -64,13 +64,19 @@ namespace VLG
         public float gameplayBgm06ClipStart = 0;
         public float gameplayBgm06ClipEnd = 0;
 
-        //[Header("GameplayAudio/Sound Effects")]
+        [Header("GameplayAudio/Sound Effects")]
 
-        //// Floor failed sound effect.
-        //public AudioClip floorFailedSfx;
+        // Floor failed sound effect.
+        public AudioClip floorFailedSfx;
 
-        //// Floor reset sound effect.
-        //public AudioClip floorResetSfx;
+        // Floor reset sound effect.
+        public AudioClip floorResetSfx;
+
+        // Floor clear for regular game.
+        public AudioClip floorClearSfx;
+
+        // Floor clear for boss.
+        public AudioClip floorClearFinalBossSfx;
 
 
         // Constructor
@@ -218,6 +224,32 @@ namespace VLG
         {
             // Provides the ID
             PlayGameplayBgm(floor.bgmId);
+        }
+
+        // Sound Effects
+
+        // Floor Failed Sfx
+        public void PlayFloorFailedSfx()
+        {
+            PlaySoundEffect(floorFailedSfx);
+        }
+
+        // Floor Reset Sfx
+        public void PlayFloorResetSfx()
+        {
+            PlaySoundEffect(floorResetSfx);
+        }
+
+        // Floor Clear
+        public void PlayFloorClearSfx()
+        {
+            PlaySoundEffect(floorClearSfx);
+        }
+
+        // Floor Clear (Final Boss)
+        public void PlayFloorClearFinalBossSfx()
+        {
+            PlaySoundEffect(floorClearFinalBossSfx);
         }
 
         // This function is called when the MonoBehaviour will be destroyed.
