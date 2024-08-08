@@ -64,6 +64,14 @@ namespace VLG
         public float gameplayBgm06ClipStart = 0;
         public float gameplayBgm06ClipEnd = 0;
 
+        //[Header("GameplayAudio/Sound Effects")]
+
+        //// Floor failed sound effect.
+        //public AudioClip floorFailedSfx;
+
+        //// Floor reset sound effect.
+        //public AudioClip floorResetSfx;
+
 
         // Constructor
         private GameplayAudio()

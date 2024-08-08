@@ -197,6 +197,8 @@ MonoBehaviour:
   animator: {fileID: 1167415686155177744}
   item: 2
   idleAnim: Weapon - Idle Animation
+  audioSource: {fileID: 8613521675177258032}
+  itemGetSfx: {fileID: 8300000, guid: 42dbfbf84f2e21846a5fdcfbdf4c4b4e, type: 3}
 --- !u!114 &-8007722826422988905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,3 +215,8 @@ MonoBehaviour:
   activeTrigger: 1
   tutorial: 17
   constantTrigger: 0
+--- !u!82 &8613521675177258032 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3620066923948310335, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
+  m_PrefabInstance: {fileID: 5022762613537575695}
+  m_PrefabAsset: {fileID: 0}

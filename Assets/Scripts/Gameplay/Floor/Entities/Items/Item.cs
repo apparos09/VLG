@@ -10,11 +10,15 @@ namespace VLG
         // The enum for the itme.
         public enum itemType { none, key, weapon }
 
+        [Header("Item")]
         // The item type for the object.
         public itemType item = itemType.none;
 
         // The idle animation for the item.
         public string idleAnim = "";
+
+        // The sound effect for getting the item.
+        public AudioClip itemGetSfx;
 
         // Gets set to 'true' when post start has been called.
         private bool calledPostStart = false;
@@ -40,6 +44,9 @@ namespace VLG
         // Call this function when the item is given to a player.
         public virtual void OnItemGiven(Player player)
         {
+            // Plays the item get sound.
+            PlayItemGetSfx();
+
             // Destroy the item object.
             KillEntity();
         }
@@ -69,6 +76,16 @@ namespace VLG
 
             // Set this to false so that the function gets called again.
             calledPostStart = false;
+        }
+
+        // Plays the item get SFX.
+        public void PlayItemGetSfx()
+        {
+            // The audio source and the sound effect are set.
+            if(itemGetSfx != null)
+            {
+                gameManager.gameAudio.PlaySoundEffect(itemGetSfx);
+            }
         }
 
         // Update is called once per frame

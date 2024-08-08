@@ -154,6 +154,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 6162913983863626783, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
   m_PrefabInstance: {fileID: 8454297779568477505}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &5147258846650694270 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3620066923948310335, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
+  m_PrefabInstance: {fileID: 8454297779568477505}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7800849029678953488 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1806398463856570705, guid: 49ab7ec925da1c949a8f564dd2d17691, type: 3}
@@ -185,6 +190,8 @@ MonoBehaviour:
   animator: {fileID: 2365694461049510238}
   item: 1
   idleAnim: Key - Idle Animation
+  audioSource: {fileID: 5147258846650694270}
+  itemGetSfx: {fileID: 8300000, guid: 42dbfbf84f2e21846a5fdcfbdf4c4b4e, type: 3}
 --- !u!114 &7309326157487717194
 MonoBehaviour:
   m_ObjectHideFlags: 0
