@@ -25,11 +25,26 @@ namespace VLG
         // The lighting strike end callback.
         private LightningStrikeCallback strikeEndCallback;
 
+        // The list of all lightning strikes.
+        private static List<LightningStrike> lightningStrikes = new List<LightningStrike>();
+
+        [Header("Audio")]
+
+        [Tooltip("If 'true', the same sounds can be overlayed with one another. If false, only one is allowed to play at a time.")]
+        public bool overlaySameSounds = true;
+
         // Thunder sound effect.
         public AudioClip thunderSfx;
 
+        // The number of calls to play the thunder sfx.
+        private static int thunderSfxCalls = 0;
+
         // Lightning osund effect.
         public AudioClip lightningStrikeSfx;
+
+        // The number of calls to play lightning.
+        private static int lightningStrikeSfxCalls = 0;
+
 
         // Start is called before the first frame update
         protected override void Start()
@@ -39,15 +54,43 @@ namespace VLG
             // Set parent to the floor origin if it's not set already. 
             if (transform.parent == null)
                 transform.parent = floorManager.floorOrigin.transform;
+
+            // Add to the lightning strike list.
+            if (!lightningStrikes.Contains(this))
+                lightningStrikes.Add(this);
         }
 
+        // This function is called when the object has become enabled and active
+        protected override void OnEnable()
+        {
+            base.OnEnable();
 
+            // The lightnign strike is enabled, so add it to the list.
+            if (!lightningStrikes.Contains(this))
+                lightningStrikes.Add(this);
+        }
+
+        // This function is called when the behaviour has become disabled or inactive
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            // The lightnign strike is disabled, so remove it from the list.
+            if (lightningStrikes.Contains(this))
+                lightningStrikes.Remove(this);
+        }
 
         // Strikes the lighting by playing the animation.
         public void TriggerLightningStrike()
         {
             // Play the strike anim.
             animator.Play(strikeAnim);
+        }
+
+        // Gets the lightning strike count.
+        public static int GetLightningStrikeCount()
+        {
+            return lightningStrikes.Count;
         }
 
         // Strike the lighting at the provided position.
@@ -68,6 +111,19 @@ namespace VLG
         // Called when the lightning strike ends.
         public void OnLightingStrikeEnd()
         {
+            // Reduce the amount.
+            thunderSfxCalls--;
+            lightningStrikeSfxCalls--;
+
+            // Bounds check.
+            if (thunderSfxCalls < 0)
+                thunderSfxCalls = 0;
+
+            // Bounds check.
+            if (lightningStrikeSfxCalls < 0)
+                lightningStrikeSfxCalls = 0;
+
+
             // The lighting strike end callback.
             if (strikeEndCallback != null)
                 strikeEndCallback(this);
@@ -98,19 +154,68 @@ namespace VLG
             strikeEndCallback -= callback;
         }
 
-        // Audio
+        // AUDIO
         // Plays the thunder sound.
         public void PlayThunderSfx()
         {
+            // Sound effect is set.
             if (thunderSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(thunderSfx);
+            {
+                // If the same sounds can be overlayed.
+                if(overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(thunderSfx);
+                }
+                else
+                {
+                    // No calls have been made, so allow the SFX to play.
+                    if(thunderSfxCalls <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(thunderSfx);
+                        thunderSfxCalls++;
+                    }
+                }
+            }
         }
 
         // Plays the lightning strike sound.
         public void PlayLightningStrikeSfx()
         {
+            // Sound effect is set.
             if (lightningStrikeSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(lightningStrikeSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(lightningStrikeSfx);
+                }
+                else
+                {
+                    // No calls have been made, so allow the SFX to play.
+                    if (lightningStrikeSfxCalls <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(lightningStrikeSfx);
+                        lightningStrikeSfxCalls++;
+                    }
+                }
+            }
+        }
+
+        // This function is called when the MonoBehaviour will be destroyed
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            // Remove from the lightning strikes list.
+            if (lightningStrikes.Contains(this))
+                lightningStrikes.Remove(this);
+
+            // If there are no lightning strikes left, reset the calls.
+            if(GetLightningStrikeCount() <= 0)
+            {
+                thunderSfxCalls = 0;
+                lightningStrikeSfxCalls = 0;
+            }
         }
 
     }
