@@ -38,6 +38,9 @@ namespace VLG
         // The empty animation.
         public string emptyAnim = "Empty State";
 
+        // The jump animation for them ain animator.
+        public string jumpMainAnim = "";
+
         // The attack animation for main animator.
         [Tooltip("The attack animation for the main animator (the one saved to the parent object).")]
         public string attackMainAnim = "";
@@ -82,6 +85,16 @@ namespace VLG
 
         // The animation for turning the sword off.
         public string swordDisableAnim = "";
+
+        [Header("Audio Clips")]
+        // Player jump sound effect.
+        public AudioClip playerJumpSfx;
+
+        // Player attack sound effect.
+        public AudioClip playerAttackSfx;
+
+        // Player hurt sound effect.
+        public AudioClip playerHurtSfx;
 
         // Start is called before the first frame update
         override protected void Start()
@@ -382,6 +395,27 @@ namespace VLG
             OnPlayerDeath();
         }
 
+        // AUDIO //
+        // Player Jump
+        public void PlayPlayerJumpSfx()
+        {
+            gameManager.gameAudio.PlaySoundEffect(playerJumpSfx);
+        }
+
+        // Player Attack
+        public void PlayPlayerAttackSfx()
+        {
+            gameManager.gameAudio.PlaySoundEffect(playerAttackSfx);
+        }
+
+        // Player Taken Damage
+        public void PlayPlayerHurtSfx()
+        {
+            gameManager.gameAudio.PlaySoundEffect(playerHurtSfx);
+        }
+
+
+        // Updates
         // Updates the player movements.
         public void UpdateInputs()
         {

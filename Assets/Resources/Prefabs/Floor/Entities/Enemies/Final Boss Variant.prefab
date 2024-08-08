@@ -124,6 +124,8 @@ MonoBehaviour:
   moveSpeed: 4
   jumpFactor: 7
   animator: {fileID: 5268624312265822331}
+  moveSfx: {fileID: 8300000, guid: 262af79b01857eb49b176767bbc3f66a, type: 3}
+  hurtSfx: {fileID: 8300000, guid: 6c2e6d05964d54249b57935dcc705afb, type: 3}
   collider: {fileID: 3676191393248219241}
   rigidbody: {fileID: 245092977649425835}
   ignoreGeometry: 1

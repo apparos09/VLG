@@ -95,7 +95,7 @@ namespace VLG
         // Plays the provided sound effect.
         public void PlaySoundEffect(AudioClip sfxClip)
         {
-            bgmSource.PlayOneShot(sfxClip);
+            sfxSource.PlayOneShot(sfxClip);
         }
 
         // Stops the sound effect.

@@ -131,6 +131,10 @@ namespace VLG
         // Kills the enemy.
         public override void KillEntity()
         {
+            // Plays the hurt sound effect.
+            PlayHurtSfx();
+
+            // Destroys the object.
             Destroy(gameObject);
         }
 

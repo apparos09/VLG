@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace VLG
@@ -72,6 +70,14 @@ namespace VLG
 
         // The animator for the floor entity.
         public Animator animator;
+
+        [Header("Jump")]
+
+        // The mvoe sound effect.
+        public AudioClip moveSfx;
+
+        // The hurt sound effect.
+        public AudioClip hurtSfx;
 
         // Awake is called when the script instance is being loaded
         protected virtual void Awake()
@@ -312,7 +318,7 @@ namespace VLG
         // Called when a movement has been started.
         public virtual void OnMoveStarted(Vector3 localStart, Vector3 localEnd, float t)
         {
-            // ...
+            PlayMoveSfx();
         }
 
         // Called when a movement is ongoing.
@@ -504,6 +510,21 @@ namespace VLG
         public virtual void ResetEntity()
         {
             SetFloorPosition(resetPos, false, false);
+        }
+
+        // Audio
+        // Plays the jump sound effect.
+        public void PlayMoveSfx()
+        {
+            if(moveSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(moveSfx);
+        }
+
+        // Plays the hurt sound effect.
+        public void PlayHurtSfx()
+        {
+            if (hurtSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(hurtSfx);
         }
 
         // Update is called once per frame
