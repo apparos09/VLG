@@ -50,7 +50,7 @@ Eternal Story - Rafael Krux
 
 === Copyright ===
 'Eternal Story' by Rafael Krux (orchestralis.net)
-Creative Commons 4.0 License.
+c
 https://creativecommons.org/licenses/by/4.0/
 
 
@@ -96,6 +96,11 @@ Button 41 - Unknown
 == Slider Use (UI) ==
 Button 16 - Unknown
 * https://gamesounds.xyz/?dir=Sound%20Effects/Buttons
+
+
+== Code Entry Button/Floor Select Button (UI) ==
+Computer Key 1 - Unknown
+* https://gamesounds.xyz/?dir=Sound%20Effects/Tools
 
 
 == Code Valid ==
@@ -181,7 +186,7 @@ Laser Cannon - Mike Koenig:
 * https://soundbible.com/1771-Laser-Cannon.html
 
 === Copyright ===
-"Laser Canon"
+"Laser Cannon"
 Mike Koenig
 Licensed under Creative Commons: By Attribution 3.0 License
 https://creativecommons.org/licenses/by/3.0/

@@ -191,7 +191,182 @@ namespace VLG
         {
             AudioCredits.AudioCredit credit = new AudioCredits.AudioCredit();
 
-            // TODO: load SFX credits
+            // SOUND EFFECTS //
+            // Floor Reset
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Text Message Alert 4";
+            credit.artist = "Daniel Simon";
+            credit.collection = "-";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/2157-Text-Message-Alert-4.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Text Message Alert 4\"\n" +
+                "Daniel Simon\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Player - Jump/Enemy - Jump
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Jump";
+            credit.artist = "snottyboy";
+            credit.collection = "-";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/1343-Jump.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Jump\"\n" +
+                "snottyboy\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Player - Attack
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Sword Swing";
+            credit.artist = "Mike Koenig";
+            credit.collection = "-";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/1176-Sword-Swing.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Sword Swing\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Hazard Block - Hazard On/Off
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Knife Scrape Horror";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/405-Knife-Scrape-Horror.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Knife Scrape Horror\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Portal Block - On
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Laser Cannon";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/1771-Laser-Cannon.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Laser Cannon\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Portal Block - Off
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Power Failure";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/1610-Power-Failure.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Power Failure\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Button Block - Button Down/Butotn Up
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Button";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/772-Button.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Button\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Dragon - Fly Up/Fly Down
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Flapping Wings";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/627-Flapping-Wings.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Flapping Wings\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Thunder
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Perfect Thunder Storm";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/916-Perfect-Thunder-Storm.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Perfect Thunder Storm\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Lightning Strike
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Thunder Strike 1";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/2015-Thunder-Strike-1.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Thunder Strike 1\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
+
+            // Item - Get
+            credit = new AudioCredits.AudioCredit();
+            credit.title = "Twitch";
+            credit.artist = "Mike Koenig";
+            credit.collection = "";
+            credit.source = "Soundbible.com";
+            credit.link1 = "https://soundbible.com/2015-Thunder-Strike-1.html";
+            credit.link2 = "";
+            credit.copyright =
+                "\"Twitch\"\n" +
+                "Mike Koenig\n" +
+                "Licensed under Creative Commons: By Attribution 3.0 License\n" +
+                "https://creativecommons.org/licenses/by/3.0/";
+
+            sfxCredits.audioCredits.Add(credit);
 
 
 

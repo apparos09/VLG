@@ -142,7 +142,7 @@ namespace VLG
                     break;
 
                 case goalType.key: // Get all the keyItems.
-                    result  = "Get all the Keys!";
+                    result  = "Get All the Keys!";
                     break;
 
                 case goalType.enemy: // Kill all enemies.
