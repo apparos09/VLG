@@ -65,7 +65,7 @@ namespace VLG
         {
             base.OnEnable();
 
-            // The lightnign strike is enabled, so add it to the list.
+            // The lightning strike is enabled, so add it to the list.
             if (!lightningStrikes.Contains(this))
                 lightningStrikes.Add(this);
         }
@@ -75,7 +75,7 @@ namespace VLG
         {
             base.OnDisable();
 
-            // The lightnign strike is disabled, so remove it from the list.
+            // The lightning strike is disabled, so remove it from the list.
             if (lightningStrikes.Contains(this))
                 lightningStrikes.Remove(this);
         }
@@ -210,8 +210,8 @@ namespace VLG
             if (lightningStrikes.Contains(this))
                 lightningStrikes.Remove(this);
 
-            // If there are no lightning strikes left, reset the calls.
-            if(GetLightningStrikeCount() <= 0)
+            // If there are no lightning strikes left, reset the call counts.
+            if (GetLightningStrikeCount() <= 0)
             {
                 thunderSfxCalls = 0;
                 lightningStrikeSfxCalls = 0;

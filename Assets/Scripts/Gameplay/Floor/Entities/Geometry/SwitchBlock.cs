@@ -43,12 +43,20 @@ namespace VLG
 
         [Header("Switch Block/Audio")]
 
+        [Tooltip("If 'true', the same sounds can be overlayed with one another. If false, only one is allowed to play at a time.")]
+        public bool overlaySameSounds = true;
+
         // The switch on SFX.
         public AudioClip switchOnSfx;
+
+        // Calles for the switch on SFX.
+        static private int switchOnCalls = 0;
 
         // The switch off SFX.
         public AudioClip switchOffSfx;
 
+        // Calles for the switch off SFX.
+        static private int switchOffCalls = 0;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -61,6 +69,32 @@ namespace VLG
             // Add to the list.
             if(!switchBlocks.Contains(this))
                 switchBlocks.Add(this);
+        }
+
+        // This function is called when the object has become enabled and active
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+
+            // The switch block is enabled, so add it to the list.
+            if (!switchBlocks.Contains(this))
+                switchBlocks.Add(this);
+        }
+
+        // This function is called when the behaviour has become disabled or inactive
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+
+            // The switch block is disabled, so remove it from the list.
+            if (switchBlocks.Contains(this))
+                switchBlocks.Remove(this);
+        }
+
+        // Gets the switch block count.
+        public static int GetSwitchBlockCount()
+        {
+            return switchBlocks.Count;
         }
 
         // Returns a bool to indicate if the hazard is on.
@@ -146,20 +180,85 @@ namespace VLG
             SetBlockOn(blockOnDefault); // Set value to default.
         }
 
+        // ANIMATION
+        // Switch On Animation
+        public void PlaySwitchOnAnimation()
+        {
+            animator.Play(onAnim);
+        }
+
+        // Switch On Animation End
+        public void OnSwitchOnAnimationEnd()
+        {
+            switchOnCalls--;
+
+            // Bounds
+            if (switchOnCalls < 0)
+                switchOnCalls = 0;
+        }
+
+        // Switch Off Animation
+        public void PlaySwitchOffAnimation()
+        {
+            animator.Play(offAnim);
+        }
+
+        // Switch Off Animation End
+        public void OnSwitchOffAnimationEnd()
+        {
+            switchOffCalls--;
+
+            // Bounds
+            if (switchOffCalls < 0)
+                switchOffCalls = 0;
+        }
+
 
         // AUDIO
         // Plays the switch on SFX.
         public void PlaySwitchOnSfx()
         {
+            // Sound effect is set.
             if (switchOnSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(switchOnSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(switchOnSfx);
+                }
+                else
+                {
+                    // No calls have been made, so allow the SFX to play.
+                    if (switchOnCalls <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(switchOnSfx);
+                        switchOnCalls++;
+                    }
+                }
+            }
         }
 
         // Plays the switch off SFX.
         public void PlaySwitchOffSfx()
         {
+            // Sound effect is set.
             if (switchOffSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(switchOffSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(switchOffSfx);
+                }
+                else
+                {
+                    // No calls have been made, so allow the SFX to play.
+                    if (switchOffCalls <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(switchOffSfx);
+                        switchOffCalls++;
+                    }
+                }
+            }
         }
 
 
@@ -172,6 +271,13 @@ namespace VLG
             // Remove from the block list.
             if(switchBlocks.Contains(this))
                 switchBlocks.Remove(this);
+
+            // If there are no switch blocks left, reset the call counts.
+            if (GetSwitchBlockCount() <= 0)
+            {
+                switchOnCalls = 0;
+                switchOffCalls = 0;
+            }
         }
     }
 }
