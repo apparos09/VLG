@@ -107,11 +107,15 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 6586918470808262265}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   tangibleDefault: 1
   blockMaterial: {fileID: 2100000, guid: 4cec3fa9fa8057e4586adbae4cee6f3f, type: 2}
   coverMaterial: {fileID: 2100000, guid: b1d4cd08127f1d64787627f4364b7ff4, type: 2}
   tangibleAnim: Phase Block - Tangible Animation
   intangibleAnim: Phase Block - Intangible Animation
+  phaseInSfx: {fileID: 8300000, guid: 4617dd9242086ec4c9f5d4c120e24bdc, type: 3}
+  phaseOutSfx: {fileID: 8300000, guid: ba54cd7848a57f54c9daf4c84c7ce6d3, type: 3}
 --- !u!114 &6520591370923973803
 MonoBehaviour:
   m_ObjectHideFlags: 0

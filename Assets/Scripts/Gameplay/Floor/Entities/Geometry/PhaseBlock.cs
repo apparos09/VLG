@@ -27,6 +27,12 @@ namespace VLG
         // The intangible animation.
         public string intangibleAnim;
 
+        // Phase In Sfx
+        public AudioClip phaseInSfx;
+
+        // Phase Out Sfx
+        public AudioClip phaseOutSfx;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -128,23 +134,36 @@ namespace VLG
 
         // ANIMATIONS //
         // Plays the tangible animation.
-        private void PlayTangibleAnimation()
+        public void PlayTangibleAnimation()
         {
             animator.Play(tangibleAnim);
         }
 
         // Plays the intangible animation.
-        private void PlayIntangibleAnimation()
+        public void PlayIntangibleAnimation()
         {
             animator.Play(intangibleAnim);
         }
-
 
         // Resets the floor entity.
         public override void ResetEntity()
         {
             base.ResetEntity();
             SetTangible(tangibleDefault, false); // Set value to default.
+        }
+
+        // Plays the phase in sound effect.
+        public void PlayPhaseInSfx()
+        {
+            if (phaseInSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(phaseInSfx);
+        }
+
+        // Plays the phase out sound effect.
+        public void PlayPhaseOutSfx()
+        {
+            if (phaseOutSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(phaseOutSfx);
         }
     }
 }

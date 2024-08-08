@@ -41,6 +41,15 @@ namespace VLG
         // If 'true', the blocks use the animations.
         private bool useAnims = true;
 
+        [Header("Switch Block/Audio")]
+
+        // The switch on SFX.
+        public AudioClip switchOnSfx;
+
+        // The switch off SFX.
+        public AudioClip switchOffSfx;
+
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -137,11 +146,23 @@ namespace VLG
             SetBlockOn(blockOnDefault); // Set value to default.
         }
 
-        // Update is called once per frame
-        protected override void Update()
+
+        // AUDIO
+        // Plays the switch on SFX.
+        public void PlaySwitchOnSfx()
         {
-            base.Update();
+            if (switchOnSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(switchOnSfx);
         }
+
+        // Plays the switch off SFX.
+        public void PlaySwitchOffSfx()
+        {
+            if (switchOffSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(switchOffSfx);
+        }
+
+
 
         // Remove from the switch block list.
         protected override void OnDestroy()

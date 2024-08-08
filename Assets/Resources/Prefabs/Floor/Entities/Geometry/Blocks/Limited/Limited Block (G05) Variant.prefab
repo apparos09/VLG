@@ -396,9 +396,12 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 227687046712514887}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   usesMax: 4
   usableIfNoUses: 0
   usesText: {fileID: 1174473893524626540}
+  breakSfx: {fileID: 8300000, guid: ca205d47c5b70f245a801ac8e60b314c, type: 3}
 --- !u!114 &1462312125442254112
 MonoBehaviour:
   m_ObjectHideFlags: 0

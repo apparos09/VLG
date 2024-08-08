@@ -180,12 +180,17 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 8608601401024704778}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   destPortal: {fileID: 0}
   autoSetDestPortal: 1
   validTags: []
   portalIdleAnim: Portal Block - Idle Animation
   portalOnAnim: Portal Block - On Animation
   portalOffAnim: Portal Block - Off Animation
+  portalActivateSfx: {fileID: 8300000, guid: 193af8cfc5adb064aa4d979cad2afd8a, type: 3}
+  portalDeactivateSfx: {fileID: 8300000, guid: 1d10329ff3cc56743b24ab51abf09f6d, type: 3}
+  portalWarpSfx: {fileID: 8300000, guid: 2e97d4ca97cbb7945857da2314c5b237, type: 3}
 --- !u!114 &-6538660150283826000
 MonoBehaviour:
   m_ObjectHideFlags: 0

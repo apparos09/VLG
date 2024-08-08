@@ -26,6 +26,9 @@ namespace VLG
         // The text for showing the amount of remaining uses.
         public TMP_Text usesText;
 
+        // The limited block break clip.
+        public AudioClip breakSfx;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -45,6 +48,8 @@ namespace VLG
         // Sets the uses count within the limits of 0 and usesMax.
         public virtual void SetUsesCount(int newCount, bool animate = true)
         {
+            gameObject.SetActive(true);
+
             // Sets uses.
             uses = Mathf.Clamp(newCount, 0, usesMax);
 
@@ -52,7 +57,7 @@ namespace VLG
             usesText.text = (uses - 1).ToString();
 
             // No uses left.
-            if(uses == 0)
+            if(uses <= 0)
             {
                 // Disable the block.
                 gameObject.SetActive(false);
@@ -70,6 +75,15 @@ namespace VLG
                 {
                     floorManager.floorEnemies[floorPos.x, floorPos.y].KillEntity();
                 }
+
+                // Plays the break sound effect.
+                PlayBreakSfx();
+            }
+            else // Uses
+            {
+                // If the block is inactive, activate it.
+                if(!gameObject.activeSelf)
+                    gameObject.SetActive(true);
             }
         }
 
@@ -160,6 +174,13 @@ namespace VLG
             // Turn on the object and set the uses count to max.
             gameObject.SetActive(true);
             SetUsesCount(usesMax);
+        }
+
+        // Plays the break sound effect.
+        public void PlayBreakSfx()
+        {
+            if (breakSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(breakSfx);
         }
     }
 }

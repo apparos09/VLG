@@ -28,6 +28,14 @@ namespace VLG
         public string hazardOnAnim = "Hazard Block - Hazard On Animation";
         public string hazardOffAnim = "Hazard Block - Hazard Off Animation";
 
+        [Header("Hazard Block/Audio")]
+        
+        // The hazard block on effect.
+        public AudioClip hazardBlockOnSfx;
+
+        // The hazard block off effect.
+        public AudioClip hazardBlockOffSfx;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -147,7 +155,23 @@ namespace VLG
         public void PlayHazardOffAnimation()
         {
             animator.Play(hazardOffAnim);
-        }    
+        }
+
+
+        // AUDIO
+        // Plays the hazard on sfx.
+        public void PlayHazardBlockOnSfx()
+        {
+            if (hazardBlockOnSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(hazardBlockOnSfx);
+        }
+
+        // Plays the hazard off sfx.
+        public void PlayHazardBlockOffSfx()
+        {
+            if (hazardBlockOffSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(hazardBlockOffSfx);
+        }
 
         // Resets the floor entity.
         public override void ResetEntity()

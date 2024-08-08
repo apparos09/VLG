@@ -104,11 +104,15 @@ MonoBehaviour:
   moveSpeed: 1
   jumpFactor: 7
   animator: {fileID: 476853789909075938}
+  moveSfx: {fileID: 0}
+  hurtSfx: {fileID: 0}
   blockOnDefault: 1
   usableWhenOff: 0
   killWhenOff: 1
   onAnim: Switch Block - On Animation
   offAnim: Switch Block - Off Animation
+  switchOnSfx: {fileID: 8300000, guid: 929f6dfc34fb83042889e5cef2adee80, type: 3}
+  switchOffSfx: {fileID: 8300000, guid: 3a1ca594712219d4db58aab3fabd5e03, type: 3}
 --- !u!114 &-5424011822686900288
 MonoBehaviour:
   m_ObjectHideFlags: 0

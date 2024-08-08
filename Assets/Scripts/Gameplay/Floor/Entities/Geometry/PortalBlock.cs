@@ -41,6 +41,17 @@ namespace VLG
         // Portal Block - Off Animation
         public string portalOffAnim = "Portal Block - Off Animation";
 
+        [Header("Portal Block/Audio")]
+
+        // Portal block activation sfx.
+        public AudioClip portalActivateSfx;
+
+        // Portal block deactivation sfx.
+        public AudioClip portalDeactivateSfx;
+
+        // Warp sfx.
+        public AudioClip portalWarpSfx;
+
         // Start is called before the first frame update
         protected override void Start()
         {
@@ -166,8 +177,11 @@ namespace VLG
             // If 'true', warp the entity.
             if (warp)
             {
-                // TODO: apply animation.
+                // Set the position.
                 entity.SetFloorPosition(destPortal.floorPos, false, false);
+
+                // Warp sound effect.
+                PlayPortalWarpSfx();
             }
         }
 
@@ -190,6 +204,27 @@ namespace VLG
             animator.Play(portalOffAnim);
         }
 
+        // AUDIO
+        // Plays the activation sound.
+        public void PlayPortalActivationSfx()
+        {
+            if (portalActivateSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(portalActivateSfx);
+        }
+
+        // Plays the deactivation sound.
+        public void PlayPortalDeactivationSfx()
+        {
+            if (portalDeactivateSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(portalDeactivateSfx);
+        }
+
+        // Plays the warp sound.
+        public void PlayPortalWarpSfx()
+        {
+            if (portalWarpSfx != null)
+                gameManager.gameAudio.PlaySoundEffect(portalWarpSfx);
+        }
 
         // Update is called once per frame
         protected override void Update()
