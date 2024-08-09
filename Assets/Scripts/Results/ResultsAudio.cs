@@ -24,6 +24,9 @@ namespace VLG
         public float resultsClipStart = 0;
         public float resultsClipEnd = 0;
 
+        // The jingle that plays to single the end of the game.
+        public AudioClip gameClearJng;
+
 
         // Constructor
         private ResultsAudio()
@@ -107,6 +110,17 @@ namespace VLG
         public void PlayResultsBgm()
         {
             PlayBackgroundMusic(resultsBgm, resultsClipStart, resultsClipEnd);
+        }
+        
+        // Plays the game end jingle.
+        // If 'onBgm' is true, the bgm source is used. If false, the sfx source is used.
+        public void PlayGameEndJingle(bool onBgm)
+        {
+            // Checks if it should be played on the BGM or on the SFX.
+            if (onBgm)
+                bgmSource.PlayOneShot(gameClearJng);
+            else
+                sfxSource.PlayOneShot(gameClearJng);
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

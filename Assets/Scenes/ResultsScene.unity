@@ -355,6 +355,7 @@ MonoBehaviour:
   resultsBgm: {fileID: 8300000, guid: 9caec2ffcd8dac94f853ecff4b001a1b, type: 3}
   resultsClipStart: 1.821
   resultsClipEnd: 67.818
+  gameClearJng: {fileID: 8300000, guid: ea256de79bf20e143a6b164b76f48169, type: 3}
 --- !u!224 &732182569 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2684966302405082283, guid: 3880ac13df57f3a40bca75cd31070969, type: 3}

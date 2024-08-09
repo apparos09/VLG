@@ -78,6 +78,16 @@ namespace VLG
 
             // Loads the Results
             LoadResultsInfo();
+
+            // Music
+            // Play the game end jingle and results music.
+            float waitTime = resultsAudio.gameClearJng.length + 1.0F;
+            resultsAudio.PlayResultsBgm();
+            resultsAudio.StopBackgroundMusic();
+
+            // Play the results BGM after the game end jingle.
+            resultsAudio.bgmSource.PlayDelayed(waitTime);
+            resultsAudio.bgmSource.PlayOneShot(resultsAudio.gameClearJng);
         }
 
         // Gets the instance.

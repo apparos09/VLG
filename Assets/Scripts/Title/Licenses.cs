@@ -371,7 +371,7 @@ namespace VLG
 
 
             // JINGLES //
-            // Floor Clear/Goal Reached, Boss Clear/Boss Goal Reached
+            // Floor Clear/Goal Reached, Boss Clear/Boss Goal Reached, Game Clear/Game End
             credit = new AudioCredits.AudioCredit();
             credit.title = "Big Intro";
             credit.artist = "Jason Shaw";

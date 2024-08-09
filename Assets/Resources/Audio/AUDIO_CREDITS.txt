@@ -141,7 +141,7 @@ https://creativecommons.org/licenses/by/3.0/
 
 
 == Player - Attack ==
-Sword Swing - Mike Koeing:
+Sword Swing - Mike Koenig:
 https://soundbible.com/1176-Sword-Swing.html
 
 === Copyright ===
@@ -218,8 +218,8 @@ Pill Bottle 2 - Unknown
 * https://gamesounds.xyz/?dir=Sound%20Effects
 
 
-== Button Block - Button Down ==
-Button - Mike Koeing
+== Button Block - Button Down/Button Up ==
+Button - Mike Koenig
 * https://soundbible.com/772-Button.html
 
 == Copyright ==
@@ -317,6 +317,17 @@ http://creativecommons.org/licenses/by/4.0/
 
 
 == Boss Clear/Boss Goal Reached ===
+Big Intro - Jason Shaw
+* https://gamesounds.xyz/?dir=Audionautix/Soundtrack
+* https://audionautix.com/
+
+=== Copyright ===
+"Big Intro"
+Music by Jason Shaw on Audionautix.com (https://audionautix.com)
+Licensed under Creative Commons: By Attribution 4.0 License
+http://creativecommons.org/licenses/by/4.0/
+
+== Game Clear/Game End ===
 Big Intro - Jason Shaw
 * https://gamesounds.xyz/?dir=Audionautix/Soundtrack
 * https://audionautix.com/
