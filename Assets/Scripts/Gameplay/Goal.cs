@@ -35,7 +35,9 @@ namespace VLG
             if (floorManager == null)
                 floorManager = FloorManager.Instance;
 
-            // Gives the floor manager the goal.
+            // Gives the floor manager the goal if it's not set.
+            // This doesn't consistently work, likely due to the goal from a prior floor still being saved.
+            // As such, the goal is also set in the FloorManager.
             if (floorManager.goal == null)
                 floorManager.goal = this;
         }

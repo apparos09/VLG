@@ -143,8 +143,8 @@ namespace VLG
         public void LoadResultsInfo(ResultsInfo info)
         {
             // Game Text and Game Turns
-            gameTimeText.text = "Total Time: ";
-            gameTurnsText.text = "Total Turns: ";
+            gameTimeText.text = "<b>Total Time:</b> ";
+            gameTurnsText.text = "<b>Total Turns:</b> ";
 
             // Checks the object to know what to load in.
             if (info != null)

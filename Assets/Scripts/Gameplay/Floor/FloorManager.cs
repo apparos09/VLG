@@ -192,8 +192,9 @@ namespace VLG
             }
                 
 
-            // The entry point for the player.
+            // The entry and exit points for the player.
             EntryBlock entryBlock = null;
+            GoalBlock goalBlock = null;
 
             // TODO: maybe use the array sizes instead of the max values?
 
@@ -227,9 +228,18 @@ namespace VLG
                         // Sets the default values.
                         SetDefaultEntityValues(geoEntity, gridPos);
 
-                        // If the geo asset is the entry block, and this hasn't been set.
+                        // If the geo asset is the entry block, and it hasn't been set.
                         if(geoEntity is EntryBlock && entryBlock == null)
-                            entryBlock = geoEntity as EntryBlock;
+                        {
+                            entryBlock = (EntryBlock)geoEntity;
+                        }
+
+                        // If the geo asset is the goal block, and it hasn't been set.
+                        if (geoEntity is GoalBlock && goalBlock == null)
+                        {
+                            goalBlock = (GoalBlock)geoEntity;
+                        }
+                            
                     }
 
                     // ENEMY //
@@ -251,6 +261,11 @@ namespace VLG
             // Resets the player's position to the entry block's position.
             if (entryBlock != null)
                 gameManager.player.SetFloorPosition(entryBlock.floorPos, true, true);
+
+            // Sets the goal as the goal saved to this goal block. This is to make sure...
+            // It's set once the floor is done generating.
+            if (goalBlock != null)
+                goal = goalBlock.goal;
 
             // Floor Turn Limit
             if(floor.turnsMax <= 0) // If 0 or less, there is no limit.
@@ -402,6 +417,9 @@ namespace VLG
         // A function called after a floor is generated.
         public void PostGenerateFloor()
         {
+            // Makes sure the UI is fully updated. I don't think this is necessary anymore, but just to be sure.
+            gameManager.gameUI.UpdateAllHUDElements();
+
             // Turn back on the sound effect.
             gameManager.gameAudio.sfxSource.gameObject.SetActive(true);
 
