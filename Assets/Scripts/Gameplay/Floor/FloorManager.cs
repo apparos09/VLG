@@ -1072,6 +1072,10 @@ namespace VLG
 
             // Floor failed.
             gameManager.gameAudio.PlayFloorFailedSfx();
+
+            // Updates the timers and turns with the carried over values.
+            gameManager.gameUI.UpdateTimerText();
+            gameManager.gameUI.UpdateTurnsText();
         }
 
         // Update is called once per frame

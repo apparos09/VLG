@@ -260,14 +260,19 @@ namespace VLG
             floorTimeText.text = "FT: " + StringFormatter.FormatTime(floorTime, true, true, false);
         }
 
+        // Updates the timer text with auto-filled values.
+        public void UpdateTimerText()
+        {
+            UpdateTimerText(gameManager.gameTime, gameManager.floorManager.floorTime);
+        }
+
         // Updates all the UI elements
         public void UpdateAllHUDElements()
         {
-            // TODO: implement objective text into gameplay.
             UpdateFloorText();
             UpdateGameProgressBar();
             UpdateObjectiveText();
-            UpdateTimerText(gameManager.gameTime, gameManager.floorManager.floorTime);
+            UpdateTimerText();
             UpdateTurnsText();
         }
 
