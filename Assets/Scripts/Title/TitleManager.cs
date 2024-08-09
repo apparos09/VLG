@@ -35,7 +35,10 @@ namespace VLG
         private bool buttonComboSuccess = false;
 
         // The floor select combination.
-        private Queue<KeyCode> floorSelectCombo = new Queue<KeyCode>();
+        // Setting this up as a queue didn't work, so now each key is a seperate variable.
+        private KeyCode floorSelectComboKey1 = KeyCode.F;
+        private KeyCode floorSelectComboKey2 = KeyCode.B;
+        private KeyCode floorSelectComboKey3 = KeyCode.L;
 
         // Constructor
         private TitleManager()
@@ -93,11 +96,6 @@ namespace VLG
 
             // Keep the game info object around for going to the gameplay scene.
             DontDestroyOnLoad(gameInfo);
-
-            // Adds the floor select combination to the queue.
-            floorSelectCombo.Enqueue(KeyCode.F);
-            floorSelectCombo.Enqueue(KeyCode.B);
-            floorSelectCombo.Enqueue(KeyCode.L);
         }
 
         // Gets the instance.
@@ -233,48 +231,34 @@ namespace VLG
                 // Checks if any keys are being pressed.
                 if(Input.anyKey && !buttonComboSuccess)
                 {
-                    // Creates a temporary queue.
-                    Queue<KeyCode> tempQueue = new Queue<KeyCode>(floorSelectCombo);
-
-                    // While there are remaining values.
-                    while(tempQueue.Count > 0)
-                    {
-                        // If the next key has been pressed down.
-                        if(Input.GetKey(tempQueue.Peek()))
-                        {
-                            // Remove the value.
-                            tempQueue.Dequeue();
-
-                        }
-                        else
-                        {
-                            // Not right combination.
-                            break;
-                        }
-                    }
-
-                    // The right combination was provided.
-                    if(tempQueue.Count == 0)
+                    // If all 3 keys a down
+                    if(Input.GetKey(floorSelectComboKey1) && Input.GetKey(floorSelectComboKey2) && Input.GetKey(floorSelectComboKey3))
                     {
                         // Toggle the buttons.
                         titleUI.ToggleCodeAndFloorButtons();
 
-                        // A button combo was successful.
+                        // The button combo was successful.
                         buttonComboSuccess = true;
 
+                        // Play the code valid sound effect to indicate the change happened.
+                        titleAudio.PlayCodeValidSfx();
+
                         // If in the editor, print a success message.
-                        if(Application.isEditor)
+                        if (Application.isEditor)
                         {
                             // The button combination was successful.
                             Debug.Log("Button Combo Success!");
                         }
                     }
+                    
                 }
                 else
                 {
                     // If no buttons are being pressed, reset the combo check.
-                    if(!Input.anyKey)
+                    if(!Input.anyKey && buttonComboSuccess)
+                    {
                         buttonComboSuccess = false;
+                    }
                 }
 
             }
