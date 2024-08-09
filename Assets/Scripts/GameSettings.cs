@@ -42,7 +42,9 @@ namespace VLG
         // The audio controls for the game.
         public AudioControls audioControls;
 
-        // If 'true', tutorial elements are used.
+        // If 'true', tutorial elements are used. This is false for testing reasons.
+        // NOTE: in LoadDefaultGameSettings, this is set to 'true'.
+        // That way, the build version has it true by default.
         public bool useTutorials = false;
 
         // Cutscenes
@@ -386,7 +388,7 @@ namespace VLG
             settingsData.mute = false;
 
             // Tutorial
-            settingsData.useTutorials = false;
+            settingsData.useTutorials = true; // True by default for the build version.
 
             // Cutscenes
             settingsData.playCutscenes = true;

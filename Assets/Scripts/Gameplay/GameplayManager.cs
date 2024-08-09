@@ -274,6 +274,10 @@ namespace VLG
                     Time.timeScale = 1.0F;
             }
 
+            // Ignore the input when unpausing to avoid an accidental attack input.
+            // This happens regardless just to be safe.
+            player.IgnoreInputs(1);
+
             // Called to update on the game's paused event.
             gameUI.OnPausedChanged(paused);
         }

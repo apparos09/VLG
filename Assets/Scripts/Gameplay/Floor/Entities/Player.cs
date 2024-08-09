@@ -570,6 +570,9 @@ namespace VLG
             if (Input.GetKeyDown(KeyCode.P))
             {
                 gameManager.TogglePaused();
+
+                // Play the button sound effect since the pause screen is up.
+                gameManager.gameAudio.PlayButton01Sfx();
             }
             
         }
