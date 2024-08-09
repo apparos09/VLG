@@ -25,8 +25,8 @@ namespace VLG
         // Gets se to 'true' when attacking, false when not attacking.
         private bool attacking = false;
 
-        // If 'true', the player uses the attack animation.
-        private bool useAttackAnim = true;
+        // Has the player ignore inputs for the given number of frames.
+        private int ignoreInputsFrameCount = 0;
 
         [Header("Player/Animation")]
         // The animation for the model specifically.
@@ -44,6 +44,9 @@ namespace VLG
         // The attack animation for main animator.
         [Tooltip("The attack animation for the main animator (the one saved to the parent object).")]
         public string attackMainAnim = "";
+        
+        // If 'true', the player uses the attack animation.
+        private bool useAttackAnim = true;
 
         // The reset effect animation.
         public string effectResetAnim = "";
@@ -260,6 +263,9 @@ namespace VLG
             // Resets the rotation.
             transform.rotation = Quaternion.identity;
 
+            // The entity has been reset, so inputs should not be ignored.
+            ignoreInputsFrameCount = 0;
+
             // This is a correction that's no longer needed.
             // // Have the attack enabled by default.
             // enabledAttack = true;
@@ -415,7 +421,27 @@ namespace VLG
         }
 
 
-        // Updates
+        // UPDATES
+        // Returns 'true' if the player is ignoring inputs for a certain number of frames.
+        public bool IsIgnoringInputsForFrames()
+        {
+            return ignoreInputsFrameCount > 0;
+        }
+
+        // Reutrns the number of frames inputs are being ignored for.
+        public int GetIngoreInputsFrameCount()
+        {
+            return ignoreInputsFrameCount;
+        }
+
+        // Ignores the player's inputs for the provided number of frames.
+        public void IgnoreInputs(int frameCount)
+        {
+            // Set the number of frames for inputs to be ignored.
+            if(frameCount >= 0)
+                ignoreInputsFrameCount = frameCount;
+        }
+
         // Updates the player movements.
         public void UpdateInputs()
         {
@@ -554,9 +580,23 @@ namespace VLG
         {
             base.Update();
 
-            // Updates the inputs from the player.
-            if (enabledInputs)
-                UpdateInputs();
+            // If inputs should be ignored for (X) amount of frames.
+            if (ignoreInputsFrameCount > 0)
+            {
+                // Reduce the count.
+                ignoreInputsFrameCount--;
+
+                // Bounds check.
+                if (ignoreInputsFrameCount <= 0)
+                    ignoreInputsFrameCount = 0;
+            }
+            else // Don't ignore inputs.
+            {
+                // Updates the inputs from the player.
+                if (enabledInputs)
+                    UpdateInputs();
+            }
+            
         }
 
     }

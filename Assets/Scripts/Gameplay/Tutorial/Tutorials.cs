@@ -160,6 +160,9 @@ namespace VLG
             // Unfreeze the game if the game is not paused.
             if(!gameManager.IsPaused())
                 Time.timeScale = 1.0F;
+
+            // Ignore the current input for this frame in case the player is holding the space bar.
+            gameManager.player.IgnoreInputs(1);
         }
 
 
