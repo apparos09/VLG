@@ -49,11 +49,11 @@ namespace VLG
             // Checks if the goal's condition has been met, and if the goal is usable.
             if(goal.IsUsableAndConditionMet())
             {
-                OnConditionMet(false);   
+                OnConditionMet();   
             }
             else
             {
-                OnConditionFailed(false);
+                OnConditionFailed();
             }
 
             // Updates the objective text with the goal's objective tpye.
@@ -65,7 +65,7 @@ namespace VLG
 
 
         // Called when the condition check for the goal has succeeded.
-        public void OnConditionMet(bool playSound = true)
+        public void OnConditionMet()
         {
             goalConMet = true;
             PlayGoalUnlockAnimation();
@@ -75,21 +75,13 @@ namespace VLG
             {
                 floorManager.OnGoalTriggered();
             }
-
-            // Plays the unlock sound effect.
-            if (playSound)
-                PlayGoalUnlockSfx();
         }
 
         // Called when the condition check for the goal has failed.
-        public void OnConditionFailed(bool playSound = true)
+        public void OnConditionFailed()
         {
             goalConMet = false;
             PlayGoalLockAnimation();
-            
-            // Plays the lock sound effect.
-            if (playSound)
-                PlayGoalLockSfx();
 
         }
 

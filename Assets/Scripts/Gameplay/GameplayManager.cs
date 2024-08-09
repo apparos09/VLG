@@ -508,8 +508,11 @@ namespace VLG
             // Add the cleared tutorials.
             tutorials.AddClearedTutorials(data.clearedTutorials, true);
 
-            // Loads the floor using the ID number (could also use code).
-            floorManager.GenerateFloor(data.floorId);
+            // Checks if a coroutine should be used or not.
+            if (useFloorCoroutine)
+                floorManager.GenerateFloorAsCoroutine(data.floorId);
+            else
+                floorManager.GenerateFloor(data.floorId);
 
             // Load successful.
             return true;

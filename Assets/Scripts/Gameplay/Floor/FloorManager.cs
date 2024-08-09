@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -64,6 +63,9 @@ namespace VLG
 
         // The array of floor items
         public Item[,] floorItems = new Item[FloorData.FLOOR_ROWS, FloorData.FLOOR_COLS];
+
+        // Used to call a function after a floor is generated. True by default.
+        private bool calledPostGenFloor = true;
 
         [Header("Floor/Stats")]
 
@@ -278,7 +280,7 @@ namespace VLG
             gameManager.gameCamera.SetView(0);
 
             // A function called when a floor has been generated.
-            OnFloorGenerated();
+            OnGeneratedFloor();
         }
 
         // Coroutine Variants
@@ -332,11 +334,24 @@ namespace VLG
 
             yield return null;
 
+            // I don't know why I make another null acll after this, but I do.
+
+            // Call this function again so that the sound effects stay muted for longer.
+            // This is to prevent sounds from being played at the start.
+            OnGeneratedFloor();
+
             // Resume time and enable player inputs.
             Time.timeScale = timeScale;
             gameManager.player.enabledInputs = true;
 
-            yield return null;
+            // This shouldn't be necessary?
+            // Uncomment out if it breaks something.
+            // yield return null;
+
+            // This was commented out because the yield above it is no longer being used.
+            // Call once again to make sure the sound effects are muted.
+            // This stops any sounds that are already in progress.
+            // OnGeneratedFloor();
 
             // Turn off the loading screen.
             gameManager.floorLoadingScreen.gameObject.SetActive(false);
@@ -359,7 +374,7 @@ namespace VLG
 
 
         // A function called when a floor has been generated.
-        public void OnFloorGenerated()
+        public void OnGeneratedFloor()
         {
             // If tutorials are being used.
             if(gameManager.UsingTutorials)
@@ -375,7 +390,23 @@ namespace VLG
                     }
                 }
             }
+
+            // Disable the audio source so that opening sounds don't play.
+            gameManager.gameAudio.sfxSource.gameObject.SetActive(false);
+
+            // Call the post floor generation function.
+            calledPostGenFloor = false;
             
+        }
+
+        // A function called after a floor is generated.
+        public void PostGenerateFloor()
+        {
+            // Turn back on the sound effect.
+            gameManager.gameAudio.sfxSource.gameObject.SetActive(true);
+
+            // Called the post floor functiion.
+            calledPostGenFloor = true;
         }
 
         // Returns 'true' if the floor has limited turns.
@@ -748,6 +779,10 @@ namespace VLG
         {
             // Floor reset - this is now triggered only when the player resets the floor.
             // gameManager.gameAudio.PlayFloorResetSfx();
+
+            // Call the post generation of floor function to stop sound effects.
+            // This doesn't consistently work, so I took it out.
+            // PostGenerateFloor();
         }
 
         // Tries entity movement.
@@ -1087,6 +1122,12 @@ namespace VLG
                 floorTime += Time.deltaTime;
             }
             
+            // If the post floor generation casn't been called yet.
+            if(!calledPostGenFloor)
+            {
+                // Call the function.
+                PostGenerateFloor();
+            }
         }
 
         // This function is called when the MonoBehaviour will be destroyed.

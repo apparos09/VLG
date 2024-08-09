@@ -95,7 +95,22 @@ namespace VLG
         // Plays the provided sound effect.
         public void PlaySoundEffect(AudioClip sfxClip)
         {
-            sfxSource.PlayOneShot(sfxClip);
+            // If the SFX is active and enabled, play the one shot.
+            if(sfxSource.isActiveAndEnabled)
+            {
+                sfxSource.PlayOneShot(sfxClip);
+            }
+            else
+            {
+                // If it's in the editor, throw this message.
+                // Unity provides a message anyway if you attempt to play a disabled audio source...
+                // So this is to hide that.
+                if(Application.isEditor)
+                {
+                    Debug.LogWarning("The SFX source is disabled, so it can't be played.");
+                }
+            }
+                
         }
 
         // Stops the sound effect.
