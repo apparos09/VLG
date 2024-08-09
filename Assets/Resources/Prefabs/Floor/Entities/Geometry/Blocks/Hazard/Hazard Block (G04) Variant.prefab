@@ -176,6 +176,7 @@ MonoBehaviour:
   useAnimations: 1
   hazardOnAnim: Hazard Block - Hazard On Animation
   hazardOffAnim: Hazard Block - Hazard Off Animation
+  overlaySameSounds: 0
   hazardBlockOnSfx: {fileID: 8300000, guid: defa38043cddd8b43886f60963cafbf5, type: 3}
   hazardBlockOffSfx: {fileID: 8300000, guid: 2c8d3ad895acd9743af0d84ebf95cea5, type: 3}
 --- !u!114 &-3691912076227483765

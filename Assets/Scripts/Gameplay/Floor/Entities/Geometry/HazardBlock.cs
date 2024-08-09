@@ -34,11 +34,17 @@ namespace VLG
         [Tooltip("If 'true', the same sounds can be overlayed with one another. If false, only one is allowed to play at a time.")]
         public bool overlaySameSounds = true;
 
-        // The hazard block on effect.
+        // The hazard block on sfx.
         public AudioClip hazardBlockOnSfx;
 
-        // The hazard block off effect.
+        // The hazard block on sfx timer.
+        private static float hazardBlockOnSfxTimer = 0.0F;
+
+        // The hazard block off sfx.
         public AudioClip hazardBlockOffSfx;
+
+        // The hazard block off sfx timer.
+        private static float hazardBlockOffSfxTimer = 0.0F;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -166,15 +172,47 @@ namespace VLG
         // Plays the hazard on sfx.
         public void PlayHazardBlockOnSfx()
         {
+            // Sound effect is set.
             if (hazardBlockOnSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(hazardBlockOnSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(hazardBlockOnSfx);
+                }
+                else
+                {
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (hazardBlockOnSfxTimer <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(hazardBlockOnSfx);
+                        hazardBlockOnSfxTimer = hazardBlockOnSfx.length;
+                    }
+                }
+            }
         }
 
         // Plays the hazard off sfx.
         public void PlayHazardBlockOffSfx()
         {
+            // Sound effect is set.
             if (hazardBlockOffSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(hazardBlockOffSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(hazardBlockOffSfx);
+                }
+                else
+                {
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (hazardBlockOffSfxTimer <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(hazardBlockOffSfx);
+                        hazardBlockOffSfxTimer = hazardBlockOffSfx.length;
+                    }
+                }
+            }
         }
 
         // Resets the floor entity.
@@ -185,6 +223,34 @@ namespace VLG
             // If the hazard was changed using an animation, it must be put back to its default...
             // Using an animation as well, for some reason.
             SetHazardOn(hazardOnDefault, useAnimations); // Set value to default.
+        }
+
+        // Update is called once per frame
+        protected override void Update()
+        {
+            // Hazard On Timer
+            if (hazardBlockOnSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                hazardBlockOnSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (hazardBlockOnSfxTimer <= 0)
+                    hazardBlockOnSfxTimer = 0.0F;
+            }
+
+            // Hazard Off Timer
+            if (hazardBlockOffSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                hazardBlockOffSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (hazardBlockOffSfxTimer <= 0)
+                    hazardBlockOffSfxTimer = 0.0F;
+
+            }
+
         }
     }
 

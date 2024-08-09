@@ -29,11 +29,21 @@ namespace VLG
 
         [Header("PhaseBlock/Audio")]
 
+        // If 'true', sounds can be overlayed.
+        [Tooltip("If 'true', the same sounds can be overlayed with one another. If false, only one is allowed to play at a time.")]
+        public bool overlaySameSounds = true;
+
         // Phase In Sfx
         public AudioClip phaseInSfx;
 
+        // Phase in SFX timer.
+        private static float phaseInSfxTimer = 0.0F;
+
         // Phase Out Sfx
         public AudioClip phaseOutSfx;
+
+        // Phase in SFX timer.
+        private static float phaseOutSfxTimer = 0.0F;
 
         // Start is called before the first frame update
         protected override void Start()
@@ -157,15 +167,75 @@ namespace VLG
         // Plays the phase in sound effect.
         public void PlayPhaseInSfx()
         {
+            // Sound effect is set.
             if (phaseInSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(phaseInSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(phaseInSfx);
+                }
+                else
+                {
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (phaseInSfxTimer <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(phaseInSfx);
+                        phaseInSfxTimer = phaseInSfx.length;
+                    }
+                }
+            }
         }
 
         // Plays the phase out sound effect.
         public void PlayPhaseOutSfx()
         {
+            // Sound effect is set.
             if (phaseOutSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(phaseOutSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(phaseOutSfx);
+                }
+                else
+                {
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (phaseOutSfxTimer <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(phaseOutSfx);
+                        phaseOutSfxTimer = phaseOutSfx.length;
+                    }
+                }
+            }
+        }
+
+        // Update is called once per frame
+        protected override void Update()
+        {
+            // Phase In SFX Timer
+            if (phaseInSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                phaseInSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (phaseInSfxTimer <= 0)
+                    phaseInSfxTimer = 0.0F;
+            }
+
+            // Phase Out SFX Timer
+            if (phaseOutSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                phaseOutSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (phaseOutSfxTimer <= 0)
+                    phaseOutSfxTimer = 0.0F;
+
+            }
+
         }
     }
 }

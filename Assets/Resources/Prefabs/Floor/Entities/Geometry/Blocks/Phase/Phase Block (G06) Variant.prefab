@@ -114,6 +114,7 @@ MonoBehaviour:
   coverMaterial: {fileID: 2100000, guid: b1d4cd08127f1d64787627f4364b7ff4, type: 2}
   tangibleAnim: Phase Block - Tangible Animation
   intangibleAnim: Phase Block - Intangible Animation
+  overlaySameSounds: 0
   phaseInSfx: {fileID: 8300000, guid: 4617dd9242086ec4c9f5d4c120e24bdc, type: 3}
   phaseOutSfx: {fileID: 8300000, guid: ba54cd7848a57f54c9daf4c84c7ce6d3, type: 3}
 --- !u!114 &6520591370923973803

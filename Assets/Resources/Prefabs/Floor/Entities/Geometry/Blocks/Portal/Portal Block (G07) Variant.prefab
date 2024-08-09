@@ -188,6 +188,7 @@ MonoBehaviour:
   portalIdleAnim: Portal Block - Idle Animation
   portalOnAnim: Portal Block - On Animation
   portalOffAnim: Portal Block - Off Animation
+  overlaySameSounds: 0
   portalActivateSfx: {fileID: 8300000, guid: f8db85bcaa1e915499c6e6715c75034c, type: 3}
   portalDeactivateSfx: {fileID: 8300000, guid: 1d10329ff3cc56743b24ab51abf09f6d, type: 3}
   portalWarpSfx: {fileID: 8300000, guid: f26901b08d45f744ba159417681b3f7b, type: 3}

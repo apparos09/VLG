@@ -43,13 +43,22 @@ namespace VLG
 
         [Header("Portal Block/Audio")]
 
+        [Tooltip("If 'true', the same sounds can be overlayed with one another. If false, only one is allowed to play at a time.")]
+        public bool overlaySameSounds = true;
+
         // Portal block activation sfx.
         public AudioClip portalActivateSfx;
+
+        // Portal activation timer.
+        private static float portalActivateSfxTimer = 0.0F;
 
         // Portal block deactivation sfx.
         public AudioClip portalDeactivateSfx;
 
-        // Warp sfx.
+        // Portal deactivation timer.
+        private static float portalDeactivateSfxTimer = 0.0F;
+
+        // Warp sfx - this doesn't need a timer since warps don't all happen at the same time.
         public AudioClip portalWarpSfx;
 
         // Start is called before the first frame update
@@ -208,22 +217,58 @@ namespace VLG
         // Plays the activation sound.
         public void PlayPortalActivationSfx()
         {
+            // Sound effect is set.
             if (portalActivateSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(portalActivateSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(portalActivateSfx);
+                }
+                else
+                {
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (portalActivateSfxTimer <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(portalActivateSfx);
+                        portalActivateSfxTimer = portalActivateSfx.length;
+                    }
+                }
+            }
         }
 
         // Plays the deactivation sound.
         public void PlayPortalDeactivationSfx()
         {
+            // Sound effect is set.
             if (portalDeactivateSfx != null)
-                gameManager.gameAudio.PlaySoundEffect(portalDeactivateSfx);
+            {
+                // If the same sounds can be overlayed.
+                if (overlaySameSounds)
+                {
+                    gameManager.gameAudio.PlaySoundEffect(portalDeactivateSfx);
+                }
+                else
+                {
+                    // Sound clip not playing, so allow the SFX to play.
+                    if (portalDeactivateSfxTimer <= 0)
+                    {
+                        gameManager.gameAudio.PlaySoundEffect(portalDeactivateSfx);
+                        portalDeactivateSfxTimer = portalDeactivateSfx.length;
+                    }
+                }
+            }
         }
 
         // Plays the warp sound.
         public void PlayPortalWarpSfx()
         {
+            // Sound effect is set.
             if (portalWarpSfx != null)
+            {
+                // Play the sound effect.
                 gameManager.gameAudio.PlaySoundEffect(portalWarpSfx);
+            }
         }
 
         // Update is called once per frame
@@ -233,7 +278,32 @@ namespace VLG
             if (!calledPostStart)
                 PostStart();
 
+            // Base Update
             base.Update();
+
+
+            // Portal Activation Timer
+            if (portalActivateSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                portalActivateSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (portalActivateSfxTimer <= 0)
+                    portalActivateSfxTimer = 0.0F;
+            }
+
+            // Portal Deactivation Timer
+            if (portalDeactivateSfxTimer > 0)
+            {
+                // Reduce timer by unscaled time since it's based on the length of the sound effect.
+                portalDeactivateSfxTimer -= Time.unscaledDeltaTime;
+
+                // Bounds
+                if (portalDeactivateSfxTimer <= 0)
+                    portalDeactivateSfxTimer = 0.0F;
+            }
+
         }
 
         // Remove from the switch block list.

@@ -50,13 +50,13 @@ namespace VLG
         public AudioClip switchOnSfx;
 
         // Switch on Sfx timer.
-        static private float switchOnSfxTimer = 0.0F;
+        private static float switchOnSfxTimer = 0.0F;
 
         // The switch off SFX.
         public AudioClip switchOffSfx;
 
         // Switch off SFX timer.
-        static private float switchOffSfxTimer = 0.0F;
+        private static float switchOffSfxTimer = 0.0F;
 
         // Start is called before the first frame update
         protected override void Start()
