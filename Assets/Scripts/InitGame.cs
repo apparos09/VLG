@@ -25,7 +25,7 @@ namespace VLG
             if(Application.platform == RuntimePlatform.WebGLPlayer)
             {
                 // Operating in WebGL, so don't allow saving and loading.
-                SaveSystem.Instance.allowSaveLoad = false; 
+                SaveSystem.Instance.allowSaveLoad = false;
             }
             else
             {
@@ -42,8 +42,10 @@ namespace VLG
 
 
             // GAME SETTINGS DATA 
-            // Loads the default settings.
-            GameSettings.Instance.LoadDefaultGameSettingsData();
+            // Loads the default settings if not in WebGL.
+            // This doesn't happen in WebGL because it screws up the screen display.
+            if(Application.platform != RuntimePlatform.WebGLPlayer)
+                GameSettings.Instance.LoadDefaultGameSettingsData();
 
             // If saving/loading is allowed, load the settings data.
             if (SaveSystem.Instance.allowSaveLoad)

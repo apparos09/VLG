@@ -331,8 +331,13 @@ namespace VLG
             playCutscenes = data.playCutscenes;
 
             // Resolution
-            FullScreen = data.fullScreen;
-            SetScreenSize(data.screenWidth, data.screenHeight, FullScreenMode.Windowed, FullScreen);
+            // This doesn't happen in WebGL because it screws up the screen resolution.
+            if(Application.platform != RuntimePlatform.WebGLPlayer)
+            {
+                FullScreen = data.fullScreen;
+                SetScreenSize(data.screenWidth, data.screenHeight, FullScreenMode.Windowed, FullScreen);
+            }
+            
         }
 
         // Loads game settings data from a file. Returns 'true' if successful.
