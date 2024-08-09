@@ -976,7 +976,9 @@ namespace VLG
                 // The max has been reached.
                 if(floorTurns >= floorTurnsMax)
                 {
-                    ResetFloor();
+                    // The floor has been failed, so restart.
+                    // ResetFloor(); // Resets the Floor
+                    OnFloorFailed(); // Floor Failed
                 }
             }
         }
