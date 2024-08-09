@@ -649,6 +649,15 @@ namespace VLG
             StartPhase();
         }
 
+        // Kills the entity.
+        public override void KillEntity()
+        {
+            base.KillEntity();
+
+            // Stops the music since the final boss is dead.
+            gameManager.gameAudio.StopBackgroundMusic();
+        }
+
         // ANIMATIONS //
         // Called to play the boss's intro animation.
         public void PlayBossIntroAnimation()
