@@ -344,14 +344,14 @@ namespace VLG
             Time.timeScale = timeScale;
             gameManager.player.enabledInputs = true;
 
-            // This shouldn't be necessary?
-            // Uncomment out if it breaks something.
-            // yield return null;
+            // This is used so that some animations can start. This hides the beginning frames of some animations.
+            // Such as the goal being turned off.
+            yield return null;
 
-            // This was commented out because the yield above it is no longer being used.
             // Call once again to make sure the sound effects are muted.
-            // This stops any sounds that are already in progress.
-            // OnGeneratedFloor();
+            // This stops sounds from playing that were triggered in PostStart functions...
+            // Such as the goal being turned off by the goal button.
+            OnGeneratedFloor();
 
             // Turn off the loading screen.
             gameManager.floorLoadingScreen.gameObject.SetActive(false);
@@ -678,6 +678,11 @@ namespace VLG
         // Resets the floor.
         public void ResetFloor()
         {
+            // Gets the sound effect source and disables it so that the kill sounds aren't heard.
+            AudioSource sfxSource = gameManager.gameAudio.sfxSource;
+            bool sfxActive = sfxSource.gameObject.activeSelf;
+            sfxSource.gameObject.SetActive(false);
+
             // Inital reset based on the current floor status.
             // This is done twice to avoid triggering the player's death animation.
             gameManager.player.ResetEntity();
@@ -769,6 +774,9 @@ namespace VLG
 
             // Updates all the HUD elements.
             gameManager.gameUI.UpdateAllHUDElements();
+
+            // Reactivate the SFX source.
+            sfxSource.gameObject.SetActive(sfxActive);
 
             // The floor has been reset.
             OnFloorReset();
@@ -1013,7 +1021,7 @@ namespace VLG
                 {
                     // The floor has been failed, so restart.
                     // ResetFloor(); // Resets the Floor
-                    OnFloorFailed(); // Floor Failed
+                    OnFloorFailed(); // Floor Failed - resets the floor.
                 }
             }
         }
@@ -1105,12 +1113,12 @@ namespace VLG
             floorTime = timeTemp;
             // floorTurns = turnsTemp;
 
-            // Floor failed.
-            gameManager.gameAudio.PlayFloorFailedSfx();
-
             // Updates the timers and turns with the carried over values.
             gameManager.gameUI.UpdateTimerText();
             gameManager.gameUI.UpdateTurnsText();
+
+            // Floor failed SFX.
+            gameManager.gameAudio.PlayFloorFailedSfx();
         }
 
         // Update is called once per frame
