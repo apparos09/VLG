@@ -1942,6 +1942,8 @@ GameObject:
   - component: {fileID: 6013012284260600612}
   - component: {fileID: 2540639984554980345}
   - component: {fileID: 2499156509143926272}
+  - component: {fileID: 7897988124164578841}
+  - component: {fileID: 4715567312667414872}
   m_Layer: 5
   m_Name: Pause Button
   m_TagString: Untagged
@@ -2062,6 +2064,35 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7897988124164578841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7832422177451960944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8cff0a985f6ce1468bf838abbc5e16a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 781d69b9b7916734b91fedc7cdafd782, type: 3}
+  button: {fileID: 2499156509143926272}
+--- !u!114 &4715567312667414872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7832422177451960944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5459955f76c08e4b8a2f307a10559a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameAudio: {fileID: 0}
+  uiElementAudio: {fileID: 7897988124164578841}
 --- !u!1 &8217081872284710373
 GameObject:
   m_ObjectHideFlags: 0
