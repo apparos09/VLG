@@ -20,7 +20,7 @@ namespace VLG
 
         // The SFX audio credits for the game.
         public AudioCredits sfxCredits;
-        
+
         // The sound effects credit page.
         public int sfxCreditsIndex = 0;
 
@@ -50,7 +50,7 @@ namespace VLG
             LoadFontCredits();
 
             // Sets this if it has not been set already.
-            if(creditsInterface == null)
+            if (creditsInterface == null)
                 creditsInterface = GetComponent<AudioCreditsInterface>();
 
             // Show the background credits.
@@ -400,10 +400,10 @@ namespace VLG
             credit.source = "1001Fonts.com";
             credit.link1 = "https://www.1001fonts.com/cinzel-font.html";
             credit.link2 = "";
-            credit.copyright = 
+            credit.copyright =
                 "\"Cinzel\"\n" +
-                "Natanael Gama\n" + 
-                "Licensed under SIL Open Font Licence: By Attribution Version 1.1\n" + 
+                "Natanael Gama\n" +
+                "Licensed under SIL Open Font Licence: By Attribution Version 1.1\n" +
                 "https://openfontlicense.org/open-font-license-official-text/";
 
             // Adds the font credit.
@@ -458,7 +458,7 @@ namespace VLG
             sfxButton.interactable = false;
 
             // Determiens which button to enable based on the prior credits selected.
-            if(oldCredits == bgmCredits)
+            if (oldCredits == bgmCredits)
             {
                 // Selects the BGM button.
                 bgmButton.Select();
@@ -522,11 +522,11 @@ namespace VLG
             {
                 bgmCreditsIndex = creditsInterface.GetCurrentCreditIndex();
             }
-            else if(IsCurrentCreditsSfxCredits())
+            else if (IsCurrentCreditsSfxCredits())
             {
                 sfxCreditsIndex = creditsInterface.GetCurrentCreditIndex();
             }
-            else if(IsCurrentCreditsFontCredits())
+            else if (IsCurrentCreditsFontCredits())
             {
                 fontsCreditsIndex = creditsInterface.GetCurrentCreditIndex();
             }
