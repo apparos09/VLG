@@ -432,7 +432,7 @@ namespace VLG
         public void ShowBackgroundMusicCredits()
         {
             // Saves the current credit index, switches over, and then sets the new credit index.
-            bgmCreditsIndex = creditsInterface.GetCurrentCreditIndex();
+            SaveCurrentCreditIndex();
             creditsInterface.audioCredits = bgmCredits;
             creditsInterface.SetCreditIndex(bgmCreditsIndex);
 
@@ -445,15 +445,34 @@ namespace VLG
         // Shows the SFX credits.
         public void ShowSoundEffectCredits()
         {
+            // Saves the old credits to know what button to enable.
+            AudioCredits oldCredits = creditsInterface.audioCredits;
+
             // Saves the current credit index, switches over, and then sets the new credit index.
-            sfxCreditsIndex = creditsInterface.GetCurrentCreditIndex();
+            SaveCurrentCreditIndex();
             creditsInterface.audioCredits = sfxCredits;
             creditsInterface.SetCreditIndex(sfxCreditsIndex);
 
             // Change button settings.
             EnableAllCreditButtons();
             sfxButton.interactable = false;
-            bgmButton.Select();
+
+            // Determiens which button to enable based on the prior credits selected.
+            if(oldCredits == bgmCredits)
+            {
+                // Selects the BGM button.
+                bgmButton.Select();
+            }
+            else if (oldCredits == fontsCredits)
+            {
+                // Selects the font button.
+                fontsButton.Select();
+            }
+            else
+            {
+                // Selects the BGM button by default.
+                bgmButton.Select();
+            }
 
         }
 
@@ -461,7 +480,7 @@ namespace VLG
         public void ShowFontCredits()
         {
             // Saves the current credit index, switches over, and then sets the new credit index.
-            fontsCreditsIndex = creditsInterface.GetCurrentCreditIndex();
+            SaveCurrentCreditIndex();
             creditsInterface.audioCredits = fontsCredits;
             creditsInterface.SetCreditIndex(fontsCreditsIndex);
 
@@ -469,6 +488,48 @@ namespace VLG
             EnableAllCreditButtons();
             fontsButton.interactable = false;
             sfxButton.Select();
+        }
+
+        // Gets the current credits.
+        public AudioCredits GetCurrentCredits()
+        {
+            return creditsInterface.audioCredits;
+        }
+
+        // Returns 'true' if the BGM credits are the current credits.
+        public bool IsCurrentCreditsBgmCredits()
+        {
+            return GetCurrentCredits() == bgmCredits;
+        }
+
+        // Returns 'true' if the SFX credits are the current credits.
+        public bool IsCurrentCreditsSfxCredits()
+        {
+            return GetCurrentCredits() == sfxCredits;
+        }
+
+        // Returns 'true' if the font credits are the current credits.
+        public bool IsCurrentCreditsFontCredits()
+        {
+            return GetCurrentCredits() == fontsCredits;
+        }
+
+        // Saves the current credit index of the applicable window.
+        public void SaveCurrentCreditIndex()
+        {
+            // Only one of these should be active at a time.
+            if (IsCurrentCreditsBgmCredits())
+            {
+                bgmCreditsIndex = creditsInterface.GetCurrentCreditIndex();
+            }
+            else if(IsCurrentCreditsSfxCredits())
+            {
+                sfxCreditsIndex = creditsInterface.GetCurrentCreditIndex();
+            }
+            else if(IsCurrentCreditsFontCredits())
+            {
+                fontsCreditsIndex = creditsInterface.GetCurrentCreditIndex();
+            }
         }
     }
 }
